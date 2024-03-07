@@ -26,7 +26,7 @@ export function FilterButtons(filters:object){
             <span key={key} className="gerstner p-2 flex items-center justify-center flex-col lg:flex-row">
                 <p className="hover:bg-bkg capitalize">{`${key}:`}</p>
                 <div className="flex flex-col lg:flex-row">
-                {array.map((item:string, itemIdx)=>{
+                {array.map((item:string, itemIdx:any)=>{
                     let itemArray = Array.from(item);
                     itemArray[0]=itemArray[0].toUpperCase();
                     itemArray.map((letter, idx)=>{
