@@ -13,7 +13,27 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      display: ["group-hover"],
+      colors:{
+        bkg: "#b0ac8c" 
+      },
+      fontSize:{
+        sm: '.8rem'
+      },
+      borderRadius:{
+        nun: '0rem'
+      },
+      width:{
+        0: '0vw'
+      },
+      height:{
+        0: '0vh'
+      }
     },
+    
+  },
+  fontFamily : {
+    timesNewRoman: ['timesNew', 'serif'],
   },
   plugins: [],
 }
