@@ -51,8 +51,9 @@ export default function ProjectListing({project, index}: Props) {
             {project.name? 
                 <div id={project.slug+"1"} className={`w-screen transition transition-all duration-1000 overflow-hidden flex justify-center flex-col ${selectedProject===project.slug? "snap-center h-[80vh] lg:h-[90vh]": "h-[0vh]"}`}>
                     <div className="flex snap-x overflow-x-scroll overflow-y-hidden w-screen">
-                        {project.images.map((image)=>(
+                        {project.images.map((image, index)=>(
                             <Image
+                            key={`image${index}`}
                             src={urlForImage(image).url()}
                             alt=""
                             width={1080}
