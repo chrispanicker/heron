@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 export function OpeningCard(){
-    const cardRef = useRef(null)
+    const cardRef = useRef<HTMLElement>(null)
     const searchParams = useSearchParams();    
     const selectedProject = searchParams.get('project');
 
@@ -20,12 +20,11 @@ export function OpeningCard(){
             behavior: 'smooth'
         })}
         
-        
         setTimeout(()=>{
-            cardRef.current.classList.replace("opacity-100", "opacity-0")
+            cardRef.current?.classList.replace("opacity-100", "opacity-0")
         }, 1000)
         setTimeout(()=>{
-            cardRef.current.classList.add("hidden")
+            cardRef.current?.classList.add("hidden")
         }, 3000)
     }, [cardRef])
     
