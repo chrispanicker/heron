@@ -174,11 +174,11 @@
 } */
 
 .projectTitle{
-  position: absolute;
+  /* position: absolute;
   transform-style: preserve-3d;
   transform: rotateY(15deg) rotateX(360deg) rotateX(calc(var(--i)*-40deg)) translateZ(20rem);
   transition: transform 1s ease;
-  animation: rotate 30s infinite linear;
+  animation: rotate 30s infinite linear; */
 }
 
 /* .carouselView{
