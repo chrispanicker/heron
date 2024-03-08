@@ -6,7 +6,6 @@ import { useCallback } from "react";
 
 export function FilterButtons(filters:object){
     const searchParams = useSearchParams();   
-    const selectedProject = searchParams.get('project');
     const router = useRouter();
 
     const createQueryString = useCallback(
