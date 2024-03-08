@@ -25,7 +25,7 @@ const project = {
                 { title: "Illustrator", value: "illustrator" },
               ],
             },
-            validation: (Rule) => Rule.required(),
+            validation: (Rule:any) => Rule.required(),
         },
 
         {
