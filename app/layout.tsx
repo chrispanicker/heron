@@ -38,12 +38,11 @@ export default async function RootLayout({
       "slug": slug.current,
   }`
   )
-
   return (
     <html lang="en">
       <body className='bg-bkg'>
         <SiteHeader />
-        <section className='w-screen h-screen snap-y snap-proximity overflow-scroll'>
+        <section className='w-screen h-screen overflow-scroll'>
           <TestFilter projects={allProjects}/>
           <>{children}</>
           <SiteFooter />

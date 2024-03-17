@@ -25,9 +25,9 @@ export default function ProjectListing({project, index}: Props) {
         },
         [searchParams]
       )
-    
+
     return project? 
-        <section className="testing" style={{['--i' as any]:index}}>
+        <section className="" style={{['--i' as any]:index}}>
             <button 
             id={project.slug}
             ref={projectRef}
@@ -44,21 +44,21 @@ export default function ProjectListing({project, index}: Props) {
                     width={240} 
                     height={240} 
                     className={`opacity-0 h-0 w-auto hidden lg:block group-hover:h-[3.5rem] sm:group-hover:opacity-100`} 
-                    src={urlForImage(project.images[0]).url()}>
+                    src={project.images? urlForImage(project.images[0]).url(): ""}>
                     </Image>
                 </span>
             </button>
             {project.name? 
-                <div id={project.slug+"1"} className={`w-screen transition transition-all duration-1000 overflow-hidden flex justify-center flex-col ${selectedProject===project.slug? "snap-center h-[80vh] lg:h-[90vh]": "h-[0vh]"}`}>
-                    <div className="flex snap-x overflow-x-scroll overflow-y-hidden w-screen">
-                        {project.images.map((image, index)=>(
+                <div id={project.slug+"1"} className={`w-screen transition transition-all duration-1000 overflow-hidden flex justify-center flex-col ${selectedProject===project.slug? "h-[80vh] lg:h-[90vh]": "h-[0vh]"}`}>
+                    <div className="flex overflow-x-scroll overflow-y-hidden w-screen">
+                        {project.images?.map((image, index)=>(
                             <Image
                             key={`image${index}`}
                             src={urlForImage(image).url()}
                             alt=""
                             width={1080}
                             height={1080}
-                            className="w-[auto] h-[19rem] sm:h-[40rem] snap-center snap-proximity hover:rounded-none rounded-3xl transition transition-all py-2 mt-1 rounded-none object-cover"
+                            className="w-[auto] h-[19rem] sm:h-[40rem] hover:rounded-none rounded-3xl transition transition-all py-2 mt-1 rounded-none object-cover"
                             unoptimized= {false}
                             />
                         ))}

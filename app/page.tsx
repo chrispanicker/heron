@@ -41,12 +41,14 @@ export default async function Home({searchParams}: Props) {
 
 
   return (
-    <main id="main" className="snap-center py-20 z-0 text-light text-black bg-white flex flex-col items-center justify-center min-h-screen gerstner">
+    <main id="main" className="py-20 z-0 text-light text-black bg-white flex flex-col items-center justify-center min-h-screen gerstner">
         <OpeningCard />
         <SiteNav />
+        <button className="fixed top-10 left-10 text-3xl z-50">↑</button>
+        <button className="fixed bottom-10 left-10 text-3xl z-50">↓</button>
         <section className="Project3dParent">
         {filteredProjects.map((project:any, index:number)=>(
-          <div className="Project3d flex justify-center items-center text-2xl md:text-4xl" key={project._id}>
+          <div className="Project3d flex justify-center items-center text-2xl md:text-4xl snap-y" key={project._id}>
               <ProjectListing project={project} index={index}  />
           </div>
         ))}

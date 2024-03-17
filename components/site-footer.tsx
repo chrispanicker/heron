@@ -10,7 +10,7 @@ export function SiteFooter(){
     
     return (
         isSanityStudio? "" : 
-        <footer className="snap-end snap-proximity w-full bg-bkg text-center transition transition-all"> 
+        <footer className="w-full bg-bkg text-center transition transition-all"> 
             <button className="absolute top-[-10vh] text-black gerstner hover:underline font-light" onClick={()=>{
                 let foot = document.querySelector("footer");
                 foot?.scrollIntoView({

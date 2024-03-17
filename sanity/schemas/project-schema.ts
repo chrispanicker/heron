@@ -73,7 +73,16 @@ const project = {
             name: 'collaborators',
             title: 'Collaborators',
             type: "array",
-            of: [{type: 'string'}]
+            of: [{type: 'string'}],
+            validation: (Rule:any) => Rule.required().custom((string:any) => {
+                if (typeof string === "undefined") return true
+                const regex = /(^[a-z0-9-]+$)/ // Regex pattern goes here
+                if (regex.test(string.current)) {
+                  return true
+                } else {
+                  return "Invalid slug: Only numbers, lowercase letters, and dashes are permitted." // Error message goes here
+                }
+              }),
         },
         {
             name: 'content',

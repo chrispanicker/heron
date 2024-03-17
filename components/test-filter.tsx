@@ -10,7 +10,6 @@ export function TestFilter(props:any){
         })
         
         allRoles.includes(project.role)? "": allRoles.push(project.role)
-
         project.collaborators?.map((collab:string)=>{
             collab=collab.toLowerCase();
             collab.length===0 || allCollabs.includes(collab)? "": allCollabs.push(collab)

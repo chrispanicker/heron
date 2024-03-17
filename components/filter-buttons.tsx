@@ -18,7 +18,7 @@ export function FilterButtons(filters:object){
       )
 
     return(
-    <div id="filters" className="h-screen lg:h-auto lg:pt-32 p-10 snap-start bg-bkg font-thin w-screen flex justify-center items-center flex-col bottom-0 z-10 text-lg sm:text-3xl" key={'parent'}>
+    <div id="filters" className="h-screen lg:h-auto lg:pt-32 p-10 bg-bkg font-thin w-screen flex justify-center items-center flex-col bottom-0 z-10 text-lg sm:text-3xl" key={'parent'}>
     
     {Object.entries(filters).map(([key, array])=>{
         return(
