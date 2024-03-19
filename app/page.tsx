@@ -1,3 +1,4 @@
+import {filterToLower} from "@/components/filter-to-lower";
 import { OpeningCard } from "@/components/opening-card";
 import ProjectListing from "@/components/project-listing";
 import { SiteNav } from "@/components/sitenav";
@@ -19,7 +20,7 @@ export default async function Home({searchParams}: Props) {
   const collabFilter = collabs ? `"${collabs}" in collaborators ${role? "||" : "" }` : ""
   const roleFilter = role ? `role == "${role}"` : ""
   const filter = `${tagFilter} ${collabFilter} ${roleFilter}`
-  const filteredProjects = await client.fetch(
+  let filteredProjects = await client.fetch(
       groq`*[${projectFilter}][${filter}]{
           _id,
           _createdAt,
@@ -29,7 +30,7 @@ export default async function Home({searchParams}: Props) {
           content,
           "type": lower(type),
           roles,
-          role,
+          "role": lower(role),
           collaborators,
           tags,
           color,
@@ -37,8 +38,7 @@ export default async function Home({searchParams}: Props) {
           "slug": slug.current,
       }`
   )
-
-
+  filterToLower(filteredProjects)
 
   return (
     <main id="main" className="py-20 z-0 text-light text-black bg-white flex flex-col items-center justify-center min-h-screen gerstner">

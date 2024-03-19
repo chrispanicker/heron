@@ -18,13 +18,13 @@ export function FilterButtons(filters:object){
       )
 
     return(
-    <div id="filters" className="h-screen lg:h-auto lg:pt-32 p-10 bg-bkg font-thin w-screen flex justify-center items-center flex-col bottom-0 z-10 text-lg sm:text-3xl" key={'parent'}>
+    <div id="filters" className={`overflow-x-scroll lg:h-auto lg:pt-32 lg:justify-center lg:items-start p-10 bg-bkg flex justify-center items-center flex-col bottom-0 z-10 text-lg sm:text-1xl`} key={'parent'}>
     
     {Object.entries(filters).map(([key, array])=>{
         return(
-            <span key={key} className="gerstner p-2 flex items-center justify-center flex-col lg:flex-row">
-                <p className="hover:bg-bkg capitalize">{`${key}:`}</p>
-                <div className="flex flex-col lg:flex-row">
+            <span key={key} className="gerstner py-3 flex items-center justify-center flex-col lg:flex-row">
+                <p className="lg:text-3xl lg:p-0 p-2 text-3xl underline lg:no-underline hover:bg-bkg capitalize">{`${key}: `}</p>
+                <div className="flex flex-col justify-center items-center lg:flex-row">
                 {array.map((item:string, itemIdx:any)=>{
                     let itemArray = Array.from(item);
                     itemArray[0]=itemArray[0].toUpperCase();
@@ -32,16 +32,19 @@ export function FilterButtons(filters:object){
                         letter===" "? itemArray[idx+1] = itemArray[idx+1].toUpperCase() : ""
                     })
                     return (
-                        <button 
-                        key={`${item}${itemIdx}`}
-                        onClick={()=>{
-                            searchParams.getAll(`${key}`).includes(item)? router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
-                            : router.push( `/?${createQueryString(`${key}`, `${item}`)}`, {scroll: false})
-                        }} 
-                        className={`font-thin lg:hover:underline p-1 ${searchParams.get(key)?.includes(item)? "underline" : ""}`}>
-                            {itemIdx<itemArray.length? `${itemArray.join("")},`: `${itemArray.join("")}`}
-                        </button>
+
+                            <button 
+                            key={`${item}${itemIdx}`}
+                            onClick={()=>{
+                                searchParams.getAll(`${key}`).includes(item)? router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
+                                : router.push( `/?${createQueryString(`${key}`, `${item}`)}`, {scroll: false})
+                            }}
+                            className={`w-fit transition transition-all whitespace-nowrap text-3xl font-light my-2 lg:mx-1 lg:my-0 border-2 border-black rounded-full px-6 py-2 outline-2 lg:hover:underline ${searchParams.get(key)?.includes(item)? " text-4xl bg-black text-white" : ""}`}>
+                                {itemIdx<itemArray.length? `${itemArray.join("")}`: `${itemArray.join("")}`}
+                            </button>
+
                     )
+                    
                 })}
                 </div>
             </span>

@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useRef } from "react";
 import { Project } from "@/types/project";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
@@ -13,6 +13,7 @@ interface Props{
 
 
 export default function ProjectListing({project, index}: Props) {
+    console.log(project)
     const router = useRouter();
     const projectRef = useRef(null);
     const searchParams = useSearchParams();    
