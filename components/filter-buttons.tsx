@@ -1,12 +1,14 @@
 "use client"
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
 
 export function FilterButtons(filters:object){
     const searchParams = useSearchParams();   
     const router = useRouter();
+    const pathname = usePathname(); 
+    const isSanityStudio = pathname.startsWith('/admin');
 
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -18,7 +20,7 @@ export function FilterButtons(filters:object){
       )
 
     return(
-    <div id="filters" className={`overflow-x-scroll lg:h-auto lg:pt-32 lg:justify-center lg:items-start p-10 bg-bkg flex justify-center items-center flex-col bottom-0 z-10 text-lg sm:text-1xl`} key={'parent'}>
+    isSanityStudio? "" : <div id="filters" className={`overflow-x-scroll lg:h-auto lg:pt-32 lg:justify-center lg:items-start p-10 bg-bkg flex justify-center items-center flex-col bottom-0 z-10 text-lg sm:text-1xl`} key={'parent'}>
     
     {Object.entries(filters).map(([key, array])=>{
         return(

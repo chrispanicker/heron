@@ -16,15 +16,7 @@ export function SiteFooter(){
             <Image className=""  src={require('../src/Drew-1.gif')} alt="loading..." />
             <p className="text-8xl text-lighter">Art Director, Designer, Illustrator</p>
         </div>
-
-            {/* <button className="absolute top-[-10vh] text-black gerstner hover:underline font-light" onClick={()=>{
-                let foot = document.querySelector("footer");
-                foot?.scrollIntoView({
-                    behavior: 'smooth'
-                });
-                // foot?.classList.add("top-[0vh]")
-            }}></button> */}
-            <p className="text-lg lg:text-3xl font-light py-20 sm:mx-40 mx-10 text-black">{siteConfig.description}</p>
+        <p className="text-lg lg:text-3xl font-light py-20 sm:mx-40 mx-10 text-black">{siteConfig.description}</p>
         </footer>
     )
 }

@@ -1,6 +1,7 @@
-import {filterToLower} from "@/components/filter-to-lower";
 import { OpeningCard } from "@/components/opening-card";
 import ProjectListing from "@/components/project-listing";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { SiteNav } from "@/components/sitenav";
 import { client } from "@/sanity/sanity-utils";
 import { groq } from "next-sanity";
@@ -16,12 +17,12 @@ interface Props {
 export default async function Home({searchParams}: Props) {
   const {tags, collabs, role} = searchParams 
   const projectFilter = `_type == "project" `
-  const tagFilter = tags ? `"${tags}" in tags ${collabs || role? "||" : "" }` : "" 
-  const collabFilter = collabs ? `"${collabs}" in collaborators ${role? "||" : "" }` : ""
-  const roleFilter = role ? `role == "${role}"` : ""
-  const filter = `${tagFilter} ${collabFilter} ${roleFilter}`
+  const tagFilter =  tags? `tags match "${tags}" ${collabs || role? "||" : "" }` : "" 
+  const collabFilter = collabs ? `collaborators match "${collabs}" ${role? "||" : "" }` : ""
+  const roleFilter = role ? `role match "${role}"` : "" 
+  const filter = collabs || role || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
   let filteredProjects = await client.fetch(
-      groq`*[${projectFilter}][${filter}]{
+      groq`*[${projectFilter} ${filter}]{
           _id,
           _createdAt,
           name,
@@ -38,14 +39,11 @@ export default async function Home({searchParams}: Props) {
           "slug": slug.current,
       }`
   )
-  filterToLower(filteredProjects)
-
+      
   return (
     <main id="main" className="py-20 z-0 text-light text-black bg-white flex flex-col items-center justify-center min-h-screen gerstner">
         <OpeningCard />
         <SiteNav />
-        <button className="fixed top-10 left-10 text-3xl z-50">↑</button>
-        <button className="fixed bottom-10 left-10 text-3xl z-50">↓</button>
         <section className="Project3dParent">
         {filteredProjects.map((project:any, index:number)=>(
           <div className="Project3d flex justify-center items-center text-2xl md:text-4xl snap-y" key={project._id}>

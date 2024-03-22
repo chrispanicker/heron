@@ -5,6 +5,7 @@ import { SiteFooter } from '@/components/site-footer'
 import { client } from '@/sanity/sanity-utils'
 import { groq } from 'next-sanity'
 import { TestFilter } from '@/components/test-filter'
+import { filterToLower } from '@/components/filter-to-lower'
 
 
 export const metadata: Metadata = {
@@ -38,11 +39,12 @@ export default async function RootLayout({
       "slug": slug.current,
   }`
   )
+  filterToLower(allProjects)
   return (
     <html lang="en">
       <body className='bg-bkg'>
         <SiteHeader />
-        <section className='w-screen h-screen overflow-scroll'>
+        <section>
           <TestFilter projects={allProjects}/>
           <>{children}</>
           <SiteFooter />

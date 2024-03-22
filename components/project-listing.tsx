@@ -13,7 +13,6 @@ interface Props{
 
 
 export default function ProjectListing({project, index}: Props) {
-    console.log(project)
     const router = useRouter();
     const projectRef = useRef(null);
     const searchParams = useSearchParams();    
