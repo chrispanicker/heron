@@ -17,6 +17,7 @@ export default function ProjectListing({project, index}: Props) {
     const projectRef = useRef(null);
     const searchParams = useSearchParams();    
     const selectedProject = searchParams.get('project');
+    const vimeoID = project.vimeo? project.vimeo.replace("https://vimeo.com/", ""):"";
     const createQueryString = useCallback(
         (name: string, value: string) => {
           const params = new URLSearchParams(searchParams.toString())
@@ -51,6 +52,20 @@ export default function ProjectListing({project, index}: Props) {
             {project.name? 
                 <div id={project.slug+"1"} className={`w-screen transition transition-all duration-1000 overflow-hidden flex justify-center flex-col ${selectedProject===project.slug? "h-[80vh] lg:h-[90vh]": "h-[0vh]"}`}>
                     <div className="flex overflow-x-scroll overflow-y-hidden w-screen">
+                        {/* {project.vimeo? 
+                        <div className="py-2 mt-1 sm:min-w-[79.55rem] sm:w-auto max-w-[100vw] sm:min-h-[40rem] sm:max-h-[100%] w-[100vw] h-[16.25rem]">
+                            <iframe src={`https://player.vimeo.com/video/${vimeoID}?h=ea4df792d3&title=0&byline=0&portrait=0`} className="w-full h-full" allow="fullscreen; picture-in-picture">
+                            </iframe>
+                            <script src="https://player.vimeo.com/api/player.js"></script>
+                        </div>:""} */}
+                        {project.vimeo? 
+                        <div className="relative sm:min-w-[80rem] sm:min-h-[40rem] min-w-[31rem] h-[16.25rem] py-2 mt-1 overflow-hidden">
+                            <div className="h-0 pt-[56.25%]">
+                                <iframe src={`https://player.vimeo.com/video/${vimeoID}?title=0&byline=0&portrait=0`} className="w-full h-full absolute top-0 left-0" allow="fullscreen; picture-in-picture">
+                                </iframe>
+                                <script src="https://player.vimeo.com/api/player.js"></script>
+                            </div>
+                        </div>:""}
                         {project.images?.map((image, index)=>(
                             <Image
                             key={`image${index}`}
@@ -58,7 +73,7 @@ export default function ProjectListing({project, index}: Props) {
                             alt=""
                             width={1080}
                             height={1080}
-                            className="w-[auto] h-[19rem] sm:h-[40rem] hover:rounded-none rounded-3xl transition transition-all py-2 mt-1 rounded-none object-cover"
+                            className="w-[auto] h-[16.25rem] sm:h-[40rem] hover:rounded-none rounded-3xl transition transition-all py-2 mt-1 rounded-none object-cover"
                             unoptimized= {false}
                             />
                         ))}

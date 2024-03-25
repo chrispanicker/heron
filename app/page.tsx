@@ -1,7 +1,5 @@
 import { OpeningCard } from "@/components/opening-card";
 import ProjectListing from "@/components/project-listing";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 import { SiteNav } from "@/components/sitenav";
 import { client } from "@/sanity/sanity-utils";
 import { groq } from "next-sanity";
@@ -26,11 +24,11 @@ export default async function Home({searchParams}: Props) {
           _id,
           _createdAt,
           name,
+          vimeo,
           images,
           url,
           content,
           "type": lower(type),
-          roles,
           "role": lower(role),
           collaborators,
           tags,

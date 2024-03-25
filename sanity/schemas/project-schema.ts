@@ -8,11 +8,6 @@ const project = {
             title: 'Name',
             type: "string"
         },
-        // {
-        //     name: 'color',
-        //     title: 'Color',
-        //     type: 'color',
-        // },
         {
             title: "Role",
             description: "Choose the best fitting role for this project.",
@@ -27,7 +22,6 @@ const project = {
             },
             validation: (Rule:any) => Rule.required(),
         },
-
         {
             name: "slug",
             title: "Slug",
@@ -44,6 +38,11 @@ const project = {
             name: 'type',
             type: 'string',
 
+        },
+        {
+            name: 'vimeo',
+            title:'Vimeo Link',
+            type: 'url'
         },
         {
             name: 'images',

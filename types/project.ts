@@ -14,5 +14,6 @@ export type Project = {
     role: string;
     color: string;
     tags: string[];
+    vimeo: string;
     images: Image[];
 }
