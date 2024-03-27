@@ -2,7 +2,7 @@
 export function SiteNav(){
     return(
         <>
-            <button className="gerstner fixed lg:block hidden w-screen top-0 p-10 hover:underline cursor-n-resize" 
+            {/* <button className="gerstner fixed lg:block hidden w-screen top-0 p-10 hover:underline cursor-n-resize" 
             onClick={()=>{
                 let filters = document.querySelector("#filters");
                 filters?.scrollIntoView({
@@ -16,7 +16,7 @@ export function SiteNav(){
                 foot?.scrollIntoView({
                     behavior: 'smooth'
                 });
-            }}></button>
+            }}></button> */}
         </>
     )
 }

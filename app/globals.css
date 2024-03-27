@@ -173,16 +173,15 @@
   }
 } */
 
+
 /* .projectTitle{
-  position: absolute;
   transform-style: preserve-3d;
-  transform: rotateY(15deg) rotateX(0deg) rotateX(calc(var(--i)*-40deg)) translateZ(20rem);
-  transition: transform 1s ease;
+  transform: rotateY(10deg) rotateX(0deg) rotateX(calc(var(--i)*36deg)) translateX(-20rem) translateX(calc(var(--i)*4rem)) translateZ(10rem);
   animation: rotate 30s infinite linear;
 } */
 
 /* .carouselView{
-  transform: rotateY(15deg) rotateX(0deg) rotateX(calc(var(--i)*-40deg)) translateZ(20rem);
+    transform: rotateY(10deg) rotateX(0deg) rotateX(calc(var(--i)*36deg)) translateX(-20rem) translateX(calc(var(--i)*4rem)) translateZ(10rem);
 }
 .flatView{
   transform: rotateY(0deg) rotateX(0deg) rotateX(calc(var(--i)*0deg)) translateZ(calc(var(--i)*10rem));

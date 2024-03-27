@@ -26,25 +26,25 @@ export default function ProjectListing({project, index}: Props) {
         },
         [searchParams]
       )
-
+    selectedProject===project.slug? "":"";
     return project? 
         <section className="" style={{['--i' as any]:index}}>
             <button 
             id={project.slug}
             ref={projectRef}
-            className={`projectTitle carouselView opacity-100 w-screen font-thin tracking-normal transition transition-all cursor-pointer flex flex-col pb-1 items-center justify-center group`}
+            className={`projectTitle flatView opacity-100 w-screen tracking-normal transition transition-all duration-1000 cursor-pointer flex flex-col pb-1 pl-10 items-center justify-center group`}
             onClick={(event)=>{
                 searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
                 : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
             }}
             >
                 <span className="flex justify-center">
-                    <p className="p-2 sm:group-hover:bg-bkg w-max flex">{project.name}</p>
+                    <p className={`px-1 sm:group-hover:bg-black sm:group-hover:text-white w-max flex ${selectedProject===project.slug? "bg-black text-white sm:group-hover:bg-white sm:group-hover:text-black": ""}`}>{project.name}</p>
                     <Image 
                     alt={`Image of ${project.name}`} 
                     width={240} 
                     height={240} 
-                    className={`opacity-0 h-0 w-auto hidden lg:block group-hover:h-[3.5rem] sm:group-hover:opacity-100`} 
+                    className={`opacity-0 h-0 w-auto hidden lg:block group-hover:h-[1.8rem] sm:group-hover:opacity-100 ${selectedProject===project.slug? "sm:opacity-100 sm:h-[1.8rem]": ""}`} 
                     src={project.images? urlForImage(project.images[0]).url(): ""}>
                     </Image>
                 </span>
@@ -52,12 +52,6 @@ export default function ProjectListing({project, index}: Props) {
             {project.name? 
                 <div id={project.slug+"1"} className={`w-screen transition transition-all duration-1000 overflow-hidden flex justify-center flex-col ${selectedProject===project.slug? "h-[80vh] lg:h-[90vh]": "h-[0vh]"}`}>
                     <div className="flex overflow-x-scroll overflow-y-hidden w-screen">
-                        {/* {project.vimeo? 
-                        <div className="py-2 mt-1 sm:min-w-[79.55rem] sm:w-auto max-w-[100vw] sm:min-h-[40rem] sm:max-h-[100%] w-[100vw] h-[16.25rem]">
-                            <iframe src={`https://player.vimeo.com/video/${vimeoID}?h=ea4df792d3&title=0&byline=0&portrait=0`} className="w-full h-full" allow="fullscreen; picture-in-picture">
-                            </iframe>
-                            <script src="https://player.vimeo.com/api/player.js"></script>
-                        </div>:""} */}
                         {project.vimeo? 
                         <div className="relative sm:min-w-[80rem] sm:min-h-[40rem] min-w-[31rem] h-[16.25rem] py-2 mt-1 overflow-hidden">
                             <div className="h-0 pt-[56.25%]">
@@ -78,16 +72,16 @@ export default function ProjectListing({project, index}: Props) {
                             />
                         ))}
                     </div>
-                    <div className="text-lg leading-5 px-5 mr-5 sm:px-10 sm:grid grid-cols-2">
-                        <div className="flex justify-start flex-col items-start text-left sm:pr-20 py-5">
-                            <p className="pb-4 text-2xl sm:text-5xl tracking-tight">{project.name}</p>
+                    <div className="leading-5 sm:grid grid-cols-2">
+                        <div className="sm:w-2/4 m-10 flex justify-start flex-col items-start text-left py-5">
+                            <p className="pb-4 tracking-tight">{project.name}</p>
                             <PortableText value={project.content}/>
                         </div>
-                        <div className="grid lg:flex-col grid-cols-2 gap-y-5 gap-x-3 sm:flex justify-between items-start sm:items-end py-10">
-                            {project.year? <p className="capitalize ">Year: <br className="block sm:hidden"></br> {project.year}</p>: ""}
-                            {project.role? <p className="capitalize ">Role: <br className="block sm:hidden"></br> {project.role}</p>: ""}
-                            {project.collaborators? <p className="capitalize">Collabs: <br className="block sm:hidden"></br> {project.collaborators?.join(", ")}</p>: " "}
-                            {project.tags? <p className="capitalize ">Tags: <br className="block sm:hidden"></br> {project.tags.join(", ")}</p>: ""}
+                        <div className="sm:w-2/4 grid m-10 lg:flex-col grid-cols-2 gap-y-5 gap-x-3 sm:flex justify-between items-start sm:items-start py-10">
+                            {project.year? <p className="capitalize ">Year: {project.year}</p>: ""}
+                            {project.role? <p className="capitalize ">Role: {project.role}</p>: ""}
+                            {project.collaborators? <p className="capitalize">Collabs: {project.collaborators?.join(", ")}</p>: " "}
+                            {project.tags? <p className="capitalize ">Tags: {project.tags.join(", ")}</p>: ""}
                         </div>
                     </div>
 

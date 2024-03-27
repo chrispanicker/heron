@@ -1,3 +1,4 @@
+import FunkyButtons from "@/components/funky-buttons";
 import { OpeningCard } from "@/components/opening-card";
 import ProjectListing from "@/components/project-listing";
 import { SiteNav } from "@/components/sitenav";
@@ -44,11 +45,12 @@ export default async function Home({searchParams}: Props) {
         <SiteNav />
         <section className="Project3dParent">
         {filteredProjects.map((project:any, index:number)=>(
-          <div className="Project3d flex justify-center items-center text-2xl md:text-4xl snap-y" key={project._id}>
-              <ProjectListing project={project} index={index}  />
+          <div className="Project3d flex justify-center items-center text-xl snap-y" key={project._id}>
+              <ProjectListing project={project} index={index}/>
           </div>
         ))}
         </section>
+        <FunkyButtons />
     </main>
   )
 }

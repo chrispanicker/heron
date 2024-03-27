@@ -11,12 +11,15 @@ export function SiteFooter(){
     
     return (
         isSanityStudio? "" : 
-        <footer className="relative w-full bg-bkg transition transition-all">
-        <div className="w-screen h-2/4 z-30 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 ease-in-out pointer-events-none">
-            <Image className=""  src={require('../src/Drew-1.gif')} alt="loading..." />
-            <p className="text-8xl text-lighter">Art Director, Designer, Illustrator</p>
+        <footer className="text-xl pb-10 relative flex w-full bg-black text-white transition transition-all">
+        <div className="m-10 sm:w-2/4 h-4/4 flex flex-col align-start items-start opacity-100 transition transition-all duration-1000 ease-in-out pointer-events-none">
+          <p className="font-light vivaldii text-8xl pr-4 pt-5">Drew Litowitz</p>
+          <p className="font-light pl-2">Art Director, Designer, Illustrator</p>
         </div>
-        <p className="text-lg lg:text-3xl font-light py-20 sm:mx-40 mx-10 text-black">{siteConfig.description}</p>
-        </footer>
+        <div className="sm:w-2/4">
+            <p className="font-light py-10 mr-20">{siteConfig.description}</p>
+            <a href="https://www.instagram.com/drewknowitz/?hl=en">@drewknowitz</a>
+        </div>
+    </footer>
     )
 }

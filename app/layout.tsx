@@ -6,6 +6,7 @@ import { client } from '@/sanity/sanity-utils'
 import { groq } from 'next-sanity'
 import { TestFilter } from '@/components/test-filter'
 import { filterToLower } from '@/components/filter-to-lower'
+import { siteConfig } from '@/config/site'
 
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export default async function RootLayout({
   filterToLower(allProjects)
   return (
     <html lang="en">
-      <body className='bg-bkg'>
+      <body className='bg-black'>
         <SiteHeader />
         <section>
           <TestFilter projects={allProjects}/>
