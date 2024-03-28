@@ -57,7 +57,7 @@ export default function ProjectListing({project, index}: Props) {
                             <div className="h-0 pt-[56.25%]">
                                 <iframe src={`https://player.vimeo.com/video/${vimeoID}?title=0&byline=0&portrait=0`} className="w-full h-full absolute top-0 left-0" allow="fullscreen; picture-in-picture">
                                 </iframe>
-                                <script src="https://player.vimeo.com/api/player.js"></script>
+                                <script src="https://player.vimeo.com/api/player.js" async></script>
                             </div>
                         </div>:""}
                         {project.images?.map((image, index)=>(
