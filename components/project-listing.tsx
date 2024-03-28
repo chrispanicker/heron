@@ -77,7 +77,7 @@ export default function ProjectListing({project, index}: Props) {
                             <p className="pb-4 tracking-tight">{project.name}</p>
                             <PortableText value={project.content}/>
                         </div>
-                        <div className="sm:w-1/4 grid lg:flex-col grid-cols-2 gap-x-3 sm:flex justify-center items-center sm:items-center pb-10">
+                        <div className="sm:w-1/4 grid flex-col justify-center items-center text-center pb-10">
                             {project.year? <p className="capitalize ">Year: {project.year}</p>: ""}
                             {project.role? <p className="capitalize ">Role: {project.role}</p>: ""}
                             {project.collaborators? <p className="capitalize">Collabs: {project.collaborators?.join(", ")}</p>: " "}
