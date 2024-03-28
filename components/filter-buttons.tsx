@@ -20,12 +20,12 @@ export function FilterButtons(filters:object){
       )
 
     return(
-    isSanityStudio? "" : <div id="filters" className={`bg-black text-white overflow-x-scroll lg:h-auto lg:pt-32 lg:justify-center lg:items-start p-10 flex lg:flex-col lg:justify-center lg:items-center bottom-0 z-10 text-lg`} key={'parent'}>
+    isSanityStudio? "" : <div id="filters" className={`p-10 bg-black text-gray-400 overflow-x-scroll lg:h-auto justify-start flex bottom-0 z-10 text-lg`} key={'parent'}>
     {Object.entries(filters).map(([key, array])=>{
         return(
-            <span key={key} className="gerstner py-3 flex items-center justify-center flex-col lg:flex-row">
-                <p className="p-2 text-lg underline lg:no-underline capitalize">{`${key}:`}</p>
-                <div className="flex flex-col justify-center items-center lg:flex-row">
+            <span key={key} className="gerstner flex items-center justify-center">
+                <p className="mx-2 text-lg underline lg:no-underline capitalize">{`${key}:`}</p>
+                <div className="flex flex-col lg:flex-row justify-center items-center">
                 {array.map((item:string, itemIdx:any)=>{
                     let itemArray = Array.from(item);
                     itemArray[0]=itemArray[0].toUpperCase();
@@ -40,7 +40,7 @@ export function FilterButtons(filters:object){
                                 searchParams.getAll(`${key}`).includes(item)? router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
                                 : router.push( `/?${createQueryString(`${key}`, `${item}`)}`, {scroll: false})
                             }}
-                            className={`w-fit transition transition-all whitespace-nowrap text-xl font-light my-2 lg:mx-1 lg:my-0 border-2 border-white rounded-full px-6 py-2 outline-2 lg:hover:underline ${searchParams.get(key)?.includes(item)? " text-4xl bg-white text-black" : ""}`}>
+                            className={`w-fit transition transition-all whitespace-nowrap text-xl font-light p-1 ml-1 lg:hover:underline ${searchParams.get(key)?.includes(item)? "text-4xl bg-black text-gray-400" : "bg-gray-400 text-black"}`}>
                                 {itemIdx<itemArray.length? `${itemArray.join("")}`: `${itemArray.join("")}`}
                             </button>
 

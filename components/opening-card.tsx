@@ -30,8 +30,8 @@ export function OpeningCard(){
     
     return(
         <div ref={cardRef} className="w-screen h-screen bg-white fixed top-0 z-30 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 ease-in-out pointer-events-none">
-            <Image className=""  src={require('../src/Drew-1.gif')} alt="loading..." />
-            <p className="text-8xl text-lighter">Art Director, Designer, Illustrator</p>
+            <Image className="w-3/4" src={require('../src/Drew-1.gif')} alt="loading..." />
+            <p className="bg-black text-7xl text-gray-400 text-lighter">Art Director, Designer, Illustrator</p>
         </div>
     )
 }

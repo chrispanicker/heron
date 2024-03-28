@@ -44,11 +44,11 @@ export default async function Home({searchParams}: Props) {
         <OpeningCard />
         <SiteNav />
         <section className="Project3dParent">
-        {filteredProjects.map((project:any, index:number)=>(
-          <div className="Project3d flex justify-center items-center text-xl snap-y" key={project._id}>
-              <ProjectListing project={project} index={index}/>
-          </div>
-        ))}
+          {filteredProjects.map((project:any, index:number)=>(
+            <div className="Project3d flex justify-center items-center lg:text-5xl text-3xl snap-y" key={project._id}>
+                <ProjectListing project={project} index={index}/>
+            </div>
+          ))}
         </section>
         <FunkyButtons />
     </main>
