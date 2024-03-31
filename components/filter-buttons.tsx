@@ -25,7 +25,7 @@ export function FilterButtons(filters:object){
         return(
             <span key={key} className="gerstner flex items-center justify-center">
                 <p className="mx-2 text-lg underline lg:no-underline capitalize">{`${key}:`}</p>
-                <div className="flex flex-col lg:flex-row justify-center items-center">
+                <div className="flex flex-row justify-center items-center">
                 {array.map((item:string, itemIdx:any)=>{
                     let itemArray = Array.from(item);
                     itemArray[0]=itemArray[0].toUpperCase();

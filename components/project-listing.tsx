@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Project } from "@/types/project";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
@@ -10,6 +10,8 @@ interface Props{
     project: Project
     index: number
 }
+
+
 
 
 export default function ProjectListing({project, index}: Props) {
@@ -26,6 +28,18 @@ export default function ProjectListing({project, index}: Props) {
         },
         [searchParams]
       )
+    useEffect(()=>{
+        if(selectedProject === null || selectedProject === ""){
+            let main = document.querySelector("main")
+            main?.scrollIntoView({
+            behavior: 'smooth'
+        })}else{
+            let proj = document.querySelector(`#${selectedProject}`)
+            proj?.scrollIntoView({
+            behavior: 'smooth'
+        })}
+
+    }, [projectRef])
     selectedProject===project.slug? "":"";
     return project? 
         <section className="" style={{['--i' as any]:index}}>
