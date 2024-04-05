@@ -38,33 +38,27 @@ export default function ProjectListing({project, index}: Props) {
             proj?.scrollIntoView({
             behavior: 'smooth'
         })}
-
     }, [projectRef])
+
+
     selectedProject===project.slug? "":"";
     return project? 
         <section className="" style={{['--i' as any]:index}}>
-            <button 
-            id={project.slug}
-            ref={projectRef}
-            className={`projectTitle flatView opacity-100 w-screen tracking-normal transition transition-all duration-200 cursor-pointer flex flex-col pb-1 items-center justify-center group`}
-            onClick={(event)=>{
-                searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
-                : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
-            }}
-            >
+                <button 
+                id={project.slug}
+                ref={projectRef}
+                className={`projectTitle flatView opacity-100 w-screen tracking-normal transition transition-all duration-200 cursor-pointer flex flex-col pb-1 items-center justify-center group`}
+                onClick={(event)=>{
+                    searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
+                    : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
+                }}
+                >
                 <span className="flex justify-center">
-                    <p className={`px-1 text-gray-300 transition transition-all duration-500 w-max flex sm:group-hover:bg-gray-400 sm:group-hover:text-white ${selectedProject===project.slug? "bg-black text-gray-400": ""}`}>{project.name}</p>
-                    {/* <Image 
-                    alt={`Image of ${project.name}`} 
-                    width={240} 
-                    height={240} 
-                    className={`opacity-0 h-0 w-auto hidden lg:block group-hover:h-[1.8rem] sm:group-hover:opacity-100 ${selectedProject===project.slug? "sm:opacity-100 sm:h-[1.8rem]": ""}`} 
-                    src={project.images? urlForImage(project.images[0]).url(): ""}>
-                    </Image> */}
+                    <p className={`px-1  transition transition-all duration-500 w-max flex sm:group-hover:bg-gray-400 sm:group-hover:text-white ${selectedProject===project.slug? "bg-gray-400 text-black": "text-gray-300"}`}>{project.name}</p>
                 </span>
             </button>
             {project.name? 
-                <div id={project.slug+"1"} className={`w-screen text-lg text-gray-400 transition transition-all duration-1000 overflow-hidden flex justify-center flex-col ${selectedProject===project.slug? "h-[80vh] lg:h-[90vh]": "h-[0vh]"}`}>
+                <div id={project.slug+"1"} className={`w-screen text-lg text-gray-400 transition transition-all duration-1000 overflow-hidden flex justify-center flex-col ${selectedProject===project.slug? "h-[60vh] lg:h-[70vh]": "h-[0vh]"}`}>
                     <div className="flex overflow-x-scroll overflow-y-hidden w-screen">
                         {project.vimeo? 
                         <div className="relative sm:min-w-[80rem] sm:min-h-[40rem] min-w-[31rem] h-[16.25rem] py-2 mt-1 overflow-hidden">
@@ -86,7 +80,7 @@ export default function ProjectListing({project, index}: Props) {
                             />
                         ))}
                     </div>
-                    <div className="leading-5 flex flex-col justify-center items-center">
+                    <div className={`leading-5 flex flex-col justify-center items-center transition transition-all ${selectedProject===project.slug? "opacity-100":"opacity-0"}`}>
                         <div className="sm:w-1/4 m-5 flex justify-center flex-col items-center text-justify py-5">
                             <p className="pb-4 tracking-tight">{project.name}</p>
                             <PortableText value={project.content}/>

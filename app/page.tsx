@@ -40,7 +40,7 @@ export default async function Home({searchParams}: Props) {
   )
       
   return (
-    <main id="main" className="py-20 z-0 text-light text-black bg-white flex flex-col items-center justify-center min-h-screen gerstner">
+    <main id="main" className="py-20 z-0 text-light text-black bg-white flex flex-col items-center justify-start min-h-screen gerstner">
         <OpeningCard />
         <SiteNav />
         <section className="Project3dParent">
