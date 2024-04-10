@@ -5,6 +5,8 @@ import { SiteNav } from "@/components/sitenav";
 import { client } from "@/sanity/sanity-utils";
 import { groq } from "next-sanity";
 
+ 
+
 interface Props {
   searchParams: {
     tags?: string
@@ -13,6 +15,7 @@ interface Props {
   }
 }
 
+
 export default async function Home({searchParams}: Props) {
   const {tags, collabs, role} = searchParams 
   const projectFilter = `_type == "project" `
@@ -20,6 +23,8 @@ export default async function Home({searchParams}: Props) {
   const collabFilter = collabs ? `collaborators match "${collabs}" ${role? "||" : "" }` : ""
   const roleFilter = role ? `role match "${role}"` : "" 
   const filter = collabs || role || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
+
+
   let filteredProjects = await client.fetch(
       groq`*[${projectFilter} ${filter}]{
           _id,
@@ -40,7 +45,7 @@ export default async function Home({searchParams}: Props) {
   )
       
   return (
-    <main id="main" className="py-20 z-0 text-light text-black bg-white flex flex-col items-center justify-start min-h-screen gerstner">
+    <main id="main" className={`py-20 z-0 text-light text-black bg-white flex flex-col items-center justify-start min-h-screen`}>
         <OpeningCard />
         <SiteNav />
         <section className="Project3dParent">

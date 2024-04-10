@@ -23,7 +23,7 @@ export function FilterButtons(filters:object){
     isSanityStudio? "" : <div id="filters" className={`fixed top-[-7vh] hover:top-[0vh] transition-all duration-500 p-10 bg-black text-gray-400 overflow-x-scroll h-fit w-screen justify-start flex bottom-0 z-10 text-lg`} key={'parent'}>
     {Object.entries(filters).map(([key, array])=>{
         return(
-            <span key={key} className="gerstner flex items-center justify-center">
+            <span key={key} className="flex items-center justify-center">
                 <p className="mx-2 text-lg underline lg:no-underline capitalize">{`${key}:`}</p>
                 <div className="flex flex-row justify-center items-center">
                 {array.map((item:string, itemIdx:any)=>{

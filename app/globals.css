@@ -2,31 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @font-face {
-  font-family: 'Times New Roman', Times, serif;
-  src: url(../src/Times\ New\ Roman.ttf);
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Times New Roman', Times, serif;
-  src: url(../src/Times\ New\ Roman\ Italic.ttf);
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Times New Roman', Times, serif;
-  src: url(../src/Times\ New\ Roman\ Bold.ttf);
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Times New Roman', Times, serif;
-  src: url(../src/Times\ New\ Roman\ Bold\ Italic.ttf);
-  font-weight: bold;
-  font-style: italic;
-} */
 
 @font-face {
   font-family: 'Waldenburg', sans-serif;
@@ -56,8 +31,6 @@
   font-style: italic;
 }
 
-
-
 @font-face {
   font-family: 'Vivaldii', serif;
   src: url(../src/VIVALDII.TTF);
@@ -79,7 +52,19 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Flatspot Nuovo Bold', sans-serif;
+  src: url(../src/FlatspotNuovoTest-Bold.woff2);
+  font-weight: bold;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'flatspot', sans-serif;
+  src: url(../src/FlatspotNuovoTest-Roman.woff2);
+  font-weight: normal;
+  font-style: normal;
+}
 
 
 
@@ -103,13 +88,12 @@
   }
 }
 
-
 .walden{
-  font-family: 'Waldenburg', sans-serif;
+  font-family: 'Waldenburg';
 }
 
 .gerstner{
-  font-family: 'Gerstner-Programm', sans-serif;
+  font-family: 'Gerstner-Programm';
 }
 
 .synt{
@@ -124,6 +108,10 @@
 .optima{
   font-family: 'Optima';
 }
+
+.flatspot{
+  font-family: "Flatspot Nuovo", sans-serif;
+} 
 
 /* scrollbar stuff */
 
@@ -172,7 +160,6 @@
     transform: rotateY(0deg) rotateX(360deg) rotateX(calc(var(--i)*40deg)) translateZ(20rem);
   }
 } */
-
 /* 
 .projectTitle{
   transform-style: preserve-3d;
