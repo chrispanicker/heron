@@ -16,6 +16,7 @@ interface Props{
 
 
 export default function ProjectListing({project, index}: Props) {
+    const projectClickRef = useRef<HTMLDivElement | null>(null)
     const router = useRouter();
     const projectRef = useRef(null);
     const searchParams = useSearchParams();    
@@ -29,47 +30,45 @@ export default function ProjectListing({project, index}: Props) {
         },
         [searchParams]
       )
-
     
     useEffect(()=>{
         if(selectedProject === null || selectedProject === ""){
             let main = document.querySelector("main")
             main?.scrollIntoView({
-            behavior: 'smooth'
+            behavior: 'smooth', block: "end"
         })}else{
             let proj = document.querySelector(`#${selectedProject}`)
             proj?.scrollIntoView({
-            behavior: 'smooth'
+            behavior: 'smooth', block: "end"
         })}
     }, [projectRef])
 
-    // const handleClick = () => {
-    //     selectedProject===project.slug? document.querySelector(`#${selectedProject}`)?.scrollIntoView({behavior: 'smooth'}): "" 
-    // };
 
     selectedProject===project.slug? "":"";
     return project? 
         <section className="" style={{['--i' as any]:index}}>
                 <button 
                 id={project.slug}
-                ref={projectRef}
-                className={`projectTitle flatView opacity-100 w-screen tracking-normal transition transition-all duration-1000 cursor-pointer flex flex-col pb-1 items-center justify-center group`}
+                className={`projectTitle flatView opacity-100 w-screen tracking-normal transition transition-all duration-500 cursor-pointer flex flex-col pb-1 items-center justify-center group`}
                 onClick={(event)=>{
-                    // handleClick()
-
                     searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
                     : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
+                    console.log(projectClickRef.current)
+                    setTimeout(() => {
+                        projectClickRef.current?.scrollIntoView({behavior: 'smooth', block: "start", inline: "start"});
+                    }, 500);
+                    
                 }}
                 >
                 <span className="flex justify-center">
-                    <p className={`px-1  transition transition-all duration-500 w-max flex sm:group-hover:bg-gray-400 sm:group-hover:text-white ${selectedProject===project.slug? "bg-gray-400 text-black": "text-gray-300"}`}>{project.name}</p>
+                    <p className={`px-1 transition transition-all duration-500 w-max flex sm:group-hover:bg-gray-400 sm:group-hover:text-white ${selectedProject===project.slug? "bg-gray-400 text-black": "text-gray-300"}`}>{project.name}</p>
                 </span>
             </button>
             {project.name? 
-                <div id={project.slug+"1"} className={`w-screen text-lg text-gray-400 transition transition-all duration-1000 overflow-hidden flex justify-center flex-col ${selectedProject===project.slug? "h-[35rem] sm:h-[40rem] lg:h-[45rem]": "h-[0vh]"}`}>
+                <div id={project.slug+"1"} ref={projectClickRef} className={`w-screen text-lg text-gray-400 transition transition-all duration-500 overflow-hidden flex justify-center flex-col ${selectedProject===project.slug? "h-[35rem] sm:h-[40rem] lg:h-[65rem]": "h-[0vh]"}`}>
                     <div className="flex overflow-x-scroll overflow-y-hidden w-screen">
                         {project.vimeo? 
-                        <div className="relative sm:min-w-[49rem] sm:min-h-[25rem] min-w-[31rem] h-[16.25rem] py-2 mt-1 overflow-hidden">
+                        <div className="relative lg:min-w-[79.4rem] lg:min-h-[40rem] md:min-w-[38.8rem] md:min-h-[20rem] min-w-[31rem] h-[16.25rem] py-2 mt-1 overflow-hidden">
                             <div className="h-0 pt-[56.25%]">
                                 <iframe src={`https://player.vimeo.com/video/${vimeoID}?title=0&byline=0&portrait=0`} className="w-full h-full absolute top-0 left-0" allow="fullscreen; picture-in-picture">
                                 </iframe>
@@ -83,7 +82,7 @@ export default function ProjectListing({project, index}: Props) {
                             alt=""
                             width={1080}
                             height={1080}
-                            className="w-[auto] h-[16.25rem] sm:h-[25rem] hover:rounded-none rounded-3xl transition transition-all py-2 mt-1 rounded-none object-cover"
+                            className="w-[auto] h-[16.25rem] lg:h-[40rem] md:h-[20rem] hover:rounded-none rounded-3xl transition transition-all py-2 mt-1 rounded-none object-cover"
                             unoptimized= {false}
                             />
                         ))}

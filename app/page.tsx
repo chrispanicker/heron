@@ -47,7 +47,7 @@ export default async function Home({searchParams}: Props) {
   return (
     <main id="main" className={`py-20 z-0 text-light text-black bg-white flex flex-col items-center justify-start min-h-screen`}>
         <OpeningCard />
-        <SiteNav />
+        {/* <SiteNav /> */}
         <section className="Project3dParent">
           {filteredProjects.map((project:any, index:number)=>(
             <div className="Project3d flex justify-center items-center lg:text-5xl text-3xl snap-y" key={project._id}>
@@ -55,7 +55,7 @@ export default async function Home({searchParams}: Props) {
             </div>
           ))}
         </section>
-        <FunkyButtons />
+        {/* <FunkyButtons /> */}
     </main>
   )
 }

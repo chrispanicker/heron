@@ -50,8 +50,7 @@ export default async function RootLayout({
   filterToLower(allProjects)
   return (
     <html lang="en">
-      <body className={`${myFont.variable} bg-black`}>
-        <SiteHeader />
+      <body className={`${myFont.variable} bg-white`}>
         <section className=''>
           <TestFilter projects={allProjects}/>
           <>{children}</>
