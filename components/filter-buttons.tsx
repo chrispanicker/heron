@@ -60,6 +60,7 @@ export function FilterButtons(filters:object){
                 header?.classList.toggle("top-[-4.5rem]")
                 button?.classList.toggle("top-[2rem]")
                 button?.classList.toggle("top-[6.5rem]")
+                button?.innerHTML=="↓"? button.innerHTML="↑": button!.innerHTML="↓"
             }}>↓</button>
         </div>
     </div>
