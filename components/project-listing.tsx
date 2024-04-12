@@ -84,7 +84,6 @@ export default function ProjectListing({project, index}: Props) {
                             height={1080}
                             className="w-[auto] h-[16.25rem] lg:h-[40rem] md:h-[20rem] hover:rounded-none rounded-3xl transition transition-all py-2 mt-1 rounded-none object-cover"
                             unoptimized= {false}
-                            priority
                             />
                         ))}
                     </div>
