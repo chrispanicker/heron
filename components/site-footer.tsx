@@ -12,8 +12,8 @@ export function SiteFooter(){
     
     return (
         isSanityStudio? "" : 
-        <footer ref={footerRef} id="footer" className="fixed bottom-0 h-[0rem] sm:h-[2rem] lg:hover:h-[14rem] md:hover:h-[20rem] sm:hover:h-[24rem] overflow-hidden duration-500 text-xl w-screen justify-center text-justify flex w-full bg-gray-400 text-black transition transition-all">
-            <button id="footerButton" className='fixed bottom-[1rem] text-5xl opacity-100 sm:opacity-0' onClick={()=>{
+        <footer ref={footerRef} id="footer" className="z-50 fixed bottom-0 h-[0rem] overflow-hidden duration-500 text-xl w-screen justify-center text-justify flex w-full bg-gray-400 text-black transition transition-all">
+            <button id="footerButton" className='fixed bottom-[1rem] text-5xl opacity-100' onClick={()=>{
                 let footer = document.querySelector("#footer");
                 let button = document.querySelector("#footerButton");
                 footer?.classList.toggle("h-[100vh]")

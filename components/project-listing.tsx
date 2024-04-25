@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Project } from "@/types/project";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
@@ -11,10 +11,6 @@ interface Props{
     index: number
 }
 
-
-
-
-
 export default function ProjectListing({project, index}: Props) {
     const projectClickRef = useRef<HTMLDivElement | null>(null)
     const router = useRouter();
@@ -22,6 +18,7 @@ export default function ProjectListing({project, index}: Props) {
     const searchParams = useSearchParams();    
     const selectedProject = searchParams.get('project');
     const vimeoID = project.vimeo? project.vimeo.replace("https://vimeo.com/", ""):"";
+
     const createQueryString = useCallback(
         (name: string, value: string) => {
           const params = new URLSearchParams(searchParams.toString())
@@ -29,8 +26,13 @@ export default function ProjectListing({project, index}: Props) {
           return params.toString()
         },
         [searchParams]
-      )
-    
+      )  
+
+      const handleScroll = (e:any) => {
+        const { scrollLeft, scrollWidth } = e.target;
+        Math.round(scrollWidth/2)===scrollLeft? document.querySelector(`#${project.slug+"1"}`)!.scrollLeft=0 : console.log(Math.round(scrollWidth/2), scrollLeft)
+      };
+
     useEffect(()=>{
         if(selectedProject === null || selectedProject === ""){
             let main = document.querySelector("main")
@@ -46,18 +48,16 @@ export default function ProjectListing({project, index}: Props) {
 
     selectedProject===project.slug? "":"";
     return project? 
-        <section className="" style={{['--i' as any]:index}}>
+        <section className="" style={{['--i' as any]:index+1}}>
                 <button 
                 id={project.slug}
-                className={`projectTitle flatView opacity-100 w-screen tracking-normal transition transition-all duration-500 cursor-pointer flex flex-col pb-1 items-center justify-center group`}
-                onClick={(event)=>{
+                className={`z-50 projectTitle flatView opacity-100 w-screen tracking-normal transition transition-all duration-500 cursor-pointer flex flex-col pb-1 items-center justify-center group`}
+                onClick={()=>{
                     searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
                     : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
-                    console.log(projectClickRef.current)
                     setTimeout(() => {
                         projectClickRef.current?.scrollIntoView({behavior: 'smooth', block: "start", inline: "start"});
                     }, 500);
-                    
                 }}
                 >
                 <span className="flex justify-center">
@@ -66,7 +66,7 @@ export default function ProjectListing({project, index}: Props) {
             </button>
             {project.name? 
                 <div id={project.slug+"1"} ref={projectClickRef} className={`w-screen text-lg text-gray-400 transition transition-all duration-500 overflow-hidden flex justify-center flex-col ${selectedProject===project.slug? "h-[35rem] sm:h-[40rem] lg:h-[65rem]": "h-[0vh]"}`}>
-                    <div className="flex overflow-x-scroll overflow-y-hidden w-screen">
+                    <div onScroll={handleScroll} className="flex overflow-x-scroll overflow-y-hidden w-screen">
                         {project.vimeo? 
                         <div className="relative lg:min-w-[79.4rem] lg:min-h-[40rem] md:min-w-[38.8rem] md:min-h-[20rem] min-w-[31rem] h-[16.25rem] py-2 mt-1 overflow-hidden">
                             <div className="h-0 pt-[56.25%]">
@@ -75,17 +75,17 @@ export default function ProjectListing({project, index}: Props) {
                                 <script src="https://player.vimeo.com/api/player.js" async></script>
                             </div>
                         </div>:""}
-                        {project.images?.map((image, index)=>(
-                            <Image
-                            key={`image${index}`}
-                            src={urlForImage(image).url()}
-                            alt=""
-                            width={1080}
-                            height={1080}
-                            className="w-[auto] h-[16.25rem] lg:h-[40rem] md:h-[20rem] hover:rounded-none rounded-3xl transition transition-all py-2 mt-1 rounded-none object-cover"
-                            unoptimized= {false}
-                            />
-                        ))}
+                            {project.images?.map((image, index)=>(
+                                <Image
+                                key={`image${index}`}
+                                src={urlForImage(image).url()}
+                                alt=""
+                                width={1080}
+                                height={1080}
+                                className="w-[auto] h-[16.25rem] lg:h-[40rem] md:h-[20rem] hover:rounded-none rounded-3xl transition transition-all py-2 mt-1 rounded-none object-cover"
+                                unoptimized= {false}
+                                />
+                            ))}
                     </div>
                     <div className={`leading-5 flex flex-col justify-center items-center transition transition-all ${selectedProject===project.slug? "opacity-100":"opacity-0"}`}>
                         <div className="sm:w-[35rem] w-[20rem] m-5 flex justify-center flex-col items-center text-justify py-5">
