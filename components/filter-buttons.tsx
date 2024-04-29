@@ -23,7 +23,7 @@ export function FilterButtons(filters:object){
     isSanityStudio? "" : <div id="filters" className={`z-40 fixed top-[-6rem] transition-all duration-500 text-gray-400 overflow-x-scroll h-fit w-screen justify-start flex bottom-0 text-lg bg-black`} key={'parent'}>
     {Object.entries(filters).map(([key, array])=>{
         return(
-            <span key={key} className="px-2 flex items-center justify-center py-7 z-40 bg-black">
+            <span key={key} className="px-2 flex items-center justify-center py-7 z-10 bg-black">
                 <p className={`mx-2 text-lg underline lg:no-underline capitalize ${key==="role"?"text-orange-400":key==="collabs"?"text-green-400":key==="tags"?"text-blue-800":""}`}>{`${key}`}</p>
                 <div className="flex flex-row justify-center items-center">
                 {array.map((item:string, itemIdx:any)=>{
@@ -42,7 +42,7 @@ export function FilterButtons(filters:object){
                                 router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
                                 : router.push( `/?${createQueryString(`${key}`, `${item}`)}`, {scroll: false})
                             }}
-                            className={`w-fit transition transition-all whitespace-nowrap text-xl font-light p-1 ml-1 lg:hover:underline ${searchParams.get(key)?.includes(item)? "text-4xl bg-white text-gray-400" : `${key==="role"?"roles":key==="collabs"?"collabs":key==="tags"?"tags":""} text-black`}`}>
+                            className={`w-fit transition transition-all whitespace-nowrap text-xl font-light p-1 ml-1 lg:hover:underline ${searchParams.get(key)?.includes(item)? `${key==="role"?"roles1":key==="collabs"?"collabs1":key==="tags"?"tags1":""}` : `${key==="role"?"roles":key==="collabs"?"collabs":key==="tags"?"tags":""} text-black`}`}>
                                 {itemIdx<itemArray.length? `${itemArray.join("")}`: `${itemArray.join("")}`}
                             </button>
 
@@ -55,7 +55,7 @@ export function FilterButtons(filters:object){
         
     })}
         <div className="fixed w-screen flex justify-center items-center z-0">
-            <button id="buttonEl" className='fixed transition-all duration-500 top-[2rem] text-5xl opacity-100' onClick={(event)=>{
+            <button id="buttonEl" className='fixed transition-all duration-500 top-[2rem] text-5xl text-black opacity-100' onClick={()=>{
                 let header = document.querySelector("#filters");
                 let button = document.querySelector("#buttonEl");
                 header?.classList.toggle("top-[0rem]")

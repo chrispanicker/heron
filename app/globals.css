@@ -185,6 +185,21 @@
   background-color: rgb(calc(var(--t)*20), 0, 255);
 }
 
+.roles1{
+  color: rgb(255, calc(var(--r)*100), 0);
+  outline: 1px solid rgb(255, calc(var(--r)*100), 0);
+}
+
+.collabs1{
+  color: rgb(0, calc(255/var(--c)), calc(var(--c)*50));
+  outline: 1px solid rgb(0, calc(255/var(--c)), calc(var(--c)*50));
+}
+
+.tags1{
+  color: rgb(calc(var(--t)*20), 0, 255);
+  outline: 1px solid rgb(calc(var(--t)*20), 0, 255);
+}
+
 
 /* @keyframes rotate{
   0%{

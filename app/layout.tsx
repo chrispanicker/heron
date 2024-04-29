@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
-import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { client } from '@/sanity/sanity-utils'
 import { groq } from 'next-sanity'
 import { TestFilter } from '@/components/test-filter'
 import { filterToLower } from '@/components/filter-to-lower'
-import { siteConfig } from '@/config/site'
 import localFont from 'next/font/local'
 
 
@@ -29,6 +27,12 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
+
+  const bio = await client.fetch(
+    groq`*[_type=="bio"]{
+        bio,
+    }`
+  )
   const allProjects = await client.fetch(
     groq`*[_type=="project"]{
       _id,
@@ -54,7 +58,7 @@ export default async function RootLayout({
         <section className=''>
           <TestFilter projects={allProjects}/>
           <>{children}</>
-          <SiteFooter />
+          <SiteFooter bio={bio} />
         </section>
       </body>
     </html>

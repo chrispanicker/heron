@@ -1,7 +1,6 @@
-import FunkyButtons from "@/components/funky-buttons";
 import { OpeningCard } from "@/components/opening-card";
 import ProjectListing from "@/components/project-listing";
-import { SiteNav } from "@/components/sitenav";
+import UsedFilters from "@/components/used-filters";
 import { client } from "@/sanity/sanity-utils";
 import { groq } from "next-sanity";
 
@@ -19,11 +18,10 @@ interface Props {
 export default async function Home({searchParams}: Props) {
   const {tags, collabs, role} = searchParams 
   const projectFilter = `_type == "project" `
-  const tagFilter =  tags? `tags match "${tags}" ${collabs || role? "||" : "" }` : "" 
-  const collabFilter = collabs ? `collaborators match "${collabs}" ${role? "||" : "" }` : ""
+  const tagFilter =  tags? `tags match "${tags}" ${collabs || role? "&&" : "" }` : "" 
+  const collabFilter = collabs ? `collaborators match "${collabs}" ${role? "&&" : "" }` : ""
   const roleFilter = role ? `role match "${role}"` : "" 
   const filter = collabs || role || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
-
 
   let filteredProjects = await client.fetch(
       groq`*[${projectFilter} ${filter}]{
@@ -55,6 +53,7 @@ export default async function Home({searchParams}: Props) {
             </div>
           ))}
         </section>
+        <UsedFilters role={role} tags={tags} collabs={collabs}/>
         {/* <FunkyButtons /> */}
     </main>
   )

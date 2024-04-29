@@ -29,7 +29,7 @@ export function OpeningCard(){
     }, [cardRef])
     
     return(
-        <div ref={cardRef} className="w-screen h-screen bg-white fixed top-0 z-30 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 ease-in-out pointer-events-none">
+        <div ref={cardRef} className="w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 ease-in-out pointer-events-none">
             <Image className="w-3/4" src={require('../src/Drew-1.gif')} alt="loading..." priority />
             <div className="flex flex-col lg:flex-row justify-center items-center w-4/4">
                 <p className="bg-black text-7xl text-gray-400 text-lighter mb-2 w-fit px-2">Art Director</p>
