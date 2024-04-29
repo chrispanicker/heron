@@ -124,9 +124,16 @@
 ::-webkit-scrollbar-track {
   background: transparent; 
 }
-/* Handle */
+/* Handle
 ::-webkit-scrollbar-thumb {
   background: #9CA3AF; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+} */
+
+::-webkit-scrollbar-thumb {
+  background: #000000; 
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 

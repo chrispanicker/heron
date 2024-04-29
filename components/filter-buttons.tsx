@@ -23,8 +23,8 @@ export function FilterButtons(filters:object){
     isSanityStudio? "" : <div id="filters" className={`z-40 fixed top-[-6rem] transition-all duration-500 text-gray-400 overflow-x-scroll h-fit w-screen justify-start flex bottom-0 text-lg bg-black`} key={'parent'}>
     {Object.entries(filters).map(([key, array])=>{
         return(
-            <span key={key} className="px-2 flex items-center justify-center py-7 z-10 bg-black">
-                <p className={`mx-2 text-lg underline lg:no-underline capitalize ${key==="role"?"text-orange-400":key==="collabs"?"text-green-400":key==="tags"?"text-blue-800":""}`}>{`${key}`}</p>
+            <span key={key} className="px-2 flex items-center justify-center py-7 z-10 bg-gray-400">
+                <p className={`mx-2 text-lg underline lg:no-underline capitalize ${key==="role"?"text-black":key==="collabs"?"text-black":key==="tags"?"text-black":""}`}>{`${key}`}</p>
                 <div className="flex flex-row justify-center items-center">
                 {array.map((item:string, itemIdx:any)=>{
                     let itemArray = Array.from(item);

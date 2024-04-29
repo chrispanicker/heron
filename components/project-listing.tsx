@@ -7,43 +7,41 @@ import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/image";
 
 interface Props{
+    filteredProjects:any
     project: Project
     index: number
 }
 
-export default function ProjectListing({project, index}: Props) {
+export default function ProjectListing({filteredProjects, project, index}: Props) {
     const projectClickRef = useRef<HTMLDivElement | null>(null)
     const router = useRouter();
-    const projectRef = useRef(null);
     const searchParams = useSearchParams();    
     const selectedProject = searchParams.get('project');
     const vimeoID = project.vimeo? project.vimeo.replace("https://vimeo.com/", ""):"";
-
     const createQueryString = useCallback(
-        (name: string, value: string) => {
-          const params = new URLSearchParams(searchParams.toString())
-          params.set(name, value)
-          return params.toString()
-        },
-        [searchParams]
-      )  
+    (name: string, value: string) => {
+        const params = new URLSearchParams(searchParams.toString())
+        params.set(name, value)
+        return params.toString()
+    }, [searchParams]
+    )  
 
-      const handleScroll = (e:any) => {
-        const { scrollLeft, scrollWidth } = e.target;
-        Math.round(scrollWidth/2)===scrollLeft? document.querySelector(`#${project.slug+"1"}`)!.scrollLeft=0 : ""
-      };
+    const handleScroll = (e:any) => {
+    const { scrollLeft, scrollWidth } = e.target;
+    Math.round(scrollWidth/2)===scrollLeft? document.querySelector(`#${project.slug+"1"}`)!.scrollLeft=0 : ""
+    };
 
-    useEffect(()=>{
-        if(selectedProject === null || selectedProject === ""){
-            let main = document.querySelector("main")
-            main?.scrollIntoView({
-            behavior: 'smooth', block: "end"
-        })}else{
-            let proj = document.querySelector(`#${selectedProject}`)
-            proj?.scrollIntoView({
-            behavior: 'smooth', block: "end"
-        })}
-    }, [projectRef])
+    // useEffect(()=>{
+    //     if(selectedProject === null || selectedProject === ""){
+    //         let main = document.querySelector("main")
+    //         main?.scrollIntoView({
+    //         behavior: 'smooth', block: "end"
+    //     })}else{
+    //         let proj = document.querySelector(`#${selectedProject}`)
+    //         proj?.scrollIntoView({
+    //         behavior: 'smooth', block: "end"
+    //     })}
+    // }, [projectRef])
 
     selectedProject===project.slug? "":"";
     return project? 
@@ -62,7 +60,6 @@ export default function ProjectListing({project, index}: Props) {
                     >
                     <span className="flex justify-center">
                         <p className={`px-1 transition transition-all duration-500 w-max flex sm:group-hover:bg-gray-400 sm:group-hover:text-white ${selectedProject===project.slug? "bg-gray-400 text-black": "text-gray-300"}`}>{project.name}</p>
-                        <p className={`${selectedProject===project.slug? "block" : "hidden"}`}>&nbsp;✕</p>
                     </span>
                 </button>
             </div>
@@ -91,19 +88,47 @@ export default function ProjectListing({project, index}: Props) {
                                 />
                             ))}
                     </div>
+
+                    
                     <div className={`leading-5 flex flex-col justify-center items-center transition transition-all ${selectedProject===project.slug? "opacity-100":"opacity-0"}`}>
                         <div className="sm:w-[35rem] w-[20rem] m-5 flex justify-center flex-col items-center text-justify">
-                            <p className="pb-4 tracking-tight">{project.name}</p>
+                            <span className="pb-5 flex sm:w-[35rem] w-[20rem] justify-between items-center">
+                                <button className="text-black text-2xl"
+                                    onClick={()=>{
+                                        router.push( `/?${createQueryString(`project`, `${index===0? filteredProjects[filteredProjects.length-1].slug: filteredProjects[index-1].slug}`)}`, {scroll: false})
+                                        setTimeout(() => {
+                                            projectClickRef.current?.scrollIntoView({behavior: 'smooth', block: "start", inline: "start"});
+                                        }, 500);
+                                    }}
+                                >←</button>
+                                <p className="tracking-tight">{project.name}</p>
+                                <button className="text-black text-2xl"
+                                    onClick={()=>{
+                                        router.push( `/?${createQueryString(`project`, `${index===filteredProjects.length-1? filteredProjects[0].slug : filteredProjects[index+1].slug}`)}`, {scroll: false})
+                                        setTimeout(() => {
+                                            projectClickRef.current?.scrollIntoView({behavior: 'smooth', block: "start", inline: "start"});
+                                        }, 500);
+                                    }}
+                                >→</button>
+                            </span>
                             <PortableText value={project.content}/>
                         </div>
-                        <div className="sm:w-[35rem] flex flex-col items-center text-left pb-10">
-                            {project.year? <p className="capitalize ">{project.year}</p>: ""}   
+                        <div id={`${project.slug}-info`} className="sm:w-[35rem] flex flex-col items-center text-left pb-10">
+                            {/* {project.year? <p className="capitalize ">{project.year}</p>: ""}    */}
                             {project.role? <p className="capitalize ">{project.role}</p>: ""}
                             {project.collaborators? <p className="capitalize">{project.collaborators?.join(", ")}</p>: " "}
                             {project.tags? <p className="capitalize ">{project.tags.join(", ")}</p>: ""}
+
+                            <span className="text-black text-2xl mt-4 sm:w-[35rem] w-[20rem] flex justify-center items-center">
+                                <button 
+                                onClick={()=>{
+                                    searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
+                                    : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
+                                }}
+                                className={`px-2 ${selectedProject===project.slug? "block" : "hidden"}`}>✕</button>
+                            </span>
                         </div>
                     </div>
-
                 </div>: ""
             }
         </section>

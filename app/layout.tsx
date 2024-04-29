@@ -24,12 +24,12 @@ const myFont = localFont({
 export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode
-}) {
+    children: React.ReactNode
+  }) {
 
 
-  const bio = await client.fetch(
-    groq`*[_type=="bio"]{
+  const info = await client.fetch(
+    groq`*[_type=="info"]{
         bio,
     }`
   )
@@ -49,8 +49,9 @@ export default async function RootLayout({
       color,
       year,
       "slug": slug.current,
-  }`
+    }`
   )
+
   filterToLower(allProjects)
   return (
     <html lang="en">
@@ -58,7 +59,7 @@ export default async function RootLayout({
         <section className=''>
           <TestFilter projects={allProjects}/>
           <>{children}</>
-          <SiteFooter bio={bio} />
+          <SiteFooter info={info} />
         </section>
       </body>
     </html>
