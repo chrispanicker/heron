@@ -1,25 +1,25 @@
 'use client'
 
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 export function OpeningCard(){
     const cardRef = useRef<HTMLDivElement>(null!)
     const h1Ref = useRef<HTMLHeadingElement>(null!)
-    const searchParams = useSearchParams();    
-    const selectedProject = searchParams.get('project');
+    // const searchParams = useSearchParams();    
+    // const selectedProject = searchParams.get('project');
 
     useEffect(()=>{
-        if(selectedProject === null || selectedProject === ""){
-            let main = document.querySelector("main")
-            main?.scrollIntoView({
-            behavior: 'smooth'
-        })}else{
-            let proj = document.querySelector(`#${selectedProject}`)
-            proj?.scrollIntoView({
-            behavior: 'smooth'
-        })}
+        // if(selectedProject === null || selectedProject === ""){
+        //     let main = document.querySelector("main")
+        //     main?.scrollIntoView({
+        //     behavior: 'smooth'
+        // })}else{
+        //     let proj = document.querySelector(`#${selectedProject}`)
+        //     proj?.scrollIntoView({
+        //     behavior: 'smooth'
+        // })}
 
         cardRef? setTimeout(()=>{
             cardRef.current.classList.replace("top-0", "top-full")
