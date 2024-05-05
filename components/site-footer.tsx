@@ -21,7 +21,7 @@ export function SiteFooter(info:any){
                     let image = document.querySelector("#footIcon")
                     let footImgDiv = document.querySelector("#footImgDiv")
                     footer?.classList.toggle("h-[0rem]")
-                    footer?.classList.toggle("h-[100vh]")
+                    footer?.classList.toggle("h-[calc(100dvh)]")
                     footImgDiv?.classList.toggle("translate-y-[-2.5rem]")
                     image?.classList.toggle("rotate-180")
                 }}

@@ -4,7 +4,7 @@ import { FilterButtons } from "./filter-buttons";
 export function TestFilter(props:any){
     let allTags:string[] = [], allCollabs:string[] = [], allRoles:string[] = []
     props.projects.map((project:Project)=>{
-        project.tags.map((tag:string)=>{
+        project.tags?.map((tag:string)=>{
             tag=tag.toLowerCase();
             tag.length===0 || allTags.includes(tag)? "": allTags.push(tag)
         })

@@ -23,7 +23,7 @@ const info = {
                 type: "object",
                 name: "inline",
                 fields: [
-                    { type: "string", name: "Job or Project Title" },
+                    { type: "string", name: "Job" },
                     { type: "number", name: "Year" }
                 ]
                 }
