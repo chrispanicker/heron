@@ -17,6 +17,9 @@ const config: Config = {
       colors:{
         bkg: "#b0ac8c" 
       },
+      fontFamily:{
+        flatspot: ["var(--font-flatspot)"]
+      },
       fontSize:{
         sm: '.8rem'
       },
@@ -31,9 +34,6 @@ const config: Config = {
       }
     },
     
-  },
-  fontFamily : {
-    timesNewRoman: ['timesNew', 'serif'],
   },
   plugins: [],
 }

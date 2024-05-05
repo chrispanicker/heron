@@ -100,7 +100,7 @@ export default function ProjectListing({filteredProjects, project, index}: Props
                                             projectClickRef.current?.scrollIntoView({behavior: 'smooth', block: "start", inline: "start"});
                                         }, 500);
                                     }}
-                                >←</button>
+                                >&#60;</button>
                                 <p className="tracking-tight">{project.name}</p>
                                 <button className="text-black text-2xl"
                                     onClick={()=>{
@@ -109,7 +109,7 @@ export default function ProjectListing({filteredProjects, project, index}: Props
                                             projectClickRef.current?.scrollIntoView({behavior: 'smooth', block: "start", inline: "start"});
                                         }, 500);
                                     }}
-                                >→</button>
+                                >&#62;</button>
                             </span>
                             <PortableText value={project.content}/>
                         </div>

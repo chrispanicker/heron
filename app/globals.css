@@ -2,74 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
-  font-family: 'Waldenburg', sans-serif;
-  src: url(../src/KMR-Waldenburg-Mager.otf);
-  font-weight: normal;
+  font-family: Flatspot;
+  src:
+       url('../public/fonts/FlatspotNuovoTest-Roman.woff') format('woff'),
+       url('../public/fonts/FlatspotNuovoTest-Roman.woff2') format('woff2');
+  font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
-
-@font-face {
-  font-family: 'Waldenburg', sans-serif;
-  src: url(../src/KMR-Waldenburg-MagerKursiv.otf);
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Waldenburg', sans-serif;
-  src: url(../src/KMR-Waldenburg-Schwer.otf);
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Waldenburg', sans-serif;
-  src: url(../src/KMR-Waldenburg-SchwerKursiv.otf);
-  font-weight: bold;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Vivaldii', serif;
-  src: url(../src/VIVALDII.TTF);
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Optima', sans-serif;
-  src: url(../src/Optima.ttc);
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Gerstner-Programm', sans-serif;
-  src: url(../src/Gerstner-ProgrammLight.otf);
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Flatspot Nuovo Bold', sans-serif;
-  src: url(../src/FlatspotNuovoTest-Bold.woff2);
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'flatspot', sans-serif;
-  src: url(../src/FlatspotNuovoTest-Roman.woff2);
-  font-weight: normal;
-  font-style: normal;
-}
-
-
 
 ::selection{
-  color: white;
+  color: rgb(57, 26, 26);
   background-color: pink;
   background-blend-mode: soft-light;
 }
@@ -88,30 +32,9 @@
   }
 }
 
-.walden{
-  font-family: 'Waldenburg';
+*{
+  font-family: Flatspot;
 }
-
-.gerstner{
-  font-family: 'Gerstner-Programm';
-}
-
-.synt{
-  font-family: 'Synt';
-  text-transform: uppercase;
-}
-
-.vivaldii{
-  font-family: 'Vivaldii';
-}
-
-.optima{
-  font-family: 'Optima';
-}
-
-.flatspot{
-  font-family: "Flatspot Nuovo", sans-serif;
-} 
 
 /* scrollbar stuff */
 
@@ -133,7 +56,7 @@
 } */
 
 ::-webkit-scrollbar-thumb {
-  background: #000000; 
+  background: #9a9a9a; 
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 

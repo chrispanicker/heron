@@ -36,9 +36,9 @@ export function OpeningCard(){
                 <h1 ref={h1Ref} className="transition-all duration-200 absolute vivaldii lg:text-[16.5rem] md:text-[16.5rem]">Drew Litowitz</h1>
             </div>
             <div className="flex flex-col lg:flex-row justify-center items-center w-4/4">
-                <p className="bg-black text-7xl text-gray-400 text-lighter mb-2 w-fit px-2">Art Director</p>
-                <p className="bg-black text-7xl text-gray-400 text-lighter mb-2 w-fit px-2">Designer</p>
-                <p className="bg-black text-7xl text-gray-400 text-lighter mb-2 w-fit px-2">Illustrator</p>
+                <p className="bg-gray-400 text-7xl text-black text-lighter mb-2 w-fit px-2">Art Director</p>
+                <p className="bg-gray-400 text-7xl text-black text-lighter mb-2 w-fit px-2">Designer</p>
+                <p className="bg-gray-400 text-7xl text-black text-lighter mb-2 w-fit px-2">Illustrator</p>
             </div>
         </div>
     )
