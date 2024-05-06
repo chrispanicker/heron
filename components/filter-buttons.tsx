@@ -62,7 +62,7 @@ export function FilterButtons(filters:object){
                 button?.innerHTML=="↓"? button.innerHTML="↑": button!.innerHTML="↓"
             }}>↓</button> */}
 
-            <div id="iconDiv" className="transition-all duration-500 fixed flex w-screen top-[0rem] justify-center items-center">
+            <div id="iconDiv" className="transition-all duration-500 fixed flex w-screen top-[calc(0rem)] justify-center items-center">
                 <Image id="headIcon" className="w-10 rotate-180 cursor-pointer" src={require('../public/Up.svg')} alt="loading..." 
                 onClick={()=>{
                     let footer = document.querySelector("#filters")
@@ -71,8 +71,8 @@ export function FilterButtons(filters:object){
                     footer?.classList.toggle("h-[0rem]")
                     footer?.classList.toggle("h-[5rem]")
                     // image?.classList.toggle("rotate-180")
-                    div?.classList.toggle("top-[0rem]")
-                    div?.classList.toggle("top-[5rem]")
+                    div?.classList.toggle("top-[calc(0rem)]")
+                    div?.classList.toggle("top-[calc(5rem)]")
                 }}
                 priority />
             </div>

@@ -30,7 +30,7 @@ export function OpeningCard(){
     }, [selectedProject])
     
     return(
-        <div ref={cardRef} className="w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 ease-in-out pointer-events-none">
+        <div ref={cardRef} className="w-screen h-screen bg-white fixed top-[0] z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 ease-in-out pointer-events-none">
             <div className="flex justify-center items-center h-[15rem]">
                 <Image className="w-3/4 z-50" src={require('../src/Drew-1.gif')} alt="loading..." onLoad={(e)=>{h1Ref.current? h1Ref.current?.classList.add("opacity-0"): ""}} priority />
                 <h1 ref={h1Ref} className="transition-all duration-200 absolute vivaldii lg:text-[16.5rem] md:text-[16.5rem]">Drew Litowitz</h1>
