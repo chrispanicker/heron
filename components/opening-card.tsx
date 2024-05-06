@@ -1,25 +1,25 @@
 'use client'
 
 import Image from "next/image";
-// import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 export function OpeningCard(){
     const cardRef = useRef<HTMLDivElement>(null!)
     const h1Ref = useRef<HTMLHeadingElement>(null!)
-    // const searchParams = useSearchParams();    
-    // const selectedProject = searchParams.get('project');
+    const searchParams = useSearchParams();    
+    const selectedProject = searchParams.get('project');
 
     useEffect(()=>{
-        // if(selectedProject === null || selectedProject === ""){
-        //     let main = document.querySelector("main")
-        //     main?.scrollIntoView({
-        //     behavior: 'smooth'
-        // })}else{
-        //     let proj = document.querySelector(`#${selectedProject}`)
-        //     proj?.scrollIntoView({
-        //     behavior: 'smooth'
-        // })}
+        if(selectedProject === null || selectedProject === ""){
+            let main = document.querySelector("main")
+            main?.scrollIntoView({
+            behavior: 'smooth'
+        })}else{
+            let proj = document.querySelector(`#${selectedProject}`)
+            proj?.scrollIntoView({
+            behavior: 'smooth'
+        })}
 
         cardRef? setTimeout(()=>{
             cardRef.current.classList.replace("top-0", "top-full")
@@ -27,7 +27,7 @@ export function OpeningCard(){
         cardRef? setTimeout(()=>{
             cardRef.current.classList.add("hidden")
         }, 4000): ""
-    }, [cardRef])
+    }, [selectedProject])
     
     return(
         <div ref={cardRef} className="w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 ease-in-out pointer-events-none">
