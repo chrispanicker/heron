@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {useCallback} from "react";
 
@@ -21,62 +20,40 @@ export function FilterButtons(filters:object){
     )
 
     return(
-    isSanityStudio? "" : <div id="filters" className={`z-40 fixed top-[0rem] transition-all duration-500 text-gray-400 overflow-x-scroll h-[0rem] w-screen justify-start flex text-lg bg-black`} key={'parent'}>
-    {Object.entries(filters).map(([key, array])=>{
-        return(
-            <span key={key} className="mx-2 flex items-center justify-center">
-                <p className={`mx-2 text-lg underline lg:no-underline capitalize ${key==="role"?"text-gray-400":key==="collabs"?"text-gray-400":key==="tags"?"text-gray-400":""}`}>{`${key}:`}</p>
-                <div className="flex flex-row justify-center items-center">
-                {array.map((item:string, itemIdx:any)=>{
-                    let itemArray = Array.from(item);
-                    itemArray[0]=itemArray[0].toUpperCase();
-                    itemArray.map((letter, idx)=>{
-                        letter===" "? itemArray[idx+1] = itemArray[idx+1].toUpperCase() : ""
-                    })
-                    return (
+    isSanityStudio? "" 
+    : <div id="filters" className={`z-40 fixed top-[0dvh] font-bold transition-all duration-500 text-gray-400 overflow-x-scroll w-screen justify-start flex text-lg`} key={'parent'}>
+        {Object.entries(filters).map(([key, array])=>{
+            return(
+                <span key={key} className="flex items-center justify-center">
+                    {/* <p className={`text-lg underline px-3 lg:no-underline capitalize ${key==="roles"?"text-gray-400":key==="collabs"?"text-gray-400":key==="tags"?"text-gray-400":""}`}>{`${key}:`}</p> */}
+                    <div className="flex flex-row justify-center items-center">
+                    {array.map((filter:any, idx:any)=>{
+                        const filterArray = filter.split("");
+                        filterArray[0] = filterArray[0].toUpperCase()
+                        // filterArray.map((letter:any, letterIdx:any)=>{
+                        //     letter === " "?  filterArray[idx+1] = filterArray[idx+1].toUpperCase() : ""
+                        // })
+                        // filterArray[0]=filterArray[0].toUpperCase();
+                        // filterArray.map((letter, idx)=>{
+                        //     letter===" "? filterArray[idx+1] = filterArray[idx+1].toUpperCase() : ""
+                        // })
+                        return (
                             <button 
-                            style={{[`${key==="role"? "--r": key==="collabs"? "--c": key==="tags"? "--t": ""}` as any]:itemIdx+1}}
-                            key={`${item}${itemIdx}`}
+                            style={{[`${key==="roles"? "--r": key==="collabs"? "--c": key==="tags"? "--t": ""}` as any]:idx+1}}
+                            key={`${filter}${idx}`}
                             onClick={()=>{
-                                searchParams.getAll(`${key}`).includes(item)?
+                                searchParams.getAll(`${key}`).includes(filter)?
                                 router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
-                                : router.push( `/?${createQueryString(`${key}`, `${item}`)}`, {scroll: false})
+                                : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
                             }}
-                            className={`w-fit transition-all whitespace-nowrap text-lg font-light ml-1 lg:hover:underline ${searchParams.get(key)?.includes(item)? `${key==="role"?"roles1":key==="collabs"?"collabs1":key==="tags"?"tags1":""}` : `${key==="role"?"roles":key==="collabs"?"collabs":key==="tags"?"tags":""} text-black`}`}>
-                                {itemIdx<itemArray.length? `${itemArray.join("")}`:`${itemArray.join("")}`}
+                            className={`w-fit transition-all whitespace-nowrap text-lg p-2 lg:hover:underline ${searchParams.get(key)?.includes(filter)? `${key==="roles"?"roles1":key==="collabs"?"collabs1":key==="tags"?"tags1":""}` : `${key==="roles"?"roles":key==="collabs"?"collabs":key==="tags"?"tags":""} text-black`}`}>
+                                {idx<filterArray.length? `${filterArray.join("")}`:`${filterArray.join("")}`}
                             </button>
-
-                    )
-                })}
-                </div>
-            </span>
-        )
-    })}
-            {/* <button id="buttonEl" className='fixed w-screen left-[0%] top-[2rem] transition-all duration-500 text-5xl text-black z-50' onClick={()=>{
-                let header = document.querySelector("#filters");
-                let button = document.querySelector("#buttonEl");
-                header?.classList.toggle("h-[0rem]")
-                header?.classList.toggle("h-[4rem]")
-                button?.classList.toggle("top-[2rem]")
-                button?.classList.toggle("top-[7.5rem]")
-                button?.innerHTML=="↓"? button.innerHTML="↑": button!.innerHTML="↓"
-            }}>↓</button> */}
-
-            <div id="iconDiv" className="transition-all duration-500 fixed flex w-screen top-[calc(0rem)] justify-center items-center">
-                <Image id="headIcon" className="w-10 rotate-180 cursor-pointer" src={require('../public/Up.svg')} alt="loading..." 
-                onClick={()=>{
-                    let footer = document.querySelector("#filters")
-                    let image = document.querySelector("#headIcon")
-                    let div = document.querySelector("#iconDiv")
-                    footer?.classList.toggle("h-[0rem]")
-                    footer?.classList.toggle("h-[5rem]")
-                    // image?.classList.toggle("rotate-180")
-                    div?.classList.toggle("top-[calc(0rem)]")
-                    div?.classList.toggle("top-[calc(5rem)]")
-                }}
-                priority />
-            </div>
-    </div>
-    )
-
+                        )
+                    })}
+                    </div>
+                </span>
+            )
+        })}
+    </div>)
 }

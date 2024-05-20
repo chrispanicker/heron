@@ -8,12 +8,11 @@ export type Project = {
     type: string;
     url: string;
     content: PortableTextBlock;
-    collaborators: string[];
+    collabs: any;
     year: string;
-    roles: string[];
-    role: string;
+    roles: any;
     color: string;
-    tags: string[];
+    tags: any;
     vimeo: string;
     images: Image[];
 }

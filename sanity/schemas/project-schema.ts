@@ -9,40 +9,44 @@ const project = {
             type: "string"
         },
         {
-            title: "Role",
-            description: "Choose the best fitting role for this project.",
-            name: "role",
-            type: "string",
-            options: {
-              list: [
-                { title: "Designer", value: "designer" },
-                { title: "Art Director", value: "art director"},
-                { title: "Illustrator", value: "illustrator" },
-              ],
-            },
-            validation: (Rule:any) => Rule.required(),
-        },
-        {
             name: "slug",
             title: "Slug",
             type: "slug",
-            options: { source: 'name'}
+            options: { source: 'name'},
+            description: 'Hi! Generate a URL slug for this Project!',
+        },
+        {
+            name: 'roles',
+            title: 'Roles',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'roles' }] }],
+            description: 'You can choose from existing roles or add new ones!',
         },
         {
             title: 'Year',
             name: 'year',
             type: 'string',
         },
+        
         {
-            title: 'Type',
-            name: 'type',
-            type: 'string',
-
+            name: 'preview',
+            title: "Preview Image",
+            type: "image",
+            description: 'Choose a fitting image for the image-only page view here!',
+            options: {
+                hotspot: true,
+            },
+            hotspot: {   
+                width: 1,
+                height: 1,
+                aspectRatio: 1,
+            },
         },
         {
             name: 'vimeo',
             title:'Vimeo Link',
-            type: 'url'
+            type: 'url',
+            description: 'Have a vimeo link for this? You can add it here!',
         },
         {
             name: 'images',
@@ -53,26 +57,22 @@ const project = {
         {
             name: "url",
             title: 'URL',
-            type: "url"
+            type: "url",
+            description: 'You can link to the project here!',
         },
-
         {
             name: 'tags',
             title: 'Tags',
-            type: "array",
-            of: [{type: 'string'}]
-        },
-
-        {
-            name: 'client',
-            title: 'Client',
-            type: "string"
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'tags' }] }],
+            description: 'Select or reference existing tags',
         },
         {
-            name: 'collaborators',
-            title: 'Collaborators',
-            type: "array",
-            of: [{type: 'string'}],
+            name: 'collabs',
+            title: 'Collabs',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'collabs' }] }],
+            description: 'Select or reference existing collabs',
         },
         {
             name: 'content',

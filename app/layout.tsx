@@ -49,20 +49,26 @@ export default async function RootLayout({
       url,
       content,
       type,
-      roles,
-      role,
-      collaborators,
-      tags,
+      "roles": roles[]->{
+        name
+      },
+      "collabs": collabs[]->{
+        name
+      },
+      "tags": tags[]->{
+        name
+      },
       color,
       year,
       "slug": slug.current,
     }`
   )
+  
 
-  filterToLower(allProjects)
+  // filterToLower(allProjects)
   return (
     <html lang="en">
-      <body className={`${poppins.variable} poppins bg-white`}>
+      <body className={`bg-white`}>
         <section>
           <TestFilter projects={allProjects}/>
           <>{children}</>
