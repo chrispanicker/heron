@@ -29,6 +29,7 @@ export default async function Home({searchParams}: Props) {
           name,
           vimeo,
           images,
+          preview,
           url,
           content,
           "roles": roles[]->{

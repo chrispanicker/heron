@@ -1,11 +1,10 @@
 'use client'
-import { useCallback, useEffect, useRef} from "react";
+import { useCallback, useRef} from "react";
 import { Project } from "@/types/project";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/image";
-import { ArrayDefinition } from "sanity";
 
 interface Props{
     filteredProjects:any
@@ -23,6 +22,7 @@ export default function ProjectListing({filteredProjects, project, index}: Props
     const router = useRouter();
     const searchParams = useSearchParams();    
     const selectedProject = searchParams.get('project');
+    const view = searchParams.get('view');
     const vimeoID = project.vimeo? project.vimeo.replace("https://vimeo.com/", ""):"";
     const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -79,6 +79,7 @@ export default function ProjectListing({filteredProjects, project, index}: Props
     // {project.collabs?.map((collab:any)=>{
     //     collabsString += collab.name
     // })}
+
     return project?
         <section ref={projectRef} className="" style={{['--i' as any]:index+1}}>
             <div className="flex w-screen">
@@ -99,8 +100,19 @@ export default function ProjectListing({filteredProjects, project, index}: Props
                         className={`z-50 projectTitle opacity-100 w-screen tracking-normal transition transition-all duration-500 cursor-pointer flex flex-col pb-1 items-center justify-center`}
                         >
                             <span className="flex justify-center">
-                                <p className={`px-1 transition transition-all duration-500 w-max flex sm:group-hover:bg-gray-400 sm:group-hover:text-white ${selectedProject===project.slug? "bg-gray-400 text-black": "text-gray-300"}`}>{project.name}</p>
+                                <p className={`px-1 transition transition-all duration-500 w-max flex sm:group-hover:bg-gray-400 sm:group-hover:text-white ${selectedProject===project.slug? "bg-gray-400 text-black": "text-gray-300"} ${view==="txt"? "lg:text-5xl text-2xl": "text-lg"}`}>{project.name}</p>
                             </span>
+
+                            <Image
+                                key={`image${index}`}
+                                src={urlForImage(project.preview).url()}
+                                alt=""
+                                width={1080}
+                                height={1080}
+                                className={`duration-500 w-auto hover:rounded-none rounded-3xl transition transition-all rounded-none object-cover ${view==="img"? "lg:h-[40rem] h-[10rem]": "h-0"}`}
+                                unoptimized= {false}
+                            />
+                            
                         </button>
                 </div>
             </div>

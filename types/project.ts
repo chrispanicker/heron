@@ -15,4 +15,5 @@ export type Project = {
     tags: any;
     vimeo: string;
     images: Image[];
+    preview: Image;
 }

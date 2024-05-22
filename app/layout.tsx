@@ -6,6 +6,7 @@ import { groq } from 'next-sanity'
 import { TestFilter } from '@/components/test-filter'
 import { filterToLower } from '@/components/filter-to-lower'
 import localFont from 'next/font/local'
+import ViewToggle from '@/components/view-toggle'
 
 
 export const metadata: Metadata = {
@@ -71,6 +72,7 @@ export default async function RootLayout({
       <body className={`bg-white`}>
         <section>
           <TestFilter projects={allProjects}/>
+          <ViewToggle />
           <>{children}</>
           <SiteFooter info={info} />
         </section>

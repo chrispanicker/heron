@@ -106,8 +106,8 @@
 }
 
 .roles{
-  background-color: rgb(255, calc(var(--r)*100), 0);
-  border: 1px solid rgb(255, calc(var(--r)*100), 0);
+  background-color: rgb(calc(255/var(--r)), 255, 0);
+  border: 1px solid rgb(calc(255/var(--r)), 255, 0);
 }
 
 .collabs{
