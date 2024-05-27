@@ -12,23 +12,23 @@ export default function ViewToggle(){
             params.set(name, value)
             return params.toString()
         }, [searchParams]
-        )  
+    )  
 
     return(
-        <div className="fixed left-0 bottom-0 m-5 z-50 flex">
+        <div className="fixed text-[1.5rem] left-0 bottom-0 m-5 z-40 flex">
             <button 
-            className={`text-[1rem] ${view==="txt"? "text-black":"text-gray-400"}`}
+            className={` ${view==="txt"? "text-black":"text-gray-400"}`}
             onClick={()=>{
                 searchParams.getAll(`view`).includes("txt")? "" : router.push( `/?${createQueryString(`view`, `txt`)}`, {scroll: false})
-            }}>&#9443;</button>
-            <p className="text-3xl">
+            }}>txt</button>
+            <p className="">
             &nbsp;/&nbsp;
             </p>
             <button
-            className={`text-[1.5rem] ${view==="img"? "text-black":"text-gray-400"}`} 
+            className={`${view==="img"? "text-black":"text-gray-400"}`} 
             onClick={()=>{
                 searchParams.getAll(`view`).includes("img")? "" : router.push( `/?${createQueryString(`view`, `img`)}`, {scroll: false})
-            }}>&#6821;</button>
+            }}>all</button>
         </div>
     )
 }

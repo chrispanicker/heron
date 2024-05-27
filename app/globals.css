@@ -41,7 +41,7 @@
 
 /* width */
 ::-webkit-scrollbar {
-  height: 5px;
+  height: 1rem;
   width: 0px;
 }
 /* Track */
@@ -57,10 +57,10 @@
 } */
 
 ::-webkit-scrollbar-thumb {
-  background: #9a9a9a; 
+  background: #000000; 
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #323232; 
 }
 
 .Project3dParent{
@@ -105,7 +105,7 @@
   /* animation-delay: calc(var(--i)*-2s); */
 }
 
-.roles{
+/* .roles{
   background-color: rgb(calc(255/var(--r)), 255, 0);
   border: 1px solid rgb(calc(255/var(--r)), 255, 0);
 }
@@ -133,7 +133,7 @@
 .tags1{
   color: rgb(calc(var(--t)*20), 0, 255);
   border: 1px solid rgb(calc(var(--t)*20), 0, 255);
-}
+} */
 
 
 @keyframes rotate{
