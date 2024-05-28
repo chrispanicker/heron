@@ -29,17 +29,19 @@ export function OpeningCard(){
                 block: "center",
             behavior: 'smooth'
         })}
-
         view? "": router.push( `/?${createQueryString(`view`, `txt`)}`)
-        
+
+    }, [selectedProject])
+    
+    useEffect(()=>{
         cardRef? setTimeout(()=>{
             cardRef.current.classList.replace("top-0", "top-full")
         }, 2000): ""
         cardRef? setTimeout(()=>{
             cardRef.current.classList.add("hidden")
         }, 4000): ""
-    }, [selectedProject])
-    
+    }, [cardRef])
+
     return(
         <div ref={cardRef} className="w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 ease-in-out pointer-events-none">
             <div className="flex justify-center items-center h-[15rem]">
@@ -47,9 +49,9 @@ export function OpeningCard(){
                 <h1 ref={h1Ref} className="transition-all duration-200 absolute vivaldii lg:text-[16.5rem] md:text-[16.5rem]">Drew Litowitz</h1>
             </div>
             <div className="flex flex-col lg:flex-row justify-center items-center w-4/4">
-                <p className="bg-gray-400 text-7xl text-black text-lighter mb-2 w-fit px-2">Art Director</p>
-                <p className="bg-gray-400 text-7xl text-black text-lighter mb-2 w-fit px-2">Designer</p>
-                <p className="bg-gray-400 text-7xl text-black text-lighter mb-2 w-fit px-2">Illustrator</p>
+                <p className="bg-gray-400 text-7xl text-black mb-2 w-fit px-2">Art Director</p>
+                <p className="bg-gray-400 text-7xl text-black mb-2 w-fit px-2">Designer</p>
+                <p className="bg-gray-400 text-7xl text-black mb-2 w-fit px-2">Illustrator</p>
             </div>
         </div>
     )

@@ -46,18 +46,18 @@ export default async function Home({searchParams}: Props) {
       }`
   )
   return (
-    <main id="main" className={`py-32 z-0 text-black bg-white flex flex-col items-center justify-start min-h-screen`}>
+    filteredProjects? <main id="main" className={`py-32 z-0 text-black font-bold bg-white flex flex-col items-center justify-start min-h-screen`}>
         <OpeningCard />
         <section className="Project3dParent">
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-            <div className="Project3d flex font-bold justify-center items-center lg:text-5xl text-3xl snap-y" key={project._id}>
+            <div className="Project3d flex justify-center items-center lg:text-5xl text-3xl snap-y" key={project._id}>
                 <ProjectListing filteredProjects={filteredProjects} project={project} index={index}/>
             </div>
           )})}
         </section>
         <UsedFilters role={roles} tags={tags} collabs={collabs}/>
-    </main>
+    </main>: <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>
   )
 }
  

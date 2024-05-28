@@ -46,7 +46,7 @@ export default function ProjectListing({filteredProjects, project, index}: Props
     
    
     return project?
-        <section ref={projectRef} className={` ${view==="img" ? "mt-10":"mt-0"}`} style={{['--i' as any]:index+1}}>
+        <section ref={projectRef} className={` ${view==="all" ? "py-10":"py-0"}`} style={{['--i' as any]:index+1}}>
             <div className="flex w-screen">
                     <div className="buttonParent cursor-pointer group"                         
                         onClick={()=>{
@@ -64,15 +64,15 @@ export default function ProjectListing({filteredProjects, project, index}: Props
                         
                             <span className="flex justify-center">
                                 <div className="flex justify-center items-center flex-col">
-                                    <p className={`px-1 w-max flex sm:group-hover:bg-gray-400 sm:group-hover:text-black ${view==="img"|| selectedProject===project.slug? "bg-gray-400 text-white ": "text-black"} ${view==="txt"||view===null? "lg:text-5xl": "text-3xl"}`}>{project.name}</p>
-                                    <div className={`text-3xl overflow-hidden ${view==="img" || selectedProject===project.slug ? "h-fit pb-2":"h-0 pb-0"} `}>
+                                    <p className={`px-1 w-max flex sm:group-hover:bg-gray-400 sm:group-hover:text-black ${view==="all"|| selectedProject===project.slug? "text-black ": "text-black"} ${view==="txt"||view===null? "lg:text-5xl": "text-3xl"}`}>{project.name}</p>
+                                    <div className={`text-3xl overflow-hidden ${view==="all" || selectedProject===project.slug ? "h-fit":"h-0"} `}>
                                         <PortableText value={project.content}/>
                                     </div>
                                 </div>
                             </span>
 
-                            <div className={`w-screen  overflow-x-scroll overflow-y-hidden ${view==="img"? "h-[16.25rem] lg:h-[30rem] md:h-[20rem]":"" } ${selectedProject===project.slug? "h-[16.25rem] lg:h-[40rem] md:h-[20rem] mb-2":"h-0 m-0"}`}>
-                                <div className={`flex w-screen`}>
+                            <div className={`w-screen overflow-x-scroll overflow-y-hidden ${selectedProject===project.slug? "h-[40rem]":view==="all"?"h-[10rem]":'h-0'} `}>
+                                <div className={`flex w-screen h-auto ${selectedProject===project.slug? "":"justify-center"}`}>
                                 {project.images?.map((image, index)=>(
                                     <Image
                                     key={`image${index}`}
@@ -80,7 +80,7 @@ export default function ProjectListing({filteredProjects, project, index}: Props
                                     alt=""
                                     width={1080}
                                     height={1080}
-                                    className={`w-auto ${view==="txt" || selectedProject==`${project.slug}`? "h-[40rem]":"h-[30rem]"}`}
+                                    className={`w-auto ${view==="txt" || selectedProject==`${project.slug}`? "h-[40rem]":"h-[10rem]"}`}
                                     unoptimized= {false}
                                     />
                                 ))}

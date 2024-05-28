@@ -25,9 +25,9 @@ export default function ViewToggle(){
             &nbsp;/&nbsp;
             </p>
             <button
-            className={`${view==="img"? "text-black":"text-gray-400"}`} 
+            className={`${view==="all"? "text-black":"text-gray-400"}`} 
             onClick={()=>{
-                searchParams.getAll(`view`).includes("img")? "" : router.push( `/?${createQueryString(`view`, `img`)}`, {scroll: false})
+                searchParams.getAll(`view`).includes("all")? "" : router.push( `/?${createQueryString(`view`, `all`)}`, {scroll: false})
             }}>all</button>
         </div>
     )

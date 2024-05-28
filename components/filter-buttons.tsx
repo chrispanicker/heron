@@ -39,8 +39,8 @@ export function FilterButtons(filters:object){
                                 router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
                                 : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
                             }}
-                            className={`w-fit transition-all whitespace-nowrap hover:bg-transparent text-[1.5rem] p-2
-                            ${searchParams.get(key)?.includes(filter)?"bg-transparent":"bg-gray-400" }`
+                            className={`w-fit transition-all whitespace-nowrap hover:bg-white text-[1.5rem] p-2
+                            ${searchParams.get(key)?.includes(filter)?"bg-white":"bg-gray-400" }`
                             }>
                                 {idx<filterArray.length? `${filterArray.join("")}`:`${filterArray.join("")}`}
                             </button>
