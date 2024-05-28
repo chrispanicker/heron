@@ -23,6 +23,7 @@ export default function ProjectListing({filteredProjects, project, index}: Props
     const searchParams = useSearchParams();    
     const selectedProject = searchParams.get('project');
     const view = searchParams.get('view');
+    const img = searchParams.get('img');
     
     const vimeoID = project.vimeo? project.vimeo.replace("https://vimeo.com/", ""):"";
     const createQueryString = useCallback(
@@ -46,47 +47,51 @@ export default function ProjectListing({filteredProjects, project, index}: Props
     
    
     return project?
-        <section ref={projectRef} className={` ${view==="all" ? "py-10":"py-0"}`} style={{['--i' as any]:index+1}}>
-            <div className="flex w-screen">
-                    <div className="buttonParent cursor-pointer group"                         
-                        onClick={()=>{
-                        searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
-                        : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
-                        // let animations = document.getAnimations()
-                        // animations.forEach((animation) => {
-                        //     animation.playbackRate = 0.0;
-                        //   });
-                    }}>
+        <section id={project.slug} ref={projectRef} className={` ${view==="all"? "py-10":"py-0"}`} style={{['--i' as any]:index+1}}>
+            <div className="flex w-screen  ">
+                    <div className=" ">
                         <button 
-                        id={project.slug}
-                        className={`z-50 projectTitle opacity-100 w-screen tracking-normal  cursor-pointer flex flex-col items-center justify-center`}
+                        className={`z-50 projectTitle opacity-100 w-screen tracking-normal  cursor-pointer flex flex-col items-center justify-center cursor-pointer`}
+                        onClick={()=>{
+                            searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
+                            : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
+                        }}
                         >
-                        
-                            <span className="flex justify-center">
-                                <div className="flex justify-center items-center flex-col">
-                                    <p className={`px-1 w-max flex sm:group-hover:bg-gray-400 sm:group-hover:text-black ${view==="all"|| selectedProject===project.slug? "text-black ": "text-black"} ${view==="txt"||view===null? "lg:text-5xl": "text-3xl"}`}>{project.name}</p>
-                                    <div className={`text-3xl overflow-hidden ${view==="all" || selectedProject===project.slug ? "h-fit":"h-0"} `}>
-                                        <PortableText value={project.content}/>
-                                    </div>
+                            <div className="flex justify-center items-center flex-col group">
+                                <p className={`px-1 w-max flex sm:group-hover:bg-gray-400 ${selectedProject===project.slug? "bg-gray-400 cursor-zoom-out": ""}`}>{project.name}</p>
+                                <div className={`lg:text-4xl text-lg mx-10 tracking-tighter overflow-hidden ${view==="all" || selectedProject===project.slug ? "h-fit":"h-0"} `}>
+                                    <PortableText value={project.content}/>
                                 </div>
-                            </span>
+                            </div>
+                        </button>
 
-                            <div className={`w-screen overflow-x-scroll overflow-y-hidden ${selectedProject===project.slug? "h-[40rem]":view==="all"?"h-[10rem]":'h-0'} `}>
-                                <div className={`flex w-screen h-auto ${selectedProject===project.slug? "":"justify-center"}`}>
-                                {project.images?.map((image, index)=>(
+                        <div className={` w-screen overflow-x-scroll overflow-y-hidden ${selectedProject===project.slug? "lg:h-[41rem] h-[13rem]":view==="all"?"h-[10rem]":'h-0'} `}>
+                            <div 
+                            className={`flex h-auto ${selectedProject===project.slug? "w-max":"w-screen justify-center"}`}
+                            >
+                            {project.images?.map((image, index)=>(
+                                <button 
+                                className={`${img===`${project.slug}${index}`? "fixed bg-white top-0 w-screen h-screen flex justify-center items-center z-50 cursor-zoom-out flex-col":"cursor-zoom-in hover:opacity-80"} `}
+                                key={`image${index}`}
+                                onClick={(e)=>{
+                                    img===`${project.slug}${index}`? router.push( `/?${createQueryString(`img`, ``)}`, {scroll: false}): router.push( `/?${createQueryString(`img`, `${project.slug}${index}`)}`, {scroll: false})
+                                }}>
+                                    <div className={`fixed top-0 w-screen flex justify-between p-5 ${img===`${project.slug}${index}`? "":"hidden"}`}>
+                                        <p>{project.name}</p>
+                                        <p>{index+1}</p>
+                                    </div>
                                     <Image
-                                    key={`image${index}`}
                                     src={urlForImage(image).url()}
                                     alt=""
                                     width={1080}
                                     height={1080}
-                                    className={`w-auto ${view==="txt" || selectedProject==`${project.slug}`? "h-[40rem]":"h-[10rem]"}`}
+                                    className={`w-auto ${view==="txt" || selectedProject==`${project.slug}`? "lg:h-[40rem] h-[12rem]":"h-[10rem]"} ${img===`${project.slug}${index}`? "lg:h-[50rem]":""}`}
                                     unoptimized= {false}
                                     />
-                                ))}
-                                </div>
-                            </div> 
-                        </button>
+                                </button>
+                            ))}
+                            </div>
+                        </div> 
                 </div>
             </div>
         </section>

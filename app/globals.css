@@ -63,13 +63,13 @@
   background: #323232; 
 }
 
-.Project3dParent{
+/* .Project3dParent{
   transform-style: preserve-3d;
 }
 
 .Project3dParent .Project3d{
   transform-style: preserve-3d;
-}
+} */
 
 /*need to do JS math, so that it can calculate based on the amt. of projects!*/
   /* 40deg just being used as an example for 9 projects */ 
@@ -98,7 +98,7 @@
   animation: rotate 30s infinite linear;
 } */
 .projectTitle{
-  transform-style: preserve-3d;
+  /* transform-style: preserve-3d; */
   /* transform: rotateX(0deg) rotateX(calc(var(--i)*126deg)) translateX(-10rem) translateX(calc(var(--i)*2rem)) translateZ(10rem); */
   /* animation: rotate 20s forwards;
   animation-iteration-count: infinite; */

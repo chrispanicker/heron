@@ -26,7 +26,7 @@ export default function UsedFilters({role, tags, collabs}: Props){
             {role||collabs||tags? 
                 <button className="buttonParent text-black cursor-alias hover:underline"                         
                     onClick={()=>{
-                        router.push( `/?view=${view? `${view}`: "txt"}: ""}`)
+                        router.push( `/?view=${view? `${view}`: "txt"}`)
                     }}>
                     Clear
                 </button>
