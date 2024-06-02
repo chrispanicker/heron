@@ -21,7 +21,7 @@ export function FilterButtons(filters:object){
 
     return(
     isSanityStudio? "" 
-    : <div id="filters" className={`z-40 fixed top-[0dvh] font-bold overflow-x-scroll w-screen justify-start flex text-[1.5rem]`} key={'parent'}>
+    : <div id="filters" className={`z-40 bg-gray-400 fixed top-[0dvh] overflow-x-scroll w-screen justify-start flex lg:text-[1.5rem] text-lg`} key={'parent'}>
         {Object.entries(filters).map(([key, array])=>{
             return(
                 <span key={key} className="flex capitalize items-center justify-center">
@@ -39,7 +39,7 @@ export function FilterButtons(filters:object){
                                 router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
                                 : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
                             }}
-                            className={`w-fit  whitespace-nowrap hover:bg-white text-[1.5rem] p-2
+                            className={`w-fit  whitespace-nowrap hover:bg-white p-2
                             ${searchParams.get(key)?.includes(filter)?"bg-white":"bg-gray-400" }`
                             }>
                                 {idx<filterArray.length? `${filterArray.join("")}`:`${filterArray.join("")}`}

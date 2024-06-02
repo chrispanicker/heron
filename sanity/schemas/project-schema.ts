@@ -19,7 +19,7 @@ const project = {
             name: 'roles',
             title: 'Roles',
             type: 'array',
-            of: [{ type: 'reference', to: [{ type: 'roles' }] }],
+            of: [{type: 'reference', to: [{ type: 'roles' }]}],
             description: 'You can choose from existing roles or add new ones!',
         },
         {
@@ -32,14 +32,9 @@ const project = {
             name: 'preview',
             title: "Preview Image",
             type: "image",
-            description: 'Choose a fitting image for the image-only page view here!',
+            description: 'Choose a preview image to highlight on opening!',
             options: {
                 hotspot: true,
-            },
-            hotspot: {   
-                width: 1,
-                height: 1,
-                aspectRatio: 1,
             },
         },
         {

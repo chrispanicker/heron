@@ -47,48 +47,71 @@ export default function ProjectListing({filteredProjects, project, index}: Props
     
    
     return project?
-        <section id={project.slug} ref={projectRef} className={` ${view==="all"? "py-10":"py-0"}`} style={{['--i' as any]:index+1}}>
+        <section id={project.slug} ref={projectRef} className={`transition-all duration-500 ${view==="all"||selectedProject===project.slug? "py-10":"lg:py-0"}`} style={{['--i' as any]:index+1}}>
             <div className="flex w-screen  ">
                     <div className=" ">
                         <button 
-                        className={`z-50 projectTitle opacity-100 w-screen tracking-normal  cursor-pointer flex flex-col items-center justify-center cursor-pointer`}
+                        className={`z-50 projectTitle opacity-100 w-screen tracking-normal  cursor-pointer flex flex-col items-center justify-center`}
                         onClick={()=>{
                             searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
                             : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
                         }}
                         >
                             <div className="flex justify-center items-center flex-col group">
-                                <p className={`px-1 w-max flex sm:group-hover:bg-gray-400 ${selectedProject===project.slug? "bg-gray-400 cursor-zoom-out": ""}`}>{project.name}</p>
-                                <div className={`lg:text-4xl text-lg mx-10 tracking-tighter overflow-hidden ${view==="all" || selectedProject===project.slug ? "h-fit":"h-0"} `}>
+                                <p className={`px-1 w-max flex group-hover:bg-gray-400 group-hover:underline ${selectedProject===project.slug? "bg-gray-400 cursor-alias": ""} ${view==="all"? "":""}`}>{project.name}</p>
+                                <div className={`lg:text-4xl text-lg mx-10 tracking-tighter overflow-hidden ${selectedProject===project.slug ? "pb-5":"pb-0"} ${view==="all" || selectedProject===project.slug ? "h-fit ":"h-0"} `}>
                                     <PortableText value={project.content}/>
                                 </div>
                             </div>
                         </button>
 
-                        <div className={` w-screen overflow-x-scroll overflow-y-hidden ${selectedProject===project.slug? "lg:h-[41rem] h-[13rem]":view==="all"?"h-[10rem]":'h-0'} `}>
+                        <div className={`w-screen overflow-x-scroll  overflow-y-hidden ${selectedProject===project.slug? "bg-gray-400 lg:h-[41rem] h-[13rem]":view==="all"?"h-[11rem]":'h-0'} `}>
                             <div 
-                            className={`flex h-auto ${selectedProject===project.slug? "w-max":"w-screen justify-center"}`}
+                            className={`flex h-auto ${selectedProject===project.slug? "w-max":"lg:w-screen lg:justify-center w-max"}`}
                             >
+                            {/* imgs logic for zoom ins */}
                             {project.images?.map((image, index)=>(
-                                <button 
-                                className={`${img===`${project.slug}${index}`? "fixed bg-white top-0 w-screen h-screen flex justify-center items-center z-50 cursor-zoom-out flex-col":"cursor-zoom-in hover:opacity-80"} `}
+                                <div 
+                                className={`${img===`${project.slug}${index}`? "fixed bg-white top-0 w-screen h-screen flex justify-center items-center z-50 flex-col":"cursor-zoom-in hover:opacity-80"} `}
                                 key={`image${index}`}
                                 onClick={(e)=>{
-                                    img===`${project.slug}${index}`? router.push( `/?${createQueryString(`img`, ``)}`, {scroll: false}): router.push( `/?${createQueryString(`img`, `${project.slug}${index}`)}`, {scroll: false})
+                                    img===`${project.slug}${index}`? "": router.push( `/?${createQueryString(`img`, `${project.slug}${index}`)}`, {scroll: false})
                                 }}>
-                                    <div className={`fixed top-0 w-screen flex justify-between p-5 ${img===`${project.slug}${index}`? "":"hidden"}`}>
-                                        <p>{project.name}</p>
-                                        <p>{index+1}</p>
+                                    <div className={`fixed lg:text-3xl text-lg  top-0 w-screen flex items-center justify-between p-5 ${img===`${project.slug}${index}`? "":"hidden"}`}>
+                                        <button
+                                        className="cursor-w-resise"
+                                        onClick={(e)=>{
+                                           index===0? router.push( `/?${createQueryString(`img`, `${project.slug}${project.images.length-1}`)}`, {scroll: false}) : router.push( `/?${createQueryString(`img`, `${project.slug}${index-1}`)}`, {scroll: false})
+                                        }}>Prev
+                                        </button>
+
+                                        <button 
+                                            className="flex cursor-alias"
+                                            onClick={(e)=>{router.push( `/?${createQueryString(`img`, ``)}`, {scroll: false})}}
+                                        >
+                                            <p className="hover:underline bg-gray-400 px-2">{project.name}</p>
+                                            &nbsp;
+                                            <p>{`(Image ${index+1})`}</p>
+                                        </button>
+
+                                        <button
+                                        className="cursor-e-resise"
+                                        onClick={(e)=>{
+                                           index===project.images.length-1?  router.push( `/?${createQueryString(`img`, `${project.slug}${0}`)}`, {scroll: false}) : router.push( `/?${createQueryString(`img`, `${project.slug}${index+1}`)}`, {scroll: false})
+                                        }}>Next</button>
                                     </div>
                                     <Image
                                     src={urlForImage(image).url()}
                                     alt=""
                                     width={1080}
                                     height={1080}
-                                    className={`w-auto ${view==="txt" || selectedProject==`${project.slug}`? "lg:h-[40rem] h-[12rem]":"h-[10rem]"} ${img===`${project.slug}${index}`? "lg:h-[50rem]":""}`}
+                                    className={`${view==="txt" || selectedProject==`${project.slug}`? "lg:h-[40rem] h-[12rem] w-auto ":"h-[10rem] w-auto "} ${img===`${project.slug}${index}`? "lg:h-[50rem] lg:w-auto w-[100vw] h-auto":""}`}
                                     unoptimized= {false}
                                     />
-                                </button>
+                                    {/* <div className={`${img===`${project.slug}${index}`? "m-5":"hidden"}`}>
+                                        <PortableText value={project.content}/>
+                                    </div> */}
+                                </div>
                             ))}
                             </div>
                         </div> 

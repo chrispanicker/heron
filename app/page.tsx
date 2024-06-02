@@ -29,7 +29,6 @@ export default async function Home({searchParams}: Props) {
           name,
           vimeo,
           images,
-          preview,
           url,
           content,
           "roles": roles[]->{
@@ -45,13 +44,31 @@ export default async function Home({searchParams}: Props) {
           "slug": slug.current,
       }`
   )
+  let gallery = await client.fetch(
+    groq`*[_type == "gallery"]{
+      index,
+      "projects": projects->{
+        name,
+        preview,
+        "roles": roles[]->{
+          name
+        },
+        "collabs": collabs[]->{
+          name
+        },
+        "tags": tags[]->{
+          name
+        },
+      },
+    }`
+  )
   return (
-    filteredProjects? <main id="main" className={`py-32 z-0 text-black font-bold bg-white flex flex-col items-center justify-start min-h-screen`}>
-        <OpeningCard />
+    filteredProjects? <main id="main" className={`py-32 font-normal z-0 text-black bg-white flex flex-col items-center justify-start min-h-screen`}>
+        <OpeningCard gallery={gallery} />
         <section className="Project3dParent">
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-            <div className="Project3d flex justify-center items-center text-4xl" key={project._id}>
+            <div className="Project3d flex justify-center items-center lg:text-4xl text-[1.5rem]" key={project._id}>
                 <ProjectListing filteredProjects={filteredProjects} project={project} index={index}/>
             </div>
           )})}

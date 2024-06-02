@@ -19,8 +19,8 @@ export function SiteFooter(info:any){
             >
             <button id="footerTab" className="fixed bottom-0 right-0 m-5 text-[1.5rem]" onClick={()=>{
                 let footer = document.querySelector("#footer")
-                footer?.classList.toggle("h-[0vh]")
-                footer?.classList.toggle("h-[100vh]")
+                footer?.classList.toggle("h-[0dvh]")
+                footer?.classList.toggle("h-[100dvh]")
             }}>about</button>
                 
             </div>
