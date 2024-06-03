@@ -17,7 +17,7 @@ export function SiteFooter(info:any){
             <div id="footImgDiv" className="fixed flex w-screen top-screen text-4xl justify-center items-center"
 
             >
-            <button id="footerTab" className="fixed bottom-0 right-0 m-5 text-[1.5rem]" onClick={()=>{
+            <button id="footerTab" className="fixed bottom-0 right-0 m-5 text-[1.5rem] lg:text-4xl bg-white px-2" onClick={()=>{
                 let footer = document.querySelector("#footer")
                 footer?.classList.toggle("h-[0dvh]")
                 footer?.classList.toggle("h-[100dvh]")

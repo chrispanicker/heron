@@ -68,9 +68,9 @@ export default async function Home({searchParams}: Props) {
         <section className="Project3dParent">
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-            <div className="Project3d flex justify-center items-center lg:text-4xl text-[1.5rem]" key={project._id}>
-                <ProjectListing filteredProjects={filteredProjects} project={project} index={index}/>
-            </div>
+              <div className="Project3d flex justify-center items-center lg:text-4xl text-[1.5rem]" key={project._id}>
+                  <ProjectListing filteredProjects={filteredProjects} project={project} index={index}/>
+              </div>
           )})}
         </section>
         <UsedFilters role={roles} tags={tags} collabs={collabs}/>

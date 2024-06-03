@@ -47,20 +47,21 @@ export default function ProjectListing({filteredProjects, project, index}: Props
     
    
     return project?
-        <section id={project.slug} ref={projectRef} className={`transition-all duration-500 ${view==="all"||selectedProject===project.slug? "py-10":"lg:py-0"}`} style={{['--i' as any]:index+1}}>
+        <section id={project.slug} ref={projectRef} className={` ${view==="all"||selectedProject===project.slug? "py-10":"lg:py-0"}`} style={{['--i' as any]:index+1}}>
             <div className="flex w-screen  ">
-                    <div className=" ">
+                    <div className="">
                         <button 
-                        className={`z-50 projectTitle opacity-100 w-screen tracking-normal  cursor-pointer flex flex-col items-center justify-center`}
+                        className={`z-50 projectTitle opacity-100 w-screen tracking-normal cursor-pointer flex flex-col items-center justify-center`}
                         onClick={()=>{
                             searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
                             : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
                         }}
                         >
                             <div className="flex justify-center items-center flex-col group">
-                                <p className={`px-1 w-max flex group-hover:bg-gray-400 ${selectedProject===project.slug? "bg-gray-400 cursor-alias hover:bg-white": ""} ${view==="all"? "":""}`}>{project.name}</p>
+                                <p className={`px-1 tracking-[.005rem] w-max flex text-5xl group-hover:bg-gray-400 group-hover:outline group-hover:outline-2 group-hover:outline-black ${selectedProject===project.slug? "bg-gray-400 outline outline-1 outline-black cursor-alias hover:bg-white": "py-[.3rem]"} ${view==="all"? "":""}`}>{project.name}</p>
                                 <div className={`lg:text-4xl text-lg mx-10 tracking-tighter overflow-hidden ${selectedProject===project.slug ? "pb-5":"pb-0"} ${view==="all" || selectedProject===project.slug ? "h-fit ":"h-0"} `}>
                                     <PortableText value={project.content}/>
+                                    {/* <p>{`${project}`}</p> */}
                                 </div>
                             </div>
                         </button>
@@ -91,7 +92,7 @@ export default function ProjectListing({filteredProjects, project, index}: Props
                                         >
                                             <p className="hover:underline bg-gray-400 px-2">{project.name}</p>
                                             &nbsp;
-                                            <p>{`(Image ${index+1})`}</p>
+                                            <p className="times">{`{Image ${index+1}}`}</p>
                                         </button>
 
                                         <button

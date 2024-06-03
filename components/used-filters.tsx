@@ -22,9 +22,9 @@ export default function UsedFilters({role, tags, collabs}: Props){
     const view = searchParams.get('view');
     const proj = searchParams.get("project");
     return(
-        <div className="flex flex-row text-gray-400 text-[1.5rem]">
+        <div className="flex flex-row text-black text-[1.5rem]">
             {role||collabs||tags? 
-                <button className="buttonParent text-black cursor-alias hover:underline"                         
+                <button className="buttonParent bg-gray-400 px-2 text-black cursor-alias hover:text-white"                         
                     onClick={()=>{
                         router.push( `/?view=${view? `${view}`: "txt"}`)
                     }}>
@@ -33,15 +33,15 @@ export default function UsedFilters({role, tags, collabs}: Props){
             :""}
             &nbsp;
             {role||collabs||tags? <p>Filtered by:&nbsp;</p>:""}
-            {role? <p className="capitalize cursor-alias hover:text-black hover:underline"
+            {role? <p className="capitalize mx-2 px-2 cursor-alias outline outline-1 outline-black bg-white  hover:text-white hover:bg-gray-400"
                 onClick={()=>{
                     router.push( `/?${createQueryString(`roles`, ``)}`, {scroll: false})
-                }}>{role}{tags||collabs?",\u00A0":""}</p>:""}
-            {collabs? <p className="capitalize cursor-alias hover:text-black hover:underline" 
+                }}>{role}{tags||collabs?"\u00A0":""}</p>:""}
+            {collabs? <p className="capitalize mx-2 px-2 cursor-alias outline outline-1 outline-black bg-white  hover:text-white hover:bg-gray-400" 
                 onClick={()=>{
                     router.push( `/?${createQueryString(`collabs`, ``)}`, {scroll: false})
-                }}>{collabs}{tags?",\u00A0":""}</p>:""}
-            {tags? <p className="capitalize cursor-alias hover:text-black hover:underline"
+                }}>{collabs}{tags?"\u00A0":""}</p>:""}
+            {tags? <p className="capitalize mx-2 px-2 cursor-alias outline outline-1 outline-black bg-white  hover:text-white hover:bg-gray-400"
                 onClick={()=>{
                     router.push( `/?${createQueryString(`tags`, ``)}`, {scroll: false})
                 }}>{tags}</p>:""}
