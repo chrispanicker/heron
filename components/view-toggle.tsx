@@ -21,9 +21,9 @@ export default function ViewToggle(){
             onClick={()=>{
                 searchParams.getAll(`view`).includes("txt")? "" : router.push( `/?${createQueryString(`view`, `txt`)}`, {scroll: false})
             }}>txt</button>
-            <p className="">
+            {/* <p className="">
             &nbsp;/&nbsp;
-            </p>
+            </p> */}
             <button
             className={`px-2 ${view==="all"? "bg-gray-400":""}`} 
             onClick={()=>{
