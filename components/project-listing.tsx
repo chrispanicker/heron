@@ -58,7 +58,7 @@ export default function ProjectListing({filteredProjects, project, index}: Props
                         }}
                         >
                             <div className="flex justify-center items-center flex-col group">
-                                <p className={`px-1 w-max flex group-hover:bg-gray-400 group-hover:underline ${selectedProject===project.slug? "bg-gray-400 cursor-alias": ""} ${view==="all"? "":""}`}>{project.name}</p>
+                                <p className={`px-1 w-max flex group-hover:bg-gray-400 ${selectedProject===project.slug? "bg-gray-400 cursor-alias hover:bg-white": ""} ${view==="all"? "":""}`}>{project.name}</p>
                                 <div className={`lg:text-4xl text-lg mx-10 tracking-tighter overflow-hidden ${selectedProject===project.slug ? "pb-5":"pb-0"} ${view==="all" || selectedProject===project.slug ? "h-fit ":"h-0"} `}>
                                     <PortableText value={project.content}/>
                                 </div>
@@ -108,9 +108,9 @@ export default function ProjectListing({filteredProjects, project, index}: Props
                                     className={`${view==="txt" || selectedProject==`${project.slug}`? "lg:h-[40rem] h-[12rem] w-auto ":"h-[10rem] w-auto "} ${img===`${project.slug}${index}`? "lg:h-[50rem] lg:w-auto w-[100vw] h-auto":""}`}
                                     unoptimized= {false}
                                     />
-                                    {/* <div className={`${img===`${project.slug}${index}`? "m-5":"hidden"}`}>
+                                    <div className={`${img===`${project.slug}${index}`? "m-5":"hidden"}`}>
                                         <PortableText value={project.content}/>
-                                    </div> */}
+                                    </div>
                                 </div>
                             ))}
                             </div>

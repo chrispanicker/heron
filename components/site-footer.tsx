@@ -24,7 +24,7 @@ export function SiteFooter(info:any){
             }}>about</button>
                 
             </div>
-            <div className="sm:w-4/4 m-5 md:text-5xl text-2xl ">
+            <div className="sm:w-4/4 m-5 md:text-5xl text-[1.5rem] ">
                 <PortableText value={info.info[0].bio[0]}/>
             </div>
         </footer>

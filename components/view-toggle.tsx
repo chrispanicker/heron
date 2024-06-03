@@ -15,9 +15,9 @@ export default function ViewToggle(){
     )  
 
     return(
-        <div className="fixed text-[1.5rem] left-0 bottom-0 m-5 z-40 flex">
+        <div className="fixed text-[1.5rem] left-0 bottom-0 m-5 z-40 flex cursor-pointer">
             <button 
-            className={` ${view==="txt"? "text-black":"text-gray-400"}`}
+            className={`px-2 ${view==="txt"? "bg-gray-400":""}`}
             onClick={()=>{
                 searchParams.getAll(`view`).includes("txt")? "" : router.push( `/?${createQueryString(`view`, `txt`)}`, {scroll: false})
             }}>txt</button>
@@ -25,7 +25,7 @@ export default function ViewToggle(){
             &nbsp;/&nbsp;
             </p>
             <button
-            className={`${view==="all"? "text-black":"text-gray-400"}`} 
+            className={`px-2 ${view==="all"? "bg-gray-400":""}`} 
             onClick={()=>{
                 searchParams.getAll(`view`).includes("all")? "" : router.push( `/?${createQueryString(`view`, `all`)}`, {scroll: false})
             }}>all</button>

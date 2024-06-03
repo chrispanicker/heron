@@ -43,6 +43,19 @@ export function OpeningCard({gallery}: Props){
     
     useEffect(()=>{
         cardRef? setTimeout(()=>{
+            document.querySelector("#image1")?.classList.replace("block", "hidden")
+            document.querySelector("#image2")?.classList.replace("hidden", "block")
+        }, 700): ""
+        cardRef? setTimeout(()=>{
+            document.querySelector("#image2")?.classList.replace("block", "hidden")
+            document.querySelector("#image3")?.classList.replace("hidden", "block")
+        }, 1400): ""
+        cardRef? setTimeout(()=>{
+            document.querySelector("#image3")?.classList.replace("block", "hidden")
+        }, 2100): ""
+
+
+        cardRef? setTimeout(()=>{
             cardRef.current.classList.replace("top-0", "top-full")
         }, 4000): ""
         cardRef? setTimeout(()=>{
@@ -50,11 +63,14 @@ export function OpeningCard({gallery}: Props){
         }, 6000): ""
     }, [cardRef])
 
-    console.log(gallery)
+    // console.log(gallery)
     return(
         <div ref={cardRef} className="lg:text-7xl text-2xl w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
             <div className="flex justify-center items-center">
-                <Image className="w-3/4 z-50" src={require('../src/Drew-1.gif')} alt="loading..." onLoad={(e)=>{h1Ref.current? h1Ref.current?.classList.add("opacity-0"): ""}} priority />
+                <Image className="w-3/4 z-50 drop-shadow-md" 
+                src={require('../src/Drew-1.gif')} 
+                alt="loading..." 
+                onLoad={(e)=>{h1Ref.current? h1Ref.current?.classList.add("opacity-0"): ""}} priority />
                 {/* <h1 ref={h1Ref} className="transition-all duration-200 absolute vivaldii lg:text-[16.5rem] md:text-[16.5rem]">Drew Litowitz</h1> */}
             </div>
             <div className="flex flex-row justify-center items-center w-4/4 z-50">
@@ -69,7 +85,8 @@ export function OpeningCard({gallery}: Props){
                 alt=""
                 width={1080}
                 height={1080}
-                className="w-screen h-screen object-cover"
+                id="image1"
+                className="w-screen h-screen object-cover block"
                 unoptimized= {false}
                 />
                 <Image
@@ -77,15 +94,17 @@ export function OpeningCard({gallery}: Props){
                 alt=""
                 width={1080}
                 height={1080}
-                className="w-screen h-screen object-cover"
+                id="image2"
+                className="w-screen h-screen object-cover hidden"
                 unoptimized= {false}
                 />
                 <Image
-                src={urlForImage(gallery[1].projects.preview).url()}
+                src={urlForImage(gallery[2].projects.preview).url()}
                 alt=""
                 width={1080}
                 height={1080}
-                className="w-screen h-screen object-cover"
+                id="image3"
+                className="w-screen h-screen object-cover hidden"
                 unoptimized= {false}
                 />
             </div>

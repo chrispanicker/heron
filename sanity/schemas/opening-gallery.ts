@@ -19,23 +19,23 @@ const gallery = {
             description: 'Choose one of your fave projects!',
         },
     ],
-    validation: (Rule: any) => Rule.custom(async (value: any, context: any) => {
-        const { document } = context;
-        const docType = document._type;
+    // validation: (Rule: any) => Rule.custom(async (value: any, context: any) => {
+    //     const { document } = context;
+    //     const docType = document._type;
     
-        try {
-          const existingDocs = await client.fetch<number>(`count(*[_type == "${docType}"])`);
+    //     try {
+    //       const existingDocs = await client.fetch<number>(`count(*[_type == "${docType}"])`);
     
-          if (existingDocs >= limit) {
-            return `You cannot create more than ${limit} entries of this type.`;
-          }
+    //       if (existingDocs >= limit) {
+    //         return `You cannot create more than ${limit} entries of this type.`;
+    //       }
     
-          return true;
-        } catch (error) {
-          console.error('Error fetching document count:', error);
-          return 'Validation error occurred.';
-        }
-      })
+    //       return true;
+    //     } catch (error) {
+    //       console.error('Error fetching document count:', error);
+    //       return 'Validation error occurred.';
+    //     }
+    //   })
 }
 
 
