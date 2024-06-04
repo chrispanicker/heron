@@ -62,7 +62,9 @@ export default async function RootLayout({
       color,
       year,
       "slug": slug.current,
-    }`
+    }`, {
+      next: { revalidate: 10 }, // Seconds
+    }
   )
   
 

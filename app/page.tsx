@@ -42,7 +42,9 @@ export default async function Home({searchParams}: Props) {
           },
           year,
           "slug": slug.current,
-      }`
+      }`, {
+        next: { revalidate: 10 }, // Seconds
+      }
   )
   let gallery = await client.fetch(
     groq`*[_type == "gallery"]{
@@ -60,7 +62,9 @@ export default async function Home({searchParams}: Props) {
           name
         },
       },
-    }`
+    }`, {
+      next: { revalidate: 10 }, // Seconds
+    }
   )
   return (
     filteredProjects? <main id="main" className={`py-32 font-normal z-0 text-black bg-white flex flex-col items-center justify-start min-h-screen`}>
@@ -77,4 +81,3 @@ export default async function Home({searchParams}: Props) {
     </main>: <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>
   )
 }
- 
