@@ -43,7 +43,9 @@ export default async function Home({searchParams}: Props) {
           year,
           "slug": slug.current,
       }`, {
-        next: { revalidate: 0 }, // Seconds
+        next: { revalidate: 0,
+          cache: 'no-store'
+         }, // Seconds
       }
   )
   let gallery = await client.fetch(
@@ -63,7 +65,9 @@ export default async function Home({searchParams}: Props) {
         },
       },
     }`, {
-      next: { revalidate: 0 }, // Seconds
+      next: { revalidate: 0,
+        cache: 'no-store'
+       }, // Seconds
     }
   )
   return (
