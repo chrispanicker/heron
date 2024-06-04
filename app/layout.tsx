@@ -39,7 +39,9 @@ export default async function RootLayout({
   const info = await client.fetch(
     groq`*[_type=="info"]{
         bio,
-    }`
+    }`, {
+      next: { revalidate: 0 }, // Seconds
+    }
   )
   const allProjects = await client.fetch(
     groq`*[_type=="project"]{
@@ -63,7 +65,7 @@ export default async function RootLayout({
       year,
       "slug": slug.current,
     }`, {
-      next: { revalidate: 10 }, // Seconds
+      next: { revalidate: 0 }, // Seconds
     }
   )
   

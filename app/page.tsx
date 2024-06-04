@@ -43,7 +43,7 @@ export default async function Home({searchParams}: Props) {
           year,
           "slug": slug.current,
       }`, {
-        next: { revalidate: 10 }, // Seconds
+        next: { revalidate: 0 }, // Seconds
       }
   )
   let gallery = await client.fetch(
@@ -63,7 +63,7 @@ export default async function Home({searchParams}: Props) {
         },
       },
     }`, {
-      next: { revalidate: 10 }, // Seconds
+      next: { revalidate: 0 }, // Seconds
     }
   )
   return (
