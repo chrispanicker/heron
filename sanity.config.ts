@@ -16,7 +16,7 @@ const config = defineConfig({
     basePath: "/admin",
     plugins: [deskTool(), colorInput()],
     schema: {types: [project, gallery, info, roles, collabs, tags]},
-    useCdn: false
+    useCdn: true
 })
 
 export default config
