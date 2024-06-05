@@ -45,20 +45,20 @@ export async function getInfo() {
 export async function getGallery(){ 
         return client.fetch(
                 groq`*[_type == "gallery"]{
-                index,
-                "projects": projects->{
-                name,
-                preview,
-                "roles": roles[]->{
-                name
-                },
-                "collabs": collabs[]->{
-                name
-                },
-                "tags": tags[]->{
-                name
-                },
-                },
+                        index,
+                        "projects": projects->{
+                                name,
+                                preview,
+                                "roles": roles[]->{
+                                name
+                                },
+                        "collabs": collabs[]->{
+                                name
+                        },
+                        "tags": tags[]->{
+                                name
+                        },
+                        },
                 }`
       )
 }

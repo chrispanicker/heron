@@ -1,5 +1,3 @@
-import { client } from "../sanity-utils";
-
 const limit = 3; // Set your limit here
 
 const gallery = {
