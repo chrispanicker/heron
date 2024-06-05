@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
 import { SiteFooter } from '@/components/site-footer'
-import { client } from '@/sanity/sanity-utils'
-import { groq } from 'next-sanity'
 import { TestFilter } from '@/components/test-filter'
-import { filterToLower } from '@/components/filter-to-lower'
 import localFont from 'next/font/local'
 import ViewToggle from '@/components/view-toggle'
+import { getInfo, getProjects } from '@/sanity/sanity-utils'
 
 
 export const metadata: Metadata = {
@@ -36,45 +34,9 @@ export default async function RootLayout({
   }) {
 
 
-  const info = await client.fetch(
-    groq`*[_type=="info"]{
-        bio,
-    }`, {
-      next: { revalidate: 0,
-        cache: 'no-store'
-       }, // Seconds
-    }
-  )
-  const allProjects = await client.fetch(
-    groq`*[_type=="project"]{
-      _id,
-      _createdAt,
-      name,
-      images,
-      url,
-      content,
-      type,
-      "roles": roles[]->{
-        name
-      },
-      "collabs": collabs[]->{
-        name
-      },
-      "tags": tags[]->{
-        name
-      },
-      color,
-      year,
-      "slug": slug.current,
-    }`, {
-      next: { revalidate: 0,
-        cache: 'no-store'
-      }, // Seconds
-    }
-  )
-  
+let allProjects = await getProjects();
+let info = await getInfo();
 
-  // filterToLower(allProjects)
   return (
     <html lang="en">
       <body className={`bg-white`}>

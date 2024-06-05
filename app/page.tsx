@@ -1,10 +1,7 @@
 import { OpeningCard } from "@/components/opening-card";
 import ProjectListing from "@/components/project-listing";
 import UsedFilters from "@/components/used-filters";
-import { client } from "@/sanity/sanity-utils";
-import { Any, groq } from "next-sanity";
-
- 
+import {getFilteredProjects, getGallery } from "@/sanity/sanity-utils"; 
 
 interface Props {
   searchParams: {
@@ -17,59 +14,37 @@ interface Props {
 
 export default async function Home({searchParams}: Props) {
   const {tags, collabs, roles} = searchParams 
-  const projectFilter = `_type == "project"`
-  const tagFilter =  tags? `tags[]-> name match "${tags}" ${collabs || roles? "&&" : "" }` : "" 
-  const collabFilter = collabs ? `collabs[]-> name match "${collabs}" ${roles? "&&" : "" }` : ""
-  const roleFilter = roles ? `roles[]-> name match "${roles}"` : "" 
-  const filter = collabs || roles || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
-  let filteredProjects = await client.fetch(
-      groq`*[${projectFilter} ${filter}]{
-          _id,
-          _createdAt,
-          name,
-          vimeo,
-          images,
-          url,
-          content,
-          "roles": roles[]->{
-            name
-          },
-          "collabs": collabs[]->{
-            name
-          },
-          "tags": tags[]->{
-            name
-          },
-          year,
-          "slug": slug.current,
-      }`, {
-        next: { revalidate: 0,
-          cache: 'no-store'
-         }, // Seconds
-      }
-  )
-  let gallery = await client.fetch(
-    groq`*[_type == "gallery"]{
-      index,
-      "projects": projects->{
-        name,
-        preview,
-        "roles": roles[]->{
-          name
-        },
-        "collabs": collabs[]->{
-          name
-        },
-        "tags": tags[]->{
-          name
-        },
-      },
-    }`, {
-      next: { revalidate: 0,
-        cache: 'no-store'
-       }, // Seconds
-    }
-  )
+  // const projectFilter = `_type == "project"`
+  // const tagFilter =  tags? `tags[]-> name match "${tags}" ${collabs || roles? "&&" : "" }` : "" 
+  // const collabFilter = collabs ? `collabs[]-> name match "${collabs}" ${roles? "&&" : "" }` : ""
+  // const roleFilter = roles ? `roles[]-> name match "${roles}"` : "" 
+  // const filter = collabs || roles || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
+  // let filteredProjects = await client.fetch(
+  //     groq`*[${projectFilter} ${filter}]{
+  //         _id,
+  //         _createdAt,
+  //         name,
+  //         vimeo,
+  //         images,
+  //         url,
+  //         content,
+  //         "roles": roles[]->{
+  //           name
+  //         },
+  //         "collabs": collabs[]->{
+  //           name
+  //         },
+  //         "tags": tags[]->{
+  //           name
+  //         },
+  //         year,
+  //         "slug": slug.current,
+  //     }`
+  // )
+
+  let filteredProjects= await getFilteredProjects({searchParams});
+  let gallery = await getGallery();
+
   return (
     filteredProjects? <main id="main" className={`py-32 font-normal z-0 text-black bg-white flex flex-col items-center justify-start min-h-screen`}>
         <OpeningCard gallery={gallery} />

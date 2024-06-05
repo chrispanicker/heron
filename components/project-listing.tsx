@@ -12,12 +12,11 @@ interface Props{
     index: number
 }
 
-export default function ProjectListing({filteredProjects, project, index}: Props) {
+export default function ProjectListing({project, index}: Props) {
     let rolesArray: string[] = []
     let tagsArray: string[] = []
     let collabsArray: string[] = []
 
-    const projectClickRef = useRef<HTMLDivElement | null>(null)
     const projectRef = useRef<HTMLElement | null>(null)
     const router = useRouter();
     const searchParams = useSearchParams();    
