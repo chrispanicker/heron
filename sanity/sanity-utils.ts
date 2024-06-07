@@ -4,6 +4,7 @@ const client = createClient({
         projectId: "01jwvji0",
         dataset: "production",
         apiVersion: "2023-01-04",
+        useCdn: false,
 });
 
 const revalidate = 10
