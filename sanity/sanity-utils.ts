@@ -7,7 +7,7 @@ const client = createClient({
         useCdn: false,
 });
 
-const revalidate = 10
+
 
 export async function getProjects() {
 
@@ -33,7 +33,7 @@ export async function getProjects() {
                   year,
                   "slug": slug.current,
                 }`
-        , {next: {revalidate}}) 
+        , {next: {revalidate: 10}}) 
 }
 
 
@@ -42,7 +42,7 @@ export async function getInfo() {
                 groq`*[_type=="info"]{
                     bio,
                 }`
-        , {next: {revalidate}})
+        , {next: {revalidate: 10}})
 }
 
 export async function getGallery(){ 
@@ -63,7 +63,7 @@ export async function getGallery(){
                         },
                         },
                 }`
-        , {next: {revalidate}})
+        , {next: {revalidate: 10}})
 }
 
 
@@ -103,5 +103,5 @@ export async function getFilteredProjects({searchParams}:Props){
                     year,
                     "slug": slug.current,
                 }`
-        , {next: {revalidate}})
+        , {next: {revalidate: 10}})
 }
