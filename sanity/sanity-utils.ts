@@ -1,3 +1,4 @@
+
 import {createClient, groq} from "next-sanity";
 const client = createClient({
         projectId: "01jwvji0",
@@ -5,6 +6,7 @@ const client = createClient({
         apiVersion: "2023-01-04",
 });
 
+const revalidate = 10
 
 export async function getProjects() {
 
@@ -30,7 +32,7 @@ export async function getProjects() {
                   year,
                   "slug": slug.current,
                 }`
-        ) 
+        , {next: {revalidate}}) 
 }
 
 
@@ -39,7 +41,7 @@ export async function getInfo() {
                 groq`*[_type=="info"]{
                     bio,
                 }`
-        )
+        , {next: {revalidate}})
 }
 
 export async function getGallery(){ 
@@ -60,17 +62,17 @@ export async function getGallery(){
                         },
                         },
                 }`
-      )
+        , {next: {revalidate}})
 }
 
 
 interface Props {
         searchParams: {
-          tags?: string
-          collabs?: string
-          roles?: string
+                tags?: string
+                collabs?: string
+                roles?: string
         }
-      }
+}
 
 export async function getFilteredProjects({searchParams}:Props){ 
         const {tags, collabs, roles} = searchParams 
@@ -100,5 +102,5 @@ export async function getFilteredProjects({searchParams}:Props){
                     year,
                     "slug": slug.current,
                 }`
-        )
+        , {next: {revalidate}})
 }

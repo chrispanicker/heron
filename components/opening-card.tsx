@@ -62,8 +62,6 @@ export function OpeningCard({gallery}: Props){
             cardRef.current.classList.add("hidden")
         }, 6000): ""
     }, [cardRef])
-
-    // console.log(gallery)
     return(
         <div ref={cardRef} className="lg:text-7xl text-2xl w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
             <div className="flex justify-center items-center">

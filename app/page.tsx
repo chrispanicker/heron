@@ -14,34 +14,6 @@ interface Props {
 
 export default async function Home({searchParams}: Props) {
   const {tags, collabs, roles} = searchParams 
-  // const projectFilter = `_type == "project"`
-  // const tagFilter =  tags? `tags[]-> name match "${tags}" ${collabs || roles? "&&" : "" }` : "" 
-  // const collabFilter = collabs ? `collabs[]-> name match "${collabs}" ${roles? "&&" : "" }` : ""
-  // const roleFilter = roles ? `roles[]-> name match "${roles}"` : "" 
-  // const filter = collabs || roles || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
-  // let filteredProjects = await client.fetch(
-  //     groq`*[${projectFilter} ${filter}]{
-  //         _id,
-  //         _createdAt,
-  //         name,
-  //         vimeo,
-  //         images,
-  //         url,
-  //         content,
-  //         "roles": roles[]->{
-  //           name
-  //         },
-  //         "collabs": collabs[]->{
-  //           name
-  //         },
-  //         "tags": tags[]->{
-  //           name
-  //         },
-  //         year,
-  //         "slug": slug.current,
-  //     }`
-  // )
-
   let filteredProjects= await getFilteredProjects({searchParams});
   let gallery = await getGallery();
 
