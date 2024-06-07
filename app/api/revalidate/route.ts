@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const paths = ['/']; // Add paths to revalidate as needed
+    const paths = ['../../../sanity/']; // Add paths to revalidate as needed
     await Promise.all(paths.map(path => revalidatePath(path)));
     return NextResponse.json({ message: 'Revalidation successful' }, { status: 200 });
   } catch (err) {
