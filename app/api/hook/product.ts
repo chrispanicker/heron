@@ -1,5 +1,4 @@
 import { SIGNATURE_HEADER_NAME, isValidSignature } from "@sanity/webhook"
-SANITY_WE
 
 const handler = async(req:any, res:any)=>{
     try {
