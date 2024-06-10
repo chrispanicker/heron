@@ -11,7 +11,7 @@ const handler = async(req:any, res:any)=>{
         const{slug}=req.body
         await res.revalidate(`../../`)
         await res.revalidate(`../../../sanity/sanity-utils`)
-
+        console.log("slug", slug)
         res.status(200).json({err:"Projects are Revalidated!"})
     }catch(error){
         res.status(200).json({err:"Something Went Wrong!"})
