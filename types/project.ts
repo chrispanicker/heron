@@ -13,7 +13,7 @@ export type Project = {
     roles: any;
     color: string;
     tags: any;
-    vimeo: string;
+    vimeo: string[];
     images: Image[];
     preview: Image;
 }

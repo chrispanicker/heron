@@ -1,10 +1,12 @@
 'use client'
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
 export default function ViewToggle(){
     const router = useRouter();
+    const pathname = usePathname(); 
     const searchParams = useSearchParams();    
+    const roles = searchParams.get('roles')
     const view = searchParams.get('view');
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -13,22 +15,23 @@ export default function ViewToggle(){
             return params.toString()
         }, [searchParams]
     )  
-
+    const isSanityStudio = pathname.startsWith('/admin');
     return(
-        <div className="fixed bg-white text-[1.5rem] lg:text-4xl left-0 bottom-0 m-5 z-40 flex cursor-pointer">
+        isSanityStudio? "":
+        <div className="fixed bg-white text-[1.5rem] lg:text-2xl left-0 bottom-0 m-5 z-40 flex cursor-pointer text-gray-400">
             <button 
-            className={`px-2 ${view==="txt"? "bg-gray-400 outline outline-1 outline-black":"hover:outline hover:outline-1 hover:outline-black"}`}
+            className={`px-2 ${view==="txt"? "hidden":""}`}
             onClick={()=>{
-                searchParams.getAll(`view`).includes("txt")? "" : router.push( `/?${createQueryString(`view`, `txt`)}`, {scroll: false})
-            }}>txt</button>
-            {/* <p className="">
-            &nbsp;/&nbsp;
-            </p> */}
+                router.push(`/?view=txt${roles? `&roles=${roles}`: ""}`, {scroll: false})
+                // searchParams.getAll(`view`).includes("txt")? "" : router.push( `/?${createQueryString(`view`, `txt`)}`, {scroll: false})
+            }}>Collapse All</button>
+
             <button
-            className={`px-2 ${view==="all"? "bg-gray-400 outline outline-1 outline-black":"hover:outline hover:outline-1 hover:outline-black"}`} 
+            className={`px-2 ${view==="all"? "hidden":""}`} 
             onClick={()=>{
-                searchParams.getAll(`view`).includes("all")? "" : router.push( `/?${createQueryString(`view`, `all`)}`, {scroll: false})
-            }}>all</button>
+                router.push(`/?view=all${roles? `&roles=${roles}`: ""}`, {scroll: false})
+                // searchParams.getAll(`view`).includes("all")? "" : router.push( `/?${createQueryString(`view`, `all`)}`, {scroll: false})
+            }}>Expand All</button>
         </div>
     )
 }

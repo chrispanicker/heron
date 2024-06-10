@@ -13,18 +13,20 @@ interface Props{
 }
 
 export default function ProjectListing({project, index}: Props) {
-    let rolesArray: string[] = []
-    let tagsArray: string[] = []
-    let collabsArray: string[] = []
-
     const projectRef = useRef<HTMLElement | null>(null)
     const router = useRouter();
     const searchParams = useSearchParams();    
     const selectedProject = searchParams.get('project');
     const view = searchParams.get('view');
-    const img = searchParams.get('img');
+    const img = Number(searchParams.get('img'));
+    const roles = searchParams.get('roles')
     
-    const vimeoID = project.vimeo? project.vimeo.replace("https://vimeo.com/", ""):"";
+    let vimeoIDs:string[] = [];
+    console.log(project.name+project.vimeo)
+    project.vimeo?.map((vid, index)=>{
+        vimeoIDs[index]=vid.replace("https://vimeo.com/", "")
+    })
+
     const createQueryString = useCallback(
         (name: string, value: string) => {
             const params = new URLSearchParams(searchParams.toString())
@@ -33,87 +35,65 @@ export default function ProjectListing({project, index}: Props) {
         }, [searchParams]
     )  
 
-    {project.roles?.map((role:any,i:number)=>{
-        rolesArray[i] = role.name
-    })}
-    {project.collabs?.map((collab:any,i:number)=>{
-        collabsArray[i] = collab.name
-    })}
-    {project.tags?.map((tag:any,i:number)=>{
-        tagsArray[i] = tag.name
-    })}
+    const vimeoCount = project.vimeo? project.vimeo.length: 0;
+    const imageCount = project.images? project.images.length: 0;
+    const galleryCount = vimeoCount + imageCount;
 
-    
-   
     return project?
-        <section id={project.slug} ref={projectRef} className={` ${view==="all"||selectedProject===project.slug? "py-10":"lg:py-0"}`} style={{['--i' as any]:index+1}}>
-            <div className="flex w-screen  ">
-                    <div className="">
+        <section id={project.slug} ref={projectRef} className={`text-2xl  ${view==="all"? "pb-10":selectedProject===project.slug? "py-10": ""}`} style={{['--i' as any]:index+1}}>
+            <div className="flex w-screen">
+                    <div>
                         <button 
                         className={`z-50 projectTitle opacity-100 w-screen tracking-normal cursor-pointer flex flex-col items-center justify-center`}
                         onClick={()=>{
-                            searchParams.getAll(`project`).includes(project.slug)? router.push(`/?${createQueryString(`project`, ``)}`, {scroll: false})
-                            : router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, {scroll: false})
+                            searchParams.getAll(`project`).includes(project.slug)?
+                            router.push(`/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}`, {scroll: false})
+                            : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}&project=${project.slug}&img=0`, {scroll: false})
                         }}
                         >
                             <div className="flex justify-center items-center flex-col group">
-                                <p className={`px-1 tracking-[.005rem] w-max flex text-5xl group-hover:bg-gray-400 group-hover:outline group-hover:outline-2 group-hover:outline-black ${selectedProject===project.slug? "bg-gray-400 outline outline-1 outline-black cursor-alias hover:bg-white": "py-[.3rem]"} ${view==="all"? "":""}`}>{project.name}</p>
-                                <div className={`lg:text-4xl text-lg mx-10 tracking-tighter overflow-hidden ${selectedProject===project.slug ? "pb-5":"pb-0"} ${view==="all" || selectedProject===project.slug ? "h-fit ":"h-0"} `}>
+                                <span className="flex justify-center items-center">       
+                                    <p className={`px-1 tracking-[.005rem] font-bold w-max flex group-hover:text-gray-600 ${selectedProject===project.slug? "text-gray-600 cursor-alias hover:text-grey-400": ""} ${view==="all"? "":""}`}>{project.name}</p>
+                                    <button className={selectedProject===project.slug? "":"hidden"}>&#735;</button>
+                                </span>
+                                <div className={`flatspot lg:mx-60 tracking-tighter overflow-hidden ${selectedProject===project.slug ? "pb-5":"pb-0"} ${view==="all" || selectedProject===project.slug ? "h-fit ":"h-0"} `}>
                                     <PortableText value={project.content}/>
-                                    {/* <p>{`${project}`}</p> */}
                                 </div>
                             </div>
                         </button>
 
-                        <div className={`w-screen overflow-x-scroll  overflow-y-hidden ${selectedProject===project.slug? "bg-gray-400 lg:h-[41rem] h-[13rem]":view==="all"?"h-[11rem]":'h-0'} `}>
-                            <div 
-                            className={`flex h-auto ${selectedProject===project.slug? "w-max":"lg:w-screen lg:justify-center w-max"}`}
-                            >
-                            {/* imgs logic for zoom ins */}
+                        <div className={` w-screen overflow-hidden flex justify-center items-center ${selectedProject===project.slug? "flex-col" : view==="all"?"h-[10rem]":'h-0'} `}>
+                            {project.vimeo?.map((vid, index)=>(
+                                <div key={`project.slug+${index}`} className={`${img===index? "": "hidden"}`}>
+                                    <iframe className="" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} width={selectedProject===project.slug? 1040: view==="all"? 288:640} height={selectedProject===project.slug? 640: view==="all"? 162:480} allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                                </div>
+                            ))}
                             {project.images?.map((image, index)=>(
-                                <div 
-                                className={`${img===`${project.slug}${index}`? "fixed bg-white top-0 w-screen h-screen flex justify-center items-center z-50 flex-col":"cursor-zoom-in hover:opacity-80"} `}
-                                key={`image${index}`}
-                                onClick={(e)=>{
-                                    img===`${project.slug}${index}`? "": router.push( `/?${createQueryString(`img`, `${project.slug}${index}`)}`, {scroll: false})
-                                }}>
-                                    <div className={`fixed lg:text-3xl text-lg  top-0 w-screen flex items-center justify-between p-5 ${img===`${project.slug}${index}`? "":"hidden"}`}>
-                                        <button
-                                        className="cursor-w-resise"
-                                        onClick={(e)=>{
-                                           index===0? router.push( `/?${createQueryString(`img`, `${project.slug}${project.images.length-1}`)}`, {scroll: false}) : router.push( `/?${createQueryString(`img`, `${project.slug}${index-1}`)}`, {scroll: false})
-                                        }}>Prev
-                                        </button>
-
-                                        <button 
-                                            className="flex cursor-alias"
-                                            onClick={(e)=>{router.push( `/?${createQueryString(`img`, ``)}`, {scroll: false})}}
-                                        >
-                                            <p className="hover:underline bg-gray-400 px-2">{project.name}</p>
-                                            &nbsp;
-                                            <p className="times">{`{Image ${index+1}}`}</p>
-                                        </button>
-
-                                        <button
-                                        className="cursor-e-resise"
-                                        onClick={(e)=>{
-                                           index===project.images.length-1?  router.push( `/?${createQueryString(`img`, `${project.slug}${0}`)}`, {scroll: false}) : router.push( `/?${createQueryString(`img`, `${project.slug}${index+1}`)}`, {scroll: false})
-                                        }}>Next</button>
-                                    </div>
+                                <div key={`project.slug+${index+vimeoCount}`} className={` flex justify-center items-center ${selectedProject===project.slug? img===index+vimeoCount? "":"hidden": ""}`}>
                                     <Image
-                                    src={urlForImage(image).url()}
+                                    src={urlForImage(project.images[index]).url()}
                                     alt=""
                                     width={1080}
                                     height={1080}
-                                    className={`${view==="txt" || selectedProject==`${project.slug}`? "lg:h-[40rem] h-[12rem] w-auto ":"h-[10rem] w-auto "} ${img===`${project.slug}${index}`? "lg:h-[50rem] lg:w-auto w-[100vw] h-auto":""}`}
+                                    className={` w-auto ${selectedProject===project.slug? "h-[40rem]": view==="all"? "h-[10rem]": "h-0"}`}
                                     unoptimized= {false}
+                                    priority={false}
                                     />
-                                    <div className={`${img===`${project.slug}${index}`? "m-5":"hidden"}`}>
-                                        <PortableText value={project.content}/>
-                                    </div>
                                 </div>
                             ))}
-                            </div>
+                            <span className={`flex w-[10rem] items-between justify-between ${view==="all"? selectedProject===project.slug? "":"hidden":""}`}>
+                                <button onClick={()=>{
+                                    img===0?
+                                    router.push( `/?${createQueryString(`img`, `${galleryCount-1}`)}`, {scroll: false}):
+                                    router.push( `/?${createQueryString(`img`, `${img-1}`)}`, {scroll: false})
+                                }}>Prev</button>
+                                <p>{img+1}/{galleryCount}</p>
+                                <button onClick={()=>{
+                                    img===galleryCount-1?
+                                    router.push( `/?${createQueryString(`img`, `0`)}`, {scroll: false}):
+                                    router.push( `/?${createQueryString(`img`, `${img+1}`)}`, {scroll: false})
+                                }}>Next</button>
+                            </span>
                         </div> 
                 </div>
             </div>

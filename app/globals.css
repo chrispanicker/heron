@@ -5,10 +5,36 @@
 @font-face {
   font-family: Flatspot;
   src:
-       url('../public/fonts/FlatspotNuovoTest-Roman.woff') format('woff'),
-       url('../public/fonts/FlatspotNuovoTest-Roman.woff2') format('woff2');
+       url('../public/fonts/FlatspotNuovoTest-Roman.woff') format('woff2');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: GreyLL;
+  src:
+       url('../public/fonts/GreyLLTrialWeb-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: GreyLL;
+  src:
+       url('../public/fonts/GreyLLTrialWeb-Medium.woff2') format('woff2');
+  font-weight: 600;
+  font-style: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Feature;
+  src:
+       url('../public/fonts/FeatureDeckCondTrial-Bold.woff') format('woff2');
+  font-weight: 600;
+  font-style: bold;
   font-display: swap;
 }
 
@@ -34,7 +60,7 @@
 
 *{
   font-family: Flatspot;
-  letter-spacing: -.04rem;
+  letter-spacing: -.05rem;
 }
 
 /* scrollbar stuff */

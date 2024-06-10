@@ -32,11 +32,12 @@ export function OpeningCard({gallery}: Props){
         if(selectedProject === null || selectedProject === ""){
 
         }else{
-            let proj = document.querySelector(`#${selectedProject}`)
-            proj?.scrollIntoView({
-                block: "center",
-            behavior: 'smooth'
-        })}
+            // let proj = document.querySelector(`#${selectedProject}`)
+            // proj?.scrollIntoView({
+            //     block: "center",
+            // behavior: 'smooth'
+            // })
+        }
         view? "": router.push( `/?${createQueryString(`view`, `txt`)}`)
 
     }, [selectedProject])
@@ -62,20 +63,16 @@ export function OpeningCard({gallery}: Props){
             cardRef.current.classList.add("hidden")
         }, 6000): ""
     }, [cardRef])
+    
     return(
         <div ref={cardRef} className="lg:text-7xl text-2xl w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
-            <div className="flex justify-center items-center">
-                <p className= "bg-gray-400 text-black mx-2 w-fit times px-2 ">This is the website of Drew Litowitz</p>
-                {/* <Image className="w-3/4 z-50 drop-shadow-md" 
-                src={require('../src/Drew-1.gif')} 
-                alt="loading..." 
-                onLoad={(e)=>{h1Ref.current? h1Ref.current?.classList.add("opacity-0"): ""}} priority /> */}
-                {/* <h1 ref={h1Ref} className="transition-all duration-200 absolute vivaldii lg:text-[16.5rem] md:text-[16.5rem]">Drew Litowitz</h1> */}
+            <div className="flex justify-center items-center z-50">
+                <p className= "bg-gray-400 text-white mx-2 w-fit px-4 ">This is the website of Drew Litowitz</p>
             </div>
-            <div className="flex flex-row justify-center items-center w-4/4 z-50">
-                <p className="outline outline-1 outline-black bg-white text-black mx-2 w-fit px-2">Art Director</p>
-                <p className="outline outline-1 outline-black bg-white  text-black mx-2 w-fit px-2">Designer</p>
-                <p className="outline outline-1 outline-black bg-white  text-black mx-2 w-fit px-2">More...</p>
+            <div className="flex flex-row justify-center text-gray-400 items-center w-4/4">
+                <p className=" bg-white mx-2 w-fit px-2">Art Director</p>
+                <p className=" bg-white mx-2 w-fit px-2">Designer</p>
+                <p className=" bg-white mx-2 w-fit px-2">More...</p>
             </div>
 
             <div id="gallery" className="absolute top-0 flex">
@@ -87,6 +84,7 @@ export function OpeningCard({gallery}: Props){
                 id="image1"
                 className="w-screen h-screen object-cover block"
                 unoptimized= {false}
+                priority={true}
                 />
                 <Image
                 src={urlForImage(gallery[1].projects.preview).url()}
@@ -96,6 +94,7 @@ export function OpeningCard({gallery}: Props){
                 id="image2"
                 className="w-screen h-screen object-cover hidden"
                 unoptimized= {false}
+                priority={true}
                 />
                 <Image
                 src={urlForImage(gallery[2].projects.preview).url()}
@@ -105,6 +104,7 @@ export function OpeningCard({gallery}: Props){
                 id="image3"
                 className="w-screen h-screen object-cover hidden"
                 unoptimized= {false}
+                priority={true}
                 />
             </div>
         </div>

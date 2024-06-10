@@ -39,9 +39,10 @@ const project = {
         },
         {
             name: 'vimeo',
-            title:'Vimeo Link',
-            type: 'url',
-            description: 'Have a vimeo link for this? You can add it here!',
+            title:'Vimeo Links',
+            type: "array",
+            of: [{type: 'url'}],
+            description: 'Hi Drew! Have any vimeo videos for this project? You can add them here!',
         },
         {
             name: 'images',

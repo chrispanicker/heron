@@ -21,12 +21,11 @@ export function FilterButtons(filters:object){
 
     return(
     isSanityStudio? "" 
-    : <div id="filters" className={`z-40 bg-gray-400 fixed top-[0dvh] overflow-x-scroll w-screen justify-start items-center flex lg:text-[1.3rem] text-lg`} key={'parent'}>
-        {/* <p className=" whitespace-nowrap pr-5 times">This is the website of Drew Litowitz.</p> */}
+    : <div id="filters" className={`z-40 fixed top-[0dvh] overflow-x-scroll w-screen justify-center items-center flex lg:text-[1.3rem] text-lg`} key={'parent'}>
         {Object.entries(filters).map(([key, array])=>{
             return(
                 <span key={key} className="flex capitalize items-center justify-center">
-                    <p className={`px-[.2rem] border border-1 border-black times bg-white`}>{`${key}`}</p>
+                    {/* <p className={`px-[.2rem]`}>{`${key}`}</p> */}
                     <div className="flex flex-row justify-center items-center">
                     {array.map((filter:any, idx:any)=>{
                         const filterArray = filter.split("");
@@ -40,8 +39,8 @@ export function FilterButtons(filters:object){
                                 router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
                                 : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
                             }}
-                            className={`w-fit whitespace-nowrap hover:bg-white hover:text-black px-2 text-black 
-                            ${searchParams.get(key)?.includes(filter)?"bg-white outline outline-1 outline-gray-400":"bg-gray-400" }`
+                            className={`w-fit whitespace-nowrap px-2 text-gray-400 text-2xl ${key!="roles"? "hidden":""}
+                            ${searchParams.get(key)?.includes(filter)? "bg-white hover:bg-gray-400 hover:text-white":"bg-gray-400 text-white hover:bg-white hover:text-gray-400" }`
                             }>
                                 {idx<filterArray.length? `${filterArray.join("")}`:`${filterArray.join("")}`}
                             </button>
