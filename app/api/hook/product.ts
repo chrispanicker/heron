@@ -12,9 +12,9 @@ const handler = async(req:any, res:any)=>{
         await res.revalidate(`../../`)
         await res.revalidate(`../../../sanity/sanity-utils`)
 
-        res.status(200).jsom({err:"Projects are Revalidated!"})
+        res.status(200).json({err:"Projects are Revalidated!"})
     }catch(error){
-        res.status(200).jsom({err:"Something Went Wrong!"})
+        res.status(200).json({err:"Something Went Wrong!"})
     }
 }
 
