@@ -22,7 +22,7 @@ export default function ProjectListing({project, index}: Props) {
     const roles = searchParams.get('roles')
     
     let vimeoIDs:string[] = [];
-    console.log(project.name+project.vimeo)
+
     project.vimeo?.map((vid, index)=>{
         vimeoIDs[index]=vid.replace("https://vimeo.com/", "")
     })
@@ -65,7 +65,7 @@ export default function ProjectListing({project, index}: Props) {
                         <section className={` w-screen overflow-hidden flex justify-center items-center ${selectedProject===project.slug? "flex-col" : view==="all"?"h-[10rem]":'h-0'} `}>
                                 {/* current image */}
                                 {project.vimeo?.map((vid, index)=>(
-                                    <div key={`project.slug+${index}`} className={`${img===index? "": "hidden"}`}>
+                                    <div key={`project.slug+${index}`} className={`${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "": "hidden"}`}>
                                         <iframe className="" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} width={selectedProject===project.slug? 1040: view==="all"? 288:640} height={selectedProject===project.slug? 640: view==="all"? 162:480} allow="autoplay; fullscreen; picture-in-picture"></iframe>
                                     </div>
                                 ))}
