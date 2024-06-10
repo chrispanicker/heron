@@ -39,7 +39,7 @@ export function FilterButtons(filters:object){
                                 router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
                                 : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
                             }}
-                            className={`w-fit whitespace-nowrap px-2 text-gray-400 text-2xl ${key!="roles"? "hidden":""}
+                            className={`w-fit whitespace-nowrap px-2 text-gray-400 text-2xl ${key!="roles"? "hidden": ""}
                             ${searchParams.get(key)?.includes(filter)? "bg-white hover:bg-gray-400 hover:text-white":"bg-gray-400 text-white hover:bg-white hover:text-gray-400" }`
                             }>
                                 {idx<filterArray.length? `${filterArray.join("")}`:`${filterArray.join("")}`}

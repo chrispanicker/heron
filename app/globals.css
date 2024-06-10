@@ -63,6 +63,9 @@
   letter-spacing: -.05rem;
 }
 
+.feature{
+  font-family: Feature;
+}
 /* scrollbar stuff */
 
 /* width */

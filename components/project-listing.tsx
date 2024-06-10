@@ -78,7 +78,7 @@ export default function ProjectListing({project, index}: Props) {
                                         height={1080}
                                         className={` w-auto ${selectedProject===project.slug? "h-[40rem]": view==="all"? "h-[10rem]": "h-0"}`}
                                         unoptimized= {false}
-                                        priority={false}
+                                        priority={false}    
                                         />
                                     </div>
                                 ))}
