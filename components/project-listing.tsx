@@ -54,7 +54,7 @@ export default function ProjectListing({project, index}: Props) {
                             <div className="flex justify-center items-center flex-col group">
                                 <span className="flex justify-center items-center">       
                                     <p className={`px-1 tracking-[.005rem] font-bold w-max flex group-hover:text-gray-600 ${selectedProject===project.slug? "text-gray-600 cursor-alias hover:text-grey-400": ""} ${view==="all"? "":""}`}>{project.name}</p>
-                                    <button className={selectedProject===project.slug? "":"hidden"}>&#735;</button>
+                                    <p className={selectedProject===project.slug? "":"hidden"}>&#735;</p>
                                 </span>
                                 <div className={`flatspot lg:mx-60 tracking-tighter overflow-hidden ${selectedProject===project.slug ? "pb-5":"pb-0"} ${view==="all" || selectedProject===project.slug ? "h-fit ":"h-0"} `}>
                                     <PortableText value={project.content}/>
@@ -62,39 +62,40 @@ export default function ProjectListing({project, index}: Props) {
                             </div>
                         </button>
 
-                        <div className={` w-screen overflow-hidden flex justify-center items-center ${selectedProject===project.slug? "flex-col" : view==="all"?"h-[10rem]":'h-0'} `}>
-                            {project.vimeo?.map((vid, index)=>(
-                                <div key={`project.slug+${index}`} className={`${img===index? "": "hidden"}`}>
-                                    <iframe className="" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} width={selectedProject===project.slug? 1040: view==="all"? 288:640} height={selectedProject===project.slug? 640: view==="all"? 162:480} allow="autoplay; fullscreen; picture-in-picture"></iframe>
-                                </div>
-                            ))}
-                            {project.images?.map((image, index)=>(
-                                <div key={`project.slug+${index+vimeoCount}`} className={` flex justify-center items-center ${selectedProject===project.slug? img===index+vimeoCount? "":"hidden": ""}`}>
-                                    <Image
-                                    src={urlForImage(project.images[index]).url()}
-                                    alt=""
-                                    width={1080}
-                                    height={1080}
-                                    className={` w-auto ${selectedProject===project.slug? "h-[40rem]": view==="all"? "h-[10rem]": "h-0"}`}
-                                    unoptimized= {false}
-                                    priority={false}
-                                    />
-                                </div>
-                            ))}
-                            <span className={`flex w-[10rem] items-between justify-between ${view==="all"? selectedProject===project.slug? "":"hidden":""}`}>
-                                <button onClick={()=>{
-                                    img===0?
-                                    router.push( `/?${createQueryString(`img`, `${galleryCount-1}`)}`, {scroll: false}):
-                                    router.push( `/?${createQueryString(`img`, `${img-1}`)}`, {scroll: false})
-                                }}>Prev</button>
-                                <p>{img+1}/{galleryCount}</p>
-                                <button onClick={()=>{
-                                    img===galleryCount-1?
-                                    router.push( `/?${createQueryString(`img`, `0`)}`, {scroll: false}):
-                                    router.push( `/?${createQueryString(`img`, `${img+1}`)}`, {scroll: false})
-                                }}>Next</button>
-                            </span>
-                        </div> 
+                        <section className={` w-screen overflow-hidden flex justify-center items-center ${selectedProject===project.slug? "flex-col" : view==="all"?"h-[10rem]":'h-0'} `}>
+                                {/* current image */}
+                                {project.vimeo?.map((vid, index)=>(
+                                    <div key={`project.slug+${index}`} className={`${img===index? "": "hidden"}`}>
+                                        <iframe className="" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} width={selectedProject===project.slug? 1040: view==="all"? 288:640} height={selectedProject===project.slug? 640: view==="all"? 162:480} allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                                    </div>
+                                ))}
+                                {project.images?.map((image, index)=>(
+                                    <div key={`project.slug+${index+vimeoCount}`} className={` flex justify-center items-center ${selectedProject===project.slug? img===index+vimeoCount? "":"hidden": ""}`}>
+                                        <Image
+                                        src={urlForImage(project.images[index]).url()}
+                                        alt=""
+                                        width={1080}
+                                        height={1080}
+                                        className={` w-auto ${selectedProject===project.slug? "h-[40rem]": view==="all"? "h-[10rem]": "h-0"}`}
+                                        unoptimized= {false}
+                                        priority={false}
+                                        />
+                                    </div>
+                                ))}
+                                <span className={`flex w-[10rem] items-between justify-between ${view==="all"? selectedProject===project.slug? "":"hidden":""}`}>
+                                    <button onClick={()=>{
+                                        img===0?
+                                        router.push( `/?${createQueryString(`img`, `${galleryCount-1}`)}`, {scroll: false}):
+                                        router.push( `/?${createQueryString(`img`, `${img-1}`)}`, {scroll: false})
+                                    }}>Prev</button>
+                                    <p>{img+1}/{galleryCount}</p>
+                                    <button onClick={()=>{
+                                        img===galleryCount-1?
+                                        router.push( `/?${createQueryString(`img`, `0`)}`, {scroll: false}):
+                                        router.push( `/?${createQueryString(`img`, `${img+1}`)}`, {scroll: false})
+                                    }}>Next</button>
+                                </span>
+                        </section> 
                 </div>
             </div>
         </section>

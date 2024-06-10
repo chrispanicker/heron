@@ -33,7 +33,7 @@ export async function getProjects() {
                   year,
                   "slug": slug.current,
                 }`
-        , {next: {revalidate: 10}}) 
+        ) 
 }
 
 
@@ -42,8 +42,7 @@ export async function getInfo() {
                 groq`*[_type=="info"]{
                     bio,
                 }`
-        , {next: {revalidate: 10}})
-}
+)}
 
 export async function getGallery(){ 
         return client.fetch(
@@ -63,7 +62,7 @@ export async function getGallery(){
                         },
                         },
                 }`
-        , {next: {revalidate: 10}})
+        )
 }
 
 
@@ -103,5 +102,5 @@ export async function getFilteredProjects({searchParams}:Props){
                     year,
                     "slug": slug.current,
                 }`
-        , {next: {revalidate: 10}})
+        )
 }
