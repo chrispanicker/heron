@@ -4,6 +4,7 @@ const client = createClient({
         projectId: "01jwvji0",
         dataset: "production",
         apiVersion: "2023-01-04",
+        token: process.env.SANITY_TOKEN,
         useCdn: false,
 });
 
@@ -33,7 +34,7 @@ export async function getProjects() {
                   year,
                   "slug": slug.current,
                 }`
-        ) 
+        ),{cache: 'no-store'} 
 }
 
 
@@ -42,7 +43,7 @@ export async function getInfo() {
                 groq`*[_type=="info"]{
                     bio,
                 }`
-)}
+),{cache: 'no-store'} }
 
 export async function getGallery(){ 
         return client.fetch(
@@ -62,7 +63,7 @@ export async function getGallery(){
                         },
                         },
                 }`
-        )
+        ),{cache: 'no-store'} 
 }
 
 
@@ -102,5 +103,5 @@ export async function getFilteredProjects({searchParams}:Props){
                     year,
                     "slug": slug.current,
                 }`
-        )
+        ),{cache: 'no-store'} 
 }
