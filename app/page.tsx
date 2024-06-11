@@ -11,6 +11,8 @@ interface Props {
   }
 }
 
+export const fetchCache = 'force-no-store';
+ 
 
 export default async function Home({searchParams}: Props) {
   const {tags, collabs, roles} = searchParams 
