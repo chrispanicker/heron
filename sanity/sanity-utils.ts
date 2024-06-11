@@ -33,7 +33,7 @@ export async function getProjects() {
                   color,
                   year,
                   "slug": slug.current,
-                }`
+                }`, {cache: "no-store"}
         )
 }
 
@@ -62,7 +62,7 @@ export async function getGallery(){
                                 name
                         },
                         },
-                }`
+                }`, {cache: "no-store"}
         )
 }
 
@@ -102,6 +102,6 @@ export async function getFilteredProjects({searchParams}:Props){
                     },
                     year,
                     "slug": slug.current,
-                }`
-        ),
+                }`, {cache: "no-store"}
+        )
 }
