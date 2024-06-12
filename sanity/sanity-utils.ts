@@ -26,7 +26,7 @@ export async function getProjects() {
                     name
                   },
                   "slug": slug.current,
-                }`,{revalidate: 60}
+                }`,{revalidate: 10}
         )
 }
 
@@ -49,7 +49,7 @@ export async function getGallery(){
                                         name
                                 }
                         }
-                }`,{revalidate: 60}
+                }`,{revalidate: 10}
         )
 }
 
@@ -75,6 +75,12 @@ export async function getFilteredProjects({searchParams}:Props){
                     name,
                     vimeo,
                     images,
+                    "gallery": images[]{
+                        "imageUrl": asset->url,
+                        "lqip": asset->metadata.lqip,
+                        "blurData": asset->metadata.blurhash,
+                        "alt": alt
+                        },
                     content,
                     "roles": roles[]->{
                       name
@@ -86,7 +92,7 @@ export async function getFilteredProjects({searchParams}:Props){
                       name
                     },
                     "slug": slug.current,
-                }`,{revalidate: 60}
+                }`,{revalidate: 10}
         )
 }
 

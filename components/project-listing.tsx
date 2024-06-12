@@ -3,14 +3,17 @@ import { useCallback, useEffect, useRef} from "react";
 import { Project } from "@/types/project";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PortableText } from "@portabletext/react";
-import Image from "next/image";
+// import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/image";
+import dynamic from "next/dynamic";
 
 interface Props{
     filteredProjects:any
     project: Project
     index: number
 }
+
+const Image = dynamic(() => import("next/image"))
 
 export default function ProjectListing({project, index}: Props) {
     const projectRef = useRef<HTMLElement | null>(null)
@@ -34,11 +37,10 @@ export default function ProjectListing({project, index}: Props) {
             return params.toString()
         }, [searchParams]
     )  
-
+    console.log(project.gallery[0])
     const vimeoCount = project.vimeo? project.vimeo.length: 0;
     const imageCount = project.images? project.images.length: 0;
     const galleryCount = vimeoCount + imageCount;
-
     return project?
         <section id={project.slug} ref={projectRef} className={`text-2xl  ${view==="all"? "pb-10":selectedProject===project.slug? "py-10": ""}`} style={{['--i' as any]:index+1}}>
             <div className="flex w-screen">
@@ -74,11 +76,13 @@ export default function ProjectListing({project, index}: Props) {
                                         <Image
                                         src={urlForImage(project.images[index]).url()}
                                         alt=""
-                                        width={480}
-                                        height={480}
-                                        className={` w-auto ${selectedProject===project.slug? "h-[40rem]": view==="all"? "h-[10rem]": "h-0"}`}
-                                        unoptimized= {false}
-                                        priority={false}    
+                                        width={1080}
+                                        height={1080}
+                                        unoptimized={true}
+                                        className={` w-auto ${selectedProject===project.slug? "h-[40rem]": view==="all"? "h-[10rem]": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"hidden": ""}`}
+                                        placeholder="blur"
+                                        blurDataURL={project.gallery[index].lqip}
+                                  
                                         />
                                     </div>
                                 ))}

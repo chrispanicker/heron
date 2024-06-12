@@ -12,6 +12,8 @@ export type Project = {
     year: string;
     roles: any;
     color: string;
+    gallery: Image[];
+    blurImg: any;
     tags: any;
     vimeo: string[];
     images: Image[];

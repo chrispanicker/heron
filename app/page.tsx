@@ -1,7 +1,6 @@
 import { OpeningCard } from "@/components/opening-card";
-import ProjectListing from "@/components/project-listing";
-import UsedFilters from "@/components/used-filters";
 import {getFilteredProjects, getGallery } from "@/sanity/sanity-utils"; 
+import dynamic from "next/dynamic";
 
 interface Props {
   searchParams: {
@@ -12,9 +11,11 @@ interface Props {
 }
 
 export const fetchCache = 'force-no-store';
- 
+const ProjectListing = dynamic(() => import("@/components/project-listing"))
+const UsedFilters = dynamic(() => import("@/components/used-filters"))
 
 export default async function Home({searchParams}: Props) {
+  
   const {tags, collabs, roles} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
   let gallery = await getGallery();

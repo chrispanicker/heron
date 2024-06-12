@@ -48,7 +48,13 @@ const project = {
             name: 'images',
             title: "Images",
             type: "array",
-            of: [{type: 'image'}]
+            of: [{type: 'image',
+                options: {
+                    metadata: [
+                      'blurhash',   // Default: included
+                    ],
+                },
+            }]
         },
         {
             name: "url",

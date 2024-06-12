@@ -6,11 +6,6 @@ const gallery = {
     type: 'document',
     fields: [
         {
-            name:'index',
-            title:'Project Number',
-            type:"number"
-        },
-        {
             name: 'projects',
             title: 'Projects',
             type: 'reference', to: { type: 'project' },
