@@ -16,11 +16,6 @@ export async function getProjects() {
                 groq`*[_type=="project"]{
                   _id,
                   _createdAt,
-                  name,
-                  images,
-                  url,
-                  content,
-                  type,
                   "roles": roles[]->{
                     name
                   },
@@ -30,10 +25,8 @@ export async function getProjects() {
                   "tags": tags[]->{
                     name
                   },
-                  color,
-                  year,
                   "slug": slug.current,
-                }`
+                }`,{revalidate: 60}
         )
 }
 
@@ -42,7 +35,7 @@ export async function getInfo() {
         return client.fetch(
                 groq`*[_type=="info"]{
                     bio,
-                }`
+                }`,{revalidate: 60}
 )}
 
 export async function getGallery(){ 
@@ -53,16 +46,10 @@ export async function getGallery(){
                                 name,
                                 preview,
                                 "roles": roles[]->{
-                                name
-                                },
-                        "collabs": collabs[]->{
-                                name
-                        },
-                        "tags": tags[]->{
-                                name
-                        },
-                        },
-                }`
+                                        name
+                                }
+                        }
+                }`,{revalidate: 60}
         )
 }
 
@@ -85,11 +72,9 @@ export async function getFilteredProjects({searchParams}:Props){
         return client.fetch(
                 groq`*[${projectFilter} ${filter}]{
                     _id,
-                    _createdAt,
                     name,
                     vimeo,
                     images,
-                    url,
                     content,
                     "roles": roles[]->{
                       name
@@ -100,10 +85,9 @@ export async function getFilteredProjects({searchParams}:Props){
                     "tags": tags[]->{
                       name
                     },
-                    year,
                     "slug": slug.current,
-                }`
+                }`,{revalidate: 60}
         )
 }
 
-export const fetchCache = 'force-no-store';
+// export const fetchCache = 'force-no-store';

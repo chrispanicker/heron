@@ -74,8 +74,8 @@ export default function ProjectListing({project, index}: Props) {
                                         <Image
                                         src={urlForImage(project.images[index]).url()}
                                         alt=""
-                                        width={1080}
-                                        height={1080}
+                                        width={480}
+                                        height={480}
                                         className={` w-auto ${selectedProject===project.slug? "h-[40rem]": view==="all"? "h-[10rem]": "h-0"}`}
                                         unoptimized= {false}
                                         priority={false}    
