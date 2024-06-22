@@ -53,6 +53,9 @@ const project = {
                     metadata: [
                       'blurhash',   // Default: included
                     ],
+                    // Specify the allowed MIME types
+                    accept: '.pdf,image/jpeg,image/png',
+                    
                 },
             }]
         },

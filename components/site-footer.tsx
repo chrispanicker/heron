@@ -13,20 +13,23 @@ export function SiteFooter(info:any){
     const isSanityStudio = pathname.startsWith('/admin');
     return (
         isSanityStudio? "" : 
-        <footer ref={footerRef} id="footer" className="z-40 fixed bottom-0 h-[0vh] overflow-hidden duration-500 text-xl w-screen justify-center text-justify flex w-full bg-gray-400 text-gray-400 transition transition-all">
-            <div id="footImgDiv" className="fixed flex w-screen top-screen text-4xl justify-center items-center"
+        <footer ref={footerRef} id="footer" className="z-40 text-5xl overflow-y-scroll fixed bottom-0 h-[0vh] duration-500 w-screen justify-center text-justify flex w-full bg-gray-400 text-gray-400 transition transition-all">
+            <div id="footImgDiv" className="fixed flex w-screen top-screen justify-center items-center"
 
             >
-            <button id="footerTab" className="fixed bottom-0 right-0 m-5 text-[1.5rem] lg:text-2xl bg-white px-2" onClick={()=>{
+            <button id="footerTab" className="fixed bottom-0 right-0 bg-gray-400 text-white hover:text-gray-400 hover:bg-white px-2 m-5" onClick={()=>{
                 let footer = document.querySelector("#footer")
                 footer?.classList.toggle("h-[0dvh]")
                 footer?.classList.toggle("h-[100dvh]")
             }}>About</button>
                 
             </div>
-            <div className="sm:w-4/4 m-60 md:text-2xl text-[1.5rem] text-white ">
+            <div className="w-4/4 text-white m-40 ">
                 <PortableText value={info.info[0].bio[0]}/>
+                <div className="h-[30vh]">
+                </div>
             </div>
+
         </footer>
     )
 }

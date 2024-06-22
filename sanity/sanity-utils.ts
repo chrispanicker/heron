@@ -11,7 +11,6 @@ const client = createClient({
 
 
 export async function getProjects() {
-
         return client.fetch(
                 groq`*[_type=="project"]{
                   _id,
@@ -26,7 +25,7 @@ export async function getProjects() {
                     name
                   },
                   "slug": slug.current,
-                }`,{revalidate: 10}
+                }`
         )
 }
 
@@ -35,7 +34,7 @@ export async function getInfo() {
         return client.fetch(
                 groq`*[_type=="info"]{
                     bio,
-                }`,{revalidate: 60}
+                }`
 )}
 
 export async function getGallery(){ 
@@ -49,7 +48,7 @@ export async function getGallery(){
                                         name
                                 }
                         }
-                }`,{revalidate: 10}
+                }`
         )
 }
 
@@ -92,7 +91,7 @@ export async function getFilteredProjects({searchParams}:Props){
                       name
                     },
                     "slug": slug.current,
-                }`,{revalidate: 10}
+                }`
         )
 }
 

@@ -39,9 +39,9 @@ let info = await getInfo();
 
   return (
     <html lang="en">
-      <body className={`bg-white`}>
+      <body className={``}>
         <section>
-          <TestFilter projects={allProjects}/>
+          {/* <TestFilter projects={allProjects}/> */}
           <ViewToggle />
           <>{children}</>
           <SiteFooter info={info} />

@@ -80,8 +80,8 @@ export default function ProjectListing({project, index}: Props) {
                                         height={1080}
                                         unoptimized={true}
                                         className={` w-auto ${selectedProject===project.slug? "h-[40rem]": view==="all"? "h-[10rem]": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"hidden": ""}`}
-                                        placeholder="blur"
-                                        blurDataURL={`${project.gallery[index].lqip}`}
+                                        // placeholder="blur"
+                                        // blurDataURL={`${project.gallery[index].lqip}`}
                                         />
                                     </div>
                                 ))}

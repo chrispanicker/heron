@@ -22,7 +22,7 @@ export default function UsedFilters({role, tags, collabs}: Props){
     const view = searchParams.get('view');
     const proj = searchParams.get("project");
     return(
-        <div className="flex flex-row text-gray-400 text-[1.5rem] mt-5">
+        <div className="flex flex-row text-gray-400 text-[1.5rem]">
             {/* {role||collabs||tags? 
                 <button className="buttonParent px-2 bg-gray-400 text-white hover:text-gray-400 hover:bg-white"                         
                     onClick={()=>{
@@ -31,7 +31,7 @@ export default function UsedFilters({role, tags, collabs}: Props){
                     Clear
                 </button>
             :""} */}
-            &nbsp;
+            {role||collabs||tags? "&nbsp;" :""}
             {role||collabs||tags? <p>Filtered by:&nbsp;</p>:""}
             {role? <p className="capitalize mx-2 px-2 cursor-alias bg-gray-400 text-white hover:text-gray-400 hover:bg-white "
                 onClick={()=>{
@@ -45,7 +45,6 @@ export default function UsedFilters({role, tags, collabs}: Props){
                 onClick={()=>{
                     router.push( `/?${createQueryString(`tags`, ``)}`, {scroll: false})
                 }}>{tags}</p>:""}
-
             
         </div>
     )
