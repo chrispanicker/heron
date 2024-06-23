@@ -29,7 +29,9 @@ export default async function Home({searchParams}: Props) {
         <section className="">
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-              <Projects filteredProjects={filteredProjects} project={project} index={index}/>
+              <div key={project.name + project._id}>
+                <Projects filteredProjects={filteredProjects} project={project} index={index}/>
+              </div>
           )})}
         </section>
         <UsedFilters role={roles} tags={tags} collabs={collabs}/>
