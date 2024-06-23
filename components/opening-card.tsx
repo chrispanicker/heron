@@ -65,14 +65,14 @@ export function OpeningCard({gallery}: Props){
     }, [cardRef])
     
     return(
-        <div ref={cardRef} className="lg:text-7xl text-2xl w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
+        <div ref={cardRef} className="lg:text-8xl text-2xl w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
             <div className="flex justify-center items-center z-50">
-                <p className= "bg-gray-400 text-white mx-2 w-fit px-4 ">This is the website of Drew Litowitz</p>
+                <p className= "bg-white text-gray-400 mx-2 w-fit px-4 ">This is the website of Drew Litowitz</p>
             </div>
-            <div className="flex flex-row justify-center text-gray-400 items-center w-4/4">
-                <p className=" bg-white mx-2 w-fit px-2">Art Director</p>
-                <p className=" bg-white mx-2 w-fit px-2">Designer</p>
-                <p className=" bg-white mx-2 w-fit px-2">More...</p>
+            <div className="flex flex-row justify-center text-white items-center w-4/4">
+                <p className=" bg-gray-400 mx-2 w-fit px-2">Art Director</p>
+                <p className=" bg-gray-400 mx-2 w-fit px-2">Designer</p>
+                <p className=" bg-gray-400 mx-2 w-fit px-2">More...</p>
             </div>
 
             <div id="gallery" className="absolute top-0 flex">

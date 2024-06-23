@@ -13,11 +13,11 @@ export function SiteFooter(info:any){
     const isSanityStudio = pathname.startsWith('/admin');
     return (
         isSanityStudio? "" : 
-        <footer ref={footerRef} id="footer" className="z-40 text-5xl overflow-y-scroll fixed bottom-0 h-[0vh] duration-500 w-screen justify-center text-justify flex w-full bg-gray-400 text-gray-400 transition transition-all">
+        <footer ref={footerRef} id="footer" className="z-40 lg:text-5xl text-2xl overflow-y-scroll fixed bottom-0 h-[0vh] duration-500 w-screen justify-center text-justify flex w-full bg-gray-400 text-gray-400">
             <div id="footImgDiv" className="fixed flex w-screen top-screen justify-center items-center"
 
             >
-            <button id="footerTab" className="fixed bottom-0 right-0 bg-gray-400 text-white hover:text-gray-400 hover:bg-white px-2 m-5" onClick={()=>{
+            <button id="footerTab" className="fixed bottom-0 right-0 bg-gray-400 text-white hover:text-gray-400 hover:bg-white px-2 py-1 m-5" onClick={()=>{
                 let footer = document.querySelector("#footer")
                 footer?.classList.toggle("h-[0dvh]")
                 footer?.classList.toggle("h-[100dvh]")
