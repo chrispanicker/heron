@@ -43,7 +43,7 @@ export default function Projects({project, index}: Props) {
     }
 
 return(
-    <section className={`flex flex-col transition-all ${view==="all" || selectedProject? "lg:text-5xl text-2xl": "lg:text-8xl text-2xl"} ${selectedProject===project.slug? "bg-gray-400": "bg-white"}`}>
+    <section key={`${project.slug}`} className={`flex flex-col transition-all ${view==="all" || selectedProject? "lg:text-5xl text-2xl": "lg:text-8xl text-2xl"} ${selectedProject===project.slug? "bg-gray-400": "bg-white"}`}>
         {/* view ===txt? */}
         <span id="txt" className={`flex flex-col items-center justify-center ${selectedProject===project.slug? "lg:py-5 py-2": "py-1"} ${view==="txt"? "": "hidden"} `}>
             <button className={`px-2 ${selectedProject===project.slug? "text-gray-400 bg-white hover:text-white hover:bg-gray-400": "text-white bg-gray-400 hover:text-gray-400 hover:bg-white"}`}                         
@@ -76,8 +76,8 @@ return(
             <div className="mx-5 text-white text-center lg:text-5xl text-2xl mb-5"><PortableText value={project.content}/></div>
             {/* current image */}
             {project.vimeo?.map((vid, index)=>(
-                <div className={`lg:h-[40rem] lg:w-[71rem] h-[14rem] w-[24rem]  ${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "": "hidden"}`}>
-                    <div key={`project.slug+${index}`} className={`relative overflow-hidden w-full pt-[56.25%]`}>
+                <div key={`project.slug+${index}`} className={`lg:h-[40rem] lg:w-[71rem] h-[14rem] w-[24rem]  ${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "": "hidden"}`}>
+                    <div className={`relative overflow-hidden w-full pt-[56.25%]`}>
                         <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ return(
             {project.images?.map((image, index)=>(
                 <div key={`project.slug+${index+vimeoCount}`} className={` flex justify-center items-center ${selectedProject===project.slug? img===index+vimeoCount? "":"hidden": ""}`}>
                     <Image
-                    src={urlForImage(project.images[index]).url()}
+                    src={urlForImage(image).url()}
                     alt=""
                     width={1080}
                     height={1080}
