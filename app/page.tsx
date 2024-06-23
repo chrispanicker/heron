@@ -1,6 +1,7 @@
 import { Name } from "@/components/name";
 import { OpeningCard } from "@/components/opening-card";
 import Projects from "@/components/projects";
+import { TestFilter } from "@/components/test-filter";
 import {getFilteredProjects, getGallery } from "@/sanity/sanity-utils"; 
 import dynamic from "next/dynamic";
 
@@ -24,13 +25,12 @@ export default async function Home({searchParams}: Props) {
   return (
     filteredProjects? <main id="main" className={`font-normal z-0 flex flex-col items-center justify-start min-h-screen`}>
         <OpeningCard gallery={gallery} />
+        <TestFilter />
         <Name />
-        <section className="Project3dParent">
+        <section className="">
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-              <div className={`Project3d sticky top-0 bg-gray-400 flex justify-center items-center`} key={project._id}>
-                  <Projects filteredProjects={filteredProjects} project={project} index={index}/>
-              </div>
+              <Projects filteredProjects={filteredProjects} project={project} index={index}/>
           )})}
         </section>
         <UsedFilters role={roles} tags={tags} collabs={collabs}/>

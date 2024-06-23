@@ -2,8 +2,7 @@ import { Project } from "@/types/project"
 import { FilterButtons } from "./filter-buttons";
 export function TestFilter(props:any){
     let allTags:string[] = [], allCollabs:string[] = [], allRoles:string[] = []
-
-    props.projects.map((project:Project)=>{
+    props.projects?.map((project:Project)=>{
         project.roles?.map((role:any)=>{
             role.length===0 || allRoles.includes(role.name)? "": allRoles.push(role.name)
         })

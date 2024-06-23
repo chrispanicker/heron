@@ -24,7 +24,6 @@ export async function getProjects() {
                   "tags": tags[]->{
                     name
                   },
-                  "slug": slug.current,
                 }`
         )
 }
@@ -64,8 +63,8 @@ interface Props {
 export async function getFilteredProjects({searchParams}:Props){ 
         const {tags, collabs, roles} = searchParams 
         const projectFilter = `_type == "project"`
-        const tagFilter =  tags? `tags[]-> name match "${tags}" ${collabs || roles? "&&" : "" }` : "" 
-        const collabFilter = collabs ? `collabs[]-> name match "${collabs}" ${roles? "&&" : "" }` : ""
+        const tagFilter =  tags? `tags[]-> name match "${tags}" ${collabs || roles? "||" : "" }` : "" 
+        const collabFilter = collabs ? `collabs[]-> name match "${collabs}" ${roles? "||" : "" }` : ""
         const roleFilter = roles ? `roles[]-> name match "${roles}"` : "" 
         const filter = collabs || roles || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
         return client.fetch(
@@ -94,5 +93,3 @@ export async function getFilteredProjects({searchParams}:Props){
                 }`
         )
 }
-
-// export const fetchCache = 'force-no-store';

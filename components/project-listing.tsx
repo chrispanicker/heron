@@ -37,7 +37,6 @@ export default function ProjectListing({project, index}: Props) {
             return params.toString()
         }, [searchParams]
     )  
-    console.log(project.gallery[0])
     const vimeoCount = project.vimeo? project.vimeo.length: 0;
     const imageCount = project.images? project.images.length: 0;
     const galleryCount = vimeoCount + imageCount;

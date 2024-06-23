@@ -38,10 +38,10 @@ let allProjects = await getProjects();
 let info = await getInfo();
 
   return (
-    <html lang="en">
-      <body className={``}>
+    <html lang="en" className=''>
+      <body>
         <section>
-          {/* <TestFilter projects={allProjects}/> */}
+          <TestFilter projects={allProjects}/>
           <ViewToggle />
           <>{children}</>
           <SiteFooter info={info} />
