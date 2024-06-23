@@ -13,7 +13,7 @@ export function SiteFooter(info:any){
     const isSanityStudio = pathname.startsWith('/admin');
     return (
         isSanityStudio? "" : 
-        <footer ref={footerRef} id="footer" className="z-40 lg:text-5xl text-2xl overflow-y-scroll fixed bottom-0 h-[0vh] duration-500 w-screen justify-center text-justify flex w-full bg-gray-400 text-gray-400">
+        <footer ref={footerRef} id="footer" className="z-40 lg:text-5xl text-2xl overflow-y-scroll fixed bottom-0 h-[0vh] duration-500 w-screen justify-center text-justify w-full bg-gray-400 text-gray-400">
             <div id="footImgDiv" className="fixed flex w-screen top-screen justify-center items-center"
 
             >
@@ -24,12 +24,26 @@ export function SiteFooter(info:any){
             }}>About</button>
                 
             </div>
-            <div className="w-4/4 text-white m-40 ">
+            <div className="w-4/4 text-white lg:m-40 m-5 p-2">
                 <PortableText value={info.info[0].bio[0]}/>
-                <div className="h-[30vh]">
-                </div>
             </div>
-
+            {/* <div className="m-40 text-white w-4/4">
+            <tr >
+                <td className="w-1/4">Pitchfork</td>
+                <td className="w-1/4">Designer</td>
+                <td className="w-1/4">2020-2021</td>
+            </tr>
+            <tr>
+                <td>Wolff Olins</td>
+                <td>Senior Designer</td>
+                <td>2021-2022</td>
+            </tr>
+            <tr>
+                <td>AIR COMPANY</td>
+                <td>Senior Designer</td>
+                <td>2022-</td>
+            </tr>
+            </div> */}
         </footer>
     )
 }

@@ -25,7 +25,6 @@ export default async function Home({searchParams}: Props) {
   return (
     filteredProjects? <main id="main" className={`font-normal z-0 flex flex-col items-center justify-start min-h-screen`}>
         <OpeningCard gallery={gallery} />
-        <TestFilter />
         <Name />
         <section className="">
           {filteredProjects.map((project:any, index:number)=>{ 
