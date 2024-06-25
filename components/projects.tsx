@@ -128,14 +128,15 @@ return(
                 </div>
             ))}
 
-            <span className={`lg:absolute lg:top-[58%] lg:peer-hover:opacity-100 lg:hover:opacity-100 lg:opacity-0 transition-all flex lg:text-5xl text-2xl items-between justify-between ${selectedProject===project.slug? "py-1 lg:m-5":"hidden"}`}>
+            <span className={`transition-all flex lg:text-2xl text-2xl items-between justify-between ${selectedProject===project.slug? "":"hidden"}`}>
                 {galleryCount===1? ""
                 :<button className="text-white bg-gray-400 hover:bg-white hover:text-gray-400 px-2" onClick={()=>{
                     img===0?
                     router.push( `/?${createQueryString(`img`, `${galleryCount-1}`)}`, {scroll: false}):
                     router.push( `/?${createQueryString(`img`, `${img-1}`)}`, {scroll: false})
                 }}>Prev</button>}
-                <p className="text-white bg-gray-400 px-2">{img+1}/{galleryCount}</p>
+                {galleryCount===1? "":
+                <p className="text-white bg-gray-400 px-2">{img+1}/{galleryCount}</p>}
                 {galleryCount===1? ""
                 :<button className="text-white bg-gray-400 hover:bg-white hover:text-gray-400 px-2" onClick={()=>{
                     img===galleryCount-1?
@@ -145,7 +146,7 @@ return(
             </span>
 
             {/* BIO */}
-            <div className="mx-40 flex text-white text-center lg:text-5xl text-2xl mt-5"><PortableText value={project.content}/></div>
+            <div className="mx-40 flex text-white text-center lg:text-5xl text-2xl"><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
             <div className="flex w-screen flex-col lg:flex-row justify-center items-center mx-5">
