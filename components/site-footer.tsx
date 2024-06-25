@@ -41,7 +41,7 @@ export function SiteFooter(info:any){
                         <th>Years</th>
                     </tr>
                     {info.info[0].cv.map((job:job)=>(
-                        <tr>
+                        <tr key={`${job.company}`}>
                             <td>{job.company}</td>
                             <td>{job.title}</td>
                             <td>{job.years}</td>
