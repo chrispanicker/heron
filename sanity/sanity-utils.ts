@@ -33,12 +33,17 @@ export async function getInfo() {
         return client.fetch(
                 groq`*[_type=="info"]{
                     bio,
+                    "cv": cv[]->{
+                      company,
+                      years,
+                      title
+                    },
                 }`
 )}
 
 export async function getGallery(){ 
         return client.fetch(
-                groq`*[_type == "gallery"]{
+                groq`*[_type == "gallery"]|order(priority asc){
                         index,
                         "projects": projects->{
                                 name,
@@ -68,7 +73,7 @@ export async function getFilteredProjects({searchParams}:Props){
         const roleFilter = roles ? `roles[]-> name match "${roles}"` : "" 
         const filter = collabs || roles || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
         return client.fetch(
-                groq`*[${projectFilter} ${filter}]{
+                groq`*[${projectFilter} ${filter}]|order(priority asc){
                     _id,
                     name,
                     vimeo,

@@ -83,7 +83,7 @@ export function OpeningCard({gallery}: Props){
                 height={1080}
                 id="image1"
                 className="w-screen h-screen object-cover block"
-                unoptimized= {false}
+                unoptimized= {true}
                 priority={true}
                 />
                 <Image
@@ -93,7 +93,7 @@ export function OpeningCard({gallery}: Props){
                 height={1080}
                 id="image2"
                 className="w-screen h-screen object-cover hidden"
-                unoptimized= {false}
+                unoptimized= {true}
                 priority={true}
                 />
                 <Image
@@ -103,7 +103,7 @@ export function OpeningCard({gallery}: Props){
                 height={1080}
                 id="image3"
                 className="w-screen h-screen object-cover hidden"
-                unoptimized= {false}
+                unoptimized={true}
                 priority={true}
                 />
             </div>

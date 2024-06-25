@@ -5,6 +5,11 @@ import { useRef } from "react";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 
+type job ={
+    company: string,
+    years: string,
+    title: string
+}
 
 
 export function SiteFooter(info:any){
@@ -27,23 +32,24 @@ export function SiteFooter(info:any){
             <div className="w-4/4 text-white lg:m-40 m-5 p-2">
                 <PortableText value={info.info[0].bio[0]}/>
             </div>
-            {/* <div className="m-40 text-white w-4/4">
-            <tr >
-                <td className="w-1/4">Pitchfork</td>
-                <td className="w-1/4">Designer</td>
-                <td className="w-1/4">2020-2021</td>
-            </tr>
-            <tr>
-                <td>Wolff Olins</td>
-                <td>Senior Designer</td>
-                <td>2021-2022</td>
-            </tr>
-            <tr>
-                <td>AIR COMPANY</td>
-                <td>Senior Designer</td>
-                <td>2022-</td>
-            </tr>
-            </div> */}
+            <div className="lg:m-40 m-5 text-white w-4/4">
+                <table className="w-[100%]">
+                <tbody>
+                    <tr>
+                        <th>Company</th>
+                        <th>Title</th>
+                        <th>Years</th>
+                    </tr>
+                    {info.info[0].cv.map((job:job)=>(
+                        <tr>
+                            <td>{job.company}</td>
+                            <td>{job.title}</td>
+                            <td>{job.years}</td>
+                        </tr>
+                    ))}
+                </tbody>
+                </table>
+            </div>
         </footer>
     )
 }

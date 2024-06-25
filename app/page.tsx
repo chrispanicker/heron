@@ -10,6 +10,8 @@ interface Props {
     tags?: string
     collabs?: string
     roles?: string
+    view?: string
+
   }
 }
 
@@ -18,7 +20,7 @@ const UsedFilters = dynamic(() => import("@/components/used-filters"))
 
 export default async function Home({searchParams}: Props) {
   
-  const {tags, collabs, roles} = searchParams 
+  const {tags, collabs, roles, view} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
   let gallery = await getGallery();
 
@@ -29,7 +31,7 @@ export default async function Home({searchParams}: Props) {
         <section className="">
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-              <div key={project.name + project._id}>
+              <div className={view === "txt"? "": "sticky top-0"} key={project.name + project._id}>
                 <Projects filteredProjects={filteredProjects} project={project} index={index}/>
               </div>
           )})}

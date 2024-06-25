@@ -42,6 +42,7 @@ export function FilterButtons(filters:object){
                                 style={{[`${key==="roles"? "--r": key==="collabs"? "--c": key==="tags"? "--t": ""}` as any]:idx+1}}
                                 key={`${filter}${idx}`}
                                 onClick={()=>{
+                                    console.log("hey")
                                     searchParams.getAll(`${key}`).includes(filter)?
                                     router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
                                     : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})

@@ -29,7 +29,6 @@ export default function Projects({project, index}: Props) {
     let allRoles:string[] = [];
     let allTags:string[] = []
     let allCollabs:string[] = [];
-    console.log(project)
     project.roles?.map((role:any)=>{
         allRoles.push(role.name)
     })
@@ -65,7 +64,7 @@ export default function Projects({project, index}: Props) {
     }
 
 return(
-    <section key={`${project.slug}`} className={`${filtersmenu==="1"? "blur-lg": ""} flex flex-col transition-all ${view==="all" || selectedProject? "lg:text-5xl text-2xl sticky top-0": "lg:text-8xl text-2xl"} ${view==="all"? "": ""} ${selectedProject===project.slug? "bg-gray-400": "bg-white"}`}>
+    <section key={`${project.slug}`} className={`${filtersmenu==="1"? "blur-lg": ""} flex flex-col transition-all ${view==="all" || selectedProject? "lg:text-5xl text-2xl": "lg:text-8xl text-2xl"} ${view==="all"? "": ""} ${selectedProject===project.slug? "bg-gray-400": "bg-white"}`}>
         {/* view ===txt? */}
         <span id="txt" className={`flex flex-col items-center justify-center ${selectedProject===project.slug? "lg:py-5 py-2": "py-1"} ${view==="txt"? "": "hidden"} `}>
             <button className={`peer z-0 hover:z-50 px-2 ${selectedProject===project.slug? "text-gray-400 bg-white hover:text-white hover:bg-gray-400": "text-white bg-gray-400 hover:text-gray-400 hover:bg-white"}`}                         
@@ -79,7 +78,6 @@ return(
                 height={1080}
                 unoptimized={true}
                 priority
-                objectFit="cover"
                 className={`w-screen h-screen object-cover`}
                 // placeholder="blur"
                 // blurDataURL={`${project.gallery[index].lqip}`}
@@ -97,7 +95,6 @@ return(
                 height={1080}
                 unoptimized={true}
                 priority
-                objectFit="cover"
                 className={`w-screen h-screen object-cover`}
                 // placeholder="blur"
                 // blurDataURL={`${project.gallery[index].lqip}`}
@@ -124,7 +121,6 @@ return(
                     alt=""
                     width={1080}
                     height={1080}
-                    unoptimized={true}
                     className={`object-cover w-auto ${selectedProject===project.slug? "lg:h-[40rem] h-[14rem]": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"hidden": ""}`}
                     // placeholder="blur"
                     // blurDataURL={`${project.gallery[index].lqip}`}

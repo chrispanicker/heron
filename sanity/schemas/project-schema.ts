@@ -16,6 +16,11 @@ const project = {
             description: 'Hi! Generate a URL slug for this Project!',
         },
         {
+            name: 'priority', 
+            title: 'Priority', 
+            type: 'number', validation: (Rule: any) => Rule.min(0).integer().positive(), 
+        },
+        {
             name: 'roles',
             title: 'Roles',
             type: 'array',
@@ -86,6 +91,22 @@ const project = {
             of: [{ type: 'block'}]
         },
     ],
+    orderings: [
+        {
+          title: 'Priority',
+          name: 'priorityasc',
+          by: [
+            {field: 'priority', direction: 'asc'}
+          ]
+        },
+    ],
+    preview: {
+        select: {
+          title: 'name',
+          subtitle: 'priority',
+          media: 'preview'
+        }
+    },
 }
 
 export default project;

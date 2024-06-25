@@ -15,20 +15,12 @@ const info = {
             of: [{ type: 'block'}]
         },
         {
-            title: "Example object list",
-            type: "array",
-            name: "example",
-            of: [
-                {
-                type: "object",
-                name: "inline",
-                fields: [
-                    { type: "string", name: "Job" },
-                    { type: "number", name: "Year" }
-                ]
-                }
-            ],
-        }
+            name: 'cv',
+            title: 'CV',
+            type: 'array',
+            of: [{type: 'reference', to: [{ type: 'jobs' }]}],
+            description: 'Hi Drew! You can choose from existing jobs or add new ones here!',
+        },
     ]
 }
 

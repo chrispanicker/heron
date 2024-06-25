@@ -1,3 +1,5 @@
+import { client } from "../lib/client";
+
 const limit = 3; // Set your limit here
 
 const gallery = {
@@ -11,24 +13,44 @@ const gallery = {
             type: 'reference', to: { type: 'project' },
             description: 'Choose one of your fave projects!',
         },
+        {
+            name: 'priority', 
+            title: 'Priority', 
+            type: 'number', validation: (Rule: any) => Rule.min(0).integer().positive(), 
+        },
+
     ],
-    // validation: (Rule: any) => Rule.custom(async (value: any, context: any) => {
-    //     const { document } = context;
-    //     const docType = document._type;
+    preview: {
+        select: {
+          title: 'priority',
+        }
+    },
+    orderings: [
+      {
+        title: 'Priority',
+        name: 'priorityasc',
+        by: [
+          {field: 'priority', direction: 'asc'}
+        ]
+      },
+    ],
+    validation: (Rule: any) => Rule.custom(async (value: any, context: any) => {
+        const { document } = context;
+        const docType = document._type;
     
-    //     try {
-    //       const existingDocs = await client.fetch<number>(`count(*[_type == "${docType}"])`);
+        try {
+          const existingDocs = await client.fetch<number>(`count(*[_type == "${docType}"])`);
     
-    //       if (existingDocs >= limit) {
-    //         return `You cannot create more than ${limit} entries of this type.`;
-    //       }
+          if (existingDocs >= limit) {
+            return `You cannot create more than ${limit} entries of this type.`;
+          }
     
-    //       return true;
-    //     } catch (error) {
-    //       console.error('Error fetching document count:', error);
-    //       return 'Validation error occurred.';
-    //     }
-    //   })
+          return true;
+        } catch (error) {
+          console.error('Error fetching document count:', error);
+          return 'Validation error occurred.';
+        }
+      })
 }
 
 
