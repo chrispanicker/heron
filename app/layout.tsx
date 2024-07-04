@@ -5,6 +5,7 @@ import { TestFilter } from '@/components/test-filter'
 import localFont from 'next/font/local'
 import ViewToggle from '@/components/view-toggle'
 import { getInfo, getProjects } from '@/sanity/sanity-utils'
+import { Filters } from '@/components/filters'
 
 
 export const metadata: Metadata = {
@@ -38,7 +39,7 @@ let allProjects = await getProjects();
 let info = await getInfo();
 
   return (
-    <html lang="en" className=''>
+    <html lang="en" className='bg-white text-black'>
       <body>
         <section>
           <TestFilter projects={allProjects}/>

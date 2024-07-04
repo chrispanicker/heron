@@ -1,5 +1,4 @@
 'use client'
-
 import { urlForImage } from "@/sanity/lib/image";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -8,7 +7,6 @@ import { useCallback, useEffect, useRef } from "react";
 interface Props{
     gallery:any
 }
-
 
 export function OpeningCard({gallery}: Props){
     const router = useRouter();
@@ -29,15 +27,13 @@ export function OpeningCard({gallery}: Props){
     )  
 
     useEffect(()=>{
-        if(selectedProject === null || selectedProject === ""){
-
-        }else{
-            // let proj = document.querySelector(`#${selectedProject}`)
-            // proj?.scrollIntoView({
-            //     block: "center",
-            // behavior: 'smooth'
-            // })
-        }
+        // if(selectedProject != null || selectedProject != ""){
+        //     let proj = document.querySelector(`#${selectedProject}`)
+        //     proj?.scrollIntoView({
+        //         block: "center",
+        //     behavior: 'smooth'
+        //     })
+        // }
         view? "": router.push( `/?${createQueryString(`view`, `txt`)}`)
 
     }, [selectedProject])
@@ -65,14 +61,14 @@ export function OpeningCard({gallery}: Props){
     }, [cardRef])
     
     return(
-        <div ref={cardRef} className="lg:text-8xl text-2xl w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
-            <div className="flex justify-center items-center z-50">
-                <p className= "bg-white text-gray-400 mx-2 w-fit px-4 ">This is the website of Drew Litowitz</p>
+        <div ref={cardRef} className="text-2xl w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
+            <div className="flex justify-center items-center z-50 mix-blend-difference">
+                <p className= "text-white e mx-2 w-fit px-4 ">This is the website of Drew Litowitz</p>
             </div>
-            <div className="flex flex-row justify-center text-white items-center w-4/4">
-                <p className=" bg-gray-400 mx-2 w-fit px-2">Art Director</p>
-                <p className=" bg-gray-400 mx-2 w-fit px-2">Designer</p>
-                <p className=" bg-gray-400 mx-2 w-fit px-2">More...</p>
+            <div className="flex flex-row justify-center text-white items-center w-4/4 mix-blend-difference">
+                <p className="mx-2 w-fit px-2">Creative Director</p>
+                <p className="mx-2 w-fit px-2">Designer</p>
+                <p className="mx-2 w-fit px-2">More...</p>
             </div>
 
             <div id="gallery" className="absolute top-0 flex">

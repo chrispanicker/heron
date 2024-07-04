@@ -15,6 +15,7 @@ export async function getProjects() {
                 groq`*[_type=="project"]{
                   _id,
                   _createdAt,
+                  "slug": slug.current,
                   "roles": roles[]->{
                     name
                   },

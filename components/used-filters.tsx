@@ -21,11 +21,12 @@ export default function UsedFilters({role, tags, collabs}: Props){
     )  
     const view = searchParams.get('view');
     const proj = searchParams.get("project");
+    const about = searchParams.get("about");
     const filtersmenu = searchParams.get("filters")
     return(
-        <div className={`${filtersmenu==="1"? "blur-lg": ""} flex flex-row text-gray-400 lg:text-5xl text-2xl mt-5 pb-1 mb-5`}>
+        <div className={`flex flex-row text-2xl mt-5 pb-1 mb-5 ${about==="open"? "blur-3xl": ""}`}>
             {/* {role||collabs||tags? 
-                <button className="buttonParent px-2 mx-2 bg-gray-400 text-white hover:text-gray-400 hover:bg-white"                         
+                <button className="buttonParent px-2 mx-2   hover:text-gray-400 hover:bg-white"                         
                     onClick={()=>{
                         router.push( `/?view=${view? `${view}`: "txt"}`)
                     }}>
@@ -33,15 +34,15 @@ export default function UsedFilters({role, tags, collabs}: Props){
                 </button>
             :""} */}
             {role||collabs||tags? <p>Filtered by:&nbsp;</p>:""}
-            {role? <p className="capitalize mx-2 px-2 cursor-alias bg-gray-400 text-white hover:text-gray-400 hover:bg-white"
+            {role? <p className="capitalize cursor-alias  hover:underline decoration-dotted"
                 onClick={()=>{
                     router.push( `/?${createQueryString(`roles`, ``)}`, {scroll: false})
                 }}>{role}{tags||collabs?"\u00A0":""}</p>:""}
-            {collabs? <p className="capitalize mx-2 px-2 cursor-alias bg-gray-400 text-white hover:text-gray-400 hover:bg-white" 
+            {collabs? <p className="capitalize cursor-alias hover:underline decoration-dotted" 
                 onClick={()=>{
                     router.push( `/?${createQueryString(`collabs`, ``)}`, {scroll: false})
                 }}>{collabs}{tags?"\u00A0":""}</p>:""}
-            {tags? <p className="capitalize mx-2 px-2 cursor-alias bg-gray-400 text-white hover:text-gray-400 hover:bg-white"
+            {tags? <p className="capitalize cursor-alias hover:underline decoration-dotted"
                 onClick={()=>{
                     router.push( `/?${createQueryString(`tags`, ``)}`, {scroll: false})
                 }}>{tags}</p>:""}

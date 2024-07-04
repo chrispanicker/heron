@@ -1,8 +1,14 @@
 import { Project } from "@/types/project"
 import { FilterButtons } from "./filter-buttons";
-export function TestFilter(props:any){
+import { Filters } from "./filters";
+
+interface Props{
+    projects:Project[]
+}
+
+export function TestFilter({projects}:Props){
     let allTags:string[] = [], allCollabs:string[] = [], allRoles:string[] = []
-    props.projects?.map((project:Project)=>{
+    projects?.map((project:Project)=>{
         project.roles?.map((role:any)=>{
             role.length===0 || allRoles.includes(role.name)? "": allRoles.push(role.name)
         })
@@ -23,7 +29,8 @@ export function TestFilter(props:any){
         "tags": allTags, 
     };
     return (
-        <FilterButtons {...filters} />
+        // <FilterButtons {...filters} />
+        <Filters filters={filters} projects={projects}  />
     )
    
 }

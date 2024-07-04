@@ -40,6 +40,7 @@ export default function ProjectListing({project, index}: Props) {
     const vimeoCount = project.vimeo? project.vimeo.length: 0;
     const imageCount = project.images? project.images.length: 0;
     const galleryCount = vimeoCount + imageCount;
+    
     return project?
         <section id={project.slug} ref={projectRef} className={`text-2xl  ${view==="all"? "pb-10":selectedProject===project.slug? "py-10": ""}`} style={{['--i' as any]:index+1}}>
             <div className="flex w-screen">

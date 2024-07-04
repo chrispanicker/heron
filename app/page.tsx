@@ -1,7 +1,6 @@
 import { Name } from "@/components/name";
 import { OpeningCard } from "@/components/opening-card";
 import Projects from "@/components/projects";
-import { TestFilter } from "@/components/test-filter";
 import {getFilteredProjects, getGallery } from "@/sanity/sanity-utils"; 
 import dynamic from "next/dynamic";
 
@@ -10,8 +9,7 @@ interface Props {
     tags?: string
     collabs?: string
     roles?: string
-    view?: string
-
+    about?: string
   }
 }
 
@@ -19,8 +17,7 @@ const ProjectListing = dynamic(() => import("@/components/project-listing"))
 const UsedFilters = dynamic(() => import("@/components/used-filters"))
 
 export default async function Home({searchParams}: Props) {
-  
-  const {tags, collabs, roles, view} = searchParams 
+  const {tags, collabs, roles, about} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
   let gallery = await getGallery();
 
@@ -31,7 +28,7 @@ export default async function Home({searchParams}: Props) {
         <section className="">
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-              <div className={view === "txt"? "": "sticky top-0"} key={project.name + project._id}>
+              <div className={`transition-all duration-500 ${about === "open"? "blur-3xl": ""}`} key={project.name + project._id}>
                 <Projects filteredProjects={filteredProjects} project={project} index={index}/>
               </div>
           )})}
