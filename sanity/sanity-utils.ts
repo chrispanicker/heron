@@ -78,6 +78,7 @@ export async function getFilteredProjects({searchParams}:Props){
                     _id,
                     name,
                     vimeo,
+                    preview,
                     images,
                     "gallery": images[]{
                         "imageUrl": asset->url,

@@ -12,7 +12,6 @@ interface Props{
     index: number
 }
 
-
 export default function Projects({project}: Props) {
     const router = useRouter();
     const searchParams = useSearchParams();    
@@ -27,6 +26,8 @@ export default function Projects({project}: Props) {
     const galleryCount = vimeoCount + imageCount;
     const filtersmenu = searchParams.get("filters")
     const filterRef = useRef<HTMLDivElement | null>(null)
+    const txtRef = useRef<HTMLElement | null>(null)
+    const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]';
 
     let vimeoIDs:string[] = [];
     let allRoles:string[] = [];
@@ -63,6 +64,43 @@ export default function Projects({project}: Props) {
         }
     }, [filterRef])
 
+    // useEffect(()=>{
+    //     let previewImages = document.getElementsByClassName('preview-image')
+    //     //Detect touch device
+    //     function isTouchDevice() {
+    //     try {
+    //         //We try to create TouchEvent. It would fail for desktops and throw error
+    //         document.createEvent("TouchEvent");
+    //         return true;
+    //     } catch (e) {
+    //         return false;
+    //     }
+    //     }
+    //     const move = (e) => {
+    //     //Try, catch to avoid any errors for touch screens (Error thrown when user doesn't move his finger)
+    //     try {
+    //         //PageX and PageY return the position of client's cursor from top left of screen
+    //         var x = !isTouchDevice() ? e.pageX : e.touches[0].pageX;
+    //         var y = !isTouchDevice() ? e.pageY : e.touches[0].pageY;
+    //     } catch (e) {}
+    //     //set left and top of div based on mouse position
+    //     Object.entries(previewImages).map((image:any)=>{
+    //         image.style.left = x - 50 + "px";
+    //         image.style.top = y - 50 + "px";
+    //     })
+
+    //     };
+    //     //For mouse
+    //     document.addEventListener("mousemove", (e) => {
+    //     move(e);
+    //     });
+    //     //For touch
+    //     document.addEventListener("touchmove", (e) => {
+    //     move(e);
+    //     });
+
+    // }, [txtRef])
+
     project.vimeo?.map((vid, index)=>{
         vimeoIDs[index]=vid.replace("https://vimeo.com/", "")
     })
@@ -80,10 +118,6 @@ export default function Projects({project}: Props) {
         : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}&project=${project.slug}&img=0`, {scroll: false})
 
         if(selectedProject===project.slug){
-            // let bgEls =Object.entries(document.getElementsByClassName('bg-black')).map((element)=>{
-            //     return element[1].id
-            // })
-            // console.log()
             project.tags?.map((tag:any)=>{
                 let el = document.getElementById(tag.name)
                 el?.classList.contains('bg-black')?
@@ -103,7 +137,6 @@ export default function Projects({project}: Props) {
             let bgEls =Object.entries(document.getElementsByClassName('bg-black')).map((element)=>{
                 return element[1].classList.remove('bg-black', 'text-white', 'text-white')
             })
-            console.log
             project.tags?.map((tag:any)=>{
                 let el = document.getElementById(tag.name)
                 el?.classList.contains('bg-black')?
@@ -121,42 +154,58 @@ export default function Projects({project}: Props) {
             })
         }
     }
+    
 
 return(
-    <section key={`${project.slug}`} className={`${filtersmenu==="1"? "blur-lg": ""} flex flex-col transition-all bg-white ${view==="all" || selectedProject? "text-2xl": "text-2xl"} ${view==="all"? "": ""} ${selectedProject===project.slug? "": ""}`}>
+    <section key={`${project.slug}`} className={`flex flex-col transition-all bg-gray-400 ${view==="all" || selectedProject? "text-2xl": "text-2xl"} ${view==="all"? "": ""} ${selectedProject===project.slug? "pt-10": ""}`}>
         {/* view ===txt? */}
-        <span id="txt" className={`flex flex-col items-center justify-center ${selectedProject===project.slug? "":""} ${view==="txt"? "": "hidden"} `}>
-            <button className={`peer group z-20 px-2 transition-all ${selectedProject===project.slug?"":""}`}                         
+        <span ref={txtRef} id="txt" className={`group flex flex-col items-center justify-center h-[5rem] leading-none ${selectedProject===project.slug? "":""} ${view==="txt"? "text-5xl py-2": "hidden"} `}>
+            <button className={`peer group z-20 px-2 transition-all text-white hover:mix-blend-difference ${selectedProject===project.slug?"":""}`}                         
             onClick={projectClick}><h3 className="hover:underline decoration-dotted ">{project.name}</h3>
             </button>
-        </span>
-
-        {/* View === highlights? */}
-        {/* view should be img to mimic txt but with images
-        maybe try a 4 or 2 column grid for projects inex? */}
-        {/* <span id="all"  className={`sticky top-0 flex flex-col items-center justify-center ${view==="txt"? "hidden": ""}`}>
-            <div className={`w-screen h-screen overflow-hidden transition-all ${selectedProject===project.slug? "hidden": ""}`}>
-                <Image
-                src={urlForImage(project.images[0]).url()}
+            {/* <Image
+                src={urlForImage(project.preview).url()}
                 alt=""
                 width={1080}
                 height={1080}
-                unoptimized={true}
-                priority
-                className={`w-screen h-screen object-cover`}
+                className={`w-screen fixed h-screen z-0 object-cover pointer-events-none top-0 peer-hover:opacity-100 opacity-0 duration-1000 transition-all ${selectedProject===project.slug? "hidden": ""}`}
                 // placeholder="blur"
                 // blurDataURL={`${project.gallery[index].lqip}`}
-                />
+            /> */}
+            <div ref={filterRef} className="flex flex-col lg:flex-row justify-center items-center mx-5">
+            <div className={`flex group-hover:h-[3rem] h-0 transition-all overflow-hidden ${selectedProject===project.slug? "group-hover:h-0": ""}`}>
+                {Object.entries(filters).map(([key, array])=>{
+                    return(
+                        <span key={key} className="capitalize flex justify-center items-center  my-1">
+                            {array.map((filter:any, idx:any)=>{
+                                return (
+                                    <button 
+                                    style={{[`${key==="roles"? "--r": key==="collabs"? "--c": key==="tags"? "--t": ""}` as any]:idx+1}}
+                                    key={`${filter}${idx}`}
+                                    onClick={()=>{
+                                        searchParams.getAll(`${key}`).includes(filter)?
+                                        router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
+                                        : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
+                                    }}
+                                    className={`px-2 ${blurClass} text-2xl mx-2 w-fit whitespace-nowrap hover:underline decoration-dotted
+                                    ${searchParams.get(key)?.includes(filter)? "underline":""}`}
+                                    >
+                                        {`${filter}`}
+                                    </button>
+                                )
+                            })}
+                        </span>
+                    )
+                })}
             </div>
-            <button className={`px-2 z-10 ${selectedProject===project.slug? "my-2 text-gray-400  hover:bg-gray-400 hover:": "absolute top-5  bg-gray-400  hover:text-gray-400 hover:bg-white"}`}
-            onClick={projectClick}>{project.name}</button>
-        </span> */}
+            </div>
+        </span>
 
-        <span id="all" className={`flex flex-col items-center justify-center ${selectedProject===project.slug? "py-20": "py-1"} ${view==="all"? "": "hidden"} `}>
+        <span id="all" className={`flex flex-col items-center justify-center pt-10  ${view==="all"? "py-2": "hidden"} `}>
             <button className={`group z-20 flex justify-center items-center transition-all ${selectedProject===project.slug?"hidden": "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
             onClick={projectClick}>
                     <Image
-                    src={urlForImage(project.images[0]).url()}
+                    src={urlForImage(project.preview).url()}
                     alt=""
                     width={1080}
                     height={1080}
@@ -168,14 +217,15 @@ return(
                     />
                     <h2 className="absolute px-2 backdrop-blur-3xl backdrop-brightness-[.75] top-0 z-20 group-hover:opacity-100 opacity-0 transition-opacity ">{project.name}</h2>
             </button>
-            <button className={`peer z-20 px-2 transition-all ${selectedProject===project.slug?"": "hidden"}`}                         
+            
+            <button className={`peer z-20 px-2 transition-all ${selectedProject===project.slug? "text-5xl": "hidden"}`}                         
                     onClick={projectClick}>{project.name}
             </button>
         </span>
 
 
         {/* project open? */}
-        <span id="open" className={`w-screen overflow-hidden flex flex-col justify-start items-center transition-all duration-500 ${selectedProject===project.slug? "h-screen":'h-0'} `}>
+        <span id="open" className={`overflow-hidden flex flex-col justify-start items-center transition-all duration-500  ${selectedProject===project.slug? "h-[60rem]":'h-0'} `}>
             {/* current image */}
             {project.vimeo?.map((vid, index)=>(
                 <div key={`project.slug+${index}`} className={`peer flex justify-center items-center lg:h-[40rem] lg:w-[71rem] h-[14rem] w-[24rem]  ${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "": "hidden"}`}>
@@ -257,10 +307,10 @@ return(
             <div className="mx-40 flex  text-center   "><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
-            <div ref={filterRef} className="flex w-screen flex-col lg:flex-row justify-center items-center mx-5">
+            <div ref={filterRef} className="flex flex-col lg:flex-row justify-center items-center mx-5">
             {Object.entries(filters).map(([key, array])=>{
                 return(
-                    <span key={key} className="capitalize">
+                    <span key={key} className="capitalize flex justify-center items-center my-1">
                         {array.map((filter:any, idx:any)=>{
                             return (
                                 <button 
@@ -271,7 +321,7 @@ return(
                                     router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
                                     : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
                                 }}
-                                className={`px-2 my-1 mx-2 w-fit whitespace-nowrap hover:underline decoration-dotted
+                                className={`px-2 ${blurClass} my-1 mx-2 w-fit whitespace-nowrap hover:underline decoration-dotted
                                 ${searchParams.get(key)?.includes(filter)? "underline":""}`}
                                 >
                                     {`${filter}`}

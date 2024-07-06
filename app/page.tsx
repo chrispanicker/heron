@@ -28,7 +28,7 @@ export default async function Home({searchParams}: Props) {
         <section className="">
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-              <div className={`transition-all duration-500 ${about === "open"? "blur-3xl": ""}`} key={project.name + project._id}>
+              <div className={`transition-all duration-500 ${about === "open"? "blur-lg": ""}`} key={project.name + project._id}>
                 <Projects filteredProjects={filteredProjects} project={project} index={index}/>
               </div>
           )})}

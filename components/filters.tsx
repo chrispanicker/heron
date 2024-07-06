@@ -21,8 +21,8 @@ export function Filters({filters, projects}: Props){
     const router = useRouter();
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin');
-    const filtersmenu = searchParams.get("filters")
-    const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]'
+    const filtersmenu = searchParams.get("filters");
+    const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]';
 
     projects.map((project:any)=>{
         selectedProject===project.slug?
@@ -42,10 +42,10 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`transition-all py-1 px-2 w-screen flex justify-center items-center flex-col my-5 text-black text-2xl ${about==="open"? "blur-3xl": ""}`}>
+        <section className={`transition-all py-1 px-2 w-screen flex justify-center items-center flex-col my-5 text-white text-2xl ${about==="open"? "blur-3xl": ""}`}>
             {Object.entries(filters).map(([key, array]:any)=>{
                 return(
-                    <span key={key} className="capitalize">
+                    <span key={key} className="capitalize flex justify-center items-center my-1">
                         {/* <p className={`px-2   w-fit mb-1`}>{`${key}`}</p> */}
                         {array.map((filter:any, idx:any)=>{
                             return (
@@ -61,7 +61,7 @@ export function Filters({filters, projects}: Props){
                                     }
                                    
                                 }}
-                                className={`px-2 w-fit whitespace-nowrap px-2 transition-all decoration-dotted 
+                                className={`${blurClass} px-2 mx-1 my-1 w-fit whitespace-nowrap px-2 transition-all decoration-dotted 
                                 ${searchParams.get(key)?.includes(filter)? "underline hover:no-underline":"hover:underline"}`
                                 }>
                                     {`${filter}`}

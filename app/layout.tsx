@@ -39,7 +39,7 @@ let allProjects = await getProjects();
 let info = await getInfo();
 
   return (
-    <html lang="en" className='bg-white text-black'>
+    <html lang="en" className='bg-gray-400 text-white overflow-x-hidden'>
       <body>
         <section>
           <TestFilter projects={allProjects}/>

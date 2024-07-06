@@ -9,6 +9,7 @@ export default function ViewToggle(){
     const roles = searchParams.get('roles')
     const view = searchParams.get('view');
     const about = searchParams.get('about');
+    const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]'
     const createQueryString = useCallback(
         (name: string, value: string) => {
             const params = new URLSearchParams(searchParams.toString())
@@ -19,20 +20,20 @@ export default function ViewToggle(){
     const isSanityStudio = pathname.startsWith('/admin');
     return(
         isSanityStudio? "":
-        <div className={`fixed hover:underline decoration-dotted text-2xl py-1 left-0 bottom-0 m-5 z-30 flex cursor-pointer transition-all ${about==="open"? "blur-3xl": ""}`}>
+        <div className={`fixed hover:underline decoration-dotted text-2xl py-1 left-0 bottom-0 m-5 z-20 flex cursor-pointer transition-all ${about==="open"? `blur-xl`: `${blurClass}`}`}>
             <button 
             className={`px-2 ${view==="txt"? "hidden":""}`}
             onClick={()=>{
                 router.push(`/?view=txt${roles? `&roles=${roles}`: ""}`, {scroll: false})
                 // searchParams.getAll(`view`).includes("txt")? "" : router.push( `/?${createQueryString(`view`, `txt`)}`, {scroll: false})
-            }}>View: Text</button>
+            }}>View: Image</button>
 
             <button
             className={`px-2 ${view==="all"? "hidden":""}`} 
             onClick={()=>{
                 router.push(`/?view=all${roles? `&roles=${roles}`: ""}`, {scroll: false})
                 // searchParams.getAll(`view`).includes("all")? "" : router.push( `/?${createQueryString(`view`, `all`)}`, {scroll: false})
-            }}>View: Image</button>
+            }}>View: Text</button>
         </div>
     )
 }
