@@ -159,8 +159,8 @@ export default function Projects({project}: Props) {
 return(
     <section key={`${project.slug}`} className={`flex flex-col transition-all bg-gray-400 ${view==="all" || selectedProject? "text-2xl": "text-2xl"} ${view==="all"? "": ""} ${selectedProject===project.slug? "pt-10": ""}`}>
         {/* view ===txt? */}
-        <span ref={txtRef} id="txt" className={`group flex flex-col items-center justify-center h-[5rem] leading-none ${selectedProject===project.slug? "":""} ${view==="txt"? "text-5xl py-2": "hidden"} `}>
-            <button className={`peer group z-20 px-2 transition-all text-white hover:mix-blend-difference ${selectedProject===project.slug?"":""}`}                         
+        <span ref={txtRef} id="txt" className={`group flex flex-col items-center justify-center lg:h-[5rem] leading-none ${selectedProject===project.slug? "":""} ${view==="txt"? "lg:text-5xl text-2xl py-2": "hidden"} `}>
+            <button className={`peer group z-20 px-2 transition-all text-white ${selectedProject===project.slug?"":""}`}                         
             onClick={projectClick}><h3 className="hover:underline decoration-dotted ">{project.name}</h3>
             </button>
             {/* <Image
@@ -173,36 +173,36 @@ return(
                 // blurDataURL={`${project.gallery[index].lqip}`}
             /> */}
             <div ref={filterRef} className="flex flex-col lg:flex-row justify-center items-center mx-5">
-            <div className={`flex group-hover:h-[3rem] h-0 transition-all overflow-hidden ${selectedProject===project.slug? "group-hover:h-0": ""}`}>
-                {Object.entries(filters).map(([key, array])=>{
-                    return(
-                        <span key={key} className="capitalize flex justify-center items-center  my-1">
-                            {array.map((filter:any, idx:any)=>{
-                                return (
-                                    <button 
-                                    style={{[`${key==="roles"? "--r": key==="collabs"? "--c": key==="tags"? "--t": ""}` as any]:idx+1}}
-                                    key={`${filter}${idx}`}
-                                    onClick={()=>{
-                                        searchParams.getAll(`${key}`).includes(filter)?
-                                        router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
-                                        : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
-                                    }}
-                                    className={`px-2 ${blurClass} text-2xl mx-2 w-fit whitespace-nowrap hover:underline decoration-dotted
-                                    ${searchParams.get(key)?.includes(filter)? "underline":""}`}
-                                    >
-                                        {`${filter}`}
-                                    </button>
-                                )
-                            })}
-                        </span>
-                    )
-                })}
-            </div>
+                <div className={`flex lg:group-hover:h-[3rem] h-0 transition-all overflow-hidden ${selectedProject===project.slug? "lg:group-hover:h-0": ""}`}>
+                    {Object.entries(filters).map(([key, array])=>{
+                        return(
+                            <span key={key} className="capitalize flex justify-center items-center  my-1">
+                                {array.map((filter:any, idx:any)=>{
+                                    return (
+                                        <button 
+                                        style={{[`${key==="roles"? "--r": key==="collabs"? "--c": key==="tags"? "--t": ""}` as any]:idx+1}}
+                                        key={`${filter}${idx}`}
+                                        onClick={()=>{
+                                            searchParams.getAll(`${key}`).includes(filter)?
+                                            router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
+                                            : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
+                                        }}
+                                        className={`px-2 ${blurClass} text-2xl mx-2 w-fit whitespace-nowrap hover:underline decoration-dotted
+                                        ${searchParams.get(key)?.includes(filter)? "underline":""}`}
+                                        >
+                                            {`${filter}`}
+                                        </button>
+                                    )
+                                })}
+                            </span>
+                        )
+                    })}
+                </div>
             </div>
         </span>
 
-        <span id="all" className={`flex flex-col items-center justify-center pt-10  ${view==="all"? "py-2": "hidden"} `}>
-            <button className={`group z-20 flex justify-center items-center transition-all ${selectedProject===project.slug?"hidden": "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
+        <span id="all" className={`group flex flex-col items-center justify-center ${selectedProject===project.slug? "h-auto": "h-[23rem]"}  ${view==="all"? "py-2": "hidden"} `}>
+            <button className={`z-20 flex justify-center items-center transition-all ${selectedProject===project.slug?"hidden": "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
             onClick={projectClick}>
                     <Image
                     src={urlForImage(project.preview).url()}
@@ -211,14 +211,40 @@ return(
                     height={1080}
                     unoptimized={true}
                     priority
-                    className={`w-[20rem] h-auto object-cover`}
+                    className={`w-[20rem] h-[20rem] object-cover`}
                     // placeholder="blur"
                     // blurDataURL={`${project.gallery[index].lqip}`}
                     />
-                    <h2 className="absolute px-2 backdrop-blur-3xl backdrop-brightness-[.75] top-0 z-20 group-hover:opacity-100 opacity-0 transition-opacity ">{project.name}</h2>
+                    <h2 className="absolute px-2 backdrop-blur-3xl backdrop-brightness-[.75] top-0 z-20 group-hover:opacity-100 group-hover:underline decoration-dotted opacity-0 transition-all ">{project.name}</h2>
             </button>
-            
-            <button className={`peer z-20 px-2 transition-all ${selectedProject===project.slug? "text-5xl": "hidden"}`}                         
+            <div ref={filterRef} className="flex flex-col lg:flex-row justify-center items-center mx-5">
+                <div className={`flex h-0 transition-all overflow-hidden ${selectedProject===project.slug? "group-hover:h-0": "group-hover:h-[3rem]"}`}>
+                    {Object.entries(filters).map(([key, array])=>{
+                        return(
+                            <span key={key} className="capitalize flex justify-center items-center  my-1">
+                                {array.map((filter:any, idx:any)=>{
+                                    return (
+                                        <button 
+                                        style={{[`${key==="roles"? "--r": key==="collabs"? "--c": key==="tags"? "--t": ""}` as any]:idx+1}}
+                                        key={`${filter}${idx}`}
+                                        onClick={()=>{
+                                            searchParams.getAll(`${key}`).includes(filter)?
+                                            router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
+                                            : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
+                                        }}
+                                        className={`px-2 ${blurClass} text-2xl mx-2 w-fit whitespace-nowrap hover:underline decoration-dotted
+                                        ${searchParams.get(key)?.includes(filter)? "underline":""}`}
+                                        >
+                                            {`${filter}`}
+                                        </button>
+                                    )
+                                })}
+                            </span>
+                        )
+                    })}
+                </div>
+            </div>
+            <button className={`peer z-20 px-2 transition-all hover:underline decoration-dotted ${selectedProject===project.slug? "text-5xl": "hidden"}`}                         
                     onClick={projectClick}>{project.name}
             </button>
         </span>

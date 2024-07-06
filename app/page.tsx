@@ -25,6 +25,7 @@ export default async function Home({searchParams}: Props) {
     filteredProjects? <main id="main" className={`font-normal z-0 flex flex-col items-center justify-start min-h-screen`}>
         <OpeningCard gallery={gallery} />
         <Name />
+        <UsedFilters role={roles} tags={tags} collabs={collabs}/>
         <section className="">
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
@@ -33,7 +34,6 @@ export default async function Home({searchParams}: Props) {
               </div>
           )})}
         </section>
-        <UsedFilters role={roles} tags={tags} collabs={collabs}/>
     </main>: <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>
   )
 }

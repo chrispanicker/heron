@@ -20,7 +20,7 @@ export default function ViewToggle(){
     const isSanityStudio = pathname.startsWith('/admin');
     return(
         isSanityStudio? "":
-        <div className={`fixed hover:underline decoration-dotted text-2xl py-1 left-0 bottom-0 m-5 z-20 flex cursor-pointer transition-all ${about==="open"? `blur-xl`: `${blurClass}`}`}>
+        <div className={`fixed hover:underline decoration-dotted text-2xl py-1 left-0 bottom-0 m-5 z-20 flex cursor-pointer transition-all hidden lg:block ${about==="open"? `blur-xl`: `${blurClass}`}`}>
             <button 
             className={`px-2 ${view==="txt"? "hidden":""}`}
             onClick={()=>{

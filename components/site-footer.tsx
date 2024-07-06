@@ -30,7 +30,7 @@ export function SiteFooter(info:any){
         isSanityStudio? "" : 
         <footer ref={footerRef} className="text-2xl text-justify w-full">
             <div id="footImgDiv" className="flex w-screen top-screen justify-center items-center">
-                <button id="footerTab" className={`fixed z-40 bottom-0 right-0 hover:underline decoration-dotted px-2 py-1 m-5 ${blurClass}`} onClick={()=>{
+                <button id="footerTab" className={`fixed z-40 bottom-0 right-0 hover:underline decoration-dotted px-2 py-1 m-5 hidden lg:block ${blurClass}`} onClick={()=>{
                     searchParams.getAll(`about`).includes("open")?
                     router.push(`/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`: ""}${project? `&project=${project}&img=0` : ""}`)
                     : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)
