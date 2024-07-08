@@ -26,11 +26,13 @@ export function SiteFooter(info:any){
     const about = searchParams.get('about');
     const blurClass = 'backdrop-blur-3xl backdrop-brightness-[.7]';
 
+    
+
     return (
         isSanityStudio? "" : 
-        <footer ref={footerRef} className="text-2xl text-justify w-full">
+        <footer ref={footerRef} className="lg:text-2xl text-lg text-justify w-full">
             <div id="footImgDiv" className="flex w-screen top-screen justify-center items-center">
-                <button id="footerTab" className={`fixed z-40 bottom-0 right-0 hover:underline decoration-dotted px-2 py-1 m-5 hidden lg:block ${blurClass}`} onClick={()=>{
+                <button id="footerTab" className={`fixed z-40 bottom-0 right-0 hover:bg-white hover:text-gray-400 decoration-dotted px-2 m-5 ${blurClass}`} onClick={()=>{
                     searchParams.getAll(`about`).includes("open")?
                     router.push(`/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`: ""}${project? `&project=${project}&img=0` : ""}`)
                     : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)

@@ -42,10 +42,17 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`transition-all py-1 px-2 w-screen flex justify-center items-center flex-col my-5 text-white text-2xl ${about==="open"? "blur-3xl": ""}`}>
+        <section className={`fixed top-0 overflow-x-scroll w-screen z-40 transition-all px-2 flex justify-start items-center flex-row py-5 text-white lg:text-2xl text-lg overflow-hidden ${about==="open"? "blur-3xl": ""}`}>
+            {/* <button 
+                className={`fixed bottom-0 my-5 px-2 ${blurClass}`}
+                onClick={()=>{
+                     searchParams.getAll(`filters`).includes("open")? router.push( `/?${createQueryString(`filters`, ``)}`) : router.push( `/?${createQueryString(`filters`, `open`)}`)
+                    }
+                }
+                >Filters</button> */}
             {Object.entries(filters).map(([key, array]:any)=>{
                 return(
-                    <span key={key} className="capitalize flex justify-center items-center my-1">
+                    <span key={key} className="capitalize flex justify-center items-center">
                         {/* <p className={`px-2   w-fit mb-1`}>{`${key}`}</p> */}
                         {array.map((filter:any, idx:any)=>{
                             return (
@@ -61,8 +68,8 @@ export function Filters({filters, projects}: Props){
                                     }
                                    
                                 }}
-                                className={`${blurClass} px-2 mx-1 my-1 w-fit whitespace-nowrap px-2 transition-all decoration-dotted 
-                                ${searchParams.get(key)?.includes(filter)? "underline hover:no-underline":"hover:underline"}`
+                                className={`${blurClass} px-2 mx-1 w-fit whitespace-nowrap px-2 transition-all
+                                ${searchParams.get(key)?.includes(filter)? "bg-white text-gray-400":"hover:bg-white hover:text-gray-400"}`
                                 }>
                                     {`${filter}`}
                                 </button>

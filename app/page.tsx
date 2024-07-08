@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 
 interface Props {
   searchParams: {
+    view?: string
     tags?: string
     collabs?: string
     roles?: string
@@ -17,19 +18,19 @@ const ProjectListing = dynamic(() => import("@/components/project-listing"))
 const UsedFilters = dynamic(() => import("@/components/used-filters"))
 
 export default async function Home({searchParams}: Props) {
-  const {tags, collabs, roles, about} = searchParams 
+  const {tags, collabs, roles, about, view} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
   let gallery = await getGallery();
 
   return (
-    filteredProjects? <main id="main" className={`font-normal z-0 flex flex-col items-center justify-start min-h-screen`}>
+    filteredProjects? <main id="main" className={`font-normal py-20 z-0 flex flex-col items-center justify-start min-h-screen`}>
         <OpeningCard gallery={gallery} />
         <Name />
         <UsedFilters role={roles} tags={tags} collabs={collabs}/>
-        <section className="">
+        <section className={`${view==="all"? "grid lg:grid-cols-4 md:grid-cols-2": ""}`}>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-              <div className={`transition-all duration-500 ${about === "open"? "blur-lg": ""}`} key={project.name + project._id}>
+              <div className={`transition-all duration-500 ${about === "open"? "blur-2xl": ""}`} key={project.name + project._id}>
                 <Projects filteredProjects={filteredProjects} project={project} index={index}/>
               </div>
           )})}

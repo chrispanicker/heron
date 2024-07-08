@@ -34,15 +34,15 @@ export default function UsedFilters({role, tags, collabs}: Props){
                 </button>
             :""} */}
             {role||collabs||tags? <p>Filtered by:&nbsp;</p>:""}
-            {role? <p className="capitalize cursor-alias  hover:underline decoration-dotted"
+            {role? <p className="capitalize cursor-alias mx-1 px-2  bg-white text-gray-400"
                 onClick={()=>{
                     router.push( `/?${createQueryString(`roles`, ``)}`, {scroll: false})
                 }}>{role}{tags||collabs?"\u00A0":""}</p>:""}
-            {collabs? <p className="capitalize cursor-alias hover:underline decoration-dotted" 
+            {collabs? <p className="capitalize cursor-alias mx-1 px-2 bg-white text-gray-400" 
                 onClick={()=>{
                     router.push( `/?${createQueryString(`collabs`, ``)}`, {scroll: false})
                 }}>{collabs}{tags?"\u00A0":""}</p>:""}
-            {tags? <p className="capitalize cursor-alias hover:underline decoration-dotted"
+            {tags? <p className="capitalize cursor-alias mx-1 px-2 bg-white text-gray-400"
                 onClick={()=>{
                     router.push( `/?${createQueryString(`tags`, ``)}`, {scroll: false})
                 }}>{tags}</p>:""}
