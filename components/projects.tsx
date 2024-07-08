@@ -173,7 +173,7 @@ return(
                 // blurDataURL={`${project.gallery[index].lqip}`}
             /> */}
             <div ref={filterRef} className="flex flex-col lg:flex-row justify-center items-center mx-5">
-                <div className={`flex transition-all overflow-hidden lg:block hidden ${selectedProject===project.slug? "h-0": "group-hover:h-[3rem] h-0"}`}>
+                <div className={`transition-all overflow-hidden lg:flex hidden ${selectedProject===project.slug? "h-0": "group-hover:h-[3rem] h-0"}`}>
                     {Object.entries(filters).map(([key, array])=>{
                         return(
                             <span key={key} className="capitalize flex justify-center items-center  my-1">
@@ -225,7 +225,7 @@ return(
 
 
         {/* project open? */}
-        <span id="open" className={`overflow-y-hidden flex flex-col justify-start items-center ${view==="txt"? "": ""}  ${view==="all" && selectedProject===project.slug? "fixed top-0 left-0 w-screen h-screen bg-gray-400 left-0 z-50 justify-center opacity-100": view==="txt" && selectedProject===project.slug? "h-[60rem]": "fixed w-0 h-0"}`}>
+        <span id="open" className={`overflow-hidden flex flex-col justify-start items-center ${view==="txt"? "": ""}  ${view==="all" && selectedProject===project.slug? "fixed top-0 left-0 w-screen h-screen bg-gray-400 left-0 z-50 justify-center opacity-100": view==="txt" && selectedProject===project.slug? "h-[60rem]": "fixed w-0 h-0"}`}>
             <button className={`peer z-20 px-2 mb-5 transition-all hover:bg-white hover:text-gray-400 ${view==="all"? "": "hidden"} ${selectedProject===project.slug? "lg:text-5xl": ""}`}                         
                     onClick={projectClick}>{project.name}
             </button>
