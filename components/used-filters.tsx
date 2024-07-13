@@ -24,7 +24,7 @@ export default function UsedFilters({role, tags, collabs}: Props){
     const about = searchParams.get("about");
     const filtersmenu = searchParams.get("filters")
     return(
-        <div className={`flex flex-row text-2xl mt-5 pb-1 mb-5 ${about==="open"? "blur-3xl": ""}`}>
+        <div className={`fixed bottom-10 text-2xl z-50 flex flex-row text-2xl pb-1 m-5 ${about==="open"? "blur-3xl": ""}`}>
             {/* {role||collabs||tags? 
                 <button className="buttonParent px-2 mx-2   hover:text-gray-400 hover:bg-white"                         
                     onClick={()=>{

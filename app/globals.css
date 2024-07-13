@@ -38,6 +38,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: Authentic;
+  src:
+       url('../public/fonts/authentic-sans-90.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 ::selection{
   color: rgb(57, 26, 26);
   background-color: rgb(227, 227, 227);
@@ -60,7 +69,11 @@
 
 *{
   font-family: Flatspot;
-  letter-spacing: -.05rem;
+  /* letter-spacing: -.05rem; */
+}
+
+.selection{
+  background-color: white;
 }
 
 .feature{

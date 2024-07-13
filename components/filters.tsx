@@ -1,5 +1,4 @@
 "use client"
-import { Project } from "@/types/project";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
@@ -40,9 +39,18 @@ export function Filters({filters, projects}: Props){
         [searchParams]
     )
 
+    let allFilters:any = []
+
+    Object.entries(filters).map(([key, array]:any)=>{
+        {array.map((filter:any, idx:any)=>{
+            allFilters[allFilters.length]={filter: filter, key: key}
+        })}
+    })
+
+
 
     return(
-        <section className={`fixed top-0 overflow-x-scroll w-screen z-40 transition-all px-2 flex justify-start items-center flex-row py-5 text-white lg:text-2xl text-lg overflow-hidden ${about==="open"? "blur-3xl": ""}`}>
+        <section className={`z-40 p-5 transition-all text-white text-xl text-center  ${about==="open"? "blur-3xl": ""}`}>
             {/* <button 
                 className={`fixed bottom-0 my-5 px-2 ${blurClass}`}
                 onClick={()=>{
@@ -50,10 +58,11 @@ export function Filters({filters, projects}: Props){
                     }
                 }
                 >Filters</button> */}
-            {Object.entries(filters).map(([key, array]:any)=>{
+            
+            {/* {Object.entries(filters).map(([key, array]:any)=>{
                 return(
-                    <span key={key} className="capitalize flex justify-center items-center">
-                        {/* <p className={`px-2   w-fit mb-1`}>{`${key}`}</p> */}
+                    <span key={key} className="capitalize justify-center items-center flex">
+                        // <p className={`px-2   w-fit mb-1`}>{`${key}`}</p>
                         {array.map((filter:any, idx:any)=>{
                             return (
                                 <button 
@@ -69,13 +78,35 @@ export function Filters({filters, projects}: Props){
                                    
                                 }}
                                 className={`${blurClass} px-2 mx-1 w-fit whitespace-nowrap px-2 transition-all
-                                ${searchParams.get(key)?.includes(filter)? "bg-white text-gray-400":"hover:bg-white hover:text-gray-400"}`
+                                ${searchParams.get(key)?.includes(filter)? "selection text-gray-400":"hover:bg-white hover:text-gray-400"}`
                                 }>
                                     {`${filter}`}
                                 </button>
                             )
                         })}
                     </span>
+                )
+            })} */}
+            
+            {allFilters.map((entry:any, idx:any)=>{
+                return (
+                    <button 
+                    id={`${entry.filter}`}
+                    // style={{[`${entry.key==="roles"? "--r": entry.key==="collabs"? "--c": entry.key==="tags"? "--t": ""}` as any]:idx+1}}
+                    key={`${entry.filter}${idx}`}
+                    onClick={()=>{
+                        if(searchParams.getAll(`${entry.key}`).includes(entry.filter)){
+                            router.push(`/?${createQueryString(`${entry.key}`, ``)}`)
+                        }else{
+                            router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`)
+                        }
+                        
+                    }}
+                    className={`${blurClass} px-2 py-0 mx-1 my-1 w-fit whitespace-nowrap transition-all
+                    ${searchParams.get(entry.key)?.includes(entry.filter)? "selection text-gray-400":"hover:bg-white hover:text-gray-400"}`
+                    }>
+                        {`${entry.filter}`}
+                    </button>
                 )
             })}
         </section>

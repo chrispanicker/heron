@@ -27,13 +27,13 @@ export function OpeningCard({gallery}: Props){
     )  
 
     useEffect(()=>{
-        // if(selectedProject != null || selectedProject != ""){
-        //     let proj = document.querySelector(`#${selectedProject}`)
-        //     proj?.scrollIntoView({
-        //         block: "center",
-        //     behavior: 'smooth'
-        //     })
-        // }
+        if(selectedProject != null || selectedProject != ""){
+            let proj = document.querySelector(`#${selectedProject}`)
+            proj?.scrollIntoView({
+                block: "center",
+            behavior: 'smooth'
+            })
+        }
         view? "": router.push( `/?${createQueryString(`view`, `txt`)}`)
 
     }, [selectedProject])
@@ -61,16 +61,10 @@ export function OpeningCard({gallery}: Props){
     }, [cardRef])
     
     return(
-        <div ref={cardRef} className="text-2xl w-screen h-screen bg-white fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
-            <div className="flex justify-center items-center z-50 mix-blend-difference">
-                <p className= "text-white e mx-2 w-fit px-4 ">This is the website of Drew Litowitz</p>
+        <div ref={cardRef} className="text-5xl w-screen h-screen backdrop-blur-lg backdrop-brightness-[1] fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
+            <div className="flex justify-center items-center z-50">
+                <p className= "text-white mx-2 w-fit px-4 ">&#169; Drew Litowitz</p>
             </div>
-            <div className="flex flex-row justify-center text-white items-center w-4/4 mix-blend-difference">
-                <p className="mx-2 w-fit px-2">Creative Director</p>
-                <p className="mx-2 w-fit px-2">Designer</p>
-                <p className="mx-2 w-fit px-2">More...</p>
-            </div>
-
             <div id="gallery" className="absolute top-0 flex">
                 <Image
                 src={urlForImage(gallery[0].projects.preview).url()}
@@ -79,7 +73,7 @@ export function OpeningCard({gallery}: Props){
                 height={1080}
                 id="image1"
                 className="w-screen h-screen object-cover block"
-                unoptimized= {true}
+                unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                 priority={true}
                 />
                 <Image
@@ -89,7 +83,7 @@ export function OpeningCard({gallery}: Props){
                 height={1080}
                 id="image2"
                 className="w-screen h-screen object-cover hidden"
-                unoptimized= {true}
+                unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                 priority={true}
                 />
                 <Image
@@ -99,7 +93,7 @@ export function OpeningCard({gallery}: Props){
                 height={1080}
                 id="image3"
                 className="w-screen h-screen object-cover hidden"
-                unoptimized={true}
+                unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                 priority={true}
                 />
             </div>

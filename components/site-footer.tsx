@@ -30,7 +30,7 @@ export function SiteFooter(info:any){
 
     return (
         isSanityStudio? "" : 
-        <footer ref={footerRef} className="lg:text-2xl text-lg text-justify w-full">
+        <footer ref={footerRef} className="text-xl text-justify w-full">
             <div id="footImgDiv" className="flex w-screen top-screen justify-center items-center">
                 <button id="footerTab" className={`fixed z-40 bottom-0 right-0 hover:bg-white hover:text-gray-400 decoration-dotted px-2 m-5 ${blurClass}`} onClick={()=>{
                     searchParams.getAll(`about`).includes("open")?
@@ -38,11 +38,11 @@ export function SiteFooter(info:any){
                     : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)
                 }}>About</button>
             </div>
-            <span id="footer" className={`z-30 fixed bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll ${about==="open"? "h-[100vh]": "h-[0vh]"}`}>
-                <div className="w-4/4 lg:m-40 m-5 p-2">
+            <span id="footer" className={`z-30 fixed grid grid-cols-2 bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll ${about==="open"? "h-[50vh]": "h-[0vh]"}`}>
+                <div className="w-4/4 m-5 p-2 text-xl">
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
-                <div className="lg:m-40 m-5 w-4/4">
+                <div className="m-5 w-4/4">
                     <table className="w-[100%]">
                     <tbody>
                         <tr>

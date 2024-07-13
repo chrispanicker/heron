@@ -116,7 +116,14 @@ export default function Projects({project}: Props) {
         searchParams.getAll(`project`).includes(project.slug)?
         router.push(`/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`: ""}`, {scroll: false})
         : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}&project=${project.slug}&img=0`, {scroll: false})
+        setTimeout(()=>{
+            selectedProject!=project.slug?
+            // document.getElementById(`${project.slug}`)?.scrollIntoView({behavior: "smooth", block: "center"})
+            "": ""
+    
+        },100)
 
+        
         if(selectedProject===project.slug){
             project.tags?.map((tag:any)=>{
                 let el = document.getElementById(tag.name)
@@ -135,34 +142,41 @@ export default function Projects({project}: Props) {
             })
         }else{
             let bgEls =Object.entries(document.getElementsByClassName('bg-black')).map((element)=>{
-                return element[1].classList.remove('bg-black', 'text-white', 'text-white')
+                return element[1].classList.remove('bg-black', 'text-white')
             })
             project.tags?.map((tag:any)=>{
                 let el = document.getElementById(tag.name)
-                el?.classList.contains('bg-black')?
-                "" : el?.classList.add('bg-black', 'text-white')
+                el?.classList.contains('bg-black')? el?.classList.contains('selection')?
+                "": el?.classList.add('bg-black', 'text-white') : el?.classList.add('bg-black')
             })
             project.roles?.map((role:any)=>{
                 let el = document.getElementById(role.name)
-                el?.classList.contains('bg-black')?
-                "" : el?.classList.add('bg-black', 'text-white')
+                el?.classList.contains('bg-black')? el?.classList.contains('selection')?
+                "": el?.classList.add('bg-black', 'text-white') : el?.classList.add('bg-black')
             })
             project.collabs?.map((collab:any)=>{
                 let el = document.getElementById(collab.name)
-                el?.classList.contains('bg-black')?
-                "" : el?.classList.add('bg-black', 'text-white')
+                el?.classList.contains('bg-black')? el?.classList.contains('selection')?
+                "": el?.classList.add('bg-black', 'text-white') : el?.classList.add('bg-black')
             })
         }
     }
     
 
 return(
-    <section key={`${project.slug}`} className={`flex flex-col bg-gray-400 lg:text-2xl text-lg ${view==="all"? "": ""} ${selectedProject===project.slug? "pt-10": ""}`}>
+    <section key={`${project.slug}`} className={`flex flex-col bg-gray-400 lg:text-xl text-lg ${view==="all"? "": ""} ${selectedProject===project.slug? "pb-5": ""}`}>
         {/* view ===txt? */}
-        <span ref={txtRef} id="txt" className={`group flex flex-col items-center justify-center lg:h-[5rem] leading-none ${selectedProject===project.slug? "":""} ${view==="txt"? "lg:text-5xl text-lg py-2": "hidden"} `}>
-            <button className={`peer z-20 px-2 transition-all text-white ${selectedProject===project.slug?"":""}`}                         
-            onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 px-2">{project.name}</h3>
-            </button>
+        <span ref={txtRef} id="txt" className={`group flex flex-col items-center justify-center lg:h-[5rem] leading-none ${selectedProject===project.slug? "":""} ${view==="txt"? "lg:text-5xl text-2xl": "hidden"} `}>
+            <div className="flex justify-center items-center">
+                <button className={`peer z-20 transition-all text-white ${selectedProject===project.slug? "":""}`}                         
+                onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 leading-10 px-2 lg:py-2">{project.name}</h3>
+                </button>
+                <button className={`peer z-20 transition-all text-white text-xl mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
+                onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 px-2">Close</h3>
+                </button>
+
+            </div>
+            
             {/* <Image
                 src={urlForImage(project.preview).url()}
                 alt=""
@@ -187,7 +201,7 @@ return(
                                             router.push(`/?${createQueryString(`${key}`, ``)}`, {scroll: false})
                                             : router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
                                         }}
-                                        className={`px-2 ${blurClass} lg:text-2xl text-lg mx-2 w-fit whitespace-nowrap hover:bg-white hover:text-gray-400
+                                        className={`px-2 ${blurClass} lg:text-xl text-lg mx-2 w-fit whitespace-nowrap hover:bg-white hover:text-gray-400
                                         ${searchParams.get(key)?.includes(filter)? "bg-white text-gray-400":"hover:bg-white hover:text-gray-400"}`}
                                         >
                                             {`${filter}`}
@@ -201,17 +215,17 @@ return(
             </div>
         </span>
 
-        <span id="all" className={`flex flex-col items-center justify-center ${selectedProject===project.slug? "h-auto": "h-[26rem] px-5"}  ${view==="all"? "py-2": "hidden"} `}>
+        <span id="all" className={`flex flex-col items-center justify-center overflow-hidden ${selectedProject===project.slug? "h-auto": "h-[26rem] px-5"}  ${view==="all"? "py-2": "hidden"} `}>
             <button className={`group peer z-20 flex justify-center items-center transition-all ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
             onClick={projectClick}>
                     <Image
                     src={urlForImage(project.preview).url()}
                     alt=""
-                    width={0}
-                    height={0}
-                    unoptimized={true}
+                    width={1080}
+                    height={1080}
+                    unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                     priority
-                    className={`w-[20rem] h-[20rem] object-cover`}
+                    className={`w-auto h-[15rem] object-cover`}
                     // placeholder="blur"
                     // blurDataURL={`${project.gallery[index].lqip}`}
                     />
@@ -225,7 +239,7 @@ return(
 
 
         {/* project open? */}
-        <span id="open" className={`overflow-hidden flex flex-col justify-start items-center ${view==="txt"? "": ""}  ${view==="all" && selectedProject===project.slug? "fixed top-0 left-0 w-screen h-screen bg-gray-400 left-0 z-50 justify-center opacity-100": view==="txt" && selectedProject===project.slug? "h-[60rem]": "fixed w-0 h-0"}`}>
+        <span id={`${project.slug}`}  className={`overflow-hidden flex flex-col justify-start items-center ${view==="txt"? "": ""}  ${view==="all" && selectedProject===project.slug? "fixed top-0 left-0 w-screen h-screen bg-gray-400 left-0 z-50 justify-center opacity-100": view==="txt" && selectedProject===project.slug? "max-h-screen-2xl": "fixed w-0 h-0"}`}>
             <button className={`peer z-20 px-2 mb-5 transition-all hover:bg-white hover:text-gray-400 ${view==="all"? "": "hidden"} ${selectedProject===project.slug? "lg:text-5xl": ""}`}                         
                     onClick={projectClick}>{project.name}
             </button>
@@ -296,6 +310,7 @@ return(
                     className={`object-cover ${selectedProject===project.slug? "lg:h-[40vw] lg:w-auto h-[14rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
                     // placeholder="blur"
                     // blurDataURL={`${project.gallery[index].lqip}`}
+                    unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                     />
                     {galleryCount===1? ""
                     :<button className={`hover:bg-white hover:text-gray-400 mx-2 z-30 px-2 ${blurClass}`} onClick={()=>{
@@ -307,7 +322,7 @@ return(
             ))}
 
             {/* BIO */}
-            <div className="flex w-screen text-center justify-center items-center px-20 pb-5"><PortableText value={project.content}/></div>
+            <div className="flex w-screen text-center justify-center items-center px-20"><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
             <div ref={filterRef} className="flex flex-col lg:flex-row justify-center items-center mx-5">

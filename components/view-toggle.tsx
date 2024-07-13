@@ -20,20 +20,26 @@ export default function ViewToggle(){
     const isSanityStudio = pathname.startsWith('/admin');
     return(
         isSanityStudio? "":
-        <div className={`fixed decoration-dotted lg:text-2xl text-lg left-0 bottom-0 m-5 z-40 flex cursor-pointer transition-all ${about==="open"? `blur-xl`: `${blurClass}`}`}>
+        <div className={`fixed decoration-dotted lg:text-xl text-lg left-0 bottom-0 m-5 z-40 flex cursor-pointer transition-all ${about==="open"? `blur-xl`: `${blurClass}`}`}>
             <button 
-            className={`px-2 hover:bg-white hover:text-gray-400 ${view==="txt"? "hidden":""}`}
+            className={`px-2 hover:bg-white hover:text-gray-400 ${view==="txt"? "bg-white text-gray-400":""}`}
             onClick={()=>{
                 router.push(`/?view=txt${roles? `&roles=${roles}`: ""}`, {scroll: false})
+                document.querySelectorAll(".bg-black")?.forEach((element)=>{
+                    element.classList.remove("bg-black")
+                })
                 // searchParams.getAll(`view`).includes("txt")? "" : router.push( `/?${createQueryString(`view`, `txt`)}`, {scroll: false})
-            }}>View: Image</button>
+            }}>Text</button>
 
             <button
-            className={`px-2 hover:bg-white hover:text-gray-400 ${view==="all"? "hidden":""}`} 
+            className={`px-2 hover:bg-white hover:text-gray-400 ${view==="all"? "bg-white text-gray-400":""}`} 
             onClick={()=>{
                 router.push(`/?view=all${roles? `&roles=${roles}`: ""}`, {scroll: false})
+                document.querySelectorAll(".bg-black")?.forEach((element)=>{
+                    element.classList.remove("bg-black")
+                })
                 // searchParams.getAll(`view`).includes("all")? "" : router.push( `/?${createQueryString(`view`, `all`)}`, {scroll: false})
-            }}>View: Text</button>
+            }}>Image</button>
         </div>
     )
 }
