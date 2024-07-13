@@ -215,6 +215,7 @@ return(
             </div>
         </span>
 
+        {/* view ===all? */}
         <span id="all" className={`flex flex-col items-center justify-center overflow-hidden ${selectedProject===project.slug? "h-auto": "h-[26rem] px-5"}  ${view==="all"? "py-2": "hidden"} `}>
             <button className={`group peer z-20 flex justify-center items-center transition-all ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
             onClick={projectClick}>
@@ -236,7 +237,6 @@ return(
                     onClick={projectClick}>{project.name}
             </button>
         </span>
-        {/* ${view==="all" && selectedProject===project.slug? "fixed top-0 left-0 w-screen h-screen bg-gray-400 left-0 z-50 justify-center opacity-100": view==="txt" && selectedProject===project.slug? "max-h-screen-2xl": "fixed w-0 h-0"}`} */}
 
         {/* project open? */}
         <span id={`${project.slug}`}  className={`overflow-hidden flex flex-col justify-start items-center transition-all ${view==="txt"? "": ""}  ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-screen ${blurClass} left-0 z-50 justify-center opacity-100`: "h-0"}`}
@@ -277,7 +277,7 @@ return(
                         <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
                     </div>
                     {galleryCount===1? ""
-                    :<button className={`hover:bg-white hover:text-gray-400 mx-2 z-30 px-2${blurClass}`} onClick={()=>{
+                    :<button className={`hover:bg-white hover:text-gray-400 mx-2 z-30 px-2 ${blurClass}`} onClick={()=>{
                         img===galleryCount-1?
                         router.push( `/?${createQueryString(`img`, `0`)}`, {scroll: false}):
                         router.push( `/?${createQueryString(`img`, `${img+1}`)}`, {scroll: false})
