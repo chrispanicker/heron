@@ -164,7 +164,7 @@ export default function Projects({project}: Props) {
     
 
 return(
-    <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 lg:text-xl text-lg transition-all ${view==="all"? "": ""} ${selectedProject===project.slug? "pb-5 h-screen": view==="txt"? "h-[5rem]": ""}`}>
+    <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 lg:text-xl text-lg transition-all ${view==="all"? "": ""} ${selectedProject===project.slug? "pb-5 h-screen": view==="txt"? "lg:h-[5rem]": ""}`}>
         {/* view ===txt? */}
         <span ref={txtRef} id="txt" className={`group flex flex-col items-center justify-center lg:h-[5rem] leading-none ${selectedProject===project.slug? "":""} ${view==="txt"? "lg:text-5xl text-2xl": "hidden"} `}>
             <div className="flex justify-center items-center">
@@ -224,8 +224,8 @@ return(
                     width={1080}
                     height={1080}
                     unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
-                    priority
                     className={`w-auto h-[15rem] object-cover`}
+                    loading="lazy"
                     // placeholder="blur"
                     // blurDataURL={`${project.gallery[index].lqip}`}
                     />
@@ -239,9 +239,9 @@ return(
         {/* ${view==="all" && selectedProject===project.slug? "fixed top-0 left-0 w-screen h-screen bg-gray-400 left-0 z-50 justify-center opacity-100": view==="txt" && selectedProject===project.slug? "max-h-screen-2xl": "fixed w-0 h-0"}`} */}
 
         {/* project open? */}
-        <span id={`${project.slug}`}  className={`overflow-hidden flex flex-col justify-start items-center transition-all ${view==="txt"? "": ""}  ${selectedProject===project.slug? view==="all"? "fixed top-0 left-0 w-screen h-screen bg-gray-400 left-0 z-50 justify-center opacity-100": "max-h-[1000rem]" : "h-0"}`}
+        <span id={`${project.slug}`}  className={`overflow-hidden flex flex-col justify-start items-center transition-all ${view==="txt"? "": ""}  ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-screen ${blurClass} left-0 z-50 justify-center opacity-100`: "h-0"}`}
         >
-            <div className={`flex justify-center items-center ${view==="all"? "":"hidden"}`}>
+            <div className={`flex justify-center items-center ${view==="all"? "":""}`}>
                 <button className={`peer z-20 transition-all text-white my-2 ${selectedProject===project.slug? "":""}`}                         
                 onClick={projectClick}><h3 className="hover:bg-white text-2xl hover:text-gray-400 leading-10 px-2">{project.name}</h3>
                 </button>
@@ -314,6 +314,7 @@ return(
                     width={1080}
                     height={1080}
                     className={`object-cover ${selectedProject===project.slug? "lg:h-[40vw] lg:w-auto h-[14rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
+                    loading="lazy"
                     // placeholder="blur"
                     // blurDataURL={`${project.gallery[index].lqip}`}
                     unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
