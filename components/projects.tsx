@@ -164,7 +164,7 @@ export default function Projects({project}: Props) {
     
 
 return(
-    <section key={`${project.slug}`} className={`flex flex-col bg-gray-400 lg:text-xl text-lg ${view==="all"? "": ""} ${selectedProject===project.slug? "pb-5": ""}`}>
+    <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 lg:text-xl text-lg transition-all ${view==="all"? "": ""} ${selectedProject===project.slug? "pb-5 h-screen": view==="txt"? "h-[5rem]": ""}`}>
         {/* view ===txt? */}
         <span ref={txtRef} id="txt" className={`group flex flex-col items-center justify-center lg:h-[5rem] leading-none ${selectedProject===project.slug? "":""} ${view==="txt"? "lg:text-5xl text-2xl": "hidden"} `}>
             <div className="flex justify-center items-center">
@@ -236,13 +236,19 @@ return(
                     onClick={projectClick}>{project.name}
             </button>
         </span>
-
+        {/* ${view==="all" && selectedProject===project.slug? "fixed top-0 left-0 w-screen h-screen bg-gray-400 left-0 z-50 justify-center opacity-100": view==="txt" && selectedProject===project.slug? "max-h-screen-2xl": "fixed w-0 h-0"}`} */}
 
         {/* project open? */}
-        <span id={`${project.slug}`}  className={`overflow-hidden flex flex-col justify-start items-center ${view==="txt"? "": ""}  ${view==="all" && selectedProject===project.slug? "fixed top-0 left-0 w-screen h-screen bg-gray-400 left-0 z-50 justify-center opacity-100": view==="txt" && selectedProject===project.slug? "max-h-screen-2xl": "fixed w-0 h-0"}`}>
-            <button className={`peer z-20 px-2 mb-5 transition-all hover:bg-white hover:text-gray-400 ${view==="all"? "": "hidden"} ${selectedProject===project.slug? "lg:text-5xl": ""}`}                         
-                    onClick={projectClick}>{project.name}
-            </button>
+        <span id={`${project.slug}`}  className={`overflow-hidden flex flex-col justify-start items-center transition-all ${view==="txt"? "": ""}  ${selectedProject===project.slug? view==="all"? "fixed top-0 left-0 w-screen h-screen bg-gray-400 left-0 z-50 justify-center opacity-100": "max-h-[1000rem]" : "h-0"}`}
+        >
+            <div className={`flex justify-center items-center ${view==="all"? "":"hidden"}`}>
+                <button className={`peer z-20 transition-all text-white my-2 ${selectedProject===project.slug? "":""}`}                         
+                onClick={projectClick}><h3 className="hover:bg-white text-2xl hover:text-gray-400 leading-10 px-2">{project.name}</h3>
+                </button>
+                <button className={`peer z-20 transition-all text-white text-xl mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
+                onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 px-2">Close</h3>
+                </button>
+            </div>
             {/* current image */}
             {project.vimeo?.map((vid, index)=>(
                 <div key={`project.slug+${index}`} className={`peer flex justify-center items-center lg:h-[45rem] lg:w-[80rem] h-[14rem] w-[24rem]  ${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "": "hidden"}`}>
@@ -271,7 +277,7 @@ return(
                         <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
                     </div>
                     {galleryCount===1? ""
-                    :<button className={`hover:bg-white hover:text-gray-400 mx-2 z-30 px-2 ${blurClass}`} onClick={()=>{
+                    :<button className={`hover:bg-white hover:text-gray-400 mx-2 z-30 px-2${blurClass}`} onClick={()=>{
                         img===galleryCount-1?
                         router.push( `/?${createQueryString(`img`, `0`)}`, {scroll: false}):
                         router.push( `/?${createQueryString(`img`, `${img+1}`)}`, {scroll: false})

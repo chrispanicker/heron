@@ -27,13 +27,13 @@ export function OpeningCard({gallery}: Props){
     )  
 
     useEffect(()=>{
-        if(selectedProject != null || selectedProject != ""){
-            let proj = document.querySelector(`#${selectedProject}`)
-            proj?.scrollIntoView({
-                block: "center",
-            behavior: 'smooth'
-            })
-        }
+        // if(selectedProject != null || selectedProject != ""){
+        //     let proj = document.querySelector(`#${selectedProject}`)
+        //     proj?.scrollIntoView({
+        //         block: "center",
+        //     behavior: 'smooth'
+        //     })
+        // }
         view? "": router.push( `/?${createQueryString(`view`, `txt`)}`)
 
     }, [selectedProject])
