@@ -24,7 +24,7 @@ export default function Projects({project}: Props) {
     const filterRef = useRef<HTMLDivElement | null>(null)
     const txtRef = useRef<HTMLElement | null>(null)
     const blurClass = ' backdrop-blur-sm backdrop-brightness-[.7] ';
-    const buttonClass = ' lg:relative lg:top-auto top-[48dvh] fixed hover:bg-white hover:text-gray-400 mx-2 z-30 px-2 '
+    const buttonClass = ' lg:relative lg:top-auto top-[48vh] fixed hover:bg-white hover:text-gray-400 mx-2 z-30 px-2 '
     const textClass = " lg:text-xl lg:leading-auto text-[1rem] leading-[1.2rem] "
 
     let vimeoIDs:string[] = [];
@@ -154,8 +154,8 @@ return(
                 <button className={`peer z-20 transition-all text-white ${selectedProject===project.slug? "":""}`}                         
                 onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 leading-10 px-2 lg:py-2">{project.name}</h3>
                 </button>
-                <button className={`peer z-20 transition-all text-white text-xl mx-2 ${blurClass + textClass} ${selectedProject===project.slug? "":"hidden"}`}                         
-                onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 px-2 py-1">Close</h3>
+                <button className={`peer z-20 transition-all text-white text-xl mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
+                onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-2 py-1 lg:py-0 ${textClass}`}>Close</h3>
                 </button>
 
             </div>
@@ -217,15 +217,15 @@ return(
         </span>
 
         {/* project open? */}
-        <span id={`${project.slug}`}  className={`overflow-hidden flex flex-col justify-start items-center transition-all ${view==="txt"? "": ""}  
-        ${selectedProject===project.slug? view==="all"? `fixed top-0 left-0 w-screen h-screen ${blurClass} left-0 z-50 justify-center opacity-100`: "max-h-[1000vh]" : "h-0"}`}
+        <span id={`${project.slug}`}  className={`overflow-hidden flex flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
+        ${selectedProject===project.slug? view==="all"? `fixed top-0 left-0 w-screen h-screen ${blurClass} left-0 z-40 justify-center opacity-100`: "max-h-[1000vh]" : "h-0"}`}
         >
             <div className={`flex justify-center items-center ${view==="all"? "":"hidden"}`}>
                 <button className={`peer z-20 transition-all text-white my-2 ${selectedProject===project.slug? "":""}`}                         
                 onClick={projectClick}><h3 className="hover:bg-white text-2xl hover:text-gray-400 leading-10 px-2">{project.name}</h3>
                 </button>
                 <button className={`peer z-20 transition-all text-white mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
-                onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-2 py-1 ${textClass}`}>Close</h3>
+                onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-2 py-1 lg:py-0 ${textClass}`}>Close</h3>
                 </button>
             </div>
             {/* current image */}
@@ -282,7 +282,7 @@ return(
                     </div>}
                     {/* main nav gallery images */}
                     {galleryCount===1? ""
-                    :<button className={`left-0 py-1 ${buttonClass + blurClass + textClass}`} onClick={()=>{
+                    :<button className={`left-0 py-1 lg:py-0 ${buttonClass + blurClass + textClass}`} onClick={()=>{
                         img===0?
                         router.push( `/?${updateQueryString(`img`, `${galleryCount-1}`)}`, {scroll: false}):
                         router.push( `/?${updateQueryString(`img`, `${img-1}`)}`, {scroll: false})
@@ -299,7 +299,7 @@ return(
                     unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                     />
                     {galleryCount===1? ""
-                    :<button className={`right-0 py-1 ${buttonClass + blurClass + textClass}`} onClick={()=>{
+                    :<button className={`right-0 py-1 lg:py-0 ${buttonClass + blurClass + textClass}`} onClick={()=>{
                         img===galleryCount-1?
                         router.push( `/?${updateQueryString(`img`, `0`)}`, {scroll: false}):
                         router.push( `/?${updateQueryString(`img`, `${img+1}`)}`, {scroll: false})
@@ -324,7 +324,7 @@ return(
                                 onClick={()=>{
                                     router.push( `/?${createQueryString(`${key}`, `${filter}`)}`)
                                 }}
-                                className={`px-2 ${blurClass + textClass} mx-2 py-1 my-1 w-fit whitespace-nowrap 
+                                className={`px-2 ${blurClass + textClass} mx-2 py-1 lg:py-0 my-1 w-fit whitespace-nowrap 
                                 ${searchParams.getAll(key)?.includes(filter)? "bg-white text-gray-400":"hover:bg-white hover:text-gray-400"}`}
                                 >
                                     {`${filter}`}

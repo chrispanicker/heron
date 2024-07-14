@@ -8,6 +8,7 @@ export default function UsedFilters(){
     const roles = searchParams.getAll("roles");
     const tags = searchParams.getAll("tags");
     const collabs = searchParams.getAll("collabs");
+    const view = searchParams.get("view");
     const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]';
     const router = useRouter();
     const createQueryString = useCallback(
@@ -29,7 +30,7 @@ export default function UsedFilters(){
     const about = searchParams.get("about");
 
     return( searchParams.toString().includes("collabs")|| searchParams.toString().includes("roles") || searchParams.toString().includes("tags")?
-            <div className={`fixed lg:bottom-10 bottom-0 text-xl z-50 flex flex-row text-2xl pb-1 m-5 ${about==="open"? "blur-3xl": ""}`}>
+            <div className={`fixed lg:flex hidden bottom-10 text-xl z-50 flex-row text-2xl pb-1 m-5 ${about==="open"? "blur-3xl": ""}`}>
                 <p className={`mx-1 px-2 ${blurClass}`}>Filtered by:</p>
                 {roles.map((role, i)=>{
                     return <button 
@@ -61,6 +62,10 @@ export default function UsedFilters(){
                         {`${tag}`}
                     </button>
                 })}
+                <button className={`${blurClass} px-2 mx-1 cursor-alias`}
+                onClick={()=>{
+                    router.push(`/?view=${view}`)
+                }}>Clear</button>
             </div>: ""
     )
 }
