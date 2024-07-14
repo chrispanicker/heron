@@ -230,7 +230,7 @@ return(
             </div>
             {/* current image */}
             {project.vimeo?.map((vid, index)=>(
-                <div key={`project.slug+${index}`} className={`peer flex justify-center items-center lg:h-[45rem] lg:w-[80rem] h-[20rem] w-[32rem]  ${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "": "hidden"}`}>
+                <div key={`project.slug+${index}`} className={`peer flex justify-center items-center lg:h-[45rem] lg:w-[80rem] h-[20rem] w-[32rem]  ${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "hidden": "hidden"}`}>
                     {/* arrow nav */}
                     {galleryCount===1? ""
                     :<div className="absolute flex h-[70%] w-full lg:block hidden">
