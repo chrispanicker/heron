@@ -60,19 +60,38 @@ export async function getGallery(){
 
 interface Props {
         searchParams: {
-                tags?: string
-                collabs?: string
-                roles?: string
+                tags?: string[]
+                collabs?: string[]
+                roles?: string[]
         }
 }
 
 export async function getFilteredProjects({searchParams}:Props){ 
-        const {tags, collabs, roles} = searchParams 
+        let {tags, collabs, roles} = searchParams 
+        let tagQueries, collabQueries, roleQueries
+
+        typeof tags === "string"? tagQueries = `tags[] -> name match "${tags}"` 
+        : tagQueries = tags?.map((e, i)=>{
+                return `tags[] -> name match "${e}"`
+        }).join(" || ")
+
+        typeof collabs === "string"? collabQueries = `collabs[] -> name match "${collabs}"` 
+        : collabQueries = collabs?.map((e)=>{
+                return `collabs[] -> name match "${e}"`
+        }).join(" || ")
+
+        typeof roles === "string"? roleQueries = `roles[] -> name match "${roles}"` 
+        : roleQueries = roles?.map((e)=>{
+                return `roles[] -> name match "${e}"`
+        }).join(" || ")
+
         const projectFilter = `_type == "project"`
-        const tagFilter =  tags? `tags[]-> name match "${tags}" ${collabs || roles? "||" : "" }` : "" 
-        const collabFilter = collabs ? `collabs[]-> name match "${collabs}" ${roles? "||" : "" }` : ""
-        const roleFilter = roles ? `roles[]-> name match "${roles}"` : "" 
+        const tagFilter =  tags? `${tagQueries} ${collabs || roles? "||" : "" }` : "" 
+        const collabFilter = collabs ? `${collabQueries} ${roles? "||" : "" }` : ""
+        const roleFilter = roles ? `${roleQueries}` : "" 
+        
         const filter = collabs || roles || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
+
         return client.fetch(
                 groq`*[${projectFilter} ${filter}]|order(priority asc){
                     _id,

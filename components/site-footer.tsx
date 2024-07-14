@@ -38,7 +38,7 @@ export function SiteFooter(info:any){
                     : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)
                 }}>About</button>
             </div>
-            <span id="footer" className={`z-30 fixed grid grid-cols-2 bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll ${about==="open"? "lg:h-[50vh] h-[100vh]": "h-[0vh]"}`}>
+            <span id="footer" className={`z-30 fixed grid lg:grid-cols-2 bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll ${about==="open"? "h-[100vh]": "h-[0vh]"}`}>
                 <div className="w-4/4 m-5 p-2 text-xl">
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>

@@ -7,9 +7,9 @@ import dynamic from "next/dynamic";
 interface Props {
   searchParams: {
     view?: string
-    tags?: string
-    collabs?: string
-    roles?: string
+    tags?: string[]
+    collabs?: string[]
+    roles?: string[]
     about?: string
   }
 }
@@ -25,8 +25,8 @@ export default async function Home({searchParams}: Props) {
     filteredProjects? <main id="main" className={`font-normal lg:py-20 z-0 flex flex-col items-center justify-start min-h-screen`}>
         <OpeningCard gallery={gallery} />
         <Name />
-        <UsedFilters role={roles} tags={tags} collabs={collabs}/>
-        <section className={`pb-20 lg:pb-0 ${view==="all"? "grid lg:grid-cols-4 md:grid-cols-2": ""}`}>
+        <UsedFilters/>
+        <section className={`pb-20 lg:py-20 ${view==="all"? "grid lg:grid-cols-4 md:grid-cols-2": ""}`}>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
               <div className={`transition-all duration-500 ${about === "open"? "blur-2xl": ""}`} key={project.name + project._id}>
