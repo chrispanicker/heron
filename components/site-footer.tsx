@@ -25,6 +25,7 @@ export function SiteFooter(info:any){
     const collabs = searchParams.get('collabs');
     const about = searchParams.get('about');
     const blurClass = 'backdrop-blur-3xl backdrop-brightness-[.7]';
+    const textClass = " lg:text-xl lg:leading-auto text-[1rem] leading-[1.2rem] "
 
     
 
@@ -38,11 +39,11 @@ export function SiteFooter(info:any){
                     : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)
                 }}>About</button>
             </div>
-            <span id="footer" className={`z-30 fixed grid lg:grid-cols-2 bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll ${about==="open"? "h-[100vh]": "h-[0vh]"}`}>
-                <div className="w-4/4 m-5 p-2 text-xl">
+            <span id="footer" className={`z-30 fixed lg:grid lg:grid-cols-2 bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll ${about==="open"? "h-[100vh]": "h-[0vh]"}`}>
+                <div className="w-4/4 m-5 p-2 text-xl leading-[1.5rem]">
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
-                <div className="m-5 w-4/4">
+                <div className={`m-5 w-4/4 pb-20 ${textClass}`}>
                     <table className="w-[100%]">
                     <tbody>
                         <tr>

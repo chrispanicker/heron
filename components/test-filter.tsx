@@ -1,5 +1,4 @@
 import { Project } from "@/types/project"
-import { FilterButtons } from "./filter-buttons";
 import { Filters } from "./filters";
 
 interface Props{
@@ -29,7 +28,6 @@ export function TestFilter({projects}:Props){
         "tags": allTags, 
     };
     return (
-        // <FilterButtons {...filters} />
         <Filters filters={filters} projects={projects}  />
     )
    

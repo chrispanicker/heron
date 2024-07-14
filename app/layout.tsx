@@ -41,7 +41,7 @@ let info = await getInfo();
   return (
     <html lang="en" className='bg-gray-400 text-white overflow-x-hidden'>
       <body>
-        <section>
+        <section className='lg:pt-0 pt-10'>
           <TestFilter projects={allProjects}/>
           <ViewToggle />
           <>{children}</>

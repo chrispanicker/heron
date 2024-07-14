@@ -16,6 +16,7 @@ export function Filters({filters, projects}: Props){
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin');
     const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]';
+    const textClass = " lg:text-xl lg:leading-auto text-[1rem] leading-[1.2rem] ";
 
     
     const createQueryString = useCallback(
@@ -54,7 +55,7 @@ export function Filters({filters, projects}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`)
                     }}
-                    className={`${blurClass} px-2 py-0 mx-1 my-1 w-fit whitespace-nowrap transition-all
+                    className={`${blurClass + textClass} px-2 py-1 lg:py-0 mx-1 my-1 w-fit whitespace-nowrap transition-all
                     ${searchParams.getAll(entry.key)?.includes(entry.filter)? "selection text-gray-400":"hover:bg-white hover:text-gray-400"}`
                     }>
                         {`${entry.filter}`}
