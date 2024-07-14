@@ -8,6 +8,7 @@ export default function UsedFilters(){
     const roles = searchParams.getAll("roles");
     const tags = searchParams.getAll("tags");
     const collabs = searchParams.getAll("collabs");
+    const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]';
     const router = useRouter();
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -27,9 +28,9 @@ export default function UsedFilters(){
 
     const about = searchParams.get("about");
 
-    return( searchParams.toString().includes("roles" || "tags" || "collabs")?
-            <div className={`fixed bottom-10 text-xl z-50 flex flex-row text-2xl pb-1 m-5 ${about==="open"? "blur-3xl": ""}`}>
-                <p className="mx-1">Filtered by:</p>
+    return( searchParams.toString().includes("collabs")|| searchParams.toString().includes("roles") || searchParams.toString().includes("tags")?
+            <div className={`fixed lg:bottom-10 bottom-0 text-xl z-50 flex flex-row text-2xl pb-1 m-5 ${about==="open"? "blur-3xl": ""}`}>
+                <p className={`mx-1 px-2 ${blurClass}`}>Filtered by:</p>
                 {roles.map((role, i)=>{
                     return <button 
                     key={`${role}${i}`}
