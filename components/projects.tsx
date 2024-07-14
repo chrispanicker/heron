@@ -197,7 +197,7 @@ return(
         </span>
 
         {/* view ===all? */}
-        <span id="all" className={`flex flex-col items-center justify-center overflow-hidden ${selectedProject===project.slug? "h-auto": "h-[26rem] px-5"}  ${view==="all"? "py-2": "hidden"} `}>
+        <span id="all" className={`flex flex-col items-center justify-center overflow-hidden ${selectedProject===project.slug? "h-auto": "h-[19rem] px-5"}  ${view==="all"? "py-2": "hidden"} `}>
             <button className={`group peer z-20 flex justify-center items-center transition-all ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
             onClick={projectClick}>
                     <Image
