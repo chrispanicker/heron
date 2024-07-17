@@ -194,18 +194,18 @@ return(
         </span>
 
         {/* project open? */}
-        <span id={`${project.slug}`}  className={`z-50 overflow-x-hidden flex w-screen flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
+        <span id={`${project.slug}`} className={`z-40 overflow-x-hidden flex w-screen flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
         ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-screen ${blurClass} left-0 z-40 justify-start opacity-100 pt-20`: "h-0"}`}
         >
-            <div className={`flex justify-center items-center`}>
-                <button className={`peer z-20 transition-all text-white my-2 ${selectedProject===project.slug? "":""}`}                         
+            <div className={`flex justify-center items-center z-40`}>
+                <button className={`peer transition-all text-white my-2 ${selectedProject===project.slug? "":""}`}                         
                 onClick={projectClick}><h3 className="hover:bg-white text-2xl hover:text-gray-400 leading-10 px-2">{project.name}</h3>
                 </button>
-                <button className={`peer z-20 transition-all text-white mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
+                <button className={`peer transition-all text-white mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
                 onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-2 py-1 lg:py-0 ${textClass}`}>Close</h3>
                 </button>
             </div>
-            <div className="w-screen overflow-x-scroll snap-x snap-proximity">
+            <div className="w-screen overflow-x-scroll snap-x snap-proximity z-40">
                 <span className={`flex left-0 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center w-screen": "w-max justify-start items-start"}`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
@@ -236,10 +236,10 @@ return(
                 </span>
             </div>
             {/* BIO */}
-            <div className={`flex w-screen text-center justify-center items-center lg:px-32 px-5 pb-5 ${textClass}`}><PortableText value={project.content}/></div>
+            <div className={`z-40 flex w-screen text-center justify-center items-center lg:px-32 px-5 pb-5 ${textClass}`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
-            <div ref={filterRef} className="lg:flex lg:flex-row text-center  justify-center items-center mx-5">
+            <div ref={filterRef} className="z-40 lg:flex lg:flex-row text-center  justify-center items-center mx-5">
             {Object.entries(filters).map(([key, array])=>{
                 return(
                     <span key={key} className="capitalize lg:flex justify-center items-center my-1">
@@ -263,6 +263,10 @@ return(
                 )
             })}
             </div>
+            <button 
+            className="w-screen h-screen absolute top-0 z-0"
+            onClick={projectClick}
+            />
         </span> 
     </section>
 )
