@@ -1,3 +1,4 @@
+import MobileProjects from "@/components/mobile-projects";
 import { Name } from "@/components/name";
 import { OpeningCard } from "@/components/opening-card";
 import Projects from "@/components/projects";
@@ -26,7 +27,16 @@ export default async function Home({searchParams}: Props) {
         <OpeningCard gallery={gallery} />
         <Name />
         <UsedFilters/>
-        <section className={`pb-20 lg:py-20 ${view==="all"? "grid lg:grid-cols-4 md:grid-cols-2": ""}`}>
+        <section className={`pb-20 h-screen overflow-y-scroll snap-y snap-proximity lg:hidden block `}>
+          {filteredProjects.map((project:any, index:number)=>{ 
+            return(
+              <div className={` ${view==="all"? " sticky " :""} snap-start top-0 transition-all duration-500 ${about === "open"? "blur-3xl": ""}`} key={project.name + project._id}>
+                <MobileProjects filteredProjects={filteredProjects} project={project} index={index}/>
+              </div>
+          )})}
+        </section>
+
+        <section className={`pb-20 hidden lg:block lg:py-20 ${view==="all"? "grid lg:grid-cols-4 md:grid-cols-2": ""}`}>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
               <div className={`transition-all duration-500 ${about === "open"? "blur-2xl": ""}`} key={project.name + project._id}>

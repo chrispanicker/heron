@@ -8,6 +8,6 @@ export function Name(){
     const selectedProject = searchParams.get("project");
     const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]'
     return(
-        <section className={`fixed z-40 lg:z-0 text-xl lg:bottom-0 lg:top-auto top-0  h-fit transition-all px-2 my-5 hover:bg-white hover:text-gray-400 decoration-dotted ${about==="open"? "blur-3xl": `${blurClass}`}`}><a href=""><h1>&#169; Drew Litowitz</h1></a></section>
+        <section className={`fixed z-40 text-xl bottom-0  h-fit transition-all px-2 my-5 hover:bg-white hover:text-gray-400 decoration-dotted ${about==="open"? "blur-3xl": `${blurClass}`}`}><a href=""><h1>&#169; Drew Litowitz</h1></a></section>
     )
 }
