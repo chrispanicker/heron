@@ -172,7 +172,7 @@ return(
         </span>
 
         {/* view ===all? */}
-        <span id="all" className={`flex relative flex-col items-center justify-center overflow-hidden ${view==="all"? "": "hidden"} ${selectedProject===project.slug? "h-auto": "h-screen"}`}>
+        <span id="all" className={`flex z-0 relative flex-col items-center justify-center overflow-hidden ${view==="all"? "": "hidden"} ${selectedProject===project.slug? "h-auto": "h-screen"}`}>
             
             <button className={`peer absolute top-5 z-30 text-3xl transition-all peer-hover:bg-white peer-hover:text-gray-400 px-2 ${blurClass} ${selectedProject===project.slug? "": ""}`}                         
                     onClick={projectClick}>{project.name}
@@ -194,8 +194,8 @@ return(
         </span>
 
         {/* project open? */}
-        <span id={`${project.slug}`}  className={`z-40 overflow-x-hidden flex w-screen flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
-        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-screen ${blurClass} left-0 z-40 justify-center opacity-100`: "h-0"}`}
+        <span id={`${project.slug}`}  className={`z-50 overflow-x-hidden flex w-screen flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
+        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-screen ${blurClass} left-0 z-40 justify-start opacity-100 pt-20`: "h-0"}`}
         >
             <div className={`flex justify-center items-center`}>
                 <button className={`peer z-20 transition-all text-white my-2 ${selectedProject===project.slug? "":""}`}                         

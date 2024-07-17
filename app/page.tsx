@@ -30,7 +30,7 @@ export default async function Home({searchParams}: Props) {
         <section className={`pb-20 h-screen overflow-y-scroll snap-y snap-proximity lg:hidden block `}>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-              <div className={` ${view==="all"? " sticky " :""} snap-start top-0 transition-all duration-500 ${about === "open"? "blur-3xl": ""}`} key={project.name + project._id}>
+              <div className={` ${view==="all"? " sticky " :""} snap-center top-0 transition-all duration-500 ${about === "open"? "blur-3xl": ""}`} key={project.name + project._id}>
                 <MobileProjects filteredProjects={filteredProjects} project={project} index={index}/>
               </div>
           )})}
