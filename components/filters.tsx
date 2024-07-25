@@ -45,7 +45,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`lg:fixed lg:block top-0 z-40 p-5 transition-all text-white text-xl text-center duration-500 ${view==="all"? "hidden": ""}  ${about==="open"? "blur-3xl": ""}`}>
+        <section className={`lg:fixed lg:block top-0 z-40 p-5 transition-all text-white text-xl text-center duration-500 ${view==="all"? "hidden": ""} ${selectedProject? "blur-lg": ""} ${about==="open"? "blur-3xl": ""}`}>
             
             {allFilters.map((entry:any, idx:any)=>{
                 return (

@@ -149,7 +149,7 @@ export default function MobileProjects({project}: Props) {
 return(
     <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 lg:text-xl text-lg transition-all ${view==="txt" && selectedProject===project.slug? "": ""} ${view==="txt"? "": ""}`}>
                 {/* view ===txt? */}
-                <span ref={txtRef} id="txt" className={`z-0 group flex flex-col items-center justify-center lg:h-[5rem] leading-none ${selectedProject===project.slug? "":""} ${view==="txt"? "lg:text-5xl text-2xl": "hidden"} `}>
+                <span ref={txtRef} id="txt" className={`z-0 group flex flex-col items-center justify-center lg:h-[5rem] leading-none ${selectedProject? "blur-lg":""} ${view==="txt"? "lg:text-5xl text-2xl": "hidden"} `}>
                     <div className="flex justify-center items-center">
                         <button className={`peer z-20 transition-all text-white ${selectedProject===project.slug? "":""}`}                         
                         onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 leading-10 px-2 lg:py-2">{project.name}</h3>
