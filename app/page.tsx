@@ -27,16 +27,16 @@ export default async function Home({searchParams}: Props) {
         <OpeningCard gallery={gallery} />
         <Name />
         <UsedFilters/>
-        <section className={`pb-20 h-screen overflow-y-scroll snap-y lg:hidden block `}>
+        <section className={`pb-20 h-screen overflow-y-scroll snap-y lg:hidden ${view==="all"? "block": "block"} `}>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-              <div className={` ${view==="all"? "sticky " :""} snap-center top-0 transition-all duration-500 ${about === "open"? "blur-3xl": ""}`} key={project.name + project._id}>
+              <div className={` ${view==="all"? "sticky" :""} snap-end snap-always top-0 transition-all duration-500 ${about === "open"? "blur-3xl": ""}`} key={project.name + project._id}>
                 <MobileProjects filteredProjects={filteredProjects} project={project} index={index}/>
               </div>
           )})}
         </section>
 
-        <section className={`pb-20 hidden lg:block lg:py-20 ${view==="all"? "grid lg:grid-cols-4 md:grid-cols-2": ""}`}>
+        <section className={`pb-20 hidden lg:grid lg:py-20 ${view==="all"? "grid lg:grid-cols-4 md:grid-cols-2": ""}`}>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
               <div className={`transition-all duration-500 ${about === "open"? "blur-2xl": ""}`} key={project.name + project._id}>

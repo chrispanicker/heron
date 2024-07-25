@@ -264,7 +264,7 @@ return(
             })}
             </div>
             <button 
-            className="w-screen h-screen absolute top-0 z-0"
+            className={`w-screen h-screen absolute top-0 z-0 ${selectedProject===project.slug? "block": "hidden"}`}
             onClick={projectClick}
             />
         </span> 
