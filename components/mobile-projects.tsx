@@ -172,7 +172,7 @@ return(
         </span>
 
         {/* view ===all? */}
-        <span id="all" className={`flex z-0 relative flex-col items-center justify-center overflow-hidden ${view==="all"? "": "hidden"} ${selectedProject===project.slug? "h-auto": "h-screen"}`}>
+        <span id="all" className={`flex z-0 relative flex-col items-center justify-center overflow-hidden transition-all duration-500 ${view==="all"? "": "hidden"} ${selectedProject===project.slug? "h-auto": "h-screen"} ${selectedProject? "blur-2xl": ""}`}>
             
             <button className={`peer absolute top-5 z-30 text-3xl transition-all peer-hover:bg-white peer-hover:text-gray-400 px-2 ${blurClass} ${selectedProject===project.slug? "": ""}`}                         
                     onClick={projectClick}>{project.name}
@@ -195,10 +195,10 @@ return(
 
         {/* project open? */}
         <span id={`${project.slug}`} className={`z-40 overflow-x-hidden flex w-screen flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
-        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-screen ${blurClass} left-0 z-40 justify-start opacity-100 pt-20`: "h-0"}`}
+        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-screen left-0 z-40 justify-start opacity-100 pt-20`: "h-0"}`}
         >
-            <div className={`flex justify-center items-center z-40`}>
-                <button className={`peer transition-all text-white my-2 ${selectedProject===project.slug? "":""}`}                         
+            <div className={`flex justify-center items-center z-40 mb-2`}>
+                <button className={`peer transition-all text-white ${blurClass} ${selectedProject===project.slug? "":""}`}                         
                 onClick={projectClick}><h3 className="hover:bg-white text-2xl hover:text-gray-400 leading-10 px-2">{project.name}</h3>
                 </button>
                 <button className={`peer transition-all text-white mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
@@ -206,10 +206,10 @@ return(
                 </button>
             </div>
             <div className="w-screen overflow-x-scroll snap-x snap-proximity z-40">
-                <span className={`flex left-0 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center w-screen": "w-max justify-start items-start"}`}>
+                <span className={`flex left-0 px-20 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center w-screen": "w-max justify-start items-start"}`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
-                        <div key={`project.slug+${index}`} className={`snap-center peer flex justify-center items-center lg:h-[45rem] lg:w-[80rem] h-[20rem] w-[35.5rem]  ${selectedProject===project.slug? img===index? "":"": view==="all"? "hidden": "hidden"}`}>
+                        <div key={`project.slug+${index}`} className={`snap-start peer flex justify-center items-center h-[17rem] w-[30rem]  ${selectedProject===project.slug? img===index? "":"": view==="all"? "hidden": "hidden"}`}>
                             {/* main gallery vimeo */}
                             <div className={`relative overflow-hidden w-full pt-[56.25%]`}>
                                 <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
@@ -225,7 +225,7 @@ return(
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover ${selectedProject===project.slug? "lg:h-[40rem] h-[20rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
+                            className={`object-cover ${selectedProject===project.slug? "h-[17rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
                             loading="lazy"
                             // placeholder="blur"
                             // blurDataURL={`${project.gallery[index].lqip}`}
