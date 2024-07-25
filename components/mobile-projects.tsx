@@ -195,7 +195,7 @@ return(
 
         {/* project open? */}
         <span id={`${project.slug}`} className={`z-40 overflow-x-hidden flex w-screen flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
-        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-screen left-0 z-40 justify-start opacity-100 pt-20`: "h-0"}`}
+        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-[100dvh] left-0 z-40 justify-start opacity-100 pt-20`: "h-0"}`}
         >
             <div className={`flex justify-center items-center z-40 mb-2`}>
                 <button className={`peer transition-all text-white ${blurClass} ${selectedProject===project.slug? "":""}`}                         
