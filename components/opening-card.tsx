@@ -61,7 +61,7 @@ export function OpeningCard({gallery}: Props){
     }, [cardRef])
     
     return(
-        <div ref={cardRef} className="text-5xl w-screen h-screen backdrop-blur-lg backdrop-brightness-[1] fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
+        <div ref={cardRef} className="text-5xl w-screen h-[100dvh] backdrop-blur-lg backdrop-brightness-[1] fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
             <div className="flex justify-center items-center z-50">
                 <p className= "text-white mx-2 w-fit px-4 ">&#169; Drew Litowitz</p>
             </div>
