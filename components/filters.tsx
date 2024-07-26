@@ -45,7 +45,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`lg:fixed lg:block top-0 z-40 p-5 transition-all text-white text-xl text-center duration-500 ${view==="all"? "hidden": ""} ${selectedProject? "blur-lg": ""} ${about==="open"? "blur-3xl": ""}`}>
+        <section className={`lg:fixed lg:block top-0 z-40 p-5 transition-all text-white text-xl text-center duration-500 ${view==="all"? "hidden": ""} ${selectedProject? "": ""} ${about==="open"? "blur-3xl": ""}`}>
             
             {allFilters.map((entry:any, idx:any)=>{
                 return (
@@ -56,7 +56,7 @@ export function Filters({filters, projects}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`)
                     }}
-                    className={`${blurClass + textClass} px-2 py-1 lg:py-0 mx-1 my-1 w-fit whitespace-nowrap transition-all
+                    className={`${selectedProject? "blur-2xl lg:blur-none": `${blurClass}`}  ${textClass} px-2 py-1 lg:py-0 mx-1 my-1 w-fit whitespace-nowrap transition-all
                     ${searchParams.getAll(entry.key)?.includes(entry.filter)? "selection text-gray-400":"hover:bg-white hover:text-gray-400"}`
                     }>
                         {`${entry.filter}`}
