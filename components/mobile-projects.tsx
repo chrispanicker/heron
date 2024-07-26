@@ -172,7 +172,7 @@ return(
         </span>
 
         {/* view ===all? */}
-        <span id="all" className={`flex z-0 relative snap-start snap-proximity snap-always flex-col items-center justify-center overflow-hidden transition-all duration-500 ${view==="all"? "": "hidden"} ${selectedProject===project.slug? "h-auto": "h-[100dvh]"} ${selectedProject? "blur-2xl": ""}`}>
+        <span id="all" className={`flex z-0 relative snap-start snap-manditory snap-always flex-col items-center justify-center overflow-hidden transition-all duration-500 ${view==="all"? "": "hidden"} ${selectedProject===project.slug? "h-auto": "h-[100dvh]"} ${selectedProject? "blur-2xl": ""}`}>
             
             <button className={`peer absolute top-5 z-30 text-3xl transition-all peer-hover:bg-white peer-hover:text-gray-400 px-2 ${blurClass} ${selectedProject===project.slug? "": ""}`}                         
                     onClick={projectClick}>{project.name}
