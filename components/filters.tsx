@@ -56,7 +56,7 @@ export function Filters({filters, projects}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`)
                     }}
-                    className={`${selectedProject? "blur-2xl lg:blur-none": `${blurClass}`}  ${textClass} px-2 py-1 lg:py-0 mx-1 my-1 w-fit whitespace-nowrap transition-all
+                    className={`${selectedProject? ``: ``}  ${blurClass} ${textClass} px-2 py-1 lg:py-0 mx-1 my-1 w-fit whitespace-nowrap transition-all
                     ${searchParams.getAll(entry.key)?.includes(entry.filter)? "selection text-gray-400":"hover:bg-white hover:text-gray-400"}`
                     }>
                         {`${entry.filter}`}

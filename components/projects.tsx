@@ -169,6 +169,7 @@ return(
                 // placeholder="blur"
                 // blurDataURL={`${project.gallery[index].lqip}`}
             /> */}
+            
             <div ref={filterRef} className="flex flex-col lg:flex-row justify-center items-center mx-5">
                 <div className={`transition-all overflow-hidden lg:flex hidden ${selectedProject===project.slug? "h-0": "group-hover:h-[3rem] h-0"}`}>
                     {Object.entries(filters).map(([key, array])=>{
