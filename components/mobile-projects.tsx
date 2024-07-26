@@ -197,7 +197,7 @@ return(
         <span id={`${project.slug}`} className={`z-40 overflow-x-hidden flex w-screen flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
         ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-[100dvh] left-0 z-50 justify-start opacity-100 pt-20`: "h-0 z-0"}`}
         >
-            <div className={`flex justify-center items-center z-40 mb-2`}>
+            <div className={`flex justify-center items-center z-40 mb-5`}>
                 <button className={`peer transition-all text-white ${blurClass} ${selectedProject===project.slug? "":""}`}                         
                 onClick={projectClick}><h3 className="hover:bg-white text-2xl hover:text-gray-400 leading-10 px-2">{project.name}</h3>
                 </button>
@@ -236,7 +236,7 @@ return(
                 </span>
             </div>
             {/* BIO */}
-            <div className={`z-40 flex w-screen text-center justify-center items-center lg:px-32 px-5 pb-5 ${textClass}`}><PortableText value={project.content}/></div>
+            <div className={`z-40 flex w-screen text-center justify-center items-center lg:px-32 mx-5 mb-5 py-2 ${blurClass+textClass}`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
             <div ref={filterRef} className="z-40 lg:flex lg:flex-row text-center  justify-center items-center mx-5">
