@@ -178,7 +178,7 @@ return(
                     onClick={projectClick}>{project.name}
             </button>
 
-            <button className={`group peer z-20 flex justify-center items-center transition-all ${selectedProject===project.slug? "z-50" : "hover:blur-none hover:text-white hover:bg-gray-400 z-0"}`}                         
+            <button className={`group peer z-20 flex justify-center items-center transition-all ${selectedProject===project.slug? "z-40" : "hover:blur-none hover:text-white hover:bg-gray-400 z-0"}`}                         
             onClick={projectClick}>
                     <Image
                     src={urlForImage(project.preview).url()}
@@ -195,7 +195,7 @@ return(
 
         {/* project open? */}
         <span id={`${project.slug}`} className={`z-40 overflow-x-hidden flex w-screen flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
-        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-[100dvh] left-0 z-50 justify-start opacity-100 pt-20 ${blurClass}`: "h-0 z-0"}`}
+        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-[100dvh] left-0 z-40 justify-start opacity-100 pt-20 ${blurClass}`: "h-0 z-0"}`}
         >
             <div className={`flex justify-center items-center z-40 mb-5`}>
                 <button className={`peer transition-all text-white  ${selectedProject===project.slug? "":""}`}                         
