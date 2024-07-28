@@ -8,6 +8,7 @@ export default function UsedFilters(){
     const roles = searchParams.getAll("roles");
     const tags = searchParams.getAll("tags");
     const collabs = searchParams.getAll("collabs");
+    const selectedProject = searchParams.get("project")
     const view = searchParams.get("view");
     const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]';
     const router = useRouter();
@@ -30,15 +31,15 @@ export default function UsedFilters(){
     const about = searchParams.get("about");
 
     return( searchParams.toString().includes("collabs")|| searchParams.toString().includes("roles") || searchParams.toString().includes("tags")?
-            <div className={`fixed flex bottom-10 text-xl z-30 flex-row text-2xl pb-1 m-5 ${about==="open"? "blur-3xl": ""}`}>
-                <p className={`mx-1 px-2 ${blurClass}`}>Filtered by:</p>
+            <div className={`fixed flex flex-wrap w-screen leading-[1.1rem] bottom-10 text-lg z-30 justify-center text-center flex-row lg:text-xl px-5 pb-5 transition-all ${about==="open"? "blur-2xl": ""} ${selectedProject? "max-[1024px]:blur-2xl": ""}`}>
+                <p className={`lg:py-0 py-1 px-2 mx-1 mb-2 text-center w-fit ${blurClass}`}>Filtered by:</p>
                 {roles.map((role, i)=>{
                     return <button 
                     key={`${role}${i}`}
                     onClick={()=>{
                         router.push( `/?${createQueryString(`roles`, `${role}`)}`)
                     }}
-                    className={`bg-white text-gray-400 px-2 mx-1`}>
+                    className={`bg-white text-gray-400 px-2 lg:py-0 py-1 mx-1 mb-2`}>
                         {`${role}`}
                     </button>
                 })}
@@ -48,7 +49,7 @@ export default function UsedFilters(){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`collabs`, `${collab}`)}`)
                     }}
-                    className={`bg-white text-gray-400 px-2 mx-1`}>
+                    className={`bg-white text-gray-400 px-2 lg:py-0 py-1 mx-1 mb-2`}>
                         {`${collab}`}
                     </button>
                 })}
@@ -58,11 +59,11 @@ export default function UsedFilters(){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`tags`, `${tag}`)}`)
                     }}
-                    className={`bg-white text-gray-400 px-2 mx-1`}>
+                    className={`bg-white text-gray-400 px-2 lg:py-0 py-1 mx-1 mb-2`}>
                         {`${tag}`}
                     </button>
                 })}
-                <button className={`${blurClass} px-2 mx-1 cursor-alias`}
+                <button className={`${blurClass} lg:py-0 px-2 mx-1 py-1 mb-2 cursor-alias`}
                 onClick={()=>{
                     router.push(`/?view=${view}`)
                 }}>Clear</button>
