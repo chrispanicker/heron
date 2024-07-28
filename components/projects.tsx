@@ -48,6 +48,7 @@ export default function Projects({project}: Props) {
         "tags": allTags, 
     };
 
+
     useEffect(()=>{
         if(selectedProject===project.slug){
             project.tags?.map((tag:any)=>{
@@ -91,6 +92,7 @@ export default function Projects({project}: Props) {
                 } 
             } 
 
+            name==="roles"||"tags"||"collabs" && selectedProject? params.delete("project", params?.get("project")!):""
             
             name==="project"||name==="img"? 
             stringSearchParams.includes(`${name}=${value}`)?
@@ -302,8 +304,8 @@ return(
                     height={1080}
                     className={`object-cover ${selectedProject===project.slug? "h-[30rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
                     loading="lazy"
-                    // placeholder="blur"
-                    // blurDataURL={`${project.gallery[index].lqip}`}
+                    placeholder={urlForImage(image).url().includes(".gif")? "empty": "blur"}
+                    blurDataURL={`${project.gallery[index].lqip}`}
                     unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                     />
                     {galleryCount===1? ""
