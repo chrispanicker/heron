@@ -205,11 +205,11 @@ return(
                 onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-2 py-1 lg:py-0 ${textClass}`}>Close</h3>
                 </button>
             </div>
-            <div className="w-screen overflow-x-scroll snap-x snap-proximity z-40">
+            <div className="w-screen overflow-x-scroll snap-x snap-mandatory z-40">
                 <span className={`flex left-0 px-20 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center w-screen": "w-max justify-start items-start"}`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
-                        <div key={`project.slug+${index}`} className={`snap-start snap-always peer flex justify-center items-center h-[17rem] w-[30rem]  ${selectedProject===project.slug? img===index? "":"": view==="all"? "hidden": "hidden"}`}>
+                        <div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center h-[17rem] w-[30rem]  ${selectedProject===project.slug? img===index? "":"": view==="all"? "hidden": "hidden"}`}>
                             {/* main gallery vimeo */}
                             <div className={`relative overflow-hidden w-full pt-[56.25%]`}>
                                 <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
