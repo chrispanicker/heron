@@ -205,7 +205,7 @@ return(
                 onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-2 py-1 lg:py-0 ${textClass}`}>Close</h3>
                 </button>
             </div>
-            <div className="w-screen overflow-x-scroll snap-x snap-mandatory z-40">
+            <div className="w-screen overflow-x-scroll snap-x snap-mandatory z-40 mb-2">
                 <span className={`flex left-0 px-20 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center w-screen": "w-max justify-start items-start"}`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
@@ -218,7 +218,7 @@ return(
                     ))}
 
                     {project.images?.map((image, index)=>(
-                        <div key={`project.slug+${index+vimeoCount}`} className={`snap-center snap-always peer pb-5 mx-2 flex justify-center items-center ${selectedProject===project.slug? img===index+vimeoCount? "":"": "hidden"}`}>
+                        <div key={`project.slug+${index+vimeoCount}`} className={`snap-center snap-always peer pb-2 mx-2 flex justify-center items-center ${selectedProject===project.slug? img===index+vimeoCount? "":"": "hidden"}`}>
                             {/* main nav gallery images */}
                             <Image
                             src={urlForImage(image).url()}
