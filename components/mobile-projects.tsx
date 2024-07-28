@@ -206,7 +206,7 @@ return(
                 </button>
             </div>
             <div className="w-screen overflow-x-scroll snap-x snap-mandatory z-40 mb-2">
-                <span className={`flex left-0 px-20 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center w-screen": "w-max justify-start items-start"}`}>
+                <span className={`flex left-0 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center w-screen": "px-20 w-max justify-start items-start"}`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
                         <div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center h-[17rem] w-[30rem]  ${selectedProject===project.slug? img===index? "":"": view==="all"? "hidden": "hidden"}`}>
