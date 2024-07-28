@@ -37,15 +37,15 @@ export function OpeningCard({gallery}: Props){
         console.log(type)
         if(type === 0){
             setTimeout(()=>{
-                document.querySelector("#image1")?.classList.replace("h-screen", "h-0")
+                document.querySelector("#image1")?.classList.replace("h-[100dvh]", "h-0")
                 // document.querySelector("#image2")?.classList.replace("hidden", "block")
             }, 800)
             setTimeout(()=>{
-                document.querySelector("#image2")?.classList.replace("h-screen", "h-0")
+                document.querySelector("#image2")?.classList.replace("h-[100dvh]", "h-0")
                 // document.querySelector("#image3")?.classList.replace("hidden", "block")
             }, 1600)
             setTimeout(()=>{
-                document.querySelector("#image3")?.classList.replace("h-screen", "h-0")
+                document.querySelector("#image3")?.classList.replace("h-[100dvh]", "h-0")
             }, 2400)
         }else if(type === 1){
             setTimeout(()=>{
@@ -89,14 +89,14 @@ export function OpeningCard({gallery}: Props){
             <div className="flex justify-center items-center z-50">
                 <p className= "text-white mx-2 w-fit px-4 backdrop-blur-sm backdrop-brightness-[.7] ">&#169; Drew Litowitz</p>
             </div>
-            <div id="gallery" className="absolute top-0 flex w-screen h-screen justify-start items-center">
+            <div id="gallery" className="absolute top-0 flex w-screen h-[100dvh] justify-start items-center">
                 <Image
                 src={urlForImage(gallery[2].projects.preview).url()}
                 alt=""
                 width={1080}
                 height={1080}
                 id="image3"
-                className="absolute opacity-100 w-screen h-screen object-cover transition-all blur-none duration-500"
+                className="absolute opacity-100 w-screen h-[100dvh] object-cover transition-all blur-none duration-500"
                 unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                 priority={true}
                 />
@@ -106,7 +106,7 @@ export function OpeningCard({gallery}: Props){
                 width={1080}
                 height={1080}
                 id="image2"
-                className="absolute opacity-100 w-screen h-screen object-cover transition-all blur-none duration-500"
+                className="absolute opacity-100 w-screen h-[100dvh] object-cover transition-all blur-none duration-500"
                 unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                 priority={true}
                 />
@@ -116,7 +116,7 @@ export function OpeningCard({gallery}: Props){
                 width={1080}
                 height={1080}
                 id="image1"
-                className="absolute opacity-100 w-screen h-screen object-cover transition-all blur-none duration-500"
+                className="absolute opacity-100 w-screen h-[100dvh] object-cover transition-all blur-none duration-500"
                 unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                 priority={true}
                 />
