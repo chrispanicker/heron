@@ -31,7 +31,7 @@ export function SiteFooter(info:any){
 
     return (
         isSanityStudio? "" : 
-        <footer ref={footerRef} className="text-xl text-justify w-full">
+        <footer ref={footerRef} className="text-xl w-full">
             <div id="footImgDiv" className="flex w-screen top-screen justify-center items-center">
                 <button id="footerTab" className={`fixed z-40 bottom-0 right-0 hover:bg-white hover:text-gray-400 decoration-dotted px-2 m-5 ${blurClass}`} onClick={()=>{
                     searchParams.getAll(`about`).includes("open")?
@@ -40,16 +40,14 @@ export function SiteFooter(info:any){
                 }}>About</button>
             </div>
             <span id="footer" className={`z-30 fixed lg:grid lg:grid-cols-2 bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll ${about==="open"? "h-[100vh]": "h-[0vh]"}`}>
-                <div className="w-4/4 m-5 p-2 text-xl leading-[1.5rem]">
+                <div className={`w-4/4 m-5 p-5 text-xl leading-[1.5rem] h-fit ${blurClass}`}>
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
-                <div className={`m-5 w-4/4 pb-20 ${textClass}`}>
+                <div className={`m-5 w-4/4 p-5 h-fit ${blurClass} ${textClass}`}>
                     <table className="w-[100%]">
                     <tbody>
-                        <tr>
-                            <td>Company</td>
-                            <td>Title</td>
-                            <td>Years</td>
+                        <tr className="">
+                            {/* <td>Experience</td> */}
                         </tr>
                         {info.info[0].cv.map((job:job)=>(
                             <tr key={`${job.company}`}>

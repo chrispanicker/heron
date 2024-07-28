@@ -195,13 +195,13 @@ return(
 
         {/* project open? */}
         <span id={`${project.slug}`} className={`z-40 overflow-x-hidden flex w-screen flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
-        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-[100dvh] left-0 z-40 justify-start opacity-100 pt-20 ${blurClass}`: "h-0 z-0"}`}
+        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-[100dvh] left-0 z-40 justify-start opacity-100 pt-20`: "h-0 z-0"}`}
         >
             <div className={`flex justify-center items-center z-40 mb-5`}>
-                <button className={`peer transition-all text-white  ${selectedProject===project.slug? "":""}`}                         
+                <button className={`peer transition-all ${blurClass} ${selectedProject===project.slug? "":""}`}                         
                 onClick={projectClick}><h3 className="hover:bg-white text-2xl hover:text-gray-400 leading-10 px-2">{project.name}</h3>
                 </button>
-                <button className={`peer transition-all text-white mx-2 ${selectedProject===project.slug? "":"hidden"}`}                         
+                <button className={`peer transition-all ${blurClass} mx-2 ${selectedProject===project.slug? "":"hidden"}`}                         
                 onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-2 py-1 lg:py-0 ${textClass}`}>Close</h3>
                 </button>
             </div>

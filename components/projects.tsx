@@ -104,7 +104,7 @@ export default function Projects({project}: Props) {
     )
 
     const projectClick = () =>{
-        router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, { scroll: false })
+        router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, { scroll: false})
         
         
         if(selectedProject===project.slug){
@@ -147,7 +147,8 @@ export default function Projects({project}: Props) {
     
 
 return(
-    <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 lg:text-xl text-lg transition-all ${view==="txt" && selectedProject===project.slug? "h-screen pb-5": ""} ${selectedProject===project.slug? " ": view==="txt"? "lg:h-[5rem]": ""}`}>
+    <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 lg:text-xl text-lg transition-all ${view==="txt" && selectedProject===project.slug? "h-screen pb-5": ""} ${selectedProject===project.slug? " ": view==="txt"? "lg:h-[5rem]": ""}
+    ${selectedProject && selectedProject!=project.slug && view === "all"? "blur-2xl": ""}`}>
         {/* view ===txt? */}
         <span ref={txtRef} id="txt" className={`group flex flex-col items-center justify-center lg:h-[5rem] leading-none ${selectedProject===project.slug? "":""} ${view==="txt"? "lg:text-5xl text-2xl": "hidden"} `}>
             <div className="flex justify-center items-center">
@@ -198,7 +199,7 @@ return(
         </span>
 
         {/* view ===all? */}
-        <span id="all" className={`flex flex-col items-center justify-center overflow-hidden ${selectedProject===project.slug? "h-auto": "h-[19rem] px-5"}  ${view==="all"? "py-2": "hidden"} `}>
+        <span id="all" className={`flex flex-col items-center justify-center overflow-hidden ${selectedProject===project.slug? "h-auto": "h-[19rem] px-5"} ${selectedProject && selectedProject===project.slug? "blur-2xl": ""} ${view==="all"? "py-2": "hidden"} `}>
             <button className={`group peer z-20 flex justify-center items-center transition-all ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
             onClick={projectClick}>
                     <Image
@@ -219,10 +220,15 @@ return(
 
         {/* project open? */}
         <span id={`${project.slug}`}  className={`overflow-hidden flex flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
-        ${selectedProject===project.slug? view==="all"? `fixed top-0 left-0 w-screen h-screen ${blurClass} left-0 z-40 justify-center opacity-100`: "max-h-[1000vh]" : "h-0"}`}
+        ${selectedProject===project.slug? view==="all"? `fixed top-0 left-0 w-screen h-screen left-0 z-40 justify-center opacity-100`: "max-h-[1000vh]" : "h-0"}`}
         >
-            <div className={`flex justify-center items-center ${view==="all"? "":"hidden"}`}>
-                <button className={`peer z-20 transition-all text-white my-2 ${selectedProject===project.slug? "":""}`}                         
+            {/* invisible closing div */}
+            <div>
+                <button className={` ${selectedProject===project.slug? "w-full h-[20%] fixed top-0 z-10 cursor-alias":"hidden"}`} onClick={projectClick}>
+                </button>
+            </div>
+            <div className={`flex justify-center items-center mb-5 ${view==="all"? "":"hidden"}`}>
+                <button className={`peer z-20 transition-all text-white${blurClass} ${selectedProject===project.slug? "":""}`}                         
                 onClick={projectClick}><h3 className="hover:bg-white text-2xl hover:text-gray-400 leading-10 px-2">{project.name}</h3>
                 </button>
                 <button className={`peer z-20 transition-all text-white mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
@@ -231,7 +237,7 @@ return(
             </div>
             {/* current image */}
             {project.vimeo?.map((vid, index)=>(
-                <div key={`project.slug+${index}`} className={`peer flex justify-center items-center lg:h-[45rem] lg:w-[80rem] h-[20rem] w-[32rem]  ${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "hidden": "hidden"}`}>
+                <div key={`project.slug+${index}`} className={`peer flex justify-center items-center h-[30rem] w-[53.333333rem]  ${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "hidden": "hidden"}`}>
                     {/* arrow nav */}
                     {galleryCount===1? ""
                     :<div className="absolute flex h-[70%] w-full lg:block hidden">
@@ -269,7 +275,7 @@ return(
                 <div key={`project.slug+${index+vimeoCount}`} className={`peer pb-5 flex justify-center items-center ${selectedProject===project.slug? img===index+vimeoCount? "":"hidden": "hidden"}`}>
                     {/* arrow nav gallery */}
                     {galleryCount===1? ""
-                    :<div className="absolute flex h-[70%] w-full lg:block hidden">
+                    :<div className="absolute flex h-[50%] w-full lg:block hidden">
                         <button className="cursor-w-resize decoration-dotted bg-blue h-[100%] w-[50%] px-2" onClick={()=>{
                         img===0?
                         router.push( `/?${updateQueryString(`img`, `${galleryCount-1}`)}`, {scroll: false}):
@@ -281,6 +287,7 @@ return(
                         router.push( `/?${updateQueryString(`img`, `${img+1}`)}`, {scroll: false})
                         }}></button>
                     </div>}
+                    
                     {/* main nav gallery images */}
                     {galleryCount===1? ""
                     :<button className={`left-0 py-1 lg:py-0 ${buttonClass + blurClass + textClass}`} onClick={()=>{
@@ -293,7 +300,7 @@ return(
                     alt=""
                     width={1080}
                     height={1080}
-                    className={`object-cover ${selectedProject===project.slug? "lg:h-[40rem] h-[20rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
+                    className={`object-cover ${selectedProject===project.slug? "h-[30rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
                     loading="lazy"
                     // placeholder="blur"
                     // blurDataURL={`${project.gallery[index].lqip}`}
@@ -309,7 +316,7 @@ return(
             ))}
 
             {/* BIO */}
-            <div className={`flex w-screen text-center justify-center items-center lg:px-32 px-5 pb-5 ${textClass}`}><PortableText value={project.content}/></div>
+            <div className={`flex w-screen text-center justify-center items-center lg:px-32 px-5 pb-2 ${textClass}`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
             <div ref={filterRef} className="lg:flex lg:flex-row text-center  justify-center items-center mx-5">
@@ -325,7 +332,7 @@ return(
                                 onClick={()=>{
                                     router.push( `/?${createQueryString(`${key}`, `${filter}`)}`)
                                 }}
-                                className={`px-2 ${blurClass + textClass} mx-2 py-1 lg:py-0 my-1 w-fit whitespace-nowrap 
+                                className={`px-2 ${textClass + blurClass} mx-2 py-1 lg:py-0 my-1 w-fit whitespace-nowrap 
                                 ${searchParams.getAll(key)?.includes(filter)? "bg-white text-gray-400":"hover:bg-white hover:text-gray-400"}`}
                                 >
                                     {`${filter}`}
