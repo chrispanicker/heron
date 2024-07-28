@@ -209,7 +209,7 @@ return(
                 <span className={`flex left-0 px-20 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center w-screen": "w-max justify-start items-start"}`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
-                        <div key={`project.slug+${index}`} className={`snap-start peer flex justify-center items-center h-[17rem] w-[30rem]  ${selectedProject===project.slug? img===index? "":"": view==="all"? "hidden": "hidden"}`}>
+                        <div key={`project.slug+${index}`} className={`snap-start snap-always peer flex justify-center items-center h-[17rem] w-[30rem]  ${selectedProject===project.slug? img===index? "":"": view==="all"? "hidden": "hidden"}`}>
                             {/* main gallery vimeo */}
                             <div className={`relative overflow-hidden w-full pt-[56.25%]`}>
                                 <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
@@ -218,7 +218,7 @@ return(
                     ))}
 
                     {project.images?.map((image, index)=>(
-                        <div key={`project.slug+${index+vimeoCount}`} className={`snap-center peer pb-5 mx-2 flex justify-center items-center ${selectedProject===project.slug? img===index+vimeoCount? "":"": "hidden"}`}>
+                        <div key={`project.slug+${index+vimeoCount}`} className={`snap-center snap-always peer pb-5 mx-2 flex justify-center items-center ${selectedProject===project.slug? img===index+vimeoCount? "":"": "hidden"}`}>
                             {/* main nav gallery images */}
                             <Image
                             src={urlForImage(image).url()}
