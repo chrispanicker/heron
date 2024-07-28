@@ -25,7 +25,7 @@ export function SiteFooter(info:any){
     const collabs = searchParams.get('collabs');
     const about = searchParams.get('about');
     const blurClass = 'backdrop-blur-3xl backdrop-brightness-[.7]';
-    const textClass = " lg:text-xl lg:leading-auto text-[1rem] leading-[1.2rem] "
+    const textClass = " lg:text-xl lg:leading-auto text-sm leading-[1.2rem] "
 
     
 
@@ -50,7 +50,7 @@ export function SiteFooter(info:any){
                             {/* <td>Experience</td> */}
                         </tr>
                         {info.info[0].cv.map((job:job)=>(
-                            <tr key={`${job.company}`}>
+                            <tr className="pb-2" key={`${job.company}`}>
                                 <td>{job.company}</td>
                                 <td>{job.title}</td>
                                 <td>{job.years}</td>

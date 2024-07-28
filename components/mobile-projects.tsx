@@ -90,14 +90,15 @@ export default function MobileProjects({project}: Props) {
                     params.set("img", "0")
                 } 
             } 
-
+            name==="roles"||"tags"||"collabs" && selectedProject? params.delete("project", params?.get("project")!):""
             
             name==="project"||name==="img"? 
             stringSearchParams.includes(`${name}=${value}`)?
-            params.delete(name, value):  params.set(name, value):
-
-            stringSearchParams.includes(`${name}=${value}`)?
-            params.delete(name, value):params.append(name, value)
+            params.delete(name, value)
+            :params.set(name, value)
+            :stringSearchParams.includes(`${name}=${value}`)?
+            params.delete(name, value)
+            :params.append(name, value)
             return params.toString()
         },
         [searchParams]
