@@ -30,7 +30,7 @@ export default function UsedFilters(){
     const about = searchParams.get("about");
 
     return( searchParams.toString().includes("collabs")|| searchParams.toString().includes("roles") || searchParams.toString().includes("tags")?
-            <div className={`fixed lg:flex hidden bottom-10 text-xl z-30 flex-row text-2xl pb-1 m-5 ${about==="open"? "blur-3xl": ""}`}>
+            <div className={`fixed flex bottom-10 text-xl z-30 flex-row text-2xl pb-1 m-5 ${about==="open"? "blur-3xl": ""}`}>
                 <p className={`mx-1 px-2 ${blurClass}`}>Filtered by:</p>
                 {roles.map((role, i)=>{
                     return <button 
