@@ -20,11 +20,9 @@ const UsedFilters = dynamic(() => import("@/components/used-filters"))
 export default async function Home({searchParams}: Props) {
   const {tags, collabs, roles, about, view} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
-  let gallery = await getGallery();
 
   return (
-    filteredProjects? <main id="main" className={`font-normal lg:py-20 z-0 flex flex-col items-center justify-start min-h-screen`}>
-        <OpeningCard gallery={gallery} />
+    filteredProjects? <main id="main" className={`font-normal z-0 flex flex-col items-center justify-start min-h-screen`}>
         <Name />
         <UsedFilters/>
         <section className={`pb-20 h-[100dvh] snap-y snap-mandatory lg:hidden ${view==="all"? "overflow-y-scroll block": "block"} `}>
@@ -36,7 +34,7 @@ export default async function Home({searchParams}: Props) {
           )})}
         </section>
 
-        <section className={`pb-20 hidden lg:grid lg:py-20 ${view==="all"? "grid lg:grid-cols-4 md:grid-cols-2": ""}`}>
+        <section className={`pb-20 hidden lg:grid ${view==="all"? "grid lg:grid-cols-4 md:grid-cols-2": ""}`}>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
               <div className={`transition-all duration-500 ${about === "open"? "blur-2xl": ""}`} key={project.name + project._id}>

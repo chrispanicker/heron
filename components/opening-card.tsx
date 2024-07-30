@@ -33,6 +33,7 @@ export function OpeningCard({gallery}: Props){
     }, [selectedProject])
     
     useEffect(()=>{
+
         if(type === 0){
             setTimeout(()=>{
                 document.querySelector("#image1")?.classList.replace("h-[100dvh]", "h-0")

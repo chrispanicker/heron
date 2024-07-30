@@ -4,8 +4,10 @@ import { SiteFooter } from '@/components/site-footer'
 import { TestFilter } from '@/components/test-filter'
 import localFont from 'next/font/local'
 import ViewToggle from '@/components/view-toggle'
-import { getInfo, getProjects } from '@/sanity/sanity-utils'
+import { getGallery, getInfo, getProjects } from '@/sanity/sanity-utils'
 import { Filters } from '@/components/filters'
+import { OpeningCard } from '@/components/opening-card'
+import { Landing } from '@/components/landing'
 
 
 export const metadata: Metadata = {
@@ -37,14 +39,18 @@ export default async function RootLayout({
 
 let allProjects = await getProjects();
 let info = await getInfo();
+let gallery = await getGallery();
+
   return (
     <html lang="en" className='bg-gray-400 text-white overflow-x-hidden'>
       <body>
         <section className=''>
+          <SiteFooter info={info} />
+          {/* <Landing gallery={gallery}/> */}
+          <OpeningCard gallery={gallery} />
           <TestFilter projects={allProjects}/>
           <ViewToggle />
           <>{children}</>
-          <SiteFooter info={info} />
         </section>
       </body>
     </html>

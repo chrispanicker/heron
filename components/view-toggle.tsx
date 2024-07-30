@@ -22,7 +22,7 @@ export default function ViewToggle(){
         isSanityStudio? "":
         <div className={`fixed flex decoration-dotted text-lg left-0 bottom-0 m-5 z-40 cursor-pointer transition-all ${about==="open"? `blur-xl`: `${blurClass}`}`}>
             <button 
-            className={`px-2 hover:bg-white hover:text-gray-400 ${view==="txt"? "bg-white text-gray-400 hidden lg:block" : "block"}`}
+            className={`${blurClass} px-1 text-[1rem] leading-[1.4rem] py-0 w-fit whitespace-nowrap hover:bg-white hover:text-gray-400 ${view==="txt"? "bg-white text-gray-400 hidden lg:block" : "block"}`}
             onClick={()=>{
                 router.push(`/?view=txt${roles? `&roles=${roles}`: ""}`, {scroll: false})
                 document.querySelectorAll(".bg-black")?.forEach((element)=>{
@@ -32,7 +32,7 @@ export default function ViewToggle(){
             }}>Text</button>
 
             <button
-            className={`px-2 hover:bg-white hover:text-gray-400 ${view==="all"? "bg-white text-gray-400 hidden lg:block" : "block"}`} 
+            className={`px-1 text-[1rem] leading-[1.4rem] py-0 w-fit whitespace-nowrap hover:bg-white hover:text-gray-400 ${view==="all"? "bg-white text-gray-400 hidden lg:block" : "block"}`} 
             onClick={()=>{
                 router.push(`/?view=all${roles? `&roles=${roles}`: ""}`, {scroll: false})
                 document.querySelectorAll(".bg-black")?.forEach((element)=>{

@@ -17,7 +17,7 @@ export function Filters({filters, projects}: Props){
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin');
     const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]';
-    const textClass = " lg:text-xl lg:leading-auto text-[1rem] leading-[1.2rem] ";
+    const textClass = " lg:text-md lg:leading-auto text-[1rem] leading-[1.2rem] ";
 
     
     const createQueryString = useCallback(
@@ -45,7 +45,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`lg:fixed lg:block top-0 z-40 p-5 transition-all text-white text-xl text-center duration-500 ${view==="all"? "lg:block hidden": ""} ${selectedProject && view==="all"? "blur-2xl": ""} ${selectedProject && view==="txt"? "max-[1024px]:blur-2xl": ""} ${about==="open"? "blur-3xl": ""}`}>
+        <section className={`lg:sticky lg:block top-0 z-40 p-5 transition-all text-white text-center duration-500 ${view==="all"? "lg:block hidden": ""} ${selectedProject && view==="all"? "blur-2xl": ""} ${selectedProject && view==="txt"? "max-[1024px]:blur-2xl": ""} ${about==="open"? "blur-3xl": ""}`}>
             {allFilters.map((entry:any, idx:any)=>{
                 return (
                     <button 
@@ -55,7 +55,7 @@ export function Filters({filters, projects}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`)
                     }}
-                    className={`${selectedProject? ``: ``}  ${blurClass} ${textClass} px-2 py-1 lg:py-0 mx-1 my-1 w-fit whitespace-nowrap transition-all
+                    className={`${selectedProject? ``: ``}  ${blurClass} ${textClass} px-1 py-1 lg:py-[.1rem] mx-1 my-1 w-fit whitespace-nowrap transition-all
                     ${searchParams.getAll(entry.key)?.includes(entry.filter)? "selection text-gray-400":"hover:bg-white hover:text-gray-400"}`
                     }>
                         {`${entry.filter}`}
