@@ -92,7 +92,12 @@ export default function Projects({project}: Props) {
                 } 
             } 
 
-            name==="roles"||"tags"||"collabs" && selectedProject? params.delete("project", params?.get("project")!):""
+            if(name==="roles"||"tags"||"collabs" && selectedProject){
+                params.delete("project", params?.get("project")!)
+                document.querySelectorAll(".bg-black").forEach((e)=>{
+                    e.classList.remove('bg-black')
+                })
+            } 
             
             name==="project"||name==="img"? 
             stringSearchParams.includes(`${name}=${value}`)?

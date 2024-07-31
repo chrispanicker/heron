@@ -24,6 +24,12 @@ export function Filters({filters, projects}: Props){
         (name: string, value: string) => {
             let params;
 
+
+            selectedProject? 
+            document.querySelectorAll(".bg-black").forEach((e)=>{
+                e.classList.remove('bg-black')
+            }): ""
+
             let stringSearchParams = searchParams.toString()
             stringSearchParams = stringSearchParams.replaceAll("+", " ")
             params = new URLSearchParams(stringSearchParams)
