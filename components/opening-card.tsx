@@ -33,6 +33,8 @@ export function OpeningCard({gallery}: Props){
     }, [selectedProject])
     
     useEffect(()=>{
+        selectedProject? console.log(`#${selectedProject}` + document.querySelector(`#${selectedProject}`)?.scrollIntoView({block: "center"})) : ""
+        selectedProject? "":""
 
         if(type === 0){
             setTimeout(()=>{

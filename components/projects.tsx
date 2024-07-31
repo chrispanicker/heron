@@ -112,7 +112,9 @@ export default function Projects({project}: Props) {
 
     const projectClick = () =>{
         router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, { scroll: false})
-        document.querySelector(`#${project.slug}`)?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+        setTimeout(()=>{
+            selectedProject? "": document.querySelector(`#${project.slug}`)?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+        }, 200)
         
         
         if(selectedProject===project.slug){
@@ -230,7 +232,7 @@ return(
         </span>
 
         {/* project open? */}
-        <span id={`${project.slug}`}  className={`overflow-hidden flex flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
+        <span id={`${project.slug}`} className={`overflow-hidden flex flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
         ${selectedProject===project.slug? view==="all"? `fixed top-0 left-0 w-screen h-screen left-0 z-40 justify-center opacity-100`: "max-h-[1000vh]" : "h-0"}`}
         >
             {/* invisible closing div */}
