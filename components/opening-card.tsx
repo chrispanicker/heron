@@ -1,7 +1,7 @@
 'use client'
 import { urlForImage } from "@/sanity/lib/image";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
 
 interface Props{
@@ -15,6 +15,8 @@ export function OpeningCard({gallery}: Props){
     const searchParams = useSearchParams();    
     const selectedProject = searchParams.get('project');
     const view = searchParams.get('view');
+    const pathname = usePathname(); 
+    const isSanityStudio = pathname.startsWith('/admin');
 
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -29,7 +31,7 @@ export function OpeningCard({gallery}: Props){
     let type = Math.floor(Math.random() * 3)
 
     useEffect(()=>{
-        view? "": router.push( `/?${createQueryString(`view`, `txt`)}`)
+        isSanityStudio? "": view? "": router.push( `/?${createQueryString(`view`, `txt`)}`)
     }, [selectedProject])
     
     useEffect(()=>{
@@ -86,11 +88,12 @@ export function OpeningCard({gallery}: Props){
     }, [cardRef])
     
     return(
-        <div ref={cardRef} className="text-5xl w-screen h-[100dvh] backdrop-blur-lg backdrop-brightness-[1] fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition transition-all duration-1000 cursor-none">
+        isSanityStudio? "": 
+        <div ref={cardRef} className="text-5xl w-screen h-[100dvh] backdrop-blur-lg backdrop-brightness-[1] fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition-all duration-1000 cursor-none">
             <div className="flex justify-center items-center z-50">
                 <p className= "text-white mx-2 w-fit px-4 backdrop-blur-sm backdrop-brightness-[.7] ">&#169; Drew Litowitz</p>
             </div>
-            <div id="gallery" className="absolute top-0 flex w-screen h-[100dvh] justify-start items-center">
+            <div id="gallery" className="fixed top-0 flex w-screen h-[100dvh] justify-start items-center">
                 <Image
                 src={urlForImage(gallery[2].projects.preview).url()}
                 alt=""
