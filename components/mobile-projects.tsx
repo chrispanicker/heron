@@ -235,12 +235,12 @@ return(
                                     img.classList.replace("h-[17rem]", "h-[100dvh]")
                                     img.classList.replace("w-auto", "w-[100dvw]")
                                     img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
-                                    img?.classList.replace("object-cover", "object-contain")
+                                    img.classList.replace("object-cover", "object-contain")
                                     img.classList.add("fixed", "top-0", "left-0", "z-50", "bg-gray-400")
                                 }else{
                                     img?.classList.replace("h-[100dvh]", "h-[17rem]")
                                     img?.classList.replace("w-[100dvw]", "w-auto")
-                                    img.classList.replace("cursor-zoom-out", "cursor-zoom-in")
+                                    img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
                                     img?.classList.replace("object-contain", "object-cover")
                                     img?.classList.remove("fixed", "top-0", "z-50", "bg-gray-400")
                                 }
