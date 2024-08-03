@@ -317,7 +317,7 @@ return(
                             img?.classList.add("max-[1500px]:h-[30rem]", "h-[40rem]")
                             img?.classList.replace("w-[100dvw]", "w-auto")
                             img?.classList.replace("object-contain", "object-cover")
-                            img.classList.replace("cursor-zoom-out", "cursor-zoom-in")
+                            img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
                             img?.classList.remove("fixed", "top-0", "z-50", "bg-gray-400")
                         }
                     }}
