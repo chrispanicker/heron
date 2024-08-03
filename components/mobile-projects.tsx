@@ -150,10 +150,10 @@ export default function MobileProjects({project}: Props) {
 return(
     <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 lg:text-xl text-lg transition-all ${view==="txt" && selectedProject===project.slug? "": ""} ${view==="txt"? "": ""}`}>
                 {/* view ===txt? */}
-                <span ref={txtRef} id="txt" className={`z-0 group flex flex-col items-center justify-center lg:h-[5rem] leading-none ${selectedProject? "blur-lg":""} ${view==="txt"? "lg:text-5xl text-2xl": "hidden"} `}>
+                <span ref={txtRef} id="txt" className={`z-0 group flex flex-col items-center justify-center leading-0 ${selectedProject? "blur-lg":""} ${view==="txt"? "lg:text-5xl text-2xl": "hidden"} `}>
                     <div className="flex justify-center items-center">
                         <button className={`peer z-20 transition-all text-white ${selectedProject===project.slug? "":""}`}                         
-                        onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 leading-10 px-2 lg:py-2">{project.name}</h3>
+                        onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 leading-9 px-2 lg:py-2">{project.name}</h3>
                         </button>
                         <button className={`peer z-20 transition-all text-white text-xl mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
                         onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-2 py-1 lg:py-0 ${textClass}`}>Close</h3>
@@ -223,11 +223,28 @@ return(
                             {/* main nav gallery images */}
                             <Image
                             src={urlForImage(image).url()}
+                            id={`mobile-${project.slug+index}`}
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover ${selectedProject===project.slug? "h-[17rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
+                            className={`object-cover cursor-zoom-in ${selectedProject===project.slug? "h-[17rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
                             loading="lazy"
+                            onClick={()=>{
+                                let img = document.querySelector(`#mobile-${project.slug+index}`)
+                                if(img?.classList.contains("h-[17rem]")){
+                                    img.classList.replace("h-[17rem]", "h-[100dvh]")
+                                    img.classList.replace("w-auto", "w-[100dvw]")
+                                    img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
+                                    img?.classList.replace("object-cover", "object-contain")
+                                    img.classList.add("fixed", "top-0", "left-0", "z-50", "bg-gray-400")
+                                }else{
+                                    img?.classList.replace("h-[100dvh]", "h-[17rem]")
+                                    img?.classList.replace("w-[100dvw]", "w-auto")
+                                    img.classList.replace("cursor-zoom-out", "cursor-zoom-in")
+                                    img?.classList.replace("object-contain", "object-cover")
+                                    img?.classList.remove("fixed", "top-0", "z-50", "bg-gray-400")
+                                }
+                            }}
                             // placeholder="blur"
                             // blurDataURL={`${project.gallery[index].lqip}`}
                             unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
@@ -237,10 +254,10 @@ return(
                 </span>
             </div>
             {/* BIO */}
-            <div className={`z-40 flex w-screen text-center justify-center items-center lg:px-32 px-2 mb-5 py-2 ${blurClass+textClass}`}><PortableText value={project.content}/></div>
+            <div className={`z-0 flex w-screen text-center justify-center items-center lg:px-32 px-2 mb-5 py-2 ${blurClass+textClass}`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
-            <div ref={filterRef} className="z-40 lg:flex lg:flex-row text-center  justify-center items-center mx-5">
+            <div ref={filterRef} className="z-0 lg:flex lg:flex-row text-center  justify-center items-center mx-5">
             {Object.entries(filters).map(([key, array])=>{
                 return(
                     <span key={key} className="capitalize lg:flex justify-center items-center my-1">

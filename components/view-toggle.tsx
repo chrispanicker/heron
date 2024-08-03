@@ -5,7 +5,8 @@ import { useCallback } from "react";
 export default function ViewToggle(){
     const router = useRouter();
     const pathname = usePathname(); 
-    const searchParams = useSearchParams();    
+    const searchParams = useSearchParams();   
+    const project = searchParams.get('project') 
     const roles = searchParams.get('roles')
     const view = searchParams.get('view');
     const about = searchParams.get('about');
@@ -20,9 +21,9 @@ export default function ViewToggle(){
     const isSanityStudio = pathname.startsWith('/admin');
     return(
         isSanityStudio? "":
-        <div className={`fixed flex decoration-dotted text-lg left-0 bottom-0 m-5 z-40 cursor-pointer transition-all ${about==="open"? `blur-xl`: `${blurClass}`}`}>
+        <div className={`fixed flex decoration-dotted text-lg left-0 bottom-0 m-5 z-40 cursor-pointer transition-all ${about==="open" || project? `blur-2xl`: `${blurClass}`}`}>
             <button 
-            className={`${blurClass} px-1 text-[1rem] leading-[1.4rem] py-0 w-fit whitespace-nowrap hover:bg-white hover:text-gray-400 ${view==="txt"? "bg-white text-gray-400 hidden lg:block" : "block"}`}
+            className={` px-1 text-[1rem] leading-[1.4rem] py-0 w-fit whitespace-nowrap hover:bg-white hover:text-gray-400 ${view==="txt"? "bg-white text-gray-400 hidden lg:block" : "block"}`}
             onClick={()=>{
                 router.push(`/?view=txt${roles? `&roles=${roles}`: ""}`, {scroll: false})
                 document.querySelectorAll(".bg-black")?.forEach((element)=>{

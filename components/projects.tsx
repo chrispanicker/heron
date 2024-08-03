@@ -160,10 +160,10 @@ return(
     <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 lg:text-xl text-lg transition-all ${view==="txt" && selectedProject===project.slug? "h-screen pb-5": ""} ${selectedProject===project.slug? " ": view==="txt"? "lg:h-[5rem]": ""}
     ${selectedProject && selectedProject!=project.slug && view === "all"? "blur-2xl": ""}`}>
         {/* view ===txt? */}
-        <span ref={txtRef} id="txt" className={`group flex flex-col items-center justify-center lg:h-[5rem] leading-none transition-all ${selectedProject===project.slug? "":""} ${view==="txt"? "text-5xl": "hidden"} `}>
+        <span ref={txtRef} id="txt" className={`group flex flex-col items-center justify-centers leading-none transition-all ${selectedProject===project.slug? "":""} ${view==="txt"? "text-5xl": "hidden"} `}>
             <div className="flex justify-center items-center">
-                <button className={`peer z-20 transition-all text-white ${selectedProject===project.slug? "":""}`}                         
-                onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 leading-10 px-2 lg:py-1">{project.name}</h3>
+                <button className={`peer z-20 transition-all text-white ${selectedProject===project.slug? "mb-2":""}`}                         
+                onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 leading-10 px-2 lg:py-2">{project.name}</h3>
                 </button>
                 <button className={`peer z-20 transition-all text-white mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
                 onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit whitespace-nowrap`}>Close</h3>
@@ -250,7 +250,7 @@ return(
             </div>
             {/* current image */}
             {project.vimeo?.map((vid, index)=>(
-                <div key={`project.slug+${index}`} className={`peer flex justify-center items-center h-[30rem] w-[53.333333rem]  ${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "hidden": "hidden"}`}>
+                <div key={`project.slug+${index}`} className={`peer flex justify-center items-center max-[1500px]:h-[30rem] max-[1500px]:w-[53.333333rem] h-[40rem] w-[71rem]  ${selectedProject===project.slug? img===index? "":"hidden": view==="all"? "hidden": "hidden"}`}>
                     {/* arrow nav */}
                     {galleryCount===1? ""
                     :<div className="absolute flex h-[70%] w-full lg:block hidden">
@@ -300,20 +300,23 @@ return(
                     alt=""
                     width={1080}
                     height={1080}
-                    className={`object-cover z-30 cursor-zoom-in transition-all ${selectedProject===project.slug? "h-[30rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
+                    className={`object-cover z-30 cursor-zoom-in transition-all ${selectedProject===project.slug? "max-[1500px]:h-[30rem] h-[40rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
                     loading="lazy"
                     onClick={()=>{
                         let img = document.querySelector(`#${project.slug+index}`)
-                        if(img?.classList.contains("h-[30rem]")){
-                            img.classList.replace("h-[30rem]", "h-[100dvh]")
+                        if(img?.classList.contains("max-[1500px]:h-[30rem]" || "h-[40rem]")){
+                            img.classList.remove("max-[1500px]:h-[30rem]", "h-[40rem]")
+                            img.classList.add("h-[100dvh]")
                             img.classList.replace("w-auto", "w-[100dvw]")
                             img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
                             img?.classList.replace("object-cover", "object-contain")
                             img.classList.add("fixed", "top-0", "z-50", "bg-gray-400")
                         }else{
-                            img?.classList.replace("h-[100dvh]", "h-[30rem]")
+                            img?.classList.remove("h-[100dvh]")
+                            img?.classList.add("max-[1500px]:h-[30rem]", "h-[40rem]")
                             img?.classList.replace("w-[100dvw]", "w-auto")
                             img?.classList.replace("object-contain", "object-cover")
+                            img.classList.replace("cursor-zoom-out", "cursor-zoom-in")
                             img?.classList.remove("fixed", "top-0", "z-50", "bg-gray-400")
                         }
                     }}
