@@ -196,7 +196,6 @@ return(
                                             router.push( `/?${createQueryString(`${key}`, `${filter}`)}`)
                                             document.querySelectorAll("#bg-black").forEach((e)=>{
                                                 e.classList.remove("bg-black")
-                                                console.log(e)
                                             })
                                         }}
                                         className={`px-1 ${blurClass} text-[1rem] leading-[1.4rem] mx-1 py-0 my-1 w-fit whitespace-nowrap 
@@ -368,7 +367,6 @@ return(
                                     router.push( `/?${createQueryString(`${key}`, `${filter}`)}`)
                                     document.querySelectorAll("#bg-black").forEach((e)=>{
                                         e.classList.remove("bg-black")
-                                        console.log(e)
                                     })
                                 }}
                                 className={`px-1 ${blurClass} text-[1rem] leading-[1.4rem] mx-1 py-0 my-1 w-fit whitespace-nowrap 

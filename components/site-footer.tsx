@@ -33,13 +33,13 @@ export function SiteFooter(info:any){
         isSanityStudio? "" : 
         <footer ref={footerRef} className="text-lg w-full">
             <div id="footImgDiv" className={`flex w-screen top-screen justify-center items-center`}>
-                <button id="footerTab" className={`fixed z-40 bottom-0 right-0 hover:bg-white hover:text-gray-400 decoration-dotted m-5 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit whitespace-nowrap ${project? "blur-2xl" : `${blurClass}`}`} onClick={()=>{
+                <button id="footerTab" className={`fixed z-40 bottom-0 right-0 hover:bg-white hover:text-gray-400 decoration-dotted m-5 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit whitespace-nowrap ${project && view==="all"? "blur-2xl" : `${blurClass}`}`} onClick={()=>{
                     searchParams.getAll(`about`).includes("open")?
                     router.push(`/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`: ""}${project? `&project=${project}&img=0` : ""}`)
                     : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)
                 }}>About</button>
             </div>
-            <span id="footer" className={`z-30 fixed lg:grid lg:grid-cols-1 bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll ${about==="open"? "h-[50vh]": "h-[0vh]"}`}>
+            <span id="footer" className={`z-30 fixed lg:flex lg:flex-col bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll ${about==="open"? "h-[100vh]": "h-[0vh]"}`}>
                 <button className={`w-screen h-screen fixed top-0 cursor-alias ${about==="open"? "": "hidden"}`}
                 onClick={()=>{
                     searchParams.getAll(`about`).includes("open")?
