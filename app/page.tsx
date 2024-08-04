@@ -34,7 +34,7 @@ export default async function Home({searchParams}: Props) {
           )})}
         </section>
 
-        <section className={`pb-20 hidden lg:grid ${view==="all"? "grid min-[1500px]:grid-cols-5 lg:grid-cols-4 md:grid-cols-2 lg:mx-12 min-[1500px]:mx-20": ""}`}>
+        <section className={`pb-20 hidden lg:grid ${view==="all"? "grid min-[1500px]:grid-cols-5 min-[1024px]:grid-cols-3 min-[1200px]:grid-cols-4 md:grid-cols-2 lg:mx-12 min-[1500px]:mx-32 min-[1200px]:mx-20": ""}`}>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
               <div className={`transition-all duration-500 ${about === "open"? "blur-2xl": ""}`} key={project.name + project._id}>
