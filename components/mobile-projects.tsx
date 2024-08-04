@@ -206,7 +206,7 @@ return(
         ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-[100dvh] left-0 z-40 justify-start opacity-100`: "h-0 z-0"}`}
         >
             <div className={`flex justify-center items-center z-40 mb-5`}>
-                <button className={`peer transition-all ${blurClass} ${selectedProject===project.slug? "":""}`}                         
+                <button className={`peer transition-all ${selectedProject===project.slug? "":""}`}                         
                 onClick={projectClick}><h3 className="hover:bg-white text-2xl hover:text-gray-400 leading-10 px-2">{project.name}</h3>
                 </button>
                 <button className={`peer transition-all ${blurClass} mx-2 ${selectedProject===project.slug? "":"hidden"}`}                         
@@ -236,22 +236,22 @@ return(
                             height={1080}
                             className={`object-cover cursor-zoom-in ${selectedProject===project.slug? "h-[17rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
                             loading="lazy"
-                            onClick={()=>{
-                                let img = document.querySelector(`#mobile-${project.slug+index}`)
-                                if(img?.classList.contains("h-[17rem]")){
-                                    img.classList.replace("h-[17rem]", "h-[100dvh]")
-                                    img.classList.replace("w-auto", "w-[100dvw]")
-                                    img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
-                                    img.classList.replace("object-cover", "object-contain")
-                                    img.classList.add("fixed", "top-0", "left-0", "z-50", "bg-gray-400")
-                                }else{
-                                    img?.classList.replace("h-[100dvh]", "h-[17rem]")
-                                    img?.classList.replace("w-[100dvw]", "w-auto")
-                                    img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
-                                    img?.classList.replace("object-contain", "object-cover")
-                                    img?.classList.remove("fixed", "top-0", "left-0",  "z-50", "bg-gray-400")
-                                }
-                            }}
+                            // onClick={()=>{
+                            //     let img = document.querySelector(`#mobile-${project.slug+index}`)
+                            //     if(img?.classList.contains("h-[17rem]")){
+                            //         img.classList.replace("h-[17rem]", "h-[100dvh]")
+                            //         img.classList.replace("w-auto", "w-[100dvw]")
+                            //         img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
+                            //         img.classList.replace("object-cover", "object-contain")
+                            //         img.classList.add("fixed", "top-0", "left-0", "z-50", "bg-gray-400")
+                            //     }else{
+                            //         img?.classList.replace("h-[100dvh]", "h-[17rem]")
+                            //         img?.classList.replace("w-[100dvw]", "w-auto")
+                            //         img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
+                            //         img?.classList.replace("object-contain", "object-cover")
+                            //         img?.classList.remove("fixed", "top-0", "left-0",  "z-50", "bg-gray-400")
+                            //     }
+                            // }}
                             // placeholder="blur"
                             // blurDataURL={`${project.gallery[index].lqip}`}
                             unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
@@ -261,7 +261,7 @@ return(
                 </span>
             </div>
             {/* BIO */}
-            <div className={`z-0 flex w-screen text-center justify-center items-center lg:px-32 px-2 mb-5 py-2 ${blurClass+textClass}`}><PortableText value={project.content}/></div>
+            <div className={`z-0 flex w-screen text-center justify-center items-center lg:px-32 px-2 mb-5 py-2 ${textClass}`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
             <div ref={filterRef} className="z-10 lg:flex lg:flex-row text-center  justify-center items-center mx-5">
