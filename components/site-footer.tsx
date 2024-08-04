@@ -39,7 +39,7 @@ export function SiteFooter(info:any){
                     : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)
                 }}>About</button>
             </div>
-            <span id="footer" className={`z-30 fixed lg:flex lg:flex-col bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll mx-40 ${about==="open"? "h-[100vh] ": "h-[0vh]"}`}>
+            <span id="footer" className={`z-30 fixed lg:flex lg:flex-col bottom-0 h-[0vh] duration-500 transition-all overflow-y-scroll lg:mx-40 ${about==="open"? "h-[100vh] ": "h-[0vh]"}`}>
                 <button className={`w-screen h-screen fixed top-0 cursor-alias ${about==="open"? "": "hidden"}`}
                 onClick={()=>{
                     searchParams.getAll(`about`).includes("open")?
