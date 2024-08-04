@@ -238,7 +238,7 @@ return(
         >
             {/* invisible closing div */}
             <div>
-                <button className={` ${selectedProject===project.slug? "w-full h-[20%] fixed top-0 z-10 cursor-alias":"hidden"}`} onClick={projectClick}>
+                <button className={` ${selectedProject===project.slug? "w-full h-[20%] fixed top-0 left-0 z-10 cursor-alias":"hidden"}`} onClick={projectClick}>
                 </button>
             </div>
             <div className={`flex justify-center items-center mb-5 ${view==="all"? "":"hidden"}`}>
