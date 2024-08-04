@@ -195,8 +195,8 @@ return(
         </span>
 
         {/* project open? */}
-        <span className={`z-40 overflow-x-hidden flex w-screen flex-col justify-start items-center transition-all ${view==="txt"? "": "w-screen"}  
-        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-[100dvh] left-0 z-40 justify-start opacity-100 pt-20`: "h-0 z-0"}`}
+        <span className={`z-40 overflow-x-hidden flex w-screen flex-col justify-center items-center transition-all ${view==="txt"? "": "w-screen"}  
+        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-[100dvh] left-0 z-40 justify-start opacity-100`: "h-0 z-0"}`}
         >
             <div className={`flex justify-center items-center z-40 mb-5`}>
                 <button className={`peer transition-all ${blurClass} ${selectedProject===project.slug? "":""}`}                         
@@ -227,7 +227,7 @@ return(
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover cursor-zoom-in ${selectedProject===project.slug? "h-[17rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
+                            className={`object-cover cursor-zoom-in transition-all ${selectedProject===project.slug? "h-[17rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
                             loading="lazy"
                             onClick={()=>{
                                 let img = document.querySelector(`#mobile-${project.slug+index}`)
