@@ -47,10 +47,10 @@ export function SiteFooter(info:any){
                     : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)
                 }}/>
 
-                <div className={`w-4/4 m-5 p-5 text-xl leading-[1.8rem] h-fit ${blurClass}`}>
+                <div className={`w-4/4 m-5 p-5 text-xl leading-[1.8rem] h-fit`}>
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
-                <div className={`m-5 w-4/4 p-5 h-fit ${blurClass} ${textClass}`}>
+                <div className={`m-5 w-4/4 p-5 h-fit ${textClass}`}>
                     <table className="w-[100%]">
                     <tbody>
                         <tr className="">

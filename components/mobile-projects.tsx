@@ -90,7 +90,7 @@ export default function MobileProjects({project}: Props) {
                     params.set("img", "0")
                 } 
             } 
-            
+
             if(name==="roles"||"tags"||"collabs" && selectedProject){
                 params.delete("project", params?.get("project")!)
                 document.querySelectorAll(".bg-black").forEach((e)=>{
@@ -234,7 +234,7 @@ return(
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover cursor-zoom-in transition-all ${selectedProject===project.slug? "h-[17rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
+                            className={`object-cover cursor-zoom-in ${selectedProject===project.slug? "h-[17rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
                             loading="lazy"
                             onClick={()=>{
                                 let img = document.querySelector(`#mobile-${project.slug+index}`)
@@ -249,7 +249,7 @@ return(
                                     img?.classList.replace("w-[100dvw]", "w-auto")
                                     img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
                                     img?.classList.replace("object-contain", "object-cover")
-                                    img?.classList.remove("fixed", "top-0", "z-50", "bg-gray-400")
+                                    img?.classList.remove("fixed", "top-0", "left-0",  "z-50", "bg-gray-400")
                                 }
                             }}
                             // placeholder="blur"

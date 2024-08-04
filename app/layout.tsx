@@ -45,12 +45,14 @@ let gallery = await getGallery();
     <html lang="en" className='bg-gray-400 text-white overflow-x-hidden'>
       <body>
         <section className=''>
-          <SiteFooter info={info} />
+
           {/* <Landing gallery={gallery}/> */}
           <OpeningCard gallery={gallery} />
           <TestFilter projects={allProjects}/>
           <ViewToggle />
+          
           <>{children}</>
+          <SiteFooter info={info} />
         </section>
       </body>
     </html>

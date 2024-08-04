@@ -22,7 +22,7 @@ export default async function Home({searchParams}: Props) {
   let filteredProjects= await getFilteredProjects({searchParams});
 
   return (
-    filteredProjects? <main id="main" className={`font-normal z-0 flex flex-col items-center justify-start min-h-screen`}>
+    filteredProjects? <main id="main" className={`sticky top-0 font-normal z-0 flex flex-col items-center justify-start min-h-screen`}>
         <Name />
         <UsedFilters/>
         <section className={`pb-20 h-[100dvh] snap-y snap-mandatory lg:hidden ${view==="all"? "overflow-y-scroll block": "block"} `}>
