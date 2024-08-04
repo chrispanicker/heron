@@ -90,8 +90,9 @@ export function OpeningCard({gallery}: Props){
     return(
         isSanityStudio? "": 
         <div ref={cardRef} className="text-5xl w-screen h-[100dvh] backdrop-blur-lg backdrop-brightness-[1] fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition-all duration-1000 cursor-none">
-            <div className="flex justify-center items-center z-50">
+            <div className="flex justify-center items-center flex-col z-50">
                 <p className= "text-white mx-2 w-fit px-4 backdrop-blur-sm backdrop-brightness-[.7] ">&#169; Drew Litowitz</p>
+                <p className= "text-white mx-2 w-fit px-4 backdrop-blur-sm backdrop-brightness-[.7] ">Here is some of my work.</p>
             </div>
             <div id="gallery" className="fixed top-0 flex w-screen h-[100dvh] justify-start items-center">
                 <Image

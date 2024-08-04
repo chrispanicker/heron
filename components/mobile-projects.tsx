@@ -90,7 +90,14 @@ export default function MobileProjects({project}: Props) {
                     params.set("img", "0")
                 } 
             } 
-            name==="roles"||"tags"||"collabs" && selectedProject? params.delete("project", params?.get("project")!):""
+            
+            if(name==="roles"||"tags"||"collabs" && selectedProject){
+                params.delete("project", params?.get("project")!)
+                document.querySelectorAll(".bg-black").forEach((e)=>{
+                    e.classList.remove('bg-black')
+                })
+            } 
+            
             
             name==="project"||name==="img"? 
             stringSearchParams.includes(`${name}=${value}`)?
@@ -257,7 +264,7 @@ return(
             <div className={`z-0 flex w-screen text-center justify-center items-center lg:px-32 px-2 mb-5 py-2 ${blurClass+textClass}`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
-            <div ref={filterRef} className="z-0 lg:flex lg:flex-row text-center  justify-center items-center mx-5">
+            <div ref={filterRef} className="z-10 lg:flex lg:flex-row text-center  justify-center items-center mx-5">
             {Object.entries(filters).map(([key, array])=>{
                 return(
                     <span key={key} className="capitalize lg:flex justify-center items-center my-1">

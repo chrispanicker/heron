@@ -222,7 +222,7 @@ return(
                     width={1080}
                     height={1080}
                     unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
-                    className={`w-auto hover:h-[16rem] h-[15rem] transition-all object-cover`}
+                    className={`w-[15rem] hover:h-[16rem] hover:w-[16rem] h-[15rem] transition-all object-cover`}
                     loading="lazy"
                     />
             </button>
