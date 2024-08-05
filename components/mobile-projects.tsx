@@ -158,7 +158,8 @@ return(
     <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 transition-all `}>
 
         {/* view === grid? */}
-        <span id="grid" className={`flex flex-col justify-start items-start overflow-hidden transition-all duration-500 lg:h-[16rem] h-[17rem] ${selectedProject? "blur-2xl": ""} ${view==="full"? "hidden": ""} `}>
+        <span id="grid" className={`relative flex flex-col justify-center items-center overflow-hidden transition-all duration-500 lg:h-[20rem] h-[12rem] ${selectedProject? "blur-2xl": ""} ${view==="full"? "hidden": ""} `}>
+
             <button className={`peer z-20 transition-all ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
             onClick={projectClick}>
                     <Image
@@ -167,14 +168,15 @@ return(
                     width={1080}
                     height={1080}
                     unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
-                    className={`lg:h-[14rem] lg:w-[20rem] h-[12rem] object-cover transition-all`}
+                    className={`lg:h-[20rem] lg:w-[20rem] h-[12rem] w-[12rem] object-cover transition-all`}
                     loading="lazy"
                     />
             </button>
 
-            <button className={`peer z-20 px-1 ${blurClass} lg:mt-2 mt-1 transition-all whitespace-nowrap peer-hover:bg-white peer-hover:text-gray-400 hover:bg-white hover:text-gray-400`}                         
+            <button className={`absolute top-0 peer z-20 px-1 ${blurClass} lg:mt-2 mt-1 transition-all whitespace-nowrap peer-hover:bg-white peer-hover:text-gray-400 hover:bg-white hover:text-gray-400`}                         
                     onClick={projectClick}>{project.name}
             </button>
+
         </span>
 
         {/* view ===full? */}
