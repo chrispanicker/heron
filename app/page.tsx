@@ -1,8 +1,9 @@
 import MobileProjects from "@/components/mobile-projects";
 import { Name } from "@/components/name";
 import { OpeningCard } from "@/components/opening-card";
-import Projects from "@/components/projects";
-import {getFilteredProjects, getGallery } from "@/sanity/sanity-utils"; 
+import { TestFilter } from "@/components/test-filter";
+
+import {getFilteredProjects, getGallery, getProjects } from "@/sanity/sanity-utils"; 
 import dynamic from "next/dynamic";
 
 interface Props {
@@ -20,25 +21,18 @@ const UsedFilters = dynamic(() => import("@/components/used-filters"))
 export default async function Home({searchParams}: Props) {
   const {tags, collabs, roles, about, view} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
+  let allProjects = await getProjects();
 
   return (
-    filteredProjects? <main id="main" className={`sticky top-0 font-normal z-0 flex flex-col items-center justify-start min-h-screen`}>
+    filteredProjects? <main id="main" className={`top-0 font-normal z-0 flex flex-col items-center justify-start min-h-screen`}>
         <Name />
         <UsedFilters/>
-        <section className={`pb-20 h-[100dvh] snap-y snap-mandatory lg:hidden ${view==="all"? "overflow-y-scroll block": "block"} `}>
+        <section className={`${view==="full"? "h-[100dvh] snap-y snap-mandatory overflow-y-scroll block": "pb-20 grid gap-5 min-[1500px]:grid-cols-5 min-[1200px]:grid-cols-4 min-[720px]:grid-cols-3 grid-cols-2 justify-items-stretch lg:mx-40 mx-5"}`}>
+          <TestFilter projects={allProjects}/>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-              <div className={` ${view==="all"? "" : ""} top-0 transition-all duration-500 ${about === "open"? "blur-3xl": ""}`} key={project.name + project._id}>
+              <div className={`top-0 transition-all duration-500`} key={project.name + project._id}>
                 <MobileProjects filteredProjects={filteredProjects} project={project} index={index}/>
-              </div>
-          )})}
-        </section>
-
-        <section className={`pb-20 hidden lg:grid ${view==="all"? "grid min-[1500px]:grid-cols-5 min-[1024px]:grid-cols-3 min-[1200px]:grid-cols-4 md:grid-cols-2 lg:mx-12 min-[1500px]:mx-32 min-[1200px]:mx-20": ""}`}>
-          {filteredProjects.map((project:any, index:number)=>{ 
-            return(
-              <div className={`transition-all duration-500 ${about === "open"? "blur-2xl": ""}`} key={project.name + project._id}>
-                <Projects filteredProjects={filteredProjects} project={project} index={index}/>
               </div>
           )})}
         </section>

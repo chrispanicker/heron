@@ -23,19 +23,31 @@ export function Filters({filters, projects}: Props){
     const createQueryString = useCallback(
         (name: string, value: string) => {
             let params;
-
+            
 
             selectedProject? 
             document.querySelectorAll(".bg-black").forEach((e)=>{
                 e.classList.remove('bg-black')
             }): ""
 
+
             let stringSearchParams = searchParams.toString()
             stringSearchParams = stringSearchParams.replaceAll("+", " ")
             params = new URLSearchParams(stringSearchParams)
+
+
+            if(name==="roles"||"tags"||"collabs" && selectedProject){
+                params.delete("project", params?.get("project")!)
+                document.querySelectorAll(".bg-black").forEach((e)=>{
+                    e.classList.remove('bg-black')
+                })
+            } 
+
             stringSearchParams.includes(`${name}=${value}`)?
             params.delete(name, value):params.append(name, value)
             return params.toString()
+
+            
         },
         [searchParams]
     )
@@ -51,7 +63,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`lg:sticky lg:block top-0 z-40 p-5 transition-all text-white text-center duration-500 ${view==="all"? "lg:block hidden": ""} ${selectedProject && view==="all"? "blur-2xl": ""} ${selectedProject && view==="txt"? "max-[1024px]:blur-2xl": ""} ${about==="open"? "blur-3xl": ""}`}>
+        <section className={`lg:sticky top-0 z-[30] w-full col-span-full py-5 transition-all pointer-events-none text-white text-left duration-500 ${view==="full"? "hidden": ""}`}>
             {allFilters.map((entry:any, idx:any)=>{
                 return (
                     <button 
@@ -61,7 +73,7 @@ export function Filters({filters, projects}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`)
                     }}
-                    className={`${selectedProject? ``: ``}  ${blurClass} ${textClass} px-1 py-1 lg:py-[.1rem] mx-1 my-1 w-fit whitespace-nowrap transition-all
+                    className={`${blurClass} ${textClass} pointer-events-auto px-1 py-1 lg:py-[.1rem] mr-1 my-1 w-fit whitespace-nowrap transition-all
                     ${searchParams.getAll(entry.key)?.includes(entry.filter)? "selection text-gray-400":"hover:bg-white hover:text-gray-400"}`
                     }>
                         {`${entry.filter}`}

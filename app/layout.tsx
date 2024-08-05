@@ -1,13 +1,10 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
 import { SiteFooter } from '@/components/site-footer'
-import { TestFilter } from '@/components/test-filter'
 import localFont from 'next/font/local'
 import ViewToggle from '@/components/view-toggle'
 import { getGallery, getInfo, getProjects } from '@/sanity/sanity-utils'
-import { Filters } from '@/components/filters'
 import { OpeningCard } from '@/components/opening-card'
-import { Landing } from '@/components/landing'
 
 
 export const metadata: Metadata = {
@@ -36,8 +33,6 @@ export default async function RootLayout({
     children: React.ReactNode
   }) {
 
-
-let allProjects = await getProjects();
 let info = await getInfo();
 let gallery = await getGallery();
 
@@ -45,10 +40,7 @@ let gallery = await getGallery();
     <html lang="en" className='bg-gray-400 text-white overflow-x-hidden'>
       <body>
         <section className=''>
-
-          {/* <Landing gallery={gallery}/> */}
           <OpeningCard gallery={gallery} />
-          <TestFilter projects={allProjects}/>
           <ViewToggle />
           
           <>{children}</>

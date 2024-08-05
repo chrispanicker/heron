@@ -23,9 +23,9 @@ export default function MobileProjects({project}: Props) {
     const galleryCount = vimeoCount + imageCount;
     const filterRef = useRef<HTMLDivElement | null>(null)
     const txtRef = useRef<HTMLElement | null>(null)
-    const blurClass = ' backdrop-blur-sm backdrop-brightness-[.7] ';
-    const buttonClass = ' lg:relative lg:top-auto top-[48vh] hover:bg-white hover:text-gray-400 mx-2 z-30 px-2 '
-    const textClass = " lg:text-xl lg:leading-auto text-[1rem] leading-[1.2rem] "
+    const blurClass = ' backdrop-blur-sm backdrop-brightness-[.8] ';
+    const buttonClass = ' lg:relative lg:top-auto top-[48vh] hover:bg-white hover:text-gray-400 mx-2 z-30'
+    const textClass = "text-lg leading-[1.5rem] "
 
     let vimeoIDs:string[] = [];
     let allRoles:string[] = [];
@@ -155,32 +155,30 @@ export default function MobileProjects({project}: Props) {
     
 
 return(
-    <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 lg:text-xl text-lg transition-all ${view==="txt" && selectedProject===project.slug? "": ""} ${view==="txt"? "": ""}`}>
-                {/* view ===txt? */}
-                <span ref={txtRef} id="txt" className={`z-0 group flex flex-col items-center justify-center leading-0 ${selectedProject? "blur-lg":""} ${view==="txt"? "lg:text-5xl text-2xl": "hidden"} `}>
-                    <div className="flex justify-center items-center">
-                        <button className={`peer z-20 transition-all text-white ${selectedProject===project.slug? "":""}`}                         
-                        onClick={projectClick}><h3 className="hover:bg-white hover:text-gray-400 leading-9 px-2 lg:py-2">{project.name}</h3>
-                        </button>
-                        <button className={`peer z-20 transition-all text-white text-xl mx-2 ${blurClass} ${selectedProject===project.slug? "":"hidden"}`}                         
-                        onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-2 py-1 lg:py-0 ${textClass}`}>Close</h3>
-                        </button>
+    <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 transition-all `}>
 
-                    </div>
-            
-            {/* <Image
-                src={urlForImage(project.preview).url()}
-                alt=""
-                width={1080}
-                height={1080}
-                className={`w-screen fixed h-screen z-0 object-cover pointer-events-none top-0 peer-hover:opacity-100 opacity-0 duration-1000 transition-all ${selectedProject===project.slug? "hidden": ""}`}
-                // placeholder="blur"
-                // blurDataURL={`${project.gallery[index].lqip}`}
-            /> */}
+        {/* view === grid? */}
+        <span id="grid" className={`flex flex-col justify-start items-start overflow-hidden transition-all duration-500 lg:h-[24rem] h-[17rem] ${selectedProject? "blur-2xl": ""} ${view==="full"? "hidden": ""} `}>
+            <button className={`peer z-20 transition-all ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
+            onClick={projectClick}>
+                    <Image
+                    src={urlForImage(project.preview).url()}
+                    alt=""
+                    width={1080}
+                    height={1080}
+                    unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
+                    className={`lg:h-[22rem] lg:w-[22rem] lg:hover:h-[22rem] h-[12rem] object-cover transition-all`}
+                    loading="lazy"
+                    />
+            </button>
+
+            <button className={`peer z-20 px-1 ${blurClass} lg:mt-2 mt-1 transition-all whitespace-nowrap peer-hover:bg-white peer-hover:text-gray-400 hover:bg-white hover:text-gray-400`}                         
+                    onClick={projectClick}>{project.name}
+            </button>
         </span>
 
-        {/* view ===all? */}
-        <span id="all" className={`flex z-0 relative snap-start snap-always flex-col items-center justify-center overflow-hidden transition-all duration-500 ${view==="all"? "": "hidden"} ${selectedProject===project.slug? "h-auto": "h-[100dvh]"} ${selectedProject? "blur-2xl": ""}`}>
+        {/* view ===full? */}
+        <span id="full" className={`flex z-0 relative snap-start snap-always flex-col items-center justify-center overflow-hidden transition-all duration-500 ${view==="full"? "": "hidden"} ${selectedProject===project.slug? "h-auto": "h-[100dvh]"} ${selectedProject? "blur-2xl": ""}`}>
             
             <button className={`peer absolute top-5 z-30 text-3xl transition-all peer-hover:bg-white peer-hover:text-gray-400 px-2 ${blurClass} ${selectedProject===project.slug? "": ""}`}                         
                     onClick={projectClick}>{project.name}
@@ -202,22 +200,23 @@ return(
         </span>
 
         {/* project open? */}
-        <span className={`z-40 overflow-x-hidden flex w-screen flex-col justify-center items-center transition-all ${view==="txt"? "": "w-screen"}  
-        ${selectedProject===project.slug? `fixed top-0 left-0 w-screen h-[100dvh] left-0 z-40 justify-start opacity-100`: "h-0 z-0"}`}
+        <span className={`fixed bottom-0 left-0 w-screen z-40 overflow-y-hidden flex w-screen flex-col justify-center items-center transition-all duration-500 
+        ${selectedProject===project.slug? `h-[100dvh] opacity-100` : "h-0 blur-3xl"}`}
         >
-            <div className={`flex justify-center items-center z-40 mb-5`}>
-                <button className={`peer transition-all ${selectedProject===project.slug? "":""}`}                         
-                onClick={projectClick}><h3 className="hover:bg-white text-2xl hover:text-gray-400 leading-10 px-2">{project.name}</h3>
+            <div className={`flex justify-center items-center z-40 mb-2`}>
+                <button className={`peer transition-all`}                         
+                onClick={projectClick}><h3 className={`text-4xl hover:bg-white hover:text-gray-400 px-1`}>{project.name}</h3>
                 </button>
-                <button className={`peer transition-all ${blurClass} mx-2 ${selectedProject===project.slug? "":"hidden"}`}                         
-                onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-2 py-1 lg:py-0 ${textClass}`}>Close</h3>
+                <button className={`peer transition-all mx-2 ${blurClass}`}                         
+                onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-1 lg:py-0 ${textClass}`}>Close</h3>
                 </button>
             </div>
+
             <div className="w-screen overflow-x-scroll snap-x snap-mandatory z-40 mb-2">
-                <span className={`flex left-0 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center w-screen": "px-20 w-max justify-start items-start"}`}>
+                <span className={`flex left-0 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center pointer-events-none": "w-max justify-start items-start"}`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
-                        <div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center h-[17rem] w-[30rem]  ${selectedProject===project.slug? img===index? "":"": view==="all"? "hidden": "hidden"}`}>
+                        <div key={`project.slug+${index}`} className={`pointer-events-auto px-2 snap-center snap-always peer flex justify-center items-center lg:h-[27rem] lg:w-[48rem] min-[1500px]:h-[36rem] min-[1500px]:w-[64rem] h-[17rem] w-[30rem]  ${selectedProject===project.slug? img===index? "":"": view==="full"? "hidden": "hidden"}`}>
                             {/* main gallery vimeo */}
                             <div className={`relative overflow-hidden w-full pt-[56.25%]`}>
                                 <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
@@ -226,48 +225,72 @@ return(
                     ))}
 
                     {project.images?.map((image, index)=>(
-                        <div key={`project.slug+${index+vimeoCount}`} className={`snap-center snap-always peer pb-2 mx-2 flex justify-center items-center ${selectedProject===project.slug? img===index+vimeoCount? "":"": "hidden"}`}>
+                        <div key={`project.slug+${index+vimeoCount}`} className={`px-2 snap-center snap-always peer pb-2 flex justify-center items-center`}>
                             {/* main nav gallery images */}
+                            <Image
+                            src={urlForImage(image).url()}
+                            alt=""
+                            width={1080}
+                            height={1080}
+                            className={`object-contain cursor-zoom-in h-[17rem] lg:h-[27rem] min-[1500px]:h-[36rem] w-auto transition-all pointer-events-auto ${selectedProject===project.slug? "": ""}`}
+                            loading="lazy"
+                            onClick={()=>{
+                                let img = document.querySelector(`#mobile-${project.slug+index}`)
+                                if(img?.classList.contains("opacity-0")){
+                                    img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
+                                    img.classList.replace("opacity-0", "opacity-100")
+                                    img.classList.remove("pointer-events-none")
+                                    img?.classList.remove("hidden")
+                                }else{
+                                    img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
+                                    img?.classList.replace("opacity-100", "opacity-0")
+                                    img?.classList.add("pointer-events-none")
+                                    setTimeout(()=>{img?.classList.add("hidden")}, 500)
+                                }
+
+                            }}
+                            placeholder="blur"
+                            blurDataURL={`${project.gallery[index].lqip}`}
+                            unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
+                            />
+
                             <Image
                             src={urlForImage(image).url()}
                             id={`mobile-${project.slug+index}`}
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover cursor-zoom-in ${selectedProject===project.slug? "h-[17rem] w-auto": "h-0"} ${selectedProject===project.slug? img===index+vimeoCount? "":"": ""}`}
+                            className={`object-contain backdrop-blur-2xl left-0 z-50 top-0 fixed overflow-hidden cursor-zoom-in w-[100dvw] h-[100dvh] transition-all hidden ${selectedProject===project.slug? "opacity-0 pointer-events-none": "hidden"}`}
+                            onClick={()=>{
+                                let img = document.querySelector(`#mobile-${project.slug+index}`)
+                                if(img?.classList.contains("opacity-0")){
+                                    img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
+                                    img.classList.replace("opacity-0", "opacity-100")
+                                    img.classList.remove("pointer-events-none")
+                                }else{
+                                    img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
+                                    img?.classList.replace("opacity-100", "opacity-0")
+                                    img?.classList.add("pointer-events-none")
+                                }
+                            }}
                             loading="lazy"
-                            // onClick={()=>{
-                            //     let img = document.querySelector(`#mobile-${project.slug+index}`)
-                            //     if(img?.classList.contains("h-[17rem]")){
-                            //         img.classList.replace("h-[17rem]", "h-[100dvh]")
-                            //         img.classList.replace("w-auto", "w-[100dvw]")
-                            //         img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
-                            //         img.classList.replace("object-cover", "object-contain")
-                            //         img.classList.add("fixed", "top-0", "left-0", "z-50", "bg-gray-400")
-                            //     }else{
-                            //         img?.classList.replace("h-[100dvh]", "h-[17rem]")
-                            //         img?.classList.replace("w-[100dvw]", "w-auto")
-                            //         img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
-                            //         img?.classList.replace("object-contain", "object-cover")
-                            //         img?.classList.remove("fixed", "top-0", "left-0",  "z-50", "bg-gray-400")
-                            //     }
-                            // }}
-                            // placeholder="blur"
-                            // blurDataURL={`${project.gallery[index].lqip}`}
+                            placeholder="blur"
+                            blurDataURL={`${project.gallery[index].lqip}`}
                             unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                             />
                         </div>
                     ))}
                 </span>
             </div>
+
             {/* BIO */}
-            <div className={`z-0 flex w-screen text-center justify-center items-center lg:px-32 px-2 mb-5 py-2 ${textClass}`}><PortableText value={project.content}/></div>
+            <div className={`z-10 flex w-screen text-center justify-center items-center lg:px-32 px-2 pb-2 ${textClass}`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
             <div ref={filterRef} className="z-10 lg:flex lg:flex-row text-center  justify-center items-center mx-5">
             {Object.entries(filters).map(([key, array])=>{
                 return(
-                    <span key={key} className="capitalize lg:flex justify-center items-center my-1">
+                    <span key={key} className="capitalize lg:flex justify-center items-center">
                         {array.map((filter:any, idx:any)=>{
                             
                             return (
@@ -277,8 +300,8 @@ return(
                                 onClick={()=>{
                                     router.push( `/?${createQueryString(`${key}`, `${filter}`)}`)
                                 }}
-                                className={`px-2 ${blurClass + textClass} mx-2 py-1 lg:py-0 my-1 w-fit whitespace-nowrap 
-                                ${searchParams.getAll(key)?.includes(filter)? "bg-white text-gray-400":"hover:bg-white hover:text-gray-400"}`}
+                                className={`${textClass + blurClass} px-1 mx-1 mb-2 w-fit whitespace-nowrap 
+                                ${searchParams.getAll(key)?.includes(filter)? "bg-white text-gray-400": "hover:bg-white hover:text-gray-400"}`}
                                 >
                                     {`${filter}`}
                                 </button>
@@ -289,7 +312,7 @@ return(
             })}
             </div>
             <button 
-            className={`w-screen h-screen absolute top-0 z-0 ${selectedProject===project.slug? "block": "hidden"}`}
+            className={`w-screen h-screen absolute top-0 cursor-alias transition-all bg-[#000000] opacity-40 ${selectedProject===project.slug? ``: "hidden"}`}
             onClick={projectClick}
             />
         </span> 

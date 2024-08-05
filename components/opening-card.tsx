@@ -31,7 +31,7 @@ export function OpeningCard({gallery}: Props){
     let type = Math.floor(Math.random() * 3)
 
     useEffect(()=>{
-        isSanityStudio? "": view? "": router.push( `/?${createQueryString(`view`, `txt`)}`)
+        isSanityStudio? "": view? "": router.push( `/?${createQueryString(`view`, `full`)}`)
     }, [selectedProject])
     
     useEffect(()=>{
@@ -89,9 +89,12 @@ export function OpeningCard({gallery}: Props){
     
     return(
         isSanityStudio? "": 
-        <div ref={cardRef} className="text-5xl w-screen h-[100dvh] backdrop-blur-lg backdrop-brightness-[1] fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition-all duration-1000 cursor-none">
-            <div className="flex justify-center items-center flex-col z-50">
-                <p className= "text-white mx-2 w-fit px-4 backdrop-blur-sm backdrop-brightness-[.7] ">&#169; Drew Litowitz</p>
+        <div ref={cardRef} className="text-5xl w-screen h-[100dvh] fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition-all duration-1000 cursor-none">
+            <div className="w-screen h-screen absolute top-0 left-0 backdrop-blur-2xl backdrop-brightness-[1] ">
+
+            </div>
+            <div className="flex justify-center items-center flex-col z-50 backdrop-blur-sm backdrop-brightness-[.7]">
+                <p className= "text-white mx-2 w-fit px-0">&#169; Drew Litowitz</p>
                 {/* <p className= "text-white mx-2 w-fit px-4 backdrop-blur-sm backdrop-brightness-[.7] ">Here is some of my work.</p> */}
             </div>
             <div id="gallery" className="fixed top-0 flex w-screen h-[100dvh] justify-start items-center">
