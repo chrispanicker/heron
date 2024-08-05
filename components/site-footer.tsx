@@ -40,7 +40,7 @@ export function SiteFooter(info:any){
                 }}>About</button>
             </div>
 
-            <span id="footer" className={`fixed z-30 lg:flex lg:flex-col bottom-0 h-[0vh] duration-500 transition-all lg:px-40 px-5 ${about==="open"? "h-[100vh] blur-auto lg:py-20 backdrop-blur-3xl backdrop-brightness-[.7]": "blur-3xl h-[0vh]"}`}>
+            <span id="footer" className={`fixed z-30 lg:flex lg:flex-col bottom-0 h-[0vh] duration-500 transition-all lg:px-40 px-5 overflow-y-scroll  ${about==="open"? " pb-20 h-[100vh] blur-auto backdrop-blur-3xl backdrop-brightness-[.7]": "blur-3xl h-[0vh]"}`}>
                 <button className={`w-screen h-screen z-0 fixed top-0 cursor-alias ${about==="open"? "": "hidden"}`}
                 onClick={()=>{
                     searchParams.getAll(`about`).includes("open")?
@@ -48,7 +48,7 @@ export function SiteFooter(info:any){
                     : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)
                 }}/>
 
-                <div className={`w-4/4 h-fit py-10`}>
+                <div className={`w-4/4 h-fit py-10 text-2xl`}>
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
                 <div className={`w-4/4 h-fit lg:text-lg text-sm `}>

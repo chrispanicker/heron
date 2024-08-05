@@ -158,7 +158,7 @@ return(
     <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 transition-all `}>
 
         {/* view === grid? */}
-        <span id="grid" className={`flex flex-col justify-start items-start overflow-hidden transition-all duration-500 lg:h-[24rem] h-[17rem] ${selectedProject? "blur-2xl": ""} ${view==="full"? "hidden": ""} `}>
+        <span id="grid" className={`flex flex-col justify-start items-start overflow-hidden transition-all duration-500 lg:h-[16rem] h-[17rem] ${selectedProject? "blur-2xl": ""} ${view==="full"? "hidden": ""} `}>
             <button className={`peer z-20 transition-all ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
             onClick={projectClick}>
                     <Image
@@ -167,7 +167,7 @@ return(
                     width={1080}
                     height={1080}
                     unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
-                    className={`lg:h-[22rem] lg:w-[22rem] lg:hover:h-[22rem] h-[12rem] object-cover transition-all`}
+                    className={`lg:h-[14rem] lg:w-[20rem] h-[12rem] object-cover transition-all`}
                     loading="lazy"
                     />
             </button>
@@ -312,7 +312,7 @@ return(
             })}
             </div>
             <button 
-            className={`w-screen h-screen absolute top-0 cursor-alias transition-all bg-[#000000] opacity-40 ${selectedProject===project.slug? ``: "hidden"}`}
+            className={`w-screen h-screen absolute top-0 cursor-alias transition-all bg-[#000000] ${view==="full"? " opacity-40": "opacity-10"} ${selectedProject===project.slug? ``: "hidden"}`}
             onClick={projectClick}
             />
         </span> 
