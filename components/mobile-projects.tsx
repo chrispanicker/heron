@@ -288,7 +288,7 @@ return(
             </div>
 
             {/* BIO */}
-            <div className={`z-10 flex w-screen text-center justify-center items-center lg:px-32 px- py-4 ${textClass}`}><PortableText value={project.content}/></div>
+            <div className={`z-10 flex w-screen text-center justify-center items-center lg:px-32 px-5 py-4 ${textClass}`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
             <div ref={filterRef} className="z-10 lg:flex lg:flex-row text-center  justify-center items-center mx-5">

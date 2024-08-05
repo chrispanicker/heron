@@ -42,7 +42,6 @@ let gallery = await getGallery();
         <section className=''>
           <OpeningCard gallery={gallery} />
           <ViewToggle />
-          
           <>{children}</>
           <SiteFooter info={info} />
         </section>

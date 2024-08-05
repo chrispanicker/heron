@@ -24,10 +24,10 @@ export default async function Home({searchParams}: Props) {
   let allProjects = await getProjects();
 
   return (
-    filteredProjects? <main id="main" className={`top-0 font-normal z-0 flex flex-col items-center justify-start min-h-screen`}>
+    filteredProjects? <main id="main" className={`top-0 font-normal z-0 flex flex-col items-center justify-start min-h-screen ${about==="open"? "overflow-hidden": ""}`}>
         <Name />
         <UsedFilters/>
-        <section className={`${view==="full"? "h-[100dvh] snap-y snap-mandatory overflow-y-scroll block": "lg:py-40 py-20 grid gap-5 min-[1500px]:grid-cols-5 min-[1200px]:grid-cols-4 min-[720px]:grid-cols-3 grid-cols-2 justify-items-stretch lg:mx-40 mx-5"}`}>
+        <section className={`${view==="full"? "h-[100dvh] snap-y snap-mandatory overflow-y-scroll block": "lg:py-40 pb-20 grid gap-5 min-[1500px]:grid-cols-5 min-[1200px]:grid-cols-4 min-[720px]:grid-cols-3 grid-cols-2 justify-items-stretch lg:mx-40 mx-5"}`}>
           <TestFilter projects={allProjects}/>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
