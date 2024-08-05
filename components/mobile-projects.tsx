@@ -203,8 +203,8 @@ return(
         <span className={`fixed bottom-0 left-0 w-screen z-40 overflow-y-hidden flex w-screen flex-col justify-center items-center transition-all duration-500 
         ${selectedProject===project.slug? `h-[100dvh] opacity-100` : "h-0 blur-3xl"}`}
         >
-            <div className={`flex justify-center items-center z-40 mb-2`}>
-                <button className={`peer transition-all`}                         
+            <div className={`flex lg:flex-row flex-col-reverse justify-center items-center z-40 mb-2`}>
+                <button className={`peer transition-all mt-2 mb-2`}                         
                 onClick={projectClick}><h3 className={`text-4xl hover:bg-white hover:text-gray-400 px-1`}>{project.name}</h3>
                 </button>
                 <button className={`peer transition-all mx-2 ${blurClass}`}                         
@@ -223,7 +223,6 @@ return(
                             </div>
                         </div>
                     ))}
-
                     {project.images?.map((image, index)=>(
                         <div key={`project.slug+${index+vimeoCount}`} className={`px-2 snap-center snap-always peer pb-2 flex justify-center items-center`}>
                             {/* main nav gallery images */}
@@ -253,7 +252,12 @@ return(
                             blurDataURL={`${project.gallery[index].lqip}`}
                             unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                             />
+                        </div>
+                    ))}
 
+                    {project.images?.map((image, index)=>(
+                        <div key={`project.slug+${index+vimeoCount}_zoom`} className={``}>
+                            {/* main nav gallery images */}
                             <Image
                             src={urlForImage(image).url()}
                             id={`mobile-${project.slug+index}`}
@@ -284,7 +288,7 @@ return(
             </div>
 
             {/* BIO */}
-            <div className={`z-10 flex w-screen text-center justify-center items-center lg:px-32 px-2 pb-2 ${textClass}`}><PortableText value={project.content}/></div>
+            <div className={`z-10 flex w-screen text-center justify-center items-center lg:px-32 px- py-4 ${textClass}`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
             <div ref={filterRef} className="z-10 lg:flex lg:flex-row text-center  justify-center items-center mx-5">
