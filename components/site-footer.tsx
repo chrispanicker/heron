@@ -25,6 +25,7 @@ export function SiteFooter(info:any){
     const collabs = searchParams.get('collabs');
     const about = searchParams.get('about');
     const blurClass = 'backdrop-blur-3xl backdrop-brightness-[.7]';
+        const hoverClass = "outline outline-1 outline-black"
     // const textClass = " lg:text-xl lg:leading-auto text-[1rem] leading-[1.2rem] "
 
     
@@ -33,7 +34,7 @@ export function SiteFooter(info:any){
         isSanityStudio? "" : 
         <footer ref={footerRef} className="w-full">
             <div id="footImgDiv" className={`flex w-screen top-screen justify-center items-center`}>
-                <button id="footerTab" className={`fixed z-[31] bottom-0 right-0 hover:bg-white hover:text-gray-400 decoration-dotted lg:mx-40 mx-5 mb-5 leading-[1.4rem] px-1 py-0 w-fit whitespace-nowrap  ${project? `blur-xl`: `${blurClass}`}`} onClick={()=>{
+                <button id="footerTab" className={`fixed z-[31] bottom-0 right-0 hover:bg-white hover:text-black decoration-dotted lg:mx-40 mx-5 mb-5 leading-[1.4rem] px-1 py-0 w-fit whitespace-nowrap ${hoverClass} ${project? `blur-xl`: `${blurClass}`}`} onClick={()=>{
                     searchParams.getAll(`about`).includes("open")?
                     router.push(`/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`: ""}${project? `&project=${project}&img=0` : ""}`)
                     : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)

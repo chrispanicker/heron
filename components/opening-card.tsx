@@ -28,8 +28,9 @@ export function OpeningCard({gallery}: Props){
         
     )  
 
-    let type = Math.floor(Math.random() * 3)
+    // let type = Math.floor(Math.random() * 3)
 
+    let type = 2;
     useEffect(()=>{
         isSanityStudio? "": view? "": router.push( `/?${createQueryString(`view`, `full`)}`)
     }, [selectedProject])

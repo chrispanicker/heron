@@ -1,5 +1,9 @@
+'use server'
 
 import {createClient, groq} from "next-sanity";
+import imageUrlBuilder from '@sanity/image-url';
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
 const client = createClient({
         projectId: "01jwvji0",
         dataset: "production",
@@ -27,7 +31,7 @@ export async function getProjects() {
                   },
                 }`
         )
-}
+} 
 
 
 export async function getInfo() {

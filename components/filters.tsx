@@ -18,7 +18,7 @@ export function Filters({filters, projects}: Props){
     const isSanityStudio = pathname.startsWith('/admin');
     const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]';
     const textClass = " lg:text-md lg:leading-auto text-[1rem] leading-[1.2rem] ";
-
+    const hoverClass = "outline outline-1 hover:outline-2 hover:rounded-sm outline-black"
     
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -63,7 +63,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`lg:sticky top-0 z-[30] w-full col-span-full py-5 transition-all pointer-events-none text-white text-left duration-500 ${view==="full"? "hidden": ""}`}>
+        <section className={`lg:sticky top-0 z-[30] w-full py-5 transition-all pointer-events-none text-white text-left duration-500 ${view==="full"? "hidden": ""}`}>
             {allFilters.map((entry:any, idx:any)=>{
                 return (
                     <button 
@@ -73,8 +73,8 @@ export function Filters({filters, projects}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`)
                     }}
-                    className={`${blurClass} ${textClass} pointer-events-auto px-1 py-1 lg:py-[.1rem] mr-1 my-1 w-fit whitespace-nowrap transition-all
-                    ${searchParams.getAll(entry.key)?.includes(entry.filter)? "selection text-gray-400":"hover:bg-white hover:text-gray-400"}`
+                    className={`${blurClass} ${textClass} ${hoverClass} pointer-events-auto px-1 py-1 lg:py-[.1rem] mr-2 my-1 w-fit whitespace-nowrap transition-all
+                    ${searchParams.getAll(entry.key)?.includes(entry.filter)? "selection text-black":"hover:bg-white hover:text-black"}`
                     }>
                         {`${entry.filter}`}
                     </button>

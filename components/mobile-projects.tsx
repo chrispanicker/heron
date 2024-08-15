@@ -26,6 +26,7 @@ export default function MobileProjects({project}: Props) {
     const blurClass = ' backdrop-blur-sm backdrop-brightness-[.8] ';
     const buttonClass = ' lg:relative lg:top-auto top-[48vh] hover:bg-white hover:text-gray-400 mx-2 z-30'
     const textClass = "text-lg leading-[1.5rem] "
+    const hoverClass = "outline outline-1 outline-black"
 
     let vimeoIDs:string[] = [];
     let allRoles:string[] = [];
@@ -155,12 +156,12 @@ export default function MobileProjects({project}: Props) {
     
 
 return(
-    <section key={`${project.slug}`} className={`flex flex-col justify-center items-center bg-gray-400 transition-all `}>
+    <section key={`${project.slug}`} className={`flex flex-col justify-start items-start bg-gray-400 transition-all `}>
 
-        {/* view === grid? */}
-        <span id="grid" className={`relative flex flex-col justify-center items-center overflow-hidden transition-all duration-500 lg:h-[20rem] h-[12rem] ${selectedProject? "blur-2xl": ""} ${view==="full"? "hidden": ""} `}>
+        {/* view === grid || list? */}
+        <span id="grid" className={`relative flex flex-col justify-center items-center overflow-hidden transition-all ${view==="grid"? "lg:h-[20rem] h-[12rem] rounded-md hover:rounded-xl": " hover:rounded-md"} w-max ${selectedProject? "blur-2xl": `${hoverClass}`} ${view==="grid"||"list"? "": "hidden"} `}>
 
-            <button className={`peer z-20 transition-all ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
+            <button className={`peer z-20 transition-all  ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
             onClick={projectClick}>
                     <Image
                     src={urlForImage(project.preview).url()}
@@ -168,14 +169,15 @@ return(
                     width={1080}
                     height={1080}
                     unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
-                    className={`lg:h-[20rem] lg:w-[20rem] h-[12rem] w-[12rem] object-cover transition-all`}
+                    className={`lg:h-[20rem] lg:w-auto h-[12rem] w-auto object-cover transition-all blur-auto ${view==="list"? "hidden": ""}`}
                     loading="lazy"
                     />
             </button>
 
-            <button className={`absolute top-0 peer z-20 px-1 ${blurClass} lg:mt-2 mt-1 transition-all whitespace-nowrap peer-hover:bg-white peer-hover:text-gray-400 hover:bg-white hover:text-gray-400`}                         
+            <button className={`${view==="list"? "lg:text-5xl text-xl lg:py-1 px-2": "absolute lg:mt-2 mt-1 "} top-0 peer z-20 px-1 ${blurClass} duration-500 outline outline-1 peer-hover:rounded-sm hover:rounded-sm outline-black transition-all whitespace-nowrap peer-hover:bg-white peer-hover:text-black hover:bg-white hover:text-black`}                         
                     onClick={projectClick}>{project.name}
             </button>
+            
 
         </span>
 
@@ -205,12 +207,12 @@ return(
         <span className={`fixed bottom-0 left-0 w-screen z-40 overflow-y-hidden flex w-screen flex-col justify-center items-center transition-all duration-500 
         ${selectedProject===project.slug? `h-[100dvh] opacity-100` : "h-0 blur-3xl"}`}
         >
-            <div className={`flex lg:flex-row flex-col-reverse justify-center items-center z-40 mb-2`}>
-                <button className={`peer transition-all mt-2 mb-2`}                         
-                onClick={projectClick}><h3 className={`text-4xl hover:bg-white hover:text-gray-400 px-1`}>{project.name}</h3>
+            <div className={`flex lg:flex-row flex-col-reverse justify-center items-end z-40 mb-2`}>
+                <button className={`peer transition-all mt-2 ${blurClass}`}                         
+                onClick={projectClick}><h3 className={`text-4xl hover:bg-white hover:text-black ${hoverClass} hover:rounded-sm px-2`}>{project.name}</h3>
                 </button>
                 <button className={`peer transition-all mx-2 ${blurClass}`}                         
-                onClick={projectClick}><h3 className={`hover:bg-white hover:text-gray-400 px-1 lg:py-0 ${textClass}`}>Close</h3>
+                onClick={projectClick}><h3 className={`hover:bg-white hover:text-black ${hoverClass} hover:rounded-sm px-1 ${textClass}`}>Close</h3>
                 </button>
             </div>
 
@@ -226,15 +228,18 @@ return(
                         </div>
                     ))}
                     {project.images?.map((image, index)=>(
-                        <div key={`project.slug+${index+vimeoCount}`} className={`px-2 snap-center snap-always peer pb-2 flex justify-center items-center`}>
+                        <div key={`project.slug+${index+vimeoCount}`} className={`px-2 py-2 snap-center snap-always peer pb-2 flex justify-center items-center`}>
                             {/* main nav gallery images */}
                             <Image
                             src={urlForImage(image).url()}
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-contain cursor-zoom-in h-[17rem] lg:h-[27rem] min-[1500px]:h-[36rem] w-auto transition-all pointer-events-auto ${selectedProject===project.slug? "": ""}`}
+                            className={`object-contain cursor-zoom-in rounded-xl h-[17rem] lg:h-[27rem] min-[1500px]:h-[36rem] w-auto transition-all pointer-events-auto outline outline-1 hover:rounded-xl outline-black  ${selectedProject===project.slug? "": ""}`}
                             loading="lazy"
+                            onLoadingComplete={(image)=>{
+                                image.classList.replace("opacity-0","opacity-100")
+                            }}
                             onClick={()=>{
                                 let img = document.querySelector(`#mobile-${project.slug+index}`)
                                 if(img?.classList.contains("opacity-0")){
@@ -290,7 +295,7 @@ return(
             </div>
 
             {/* BIO */}
-            <div className={`z-10 flex w-screen text-center justify-center items-center lg:px-32 px-5 py-4 ${textClass}`}><PortableText value={project.content}/></div>
+            <div className={`z-10 flex text-center justify-center items-center px-2 py-1 mt-2 mb-4 ${textClass + blurClass} outline-1 outline outline-black`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
             <div ref={filterRef} className="z-10 lg:flex lg:flex-row text-center  justify-center items-center mx-5">
@@ -306,8 +311,8 @@ return(
                                 onClick={()=>{
                                     router.push( `/?${createQueryString(`${key}`, `${filter}`)}`)
                                 }}
-                                className={`${textClass + blurClass} px-1 mx-1 mb-2 w-fit whitespace-nowrap 
-                                ${searchParams.getAll(key)?.includes(filter)? "bg-white text-gray-400": "hover:bg-white hover:text-gray-400"}`}
+                                className={`${textClass + blurClass} px-1 mx-1 mb-2 w-fit whitespace-nowrap ${hoverClass}
+                                ${searchParams.getAll(key)?.includes(filter)? "bg-white text-black": `hover:bg-white hover:text-black`}`}
                                 >
                                     {`${filter}`}
                                 </button>
