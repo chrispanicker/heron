@@ -47,6 +47,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: Marlfield;
+  src:
+       url('../public/fonts/MarlfieldTRIAL-BoldCondensed.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 ::selection{
   color: rgb(57, 26, 26);
   background-color: rgb(227, 227, 227);
@@ -66,10 +75,12 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
 *{
   font-family: Flatspot;
-  /* letter-spacing: -.05rem; */
+}
+
+.sans{
+  font-family: sans-serif;
 }
 
 .selection{
@@ -103,7 +114,9 @@
   font-family: 'Times New Roman', Times, serif;
 }
 
-
+.serif{
+  /* font-family: serif; */
+}
 
 @keyframes rotate{
   0%{

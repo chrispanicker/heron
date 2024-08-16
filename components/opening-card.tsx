@@ -32,7 +32,7 @@ export function OpeningCard({gallery}: Props){
 
     let type = 2;
     useEffect(()=>{
-        isSanityStudio? "": view? "": router.push( `/?${createQueryString(`view`, `full`)}`)
+        isSanityStudio? "": view? "": router.push( `/?${createQueryString(`view`, `grid`)}`)
     }, [selectedProject])
     
     useEffect(()=>{

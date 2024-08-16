@@ -37,7 +37,7 @@ let info = await getInfo();
 let gallery = await getGallery();
 
   return (
-    <html lang="en" className='bg-gray-400 text-white overflow-x-hidden'>
+    <html lang="en" className='bg-gray-400 text-white overflow-x-hidden sans'>
       <body>
         <section className=''>
           <OpeningCard gallery={gallery} />
