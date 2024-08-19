@@ -170,15 +170,11 @@ return(
                     width={1080}
                     height={1080}
                     unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
-                    className={`lg:h-[20rem] hover:lg:h-[21rem]  lg:w-auto h-[12rem] w-auto object-cover transition-all blur-auto opacity-0 duration-500 ${view==="list"? "hidden": ""}`}
-                    onLoad={()=>{
-                        let image=document.querySelector(`#${project.slug}-preview`)
-                        image!.classList.replace("opacity-0", "opacity-1")
-                    }}
+                    className={`lg:h-[20rem] hover:lg:h-[21rem]  lg:w-auto h-[12rem] w-auto object-cover transition-all blur-auto duration-500 ${view==="list"? "hidden": ""}`}
                     />
             </button>
 
-            <div className={`${view==="list"? "serif group tracking-[-.05rem] lg:text-5xl text-xl lg:py-1 px-2 flex flex-col justify-center items-center": "absolute lg:mt-2 mt-1 "} top-0 peer z-20 px-1  duration-1000 transition-all whitespace-nowrap`}>
+            <div className={`${view==="list"? " group tracking-[-.05rem] lg:text-5xl text-xl lg:py-1 px-2 flex flex-col justify-center items-center": "absolute lg:mt-2 mt-1 "} top-0 peer z-20 px-1  duration-1000 transition-all whitespace-nowrap`}>
                 <button className={`${blurClass} outline outline-1 outline-black peer-hover:rounded-sm hover:rounded-sm hover:bg-white hover:text-black peer-hover:rounded-sm peer-hover:bg-white peer-hover:text-black px-1 ${view==="list"? "py-[.2rem]": ""} mb-1`} onClick={projectClick}>{project.name}</button>
                 <div ref={filterRef} className={`z-10 sans text-center justify-center items-center max-h-0 overflow-hidden group-hover:max-h-[5vh] duration-500 transition-all  ${view==="list"? "lg:flex": "hidden"}`}>
                     {Object.entries(filters).map(([key, array])=>{
@@ -314,10 +310,10 @@ return(
             </div>
 
                    
-            <h2 className={`text-5xl text-white hover:rounded-sm px-2 z-30 pt-2 serif`}>{project.name}</h2>
+            <h2 className={`text-5xl text-white hover:rounded-sm px-2 z-30 pt-2`}>{project.name}</h2>
 
             {/* BIO */}
-            <div className={`z-10 serif flex text-center justify-center items-center px-1 mt-2 mb-4 ${textClass} lg:mx-40`}><PortableText value={project.content}/></div>
+            <div className={`z-10  flex text-center justify-center items-center px-1 mt-2 mb-4 ${textClass} lg:mx-40`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
             <div ref={filterRef} className="z-10 lg:flex lg:flex-row text-center  justify-center items-center mx-40">

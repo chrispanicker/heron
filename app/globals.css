@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400..700;1,400..700&display=swap');
+
+
 @font-face {
   font-family: Flatspot;
   src:
@@ -68,6 +73,7 @@
   --background-end-rgb: 0, 0, 0;
 }
 
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -75,8 +81,25 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
+
+
+.playfair-display-400 {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.gelasio-400 {
+  font-family: "Gelasio", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
 *{
-  font-family: Flatspot;
+
 }
 
 .sans{
@@ -115,7 +138,7 @@
 }
 
 .serif{
-  /* font-family: serif; */
+  font-family: Gelasio;
 }
 
 @keyframes rotate{
