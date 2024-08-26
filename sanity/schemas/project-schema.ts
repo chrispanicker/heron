@@ -1,3 +1,5 @@
+import { metadata } from "@/app/layout";
+
 const project = {
     name: 'project',
     title: "Projects",
@@ -40,6 +42,10 @@ const project = {
             description: 'Choose a preview image to highlight on opening!',
             options: {
                 hotspot: true,
+                metadata: [
+                    'blurhash',
+                    'lqip'
+                ]
             },
         },
         {

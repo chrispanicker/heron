@@ -24,14 +24,14 @@ export default async function Home({searchParams}: Props) {
   let allProjects = await getProjects();
 
   return (
-    filteredProjects? <main id="main" className={`top-0 font-normal z-0 flex flex-col items-center justify-start min-h-screen ${about==="open"? "overflow-hidden": ""}`}>
+    filteredProjects? <main id="main" className={`top-0 flex z-0 flex-col items-center justify-start min-h-screen`}>
         <Name />
         <UsedFilters/>
         <section className={`${view==="full"? "h-[100dvh] snap-y snap-mandatory overflow-y-scroll block": view==="grid"? "lg:pb-40 pb-20 lg:mx-40 mx-5": "flex flex-col justify-center items-center lg:pb-40 pb-20 lg:mx-40 mx-5"}`}>
           <TestFilter projects={allProjects}/>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
-              <div className={`top-0 transition-all h-fit ${view==="grid"? "inline-block   mr-4 my-2": view==="list"? "": ""}`} key={project.name + project._id}>
+              <div className={`transition-all ${view==="grid"? "my-2 inline-block min-w-[50%] max-w-[50%] odd:pl-5": view==="list"? "": ""}`} key={project.name + project._id}>
                 <MobileProjects filteredProjects={filteredProjects} project={project} index={index}/>
               </div>
           )})}

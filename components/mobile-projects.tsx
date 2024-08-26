@@ -4,6 +4,7 @@ import { Project } from "@/types/project"
 import { PortableText } from "@portabletext/react"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation";
+import { getPlaiceholder } from "plaiceholder"
 import { useCallback, useEffect, useRef } from "react"
 
 interface Props{
@@ -12,7 +13,13 @@ interface Props{
     index: number
 }
 
+
+  
+    // const plaiceholder = getPlaiceholder(buffer);
+
 export default function MobileProjects({project}: Props) {
+
+
     const router = useRouter();
     const searchParams = useSearchParams();    
     const view = searchParams.get('view');
@@ -26,7 +33,7 @@ export default function MobileProjects({project}: Props) {
     const blurClass = ' backdrop-blur-sm backdrop-brightness-[.8] ';
     const buttonClass = ' lg:relative lg:top-auto top-[48vh] hover:bg-white hover:text-gray-400 mx-2 z-30'
     const textClass = "text-lg leading-[1.5rem] "
-    const hoverClass = "outline outline-1 outline-black"
+    // const hoverClass = "outline outline-1 outline-black"
 
     let vimeoIDs:string[] = [];
     let allRoles:string[] = [];
@@ -153,14 +160,15 @@ export default function MobileProjects({project}: Props) {
             })
         }
     }
-    
 
 return(
-    <section key={`${project.slug}`} className={`flex flex-col justify-start items-start bg-gray-400 transition-all `}>
+    <section key={`${project.slug}`} className={`flex flex-col justify-center items-start bg-gray-400 transition-all mb-4 lg:mb-0`}>
 
         {/* view === grid || list? */}
-        <span id="grid" className={` relative flex flex-col justify-center items-center overflow-hidden transition-all ${view==="grid"? `rounded-md hover:rounded-xl  ${hoverClass}`: "hover:rounded-md"} ${selectedProject? "blur-2xl": ``} ${view==="grid"||"list"? "": "hidden"} `}>
-
+        <span id="grid" className={` relative flex flex-col justify-center items-center overflow-hidden transition-all duration-1000
+        ${view==="grid"? `rounded-md hover:rounded-xl`: view==="list"? "lg:h-[5rem] hover:rounded-md": ""} 
+        ${selectedProject? view==="grid"? "blur-2xl": `blur-md`: ""} 
+        ${view==="grid"||"list"? "": "hidden"} `}>
             <button className={`peer z-20 transition-all  ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
             onClick={projectClick}>
                     <Image
@@ -169,19 +177,19 @@ return(
                     id={`${project.slug}-preview`}
                     width={1080}
                     height={1080}
-                    unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
-                    className={`lg:h-[20rem] hover:lg:h-[21rem]  lg:w-auto h-[12rem] w-auto object-cover transition-all blur-auto duration-500 ${view==="list"? "hidden": ""}`}
+                    unoptimized={true}
+                    className={`w-auto lg:h-[30rem] h-[15rem] object-cover transition-all blur-auto duration-500 ${view==="list"|| view==="full"? "hidden": ""}`}
                     />
             </button>
 
-            <div className={`${view==="list"? " group tracking-[-.05rem] lg:text-5xl text-xl lg:py-1 px-2 flex flex-col justify-center items-center": "absolute lg:mt-2 mt-1 "} top-0 peer z-20 px-1  duration-1000 transition-all whitespace-nowrap`}>
-                <button className={`${blurClass} outline outline-1 outline-black peer-hover:rounded-sm hover:rounded-sm hover:bg-white hover:text-black peer-hover:rounded-sm peer-hover:bg-white peer-hover:text-black px-1 ${view==="list"? "py-[.2rem]": ""} mb-1`} onClick={projectClick}>{project.name}</button>
-                <div ref={filterRef} className={`z-10 sans text-center justify-center items-center max-h-0 overflow-hidden group-hover:max-h-[5vh] duration-500 transition-all  ${view==="list"? "lg:flex": "hidden"}`}>
+            <div className={`${view==="list"? " group lg:text-5xl text-3xl flex flex-col justify-center items-center": "absolute "} top-0 peer z-20 duration-1000 transition-all`}>
+                <button className={`
+                peer-hover:rounded-sm hover:rounded-sm hover:bg-white hover:text-black peer-hover:rounded-sm peer-hover:bg-white peer-hover:text-black px-1 tracking-[-0.03rem] w-fit ${view==="list"? "": `${blurClass}`} `} onClick={projectClick}>{project.name}</button>
+                <div ref={filterRef} className={`z-10 sans text-center justify-center items-center overflow-hidden duration-100 transition-all h-0 lg:group-hover:h-[2rem] w-0 lg:w-auto    ${view==="list"? "lg:flex": "hidden"}`}>
                     {Object.entries(filters).map(([key, array])=>{
                         return(
                             <span key={key} className="capitalize lg:flex justify-center items-center">
                                 {array.map((filter:any, idx:any)=>{
-                                    
                                     return (
                                         <button 
                                         // style={{[`${key==="roles"? "--r": key==="collabs"? "--c": key==="tags"? "--t": ""}` as any]:idx+1}}
@@ -189,7 +197,7 @@ return(
                                         onClick={()=>{
                                             router.push( `/?${createQueryString(`${key}`, `${filter}`)}`)
                                         }}
-                                        className={`${textClass + blurClass} px-1 my-1 mx-1 w-fit whitespace-nowrap ${hoverClass}
+                                        className={`${textClass} backdrop-blur-sm ${key==="roles"? "backdrop-brightness-[.4]": key==="tags"? "backdrop-brightness-[.8]": "backdrop-brightness-[.6]"}  px-1 my-1 mx-1 w-fit whitespace-nowrap
                                         ${searchParams.getAll(key)?.includes(filter)? "bg-white text-black": `text-white hover:bg-white hover:text-black`}`}
                                         >
                                             {`${filter}`}
@@ -232,9 +240,9 @@ return(
         ${selectedProject===project.slug? `h-[100dvh] opacity-100` : "h-0 blur-3xl"}`}
         >
             <button className={`peer transition-all mx-2 mb-2 z-30 ${blurClass}`}                         
-            onClick={projectClick}><h3 className={`hover:bg-white hover:text-black ${hoverClass} hover:rounded-sm px-1 ${textClass}`}>Close</h3>
+            onClick={projectClick}><h3 className={`hover:bg-white hover:text-black {hoverClass} hover:rounded-sm px-1 ${textClass}`}>Close</h3>
             </button>
-            <div className="w-screen overflow-x-scroll snap-x snap-mandatory z-40 mb-2">
+            <div className="w-screen overflow-x-scroll snap-x snap-mandatory z-40 lg:mb-2">
                 <span className={`flex left-0 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center pointer-events-none": "w-max justify-center items-center"}`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
@@ -253,7 +261,8 @@ return(
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-contain cursor-zoom-in rounded-lg h-[17rem] lg:h-[27rem] lg:hover:h-[28rem] min-[1500px]:hover:h-[37rem] min-[1500px]:h-[36rem] w-auto transition-all pointer-events-auto outline outline-1 hover:rounded-3xl outline-black  ${selectedProject===project.slug? "": ""}`}
+                            className={`object-contain cursor-zoom-in rounded-lg h-[17rem] lg:h-[27rem] min-[1500px]:h-[36rem] w-auto transition-all pointer-events-auto 
+                            hover:rounded-3xl  ${selectedProject===project.slug? "": ""}`}
                             loading="lazy"
                             onClick={()=>{
                                 let img = document.querySelector(`#mobile-${project.slug+index}`)
@@ -276,17 +285,17 @@ return(
                             />
                         </div>
                     ))}
-
-                    {project.images?.map((image, index)=>(
+                </span>
+                                    {project.images?.map((image, index)=>(
                         <div key={`project.slug+${index+vimeoCount}_zoom`} className={``}>
-                            {/* main nav gallery images */}
+                            {/* zoom images */}
                             <Image
                             src={urlForImage(image).url()}
                             id={`mobile-${project.slug+index}`}
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-contain backdrop-blur-2xl left-0 z-50 top-0 fixed overflow-hidden cursor-zoom-in w-[100dvw] h-[100dvh] transition-all hidden ${hoverClass} ${selectedProject===project.slug? "opacity-0 pointer-events-none": "hidden"}`}
+                            className={`object-contain backdrop-blur-2xl left-0 z-50 top-0 fixed overflow-hidden cursor-zoom-in w-[100dvw] h-[100dvh] transition-all hidden {hoverClass} ${selectedProject===project.slug? "opacity-0 pointer-events-none": "hidden"}`}
                             onClick={()=>{
                                 let img = document.querySelector(`#mobile-${project.slug+index}`)
                                 if(img?.classList.contains("opacity-0")){
@@ -306,17 +315,45 @@ return(
                             />
                         </div>
                     ))}
-                </span>
             </div>
 
+            {project.images?.map((image, index)=>(
+                <div key={`project.slug+${index+vimeoCount}_zoom`} className={``}>
+                    {/* zoom images */}
+                    <Image
+                    src={urlForImage(image).url()}
+                    id={`mobile-${project.slug+index}`}
+                    alt=""
+                    width={1080}
+                    height={1080}
+                    className={`object-contain backdrop-blur-2xl left-0 z-50 top-0 fixed overflow-hidden cursor-zoom-in w-[100dvw] h-[100dvh] transition-all hidden {hoverClass} ${selectedProject===project.slug? "opacity-0 pointer-events-none": "hidden"}`}
+                    onClick={()=>{
+                        let img = document.querySelector(`#mobile-${project.slug+index}`)
+                        if(img?.classList.contains("opacity-0")){
+                            img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
+                            img.classList.replace("opacity-0", "opacity-100")
+                            img.classList.remove("pointer-events-none")
+                        }else{
+                            img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
+                            img?.classList.replace("opacity-100", "opacity-0")
+                            img?.classList.add("pointer-events-none")
+                        }
+                    }}
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL={`${project.gallery[index].lqip}`}
+                    unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
+                    />
+                </div>
+            ))}
                    
-            <h2 className={`text-5xl text-white hover:rounded-sm px-2 z-30 pt-2`}>{project.name}</h2>
+            <h2 className={`lg:text-5xl text-3xl text-white hover:rounded-sm px-2 z-30 lg:pt-2 text-center`}>{project.name}</h2>
 
             {/* BIO */}
-            <div className={`z-10  flex text-center justify-center items-center px-1 mt-2 mb-4 ${textClass} lg:mx-40`}><PortableText value={project.content}/></div>
+            <div className={`z-10 flex text-center justify-center items-center px-1 lg:mt-2 mb-2 lg:mb-4 ${textClass} lg:mx-40 mx-5`}><PortableText value={project.content}/></div>
             
             {/* FILTERS! */}
-            <div ref={filterRef} className="z-10 lg:flex lg:flex-row text-center  justify-center items-center mx-40">
+            <div ref={filterRef} className="z-10 lg:flex lg:flex-row text-center  justify-center items-center lg:mx-40 mx-5">
             {Object.entries(filters).map(([key, array])=>{
                 return(
                     <span key={key} className="capitalize lg:flex justify-center items-center">
@@ -329,7 +366,7 @@ return(
                                 onClick={()=>{
                                     router.push( `/?${createQueryString(`${key}`, `${filter}`)}`)
                                 }}
-                                className={`${textClass + blurClass} px-1 mx-1 mb-2 w-fit whitespace-nowrap ${hoverClass}
+                                className={`${textClass} backdrop-blur-sm ${key==="roles"? "backdrop-brightness-[.4]": key==="tags"? "backdrop-brightness-[.8]": "backdrop-brightness-[.6]"}  px-1 mx-1 mb-2 w-fit whitespace-nowrap
                                 ${searchParams.getAll(key)?.includes(filter)? "bg-white text-black": `hover:bg-white hover:text-black`}`}
                                 >
                                     {`${filter}`}

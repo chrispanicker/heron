@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@plaiceholder/next": "^3.0.0",
     "@portabletext/react": "^3.0.11",
     "@sanity/image-url": "^1.0.2",
     "@sanity/orderable-document-list": "^1.2.1",
@@ -16,9 +17,11 @@
     "latest": "^0.2.0",
     "next": "^14.2.3",
     "next-sanity": "^7.0.1",
+    "plaiceholder": "^3.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sanity": "^3.21.0",
+    "sharp": "^0.33.5",
     "styled-components": "^6.1.11"
   },
   "devDependencies": {

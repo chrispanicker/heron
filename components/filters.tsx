@@ -16,9 +16,9 @@ export function Filters({filters, projects}: Props){
     const router = useRouter();
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin');
-    const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]';
+    const blurClass = 'backdrop-blur-sm';
     const textClass = " lg:text-md lg:leading-auto text-[1rem] leading-[1.2rem] ";
-    const hoverClass = "outline outline-1 hover:outline-2 hover:rounded-sm outline-black"
+    // const hoverClass = "outline outline-1 hover:outline-2 hover:rounded-sm outline-black"
     
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -63,7 +63,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`lg:sticky col-span-4 top-0 z-[30] w-full py-5 transition-all pointer-events-none text-white text-left duration-500 ${view==="full"? "hidden": ""}`}>
+        <section className={`lg:sticky col-span-4 top-0 z-[30] py-5 transition-all pointer-events-none text-white lg:text-left text-center duration-500 ${view==="full"? "hidden": ""} ${selectedProject? "max-[1024px]:blur-3xl": ""}`}>
             {allFilters.map((entry:any, idx:any)=>{
                 return (
                     <button 
@@ -73,7 +73,7 @@ export function Filters({filters, projects}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`)
                     }}
-                    className={`${blurClass} ${textClass} ${hoverClass} pointer-events-auto px-1 py-1 lg:py-[.1rem] mr-2 my-1 w-fit whitespace-nowrap transition-all
+                    className={`${blurClass} ${entry.key==="roles"? "backdrop-brightness-[.4]": entry.key==="tags"? "backdrop-brightness-[.8]": "backdrop-brightness-[.6]"} ${textClass} pointer-events-auto px-1 py-1 lg:py-[.1rem] mr-2 my-1 w-fit whitespace-nowrap transition-all
                     ${searchParams.getAll(entry.key)?.includes(entry.filter)? "selection text-black":"hover:bg-white hover:text-black"}`
                     }>
                         {`${entry.filter}`}
