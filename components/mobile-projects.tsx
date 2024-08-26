@@ -286,35 +286,6 @@ return(
                         </div>
                     ))}
                 </span>
-                                    {project.images?.map((image, index)=>(
-                        <div key={`project.slug+${index+vimeoCount}_zoom`} className={``}>
-                            {/* zoom images */}
-                            <Image
-                            src={urlForImage(image).url()}
-                            id={`mobile-${project.slug+index}`}
-                            alt=""
-                            width={1080}
-                            height={1080}
-                            className={`object-contain backdrop-blur-2xl left-0 z-50 top-0 fixed overflow-hidden cursor-zoom-in w-[100dvw] h-[100dvh] transition-all hidden {hoverClass} ${selectedProject===project.slug? "opacity-0 pointer-events-none": "hidden"}`}
-                            onClick={()=>{
-                                let img = document.querySelector(`#mobile-${project.slug+index}`)
-                                if(img?.classList.contains("opacity-0")){
-                                    img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
-                                    img.classList.replace("opacity-0", "opacity-100")
-                                    img.classList.remove("pointer-events-none")
-                                }else{
-                                    img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
-                                    img?.classList.replace("opacity-100", "opacity-0")
-                                    img?.classList.add("pointer-events-none")
-                                }
-                            }}
-                            loading="lazy"
-                            placeholder="blur"
-                            blurDataURL={`${project.gallery[index].lqip}`}
-                            unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
-                            />
-                        </div>
-                    ))}
                     {project.images?.map((image, index)=>(
                         <div key={`project.slug+${index+vimeoCount}_zoom`} className={``}>
                             {/* zoom images */}
@@ -346,7 +317,35 @@ return(
                     ))}
             </div>
 
-                   
+            {project.images?.map((image, index)=>(
+                <div key={`project.slug+${index+vimeoCount}_zoom`} className={``}>
+                    {/* zoom images */}
+                    <Image
+                    src={urlForImage(image).url()}
+                    id={`mobile-${project.slug+index}`}
+                    alt=""
+                    width={1080}
+                    height={1080}
+                    className={`object-contain backdrop-blur-2xl left-0 z-50 top-0 fixed overflow-hidden cursor-zoom-in w-[100dvw] h-[100dvh] transition-all hidden {hoverClass} ${selectedProject===project.slug? "opacity-0 pointer-events-none": "hidden"}`}
+                    onClick={()=>{
+                        let img = document.querySelector(`#mobile-${project.slug+index}`)
+                        if(img?.classList.contains("opacity-0")){
+                            img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
+                            img.classList.replace("opacity-0", "opacity-100")
+                            img.classList.remove("pointer-events-none")
+                        }else{
+                            img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
+                            img?.classList.replace("opacity-100", "opacity-0")
+                            img?.classList.add("pointer-events-none")
+                        }
+                    }}
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL={`${project.gallery[index].lqip}`}
+                    unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
+                    />
+                </div>
+            ))}
             <h2 className={`lg:text-5xl lg:relative text-3xl text-white hover:rounded-sm px-2 z-30 lg:pt-2 text-center`}>{project.name}</h2>
 
             {/* BIO */}
