@@ -24,7 +24,7 @@ export default async function Home({searchParams}: Props) {
   let allProjects = await getProjects();
 
   return (
-    filteredProjects? <main id="main" className={`top-0 flex z-0 flex-col items-center justify-start min-h-screen`}>
+    filteredProjects? <main id="main" className={`top-0 flex z-0 flex-col items-center justify-start min-h-[100dvh]`}>
         <Name />
         <UsedFilters/>
         <section className={`${view==="full"? "h-[100dvh] snap-y snap-mandatory overflow-y-scroll block": view==="grid"? "lg:pb-40 pb-20 lg:mx-40 mx-5": "flex flex-col justify-center items-center lg:pb-40 pb-20 lg:mx-40 mx-5"}`}>
