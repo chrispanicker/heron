@@ -269,8 +269,8 @@ return(
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-contain cursor-zoom-in rounded-lg transition-all duration-1000 pointer-events-auto hover:rounded-3xl  
-                            ${selectedProject===project.slug? "lg:h-[27rem] min-[1500px]:h-[36rem] h-[17rem] w-auto":"w-0 h-0"}`}
+                            className={`lg:object-contain object-cover cursor-zoom-in rounded-lg transition-all duration-1000 pointer-events-auto hover:rounded-3xl  
+                            ${selectedProject===project.slug? "lg:h-[27rem] min-[1500px]:h-[36rem] h-[30rem] w-auto" :"w-0 h-0"}`}
                             loading="lazy"
                             onClick={()=>{
                                 let img = document.querySelector(`#mobile-${project.slug+index}`)
