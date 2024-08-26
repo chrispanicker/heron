@@ -241,17 +241,20 @@ return(
         </span>
 
         {/* project open? */}
-        <span className={`fixed bottom-0 left-0 w-screen z-40 overflow-y-hidden flex w-screen flex-col justify-center lg:justify-center lg:items-center items-center transition-all duration-500 
+        <span className={`fixed bottom-0 left-0 z-40 overflow-y-hidden flex  flex-col justify-center lg:justify-center lg:items-center items-center transition-all duration-1000
         ${selectedProject===project.slug? `h-[100dvh] opacity-100` : "h-0 blur-3xl"}`}
         >
             <button className={`peer transition-all mx-2 mb-2 z-30 ${blurClass}`}                         
             onClick={projectClick}><h3 className={`hover:bg-white hover:text-black {hoverClass} hover:rounded-sm px-1 ${textClass}`}>Close</h3>
             </button>
-            <div className="w-screen overflow-x-scroll snap-x snap-mandatory z-40 lg:mb-2">
+
+            <div className={`w-screen overflow-x-scroll snap-x snap-mandatory z-40 lg:mb-2`}>
                 <span className={`flex left-0 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center pointer-events-none": "w-max justify-center items-center"}`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
-                        <div key={`project.slug+${index}`} className={`pointer-events-auto px-2 snap-center snap-always peer flex justify-center items-center lg:h-[27rem] lg:w-[48rem] min-[1500px]:h-[36rem] min-[1500px]:w-[64rem] h-[17rem] w-[30rem]  ${selectedProject===project.slug? img===index? "":"": view==="full"? "hidden": "hidden"}`}>
+                        <div key={`project.slug+${index}`} className={`pointer-events-auto px-2 snap-center rounded-lg snap-always peer flex justify-center items-center transition-all duration-500
+                         ${selectedProject===project.slug? "lg:h-[27rem] lg:w-[48rem] min-[1500px]:h-[36rem] min-[1500px]:w-[64rem] h-[17rem] w-[30rem]"
+                         :"w-0 h-0"} ${view==="full"? "hidden": ""}`}>
                             {/* main gallery vimeo */}
                             <div className={`relative overflow-hidden w-full pt-[56.25%]`}>
                                 <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
@@ -266,8 +269,8 @@ return(
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-contain cursor-zoom-in rounded-lg h-[17rem] lg:h-[27rem] min-[1500px]:h-[36rem] w-auto transition-all pointer-events-auto 
-                            hover:rounded-3xl  ${selectedProject===project.slug? "": ""}`}
+                            className={`object-contain cursor-zoom-in rounded-lg transition-all duration-1000 pointer-events-auto hover:rounded-3xl  
+                            ${selectedProject===project.slug? "lg:h-[27rem] min-[1500px]:h-[36rem] h-[17rem] w-auto":"w-0 h-0"}`}
                             loading="lazy"
                             onClick={()=>{
                                 let img = document.querySelector(`#mobile-${project.slug+index}`)
@@ -291,35 +294,6 @@ return(
                         </div>
                     ))}
                 </span>
-                    {project.images?.map((image, index)=>(
-                        <div key={`project.slug+${index+vimeoCount}_zoom`} className={``}>
-                            {/* zoom images */}
-                            <Image
-                            src={urlForImage(image).url()}
-                            id={`mobile-${project.slug+index}`}
-                            alt=""
-                            width={1080}
-                            height={1080}
-                            className={`object-contain backdrop-blur-2xl left-0 z-50 top-0 fixed overflow-hidden cursor-zoom-in w-[100dvw] h-[100dvh] transition-all hidden {hoverClass} ${selectedProject===project.slug? "opacity-0 pointer-events-none": "hidden"}`}
-                            onClick={()=>{
-                                let img = document.querySelector(`#mobile-${project.slug+index}`)
-                                if(img?.classList.contains("opacity-0")){
-                                    img.classList.replace("cursor-zoom-in", "cursor-zoom-out")
-                                    img.classList.replace("opacity-0", "opacity-100")
-                                    img.classList.remove("pointer-events-none")
-                                }else{
-                                    img?.classList.replace("cursor-zoom-out", "cursor-zoom-in")
-                                    img?.classList.replace("opacity-100", "opacity-0")
-                                    img?.classList.add("pointer-events-none")
-                                }
-                            }}
-                            loading="lazy"
-                            placeholder="blur"
-                            blurDataURL={`${project.gallery[index].lqip}`}
-                            unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
-                            />
-                        </div>
-                    ))}
             </div>
 
             {project.images?.map((image, index)=>(
@@ -331,7 +305,7 @@ return(
                     alt=""
                     width={1080}
                     height={1080}
-                    className={`object-contain backdrop-blur-2xl left-0 z-50 top-0 fixed overflow-hidden cursor-zoom-in w-[100dvw] h-[100dvh] transition-all hidden {hoverClass} ${selectedProject===project.slug? "opacity-0 pointer-events-none": "hidden"}`}
+                    className={`object-contain backdrop-blur-2xl left-0 z-50 top-0 fixed overflow-hidden cursor-zoom-in w-[100dvw] h-[100dvh] transition-all hidden ${selectedProject===project.slug? "opacity-0 pointer-events-none": "hidden"}`}
                     onClick={()=>{
                         let img = document.querySelector(`#mobile-${project.slug+index}`)
                         if(img?.classList.contains("opacity-0")){

@@ -65,17 +65,23 @@ export function OpeningCard({gallery}: Props){
             }, 2400)
         }else if(type === 2){
             setTimeout(()=>{
-                document.querySelector("#image1")?.classList.replace("blur-none", "blur-2xl")
+                document.querySelector("#image1")?.classList.replace("blur-none", "blur-sm")
+                document.querySelector("#image1")?.classList.replace("h-[100dvh]", "h-0")
+                document.querySelector("#image1")?.classList.replace("w-screen", "w-0")
                 document.querySelector("#image1")?.classList.replace("opacity-100", "opacity-0")
                 // document.querySelector("#image2")?.classList.replace("hidden", "block")
             }, 800)
             setTimeout(()=>{
-                document.querySelector("#image2")?.classList.replace("blur-none", "blur-2xl")
+                document.querySelector("#image2")?.classList.replace("blur-none", "blur-sm")
+                document.querySelector("#image2")?.classList.replace("h-[100dvh]", "h-0")
+                document.querySelector("#image2")?.classList.replace("w-screen", "w-0")
                 document.querySelector("#image2")?.classList.replace("opacity-100", "opacity-0")
                 // document.querySelector("#image3")?.classList.replace("hidden", "block")
             }, 1600)
             setTimeout(()=>{
-                document.querySelector("#image3")?.classList.replace("blur-none", "blur-2xl")
+                document.querySelector("#image3")?.classList.replace("blur-none", "blur-sm")
+                document.querySelector("#image3")?.classList.replace("h-[100dvh]", "h-0")
+                document.querySelector("#image3")?.classList.replace("w-screen", "w-0")
                 document.querySelector("#image3")?.classList.replace("opacity-100", "opacity-0")
             }, 2400)
         }
@@ -98,14 +104,14 @@ export function OpeningCard({gallery}: Props){
                 <p className= "text-white mx-2 w-fit px-0">&#169; Drew Litowitz</p>
                 {/* <p className= "text-white mx-2 w-fit px-4 backdrop-blur-sm backdrop-brightness-[.7] ">Here is some of my work.</p> */}
             </div>
-            <div id="gallery" className="fixed top-0 flex w-screen h-[100dvh] justify-start items-center">
+            <div id="gallery" className="fixed top-0 flex w-screen h-[100dvh] justify-center items-center">
                 <Image
                 src={urlForImage(gallery[2].projects.preview).url()}
                 alt=""
                 width={1080}
                 height={1080}
                 id="image3"
-                className="absolute opacity-100 w-screen h-[100dvh] object-cover transition-all blur-none duration-500"
+                className="absolute opacity-100 w-screen h-[100dvh] object-cover transition-all blur-none duration-[3000ms]"
                 unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                 priority={true}
                 />
@@ -115,7 +121,7 @@ export function OpeningCard({gallery}: Props){
                 width={1080}
                 height={1080}
                 id="image2"
-                className="absolute opacity-100 w-screen h-[100dvh] object-cover transition-all blur-none duration-500"
+                className="absolute opacity-100 w-screen h-[100dvh] object-cover transition-all blur-none duration-[3000ms]"
                 unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                 priority={true}
                 />
@@ -125,7 +131,7 @@ export function OpeningCard({gallery}: Props){
                 width={1080}
                 height={1080}
                 id="image1"
-                className="absolute opacity-100 w-screen h-[100dvh] object-cover transition-all blur-none duration-500"
+                className="absolute opacity-100 w-screen h-[100dvh] object-cover transition-all blur-none duration-[3000ms]"
                 unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                 priority={true}
                 />
