@@ -178,6 +178,9 @@ return(
                     width={1080}
                     height={1080}
                     unoptimized={true}
+                    placeholder="blur"
+                    priority
+                    blurDataURL={`${project.preview.lqip}`}
                     className={`w-auto lg:h-[30rem] h-[15rem] object-cover transition-all blur-auto duration-500 ${view==="list"|| view==="full"? "hidden": ""}`}
                     />
             </button>
@@ -230,6 +233,8 @@ return(
                     unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                     className={`w-screen h-screen object-cover z-20`}
                     loading="lazy"
+                    placeholder="blur"
+                    blurDataURL={`${project.preview.lqip}`}
                     />
             </button>
 
