@@ -165,29 +165,27 @@ return(
     <section key={`${project.slug}`} className={`flex flex-col justify-center items-start bg-gray-400 transition-all mb-4 lg:mb-0`}>
 
         {/* view === grid || list? */}
-        <span id="grid" className={` relative flex flex-col justify-center items-center overflow-hidden transition-all duration-1000
-        ${view==="grid"? `rounded-md hover:rounded-xl`: view==="list"? "lg:h-[5rem] hover:rounded-md": ""} 
+        <span id="grid" className={`group relative flex flex-col justify-center items-center overflow-hidden transition-[height] transition-[border-radius] duration-500
+        ${view==="grid"? `rounded-md hover:rounded-xl hover:outline outline-3 outline-white`: view==="list"? "lg:h-[5rem] hover:rounded-md": ""} 
         ${selectedProject? view==="grid"? "blur-2xl": `blur-md`: ""} 
         ${view==="grid"||"list"? "": "hidden"} `}>
-            <button className={`peer z-20 transition-all  ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}                         
-            onClick={projectClick}>
-                    <Image
-                    src={urlForImage(project.preview).url()}
-                    alt=""
-                    id={`${project.slug}-preview`}
-                    width={1080}
-                    height={1080}
-                    unoptimized={true}
-                    placeholder="blur"
-                    priority
-                    blurDataURL={`${project.preview.lqip}`}
-                    className={`w-auto lg:h-[30rem] h-[15rem] object-cover transition-all blur-auto duration-500 ${view==="list"|| view==="full"? "hidden": ""}`}
-                    />
+            <button className={`peer z-20 transition-all  ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}onClick={projectClick}>
+                <Image
+                src={urlForImage(project.preview).url()}
+                alt=""
+                id={`${project.slug}-preview`}
+                width={1080}
+                height={1080}
+                unoptimized={true}
+                placeholder="blur"
+                priority
+                blurDataURL={`${project.preview.lqip}`}
+                className={`w-auto lg:h-[20rem] h-[10rem] object-cover transition-all blur-auto duration-500 ${view==="list"|| view==="full"? "hidden": ""}`}
+                />
             </button>
 
             <div className={`${view==="list"? " group lg:text-5xl text-3xl flex flex-col justify-center items-center": "absolute "} top-0 peer z-20 duration-1000 transition-all`}>
-                <button className={`
-                peer-hover:rounded-sm hover:rounded-sm hover:bg-white hover:text-black peer-hover:rounded-sm peer-hover:bg-white peer-hover:text-black px-1 tracking-[-0.03rem] w-fit ${view==="list"? "": `${blurClass}`} `} onClick={projectClick}>{project.name}</button>
+                <button className={`group-hover:text-black group-hover:bg-white peer-hover:text-black px-1 tracking-[-0.03rem] w-fit ${view==="list"? "": `${blurClass}`} `} onClick={projectClick}>{project.name}</button>
                 <div ref={filterRef} className={`z-10 sans text-center justify-center items-center overflow-hidden duration-100 transition-all h-0 lg:group-hover:h-[2rem] w-0 lg:w-auto    ${view==="list"? "lg:flex": "hidden"}`}>
                     {Object.entries(filters).map(([key, array])=>{
                         return(
@@ -217,13 +215,13 @@ return(
         </span>
 
         {/* view ===full? */}
-        <span id="full" className={`flex z-0 relative snap-start snap-always flex-col items-center justify-center overflow-hidden transition-all duration-500 ${view==="full"? "": "hidden"} ${selectedProject===project.slug? "h-auto": "h-[100dvh]"} ${selectedProject? "blur-2xl": ""}`}>
+        <span id="full" className={`flex z-0 overflow-hidden relative snap-start snap-always items-center justify-center transition-all duration-500 ${view==="full"? "": "hidden"} ${selectedProject===project.slug? "h-auto": "h-[100dvh]"} ${selectedProject? "blur-2xl": ""}`}>
             
             <button className={`peer absolute top-5 z-30 text-3xl transition-all peer-hover:bg-white peer-hover:text-gray-400 px-2 ${blurClass} ${selectedProject===project.slug? "": ""}`}                         
                     onClick={projectClick}>{project.name}
             </button>
 
-            <button className={`group peer z-20 flex justify-center items-center transition-all ${selectedProject===project.slug? "z-40" : "hover:blur-none hover:text-white hover:bg-gray-400 z-0"}`}                         
+            <button className={`group peer z-20 flex w-screen h-screen  justify-center items-center transition-all ${selectedProject===project.slug? "z-40" : "hover:blur-none hover:text-white hover:bg-gray-400 z-0"}`}                         
             onClick={projectClick}>
                     <Image
                     src={urlForImage(project.preview).url()}
@@ -242,12 +240,12 @@ return(
 
         {/* project open? */}
         <span className={`fixed bottom-0 left-0 z-40 overflow-y-hidden flex  flex-col justify-center lg:justify-center lg:items-center items-center transition-all duration-1000
-        ${selectedProject===project.slug? `h-[100dvh] opacity-100` : "h-0 blur-3xl"}`}
-        >
+        ${selectedProject===project.slug? `h-[100dvh] opacity-100` : "h-0 blur-3xl"}`}>
             <button className={`peer transition-all mx-2 mb-2 z-30 ${blurClass}`}                         
             onClick={projectClick}><h3 className={`hover:bg-white hover:text-black {hoverClass} hover:rounded-sm px-1 ${textClass}`}>Close</h3>
             </button>
 
+            {/* GALLERY */}
             <div className={`w-screen overflow-x-scroll snap-x snap-mandatory z-40 lg:mb-2`}>
                 <span className={`flex left-0 mx-2 ${vimeoCount+imageCount===1? "justify-center items-center pointer-events-none": "w-max justify-center items-center"}`}>
                     {/* current image */}
@@ -269,8 +267,8 @@ return(
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`lg:object-contain object-cover cursor-zoom-in rounded-lg transition-all duration-1000 pointer-events-auto hover:rounded-3xl  
-                            ${selectedProject===project.slug? "lg:h-[27rem] min-[1500px]:h-[36rem] h-[30rem] w-auto" :"w-0 h-0"}`}
+                            className={`lg:object-contain object-cover cursor-zoom-in rounded-lg transition-all duration-500 pointer-events-auto hover:rounded-3xl hover:outline outline-3 outline-white  
+                            ${selectedProject===project.slug? "lg:h-[27rem] min-[1500px]:h-[36rem] h-[30rem] lg:w-auto w-[100vw] lg:px-0" :"w-0 h-0"}`}
                             loading="lazy"
                             onClick={()=>{
                                 let img = document.querySelector(`#mobile-${project.slug+index}`)
