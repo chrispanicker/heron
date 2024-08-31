@@ -37,7 +37,12 @@ export function OpeningCard({gallery}: Props){
     
     useEffect(()=>{
         selectedProject? document.querySelector(`#${selectedProject}`)?.scrollIntoView({block: "center"}) : ""
-        selectedProject? "":""
+        if(selectedProject){
+
+        } else{
+            document.querySelector("html")?.classList.add("overflow-y-hidden")
+            document.querySelector("html")?.scrollIntoView({block: "start"})
+        }
 
         if(type === 0){
             setTimeout(()=>{
@@ -87,17 +92,18 @@ export function OpeningCard({gallery}: Props){
         }
 
         cardRef? setTimeout(()=>{
-            cardRef.current.classList.replace("top-0", "top-full")
+            // cardRef.current.classList.replace("top-0", "top-full")
             document.querySelector("html")?.classList.remove("overflow-y-hidden")
+            cardRef.current.classList.replace("h-[100dvh]", "h-[4rem]")
         }, 5000): ""
         cardRef? setTimeout(()=>{
-            cardRef.current.classList.add("hidden")
+            // cardRef.current.classList.add("hidden")
         }, 6000): ""
     }, [cardRef])
     
     return(
         isSanityStudio? "": 
-        <div ref={cardRef} className="text-5xl w-screen h-[100dvh] fixed top-0 z-50 flex flex-col justify-center items-center opacity-100 transition-all duration-1000 cursor-none">
+        <div ref={cardRef} className="text-5xl w-screen h-[100dvh] top-0 z-50 flex flex-col justify-center items-center opacity-100 transition-all duration-1000 cursor-none">
             <div className="w-screen h-screen absolute top-0 left-0 backdrop-blur-2xl backdrop-brightness-[1] ">
 
             </div>

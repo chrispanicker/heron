@@ -5,6 +5,7 @@ import localFont from 'next/font/local'
 import ViewToggle from '@/components/view-toggle'
 import { getGallery, getInfo, getProjects } from '@/sanity/sanity-utils'
 import { OpeningCard } from '@/components/opening-card'
+import { HomeGallery } from '@/components/home-gallery'
 
 
 export const metadata: Metadata = {
@@ -41,10 +42,11 @@ let gallery = await getGallery();
       <body>
         <section className=''>
           <OpeningCard gallery={gallery} />
-          <ViewToggle />
+          {/* <HomeGallery gallery={gallery} /> */}
           <>{children}</>
           <SiteFooter info={info} />
         </section>
+
       </body>
     </html>
   )

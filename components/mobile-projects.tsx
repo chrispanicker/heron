@@ -19,7 +19,6 @@ interface Props{
 
 export default function MobileProjects({project}: Props) {
 
-
     const router = useRouter();
     const searchParams = useSearchParams();    
     const view = searchParams.get('view');
@@ -162,7 +161,7 @@ export default function MobileProjects({project}: Props) {
     }
 
 return(
-    <section key={`${project.slug}`} className={`flex flex-col justify-center items-start bg-gray-400 transition-all mb-4 lg:mb-0`}>
+    <section key={`${project.slug}`} className={`flex flex-col justify-center items-start transition-all ${view==='full'?"":"mb-4 lg:mb-0"}`}>
 
         {/* view === grid || list? */}
         <span id="grid" className={`group relative flex flex-col justify-center items-center overflow-hidden transition-[height] transition-[border-radius] duration-500

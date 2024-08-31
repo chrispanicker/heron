@@ -32,41 +32,21 @@ export function SiteFooter(info:any){
 
     return (
         isSanityStudio? "" : 
-        <footer ref={footerRef} className="w-full">
-            <div id="footImgDiv" className={`flex w-screen top-screen justify-center items-center`}>
-                <button id="footerTab" className={`fixed z-[31] bottom-0 right-0 hover:bg-white hover:text-black decoration-dotted lg:mx-40 mx-5 mb-5 leading-[1.4rem] px-1 py-0 w-fit whitespace-nowrap {hoverClass} ${project? `blur-xl`: `${blurClass}`}`} onClick={()=>{
-                    searchParams.getAll(`about`).includes("open")?
-                    router.push(`/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`: ""}${project? `&project=${project}&img=0` : ""}`,{scroll: false})
-                    : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`,{scroll: false})
-                }}>About</button>
-            </div>
-
-            <span id="footer" className={`fixed z-30 lg:flex lg:flex-col bottom-0 h-[0vh] duration-500 transition-all lg:px-40 px-5 lg:overflow-y-hidden overflow-x-hidden overflow-y-scroll  ${about==="open"? " pb-20 lg:pt-40 h-[100dvh] blur-auto backdrop-blur-3xl backdrop-brightness-[.7]": "blur-3xl h-[0vh]"}`}>
-                <button className={`w-screen h-screen z-0 fixed top-0 cursor-alias ${about==="open"? "": "hidden"}`}
-                onClick={()=>{
-                    searchParams.getAll(`about`).includes("open")?
-                    router.push(`/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`: ""}${project? `&project=${project}&img=0` : ""}`)
-                    : router.push( `/?view=${view? `${view}`: "txt"}${roles? `&roles=${roles}`: ""}${tags? `&tags=${tags}`: ""}${collabs? `&collabs=${collabs}`:""}${project? `&project=${project}&img=0` : ""}${`&about=open`}`)
-                }}/>
-
-                <div className={`w-4/4 h-fit py-10 lg:text-2xl text-lg`}>
+        <footer ref={footerRef} className="">
+            <span id="footer" className={`z-30 lg:flex text-lg justify-center items-center lg:flex-col min-h-screen duration-500 transition-all lg:px-40 backdrop-blur-3xl backdrop-brightness-[.9]`}>
+                <div className={`w-4/4 h-fit pb-10 pt-5 text-center `}>
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
-                <div className={`w-4/4 h-fit lg:text-lg text-sm `}>
-                    <table className="w-[100%]">
-                    <tbody>
-                        <tr className="">
-                            {/* <td>Experience</td> */}
-                        </tr>
+                <div className={`w-4/4 h-fit`}>
                         {info.info[0].cv.map((job:job)=>(
-                            <tr key={`${job.company}`}>
-                                <td>{job.company}</td>
-                                <td>{job.title}</td>
-                                <td>{job.years}</td>
-                            </tr>
+                            <span key={`${job.company}`} className="w-4/4 flex flex-col justify-between items-center pb-2">
+                                <div className="flex">
+                                    <p className="pr-1">{job.company}</p>
+                                    <p className="italic">{job.title}</p>
+                                </div>
+                                <p>{job.years}</p>
+                            </span>
                         ))}
-                    </tbody>
-                    </table>
                 </div>
             </span>
         </footer>

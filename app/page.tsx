@@ -27,7 +27,7 @@ export default async function Home({searchParams}: Props) {
     filteredProjects? <main id="main" className={`top-0 flex z-0 flex-col items-center justify-start min-h-[100dvh]`}>
         <Name />
         <UsedFilters/>
-        <section className={`${view==="full"? "h-[100dvh] snap-y snap-mandatory overflow-y-scroll block": view==="grid"? "flex flex-wrap justify-center items-center lg:pb-40 pb-20 lg:mx-40 mx-5": "flex flex-col justify-center items-center lg:pb-40 pb-20 lg:mx-40 mx-5"}`}>
+        <section className={`${view==="full"? "h-[100dvh] snap-y snap-mandatory overflow-y-scroll block": view==="grid"? "flex flex-wrap justify-center items-center lg:pb-40 pb-20 lg:mx-40 mx-5": "flex flex-col justify-center items-center pb-5 lg:mx-40 mx-5"}`}>
           <TestFilter projects={allProjects}/>
           {filteredProjects.map((project:any, index:number)=>{ 
             return(

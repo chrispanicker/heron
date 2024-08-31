@@ -63,7 +63,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`lg:sticky col-span-4 top-0 z-[30] py-5 transition-all pointer-events-none text-white lg:text-left text-center duration-500 ${view==="full"? "hidden": ""} ${selectedProject? "max-[1024px]:blur-3xl": ""}`}>
+        <section className={`lg:sticky top-0 z-[30] py-5 transition-all pointer-events-none text-white text-center duration-500 ${view==="full"? "hidden": ""} ${selectedProject? "max-[1024px]:blur-3xl": ""}`}>
             {allFilters.map((entry:any, idx:any)=>{
                 return (
                     <button 
