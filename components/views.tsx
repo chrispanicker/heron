@@ -1,4 +1,5 @@
 "use client"
+import project from "@/sanity/schemas/project-schema";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
@@ -42,7 +43,7 @@ export function Views(){
     )
 
     return(
-        <div className="w-screen justify-center mt-5 lg:mb-6 mb-2 lg:relative w-screen flex sticky top-5 z-40">
+        <div className={`w-screen justify-center mt-5 lg:mb-6 mb-2 lg:relative w-screen flex sticky top-5 z-40 ${project? "blur-2xl": ""}`}>
             <h2 className="px-2">View:</h2>
             <button className={`${blurClass} px-1 mr-2 ${view==="list"? "bg-white text-black": ""}`}
             onClick={()=>{
