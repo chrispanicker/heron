@@ -18,7 +18,7 @@ export function HomeGallery({gallery}: Props){
     const selectedProject = searchParams.get("project")
     const isSanityStudio = pathname.startsWith('/admin');
     const blurClass = ' backdrop-blur-sm px-1 w-fit whitespace-nowrap mx-1 mb-1';
-    const parentClass = "relative snap-center snap-always w-fit h-fit flex justify-center items-center text-center w-screen h-[100dvh] shrink-0";
+    const parentClass = "snap-center snap-always w-fit h-fit flex justify-center items-center text-center w-screen h-[100dvh] shrink-0";
 
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -102,10 +102,11 @@ export function HomeGallery({gallery}: Props){
 
     return(
         isSanityStudio? "": 
-            <div id="gallery" className={`flex w-screen h-screen ${selectedProject? "blur-3xl": ""}`}>
-                <span className="z-0 flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory">
+            <div id="gallery" className={`relative flex justify-center items-center w-screen h-screen ${selectedProject? "blur-3xl": ""}`}>
+                <h2 className={`${blurClass} backdrop-brightness-[.8] px-2 absolute top-5 z-20 h-fit w-fit`}>Featured Projects</h2>
+                <span className="relative z-0 flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory">
                         <button className={`${parentClass}`} onClick={()=>{projectClick(gallery[2].projects)}}>
-                            <h2 className={`${blurClass} absolute top-5 px-1 backdrop-brightness-[.8]`}>{gallery[2].projects.name}</h2>
+                            <h2 className={`${blurClass} absolute top-14 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8]`}>{gallery[2].projects.name}</h2>
                             <span className={`absolute bottom-12 flex justify-center items-center flex-wrap w-screen`}>
                                 {gallery[2].projects.roles?.map((role:any)=>{
                                     return <p key={role.name} className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
@@ -130,7 +131,7 @@ export function HomeGallery({gallery}: Props){
                             />
                         </button>
                         <button className={`${parentClass}`} onClick={()=>{projectClick(gallery[1].projects)}}>     
-                            <h2 className={`${blurClass} absolute top-5 px-1 backdrop-brightness-[.8]`}>{gallery[1].projects.name}</h2>
+                            <h2 className={`${blurClass} absolute top-14 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8]`}>{gallery[1].projects.name}</h2>
                             <span className={`absolute bottom-12 flex justify-center items-center flex-wrap w-screen`}>
                                 {gallery[1].projects.roles?.map((role:any)=>{
                                     return <p key={role.name} className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
@@ -155,7 +156,7 @@ export function HomeGallery({gallery}: Props){
                             />
                         </button>
                         <button className={`${parentClass}`} onClick={()=>{projectClick(gallery[0].projects)}}>
-                            <h2 className={`${blurClass} absolute top-5 px-1 backdrop-brightness-[.8]`}>{gallery[0].projects.name}</h2>
+                            <h2 className={`${blurClass} absolute top-14 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8]`}>{gallery[0].projects.name}</h2>
                             <span className={`absolute bottom-12 flex justify-center items-center flex-wrap w-screen`}>
                                 {gallery[0].projects.roles?.map((role:any)=>{
                                     return <p key={role.name} className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
