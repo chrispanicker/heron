@@ -63,7 +63,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`lg:sticky lg:mx-40 mx-5 top-5 z-[30] pt-1 pb-5 transition-all pointer-events-none text-white text-center duration-500 ${view==="full"? "hidden": ""} ${selectedProject? "max-[1024px]:blur-3xl": ""}`}>
+        <section className={`lg:sticky lg:mx-40 mx-5 top-5 z-[30] pt-1 pb-5 transition-all pointer-events-none text-white text-center duration-500 ${selectedProject? "blur-lg": ""}`}>
             <h2 className="inline-block px-2">Filters:</h2>
             {allFilters.map((entry:any, idx:any)=>{
                 return (
