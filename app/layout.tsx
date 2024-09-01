@@ -42,7 +42,7 @@ let gallery = await getGallery();
       <body>
         <section className=''>
           <OpeningCard gallery={gallery} />
-          {/* <HomeGallery gallery={gallery} /> */}
+          <HomeGallery gallery={gallery} />
           <>{children}</>
           <SiteFooter info={info} />
         </section>

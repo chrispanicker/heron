@@ -52,10 +52,17 @@ export async function getGallery(){
                         index,
                         "projects": projects->{
                                 name,
+                                slug,
                                 preview,
                                 "roles": roles[]->{
                                         name
-                                }
+                                },
+                                "collabs": collabs[]->{
+                                        name
+                                },
+                                "tags": tags[]->{
+                                        name
+                                },
                         }
                 }`
         )
