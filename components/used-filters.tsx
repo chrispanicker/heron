@@ -32,7 +32,7 @@ export default function UsedFilters(){
     const about = searchParams.get("about");
 
     return( searchParams.toString().includes("collabs")|| searchParams.toString().includes("roles") || searchParams.toString().includes("tags")?
-            <div className={`fixed flex flex-wrap w-screen z-10 leading-[1.1rem] bottom-6 text-lg z-50 justify-center text-center flex-row lg:text-xl px-5 pb-5 transition-all ${about==="open"? "blur-2xl": ""} ${selectedProject? "max-[1024px]:blur-2xl": ""}`}>
+            <div className={`fixed flex flex-wrap w-screen z-10 leading-[1.1rem] bottom-6 text-lg z-30 justify-center text-center flex-row lg:text-xl px-5 pb-5 transition-all ${about==="open"? "blur-2xl": ""} ${selectedProject? "blur-2xl": ""}`}>
                 <p className={`text-lg leading-[1.4rem] py-0 w-fit whitespace-nowrap mb-2 text-center w-fit `}>Filtered by:</p>
                 {roles.map((role, i)=>{
                     return <button 

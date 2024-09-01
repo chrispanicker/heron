@@ -31,7 +31,7 @@ export default async function Home({searchParams}: Props) {
         <section className={`${view==="grid"? "flex flex-wrap justify-center items-center lg:pb-40 pb-20 lg:mx-40 mx-5": "flex flex-col justify-center items-center pb-5 lg:mx-40 mx-5"}`}>
           <Views />
           <TestFilter projects={allProjects}/>
-          <h2 className="w-screen text-lg pt-5 flex text-center justify-center">Project <p className={`${view==="grid"? "": "hidden"}`}>&nbsp;Grid:</p><p className={`${view==="list"? "": "hidden"}`}>&nbsp;List:</p></h2>
+          {/* <h2 className="w-screen text-lg pt-5 flex text-center justify-center">Project <p className={`${view==="grid"? "": "hidden"}`}>&nbsp;Grid:</p><p className={`${view==="list"? "": "hidden"}`}>&nbsp;List:</p></h2> */}
           {filteredProjects.map((project:any, index:number)=>{ 
             return(
               <div className={`transition-all ${view==="grid"? "my-2 inline-block min-w-[10%] max-w-[100%] lg:pr-2 px-2": view==="list"? "": ""}`} key={project.name + project._id}>

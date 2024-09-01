@@ -226,7 +226,7 @@ return(
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
                         <div key={`project.slug+${index}`} className={`pointer-events-auto px-2 snap-center rounded-lg snap-always peer flex justify-center items-center transition-all duration-500
-                         ${selectedProject===project.slug? "lg:h-[27rem] lg:w-[48rem] min-[1500px]:h-[36rem] min-[1500px]:w-[64rem] h-[17rem] w-[30rem]"
+                         ${selectedProject===project.slug? "lg:h-[27rem] lg:w-[48rem] min-[1500px]:h-[32rem] min-[1500px]:w-[58rem] h-[17rem] w-[30rem]"
                          :"w-0 h-0"}`}>
                             {/* main gallery vimeo */}
                             <div className={`relative overflow-hidden w-full pt-[56.25%]`}>
@@ -243,7 +243,7 @@ return(
                             width={1080}
                             height={1080}
                             className={`lg:object-contain object-cover cursor-zoom-in rounded-lg transition-all duration-500 pointer-events-auto hover:rounded-3xl hover:outline outline-3 outline-white  
-                            ${selectedProject===project.slug? "mx-5 lg:h-[27rem] min-[1500px]:h-[36rem] h-[20rem] lg:w-auto w-[20rem] lg:px-0" :"w-0 h-0"}`}
+                            ${selectedProject===project.slug? "mx-5 lg:h-[27rem] min-[1500px]:h-[32rem] h-[20rem] lg:w-auto w-[20rem] lg:px-0" :"w-0 h-0"}`}
                             loading="lazy"
                             onClick={()=>{
                                 let img = document.querySelector(`#mobile-${project.slug+index}`)
@@ -298,7 +298,7 @@ return(
                     />
                 </div>
             ))}
-            <h2 className={`lg:text-5xl lg:relative text-3xl text-white hover:rounded-sm px-2 z-30 lg:pt-2 text-center`}>{project.name}</h2>
+            <h2 className={`lg:text-5xl text-3xl text-white hover:rounded-sm px-2 z-30 lg:pt-2 text-center`}>{project.name}</h2>
 
             {/* BIO */}
             <div className={`z-10 flex text-center justify-center items-center px-1 lg:mt-2 mb-2 lg:mb-4 lg:mx-40 mx-5 ${selectedProject===project.slug? "": "hidden"}`}><PortableText value={project.content}/></div>
