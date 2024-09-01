@@ -108,15 +108,15 @@ export function HomeGallery({gallery}: Props){
                             <h2 className={`${blurClass} absolute top-5 px-1 backdrop-brightness-[.8]`}>{gallery[2].projects.name}</h2>
                             <span className={`absolute bottom-12 flex justify-center items-center flex-wrap w-screen`}>
                                 {gallery[2].projects.roles?.map((role:any)=>{
-                                    return <p className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
+                                    return <p key={role.name} className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
                                 })}
 
                                 {gallery[2].projects.collabs?.map((collab:any)=>{
-                                    return <p className={`${blurClass} backdrop-brightness-[.6] `}>{collab.name}</p>
+                                    return <p key={collab.name}  className={`${blurClass} backdrop-brightness-[.6] `}>{collab.name}</p>
                                 })}
 
                                 {gallery[2].projects.tags?.map((tag:any)=>{
-                                    return <p className={`${blurClass} px-1 backdrop-brightness-[.8] `}>{tag.name}</p>
+                                    return <p key={tag.name} className={`${blurClass} px-1 backdrop-brightness-[.8] `}>{tag.name}</p>
                                 })}
                             </span>
                             <Image
@@ -133,15 +133,15 @@ export function HomeGallery({gallery}: Props){
                             <h2 className={`${blurClass} absolute top-5 px-1 backdrop-brightness-[.8]`}>{gallery[1].projects.name}</h2>
                             <span className={`absolute bottom-12 flex justify-center items-center flex-wrap w-screen`}>
                                 {gallery[1].projects.roles?.map((role:any)=>{
-                                    return <p className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
+                                    return <p key={role.name} className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
                                 })}
 
                                 {gallery[1].projects.collabs?.map((collab:any)=>{
-                                    return <p className={`${blurClass} backdrop-brightness-[.6] `}>{collab.name}</p>
+                                    return <p key={collab.name}  className={`${blurClass} backdrop-brightness-[.6] `}>{collab.name}</p>
                                 })}
 
                                 {gallery[1].projects.tags?.map((tag:any)=>{
-                                    return <p className={`${blurClass} px-1 backdrop-brightness-[.8] `}>{tag.name}</p>
+                                    return <p key={tag.name} className={`${blurClass} px-1 backdrop-brightness-[.8] `}>{tag.name}</p>
                                 })}
                             </span>                       
                             <Image
@@ -158,15 +158,15 @@ export function HomeGallery({gallery}: Props){
                             <h2 className={`${blurClass} absolute top-5 px-1 backdrop-brightness-[.8]`}>{gallery[0].projects.name}</h2>
                             <span className={`absolute bottom-12 flex justify-center items-center flex-wrap w-screen`}>
                                 {gallery[0].projects.roles?.map((role:any)=>{
-                                    return <p className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
+                                    return <p key={role.name} className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
                                 })}
 
                                 {gallery[0].projects.collabs?.map((collab:any)=>{
-                                    return <p className={`${blurClass} backdrop-brightness-[.6] `}>{collab.name}</p>
+                                    return <p key={collab.name} className={`${blurClass} backdrop-brightness-[.6] `}>{collab.name}</p>
                                 })}
 
                                 {gallery[0].projects.tags?.map((tag:any)=>{
-                                    return <p className={`${blurClass} px-1 backdrop-brightness-[.8] `}>{tag.name}</p>
+                                    return <p  key={tag.name} className={`${blurClass} px-1 backdrop-brightness-[.8] `}>{tag.name}</p>
                                 })}
                             </span>                                
                             <Image
