@@ -103,7 +103,7 @@ export function HomeGallery({gallery}: Props){
 
     return(
         isSanityStudio? "": 
-            <div id="gallery" className={`relative flex justify-center items-center w-screen lg:h-[70dvh] h-[95dvh] ${selectedProject? "blur-3xl": ""}`}>
+            <div id="gallery" className={`relative flex justify-center items-center w-screen lg:h-[70dvh] h-[95dvh] rounded-2xl ${selectedProject? "blur-3xl": ""}`}>
                 <h2 className={`${blurClass} backdrop-brightness-[.8] px-2 py-0 absolute top-4 w-fit z-20`}>Featured Projects</h2>
                 <span className="relative z-0 flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory">
                     <button className={`${parentClass}`} onClick={()=>{projectClick(gallery[2].projects)}}>
@@ -127,7 +127,7 @@ export function HomeGallery({gallery}: Props){
                         alt=""
                         width={1080}
                         height={1080}
-                        className="w-screen lg:h-[70dvh] h-[95dvh] object-cover px-5 py-[1.2rem]"
+                        className="w-screen lg:h-[70dvh] h-[95dvh] object-cover px-5 py-[1.2rem] rounded-xl"
                         unoptimized={urlForImage(gallery[2].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
@@ -152,7 +152,7 @@ export function HomeGallery({gallery}: Props){
                         alt=""
                         width={1080}
                         height={1080}
-                        className="w-screen lg:h-[70dvh] h-[95dvh] object-cover px-5 py-[1.2rem]"
+                        className="w-screen lg:h-[70dvh] h-[95dvh] object-cover px-5 py-[1.2rem] rounded-xl"
                         unoptimized={urlForImage(gallery[1].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
@@ -177,7 +177,7 @@ export function HomeGallery({gallery}: Props){
                         alt=""
                         width={1080}
                         height={1080}
-                        className="w-screen lg:h-[70dvh] h-[95dvh] object-cover px-5 py-[1.2rem]"
+                        className="w-screen lg:h-[70dvh] h-[95dvh] object-cover px-5 py-[1.2rem] rounded-xl"
                         unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
