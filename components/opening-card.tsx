@@ -36,9 +36,8 @@ export function OpeningCard({gallery}: Props){
     }, [selectedProject])
     
     useEffect(()=>{
-        selectedProject? document.querySelector(`#${selectedProject}`)?.scrollIntoView({block: "center"}) : ""
-        selectedProject? "":""
-
+        // selectedProject? document.querySelector(`#${selectedProject}`)?.scrollIntoView({block: "center"}) : ""
+        document.querySelector("html")?.classList.add("overflow-y-hidden")
         if(type === 0){
             setTimeout(()=>{
                 document.querySelector("#image1")?.classList.replace("h-[100dvh]", "h-0")
@@ -88,7 +87,7 @@ export function OpeningCard({gallery}: Props){
 
         cardRef? setTimeout(()=>{
             cardRef.current.classList.replace("top-0", "top-full")
-            document.querySelector("html")?.classList.remove("overflow-y-hidden")
+            selectedProject? "" : document.querySelector("html")?.classList.remove("overflow-y-hidden")
         }, 5000): ""
         cardRef? setTimeout(()=>{
             cardRef.current.classList.add("hidden")

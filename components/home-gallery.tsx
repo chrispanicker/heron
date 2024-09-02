@@ -61,7 +61,8 @@ export function HomeGallery({gallery}: Props){
     const projectClick = (project:any) =>{
         console.log(project)
         router.push( `/?${createQueryString(`project`, `${project.slug.current}`)}`, { scroll: false })
-        
+        document.querySelector("html")?.classList.contains("overflow-y-hidden")? document.querySelector("html")?.classList.remove("overflow-y-hidden") : document.querySelector("html")?.classList.add("overflow-y-hidden")
+
         if(selectedProject===project.slug){
             project.tags?.map((tag:any)=>{
                 let el = document.getElementById(tag.name)
