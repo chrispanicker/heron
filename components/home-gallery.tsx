@@ -126,7 +126,7 @@ export function HomeGallery({gallery}: Props){
                         alt=""
                         width={1080}
                         height={1080}
-                        className="w-screen h-[100dvh] object-cover p-5"
+                        className="w-screen h-[100dvh] object-cover px-5 py-[1.2rem]"
                         unoptimized={urlForImage(gallery[2].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
@@ -151,7 +151,7 @@ export function HomeGallery({gallery}: Props){
                         alt=""
                         width={1080}
                         height={1080}
-                        className="w-screen h-[100dvh] object-cover p-5"
+                        className="w-screen h-[100dvh] object-cover px-5 py-[1.2rem]"
                         unoptimized={urlForImage(gallery[1].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
@@ -176,7 +176,7 @@ export function HomeGallery({gallery}: Props){
                         alt=""
                         width={1080}
                         height={1080}
-                        className="w-screen h-[100dvh] object-cover p-5"
+                        className="w-screen h-[100dvh] object-cover px-5 py-[1.2rem]"
                         unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
