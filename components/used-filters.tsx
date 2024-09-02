@@ -38,7 +38,7 @@ export default function UsedFilters(){
                     return <button 
                     key={`${role}${i}`}
                     onClick={()=>{
-                        router.push( `/?${createQueryString(`roles`, `${role}`)}`)
+                        router.push( `/?${createQueryString(`roles`, `${role}`)}`, {scroll: false})
                     }}
                     className={`bg-white text-black ${blurClass}  ml-2 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit cursor-alias whitespace-nowrap mb-2`}>
                         {`${role}`}
@@ -48,7 +48,7 @@ export default function UsedFilters(){
                     return <button 
                     key={`${collab}${i}`}
                     onClick={()=>{
-                        router.push( `/?${createQueryString(`collabs`, `${collab}`)}`)
+                        router.push( `/?${createQueryString(`collabs`, `${collab}`)}`, {scroll: false})
                     }}
                     className={`bg-white text-black ${blurClass}  ml-2 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit cursor-alias whitespace-nowrap mb-2`}>
                         {`${collab}`}
@@ -58,7 +58,7 @@ export default function UsedFilters(){
                     return <button 
                     key={`${tag}${i}`}
                     onClick={()=>{
-                        router.push( `/?${createQueryString(`tags`, `${tag}`)}`)
+                        router.push( `/?${createQueryString(`tags`, `${tag}`)}`, {scroll: false})
                     }}
                     className={`bg-white text-black ${blurClass}  ml-2 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit cursor-alias whitespace-nowrap mb-2`}>
                         {`${tag}`}
@@ -66,7 +66,7 @@ export default function UsedFilters(){
                 })}
                 <button className={`${blurClass}  ml-2 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit whitespace-nowrap mb-2 hover:bg-white hover:text-black`}
                 onClick={()=>{
-                    router.push(`/?view=${view}`)
+                    router.push(`/?view=${view}`, {scroll: false})
                 }}>Clear</button>
             </div>: ""
     )

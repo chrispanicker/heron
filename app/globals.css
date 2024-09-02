@@ -142,13 +142,17 @@
 }
 
 #footer div h2 a {
-  /* --tw-backdrop-blur: blur(4px);
-  --tw-backdrop-brightness: brightness(.4);
-  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness); */
-  /* background-color: white; */
-  /* backdrop-filter: brightness(.7) */
+  color: white;
+  background-color: rgb(75, 75, 79);
+  padding: .1rem .2rem;
+
 }
 
+#footer div h2 a:hover {
+  color: black;
+  background-color: white;
+  padding: .1rem .2rem;
+}
 @keyframes rotate{
   0%{
     transform: rotateX(0deg) rotateX(calc(var(--i)*126deg)) translateX(-10rem);

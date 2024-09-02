@@ -31,13 +31,20 @@ export default async function Home({searchParams}: Props) {
         <section className={`${view==="grid"? "flex flex-wrap justify-center items-center lg:pb-40 pb-20 lg:mx-40 mx-5": "flex flex-col justify-center items-center pb-5 lg:mx-40 mx-5"}`}>
           <Views />
           <TestFilter projects={allProjects}/>
-          {/* <h2 className="w-screen text-lg pt-5 flex text-center justify-center">Project <p className={`${view==="grid"? "": "hidden"}`}>&nbsp;Grid:</p><p className={`${view==="list"? "": "hidden"}`}>&nbsp;List:</p></h2> */}
-          {filteredProjects.map((project:any, index:number)=>{ 
-            return(
-              <div className={`transition-all ${view==="grid"? "my-2 inline-block min-w-[10%] max-w-[100%] lg:pr-2 px-2": view==="list"? "": ""}`} key={project.name + project._id}>
-                <MobileProjects filteredProjects={filteredProjects} project={project} index={index}/>
-              </div>
-          )})}
+          
+          <div className="flex flex-col justify-center items-center">
+            {/* <div className="w-screen flex justify-center pb-5">
+              <h2 className="w-fit text-md flex text-center justify-center backdrop-blur-2xl backdrop-brightness-[.8] px-1">Project 
+                <p className={`${view==="grid"? "": "hidden"}`}>&nbsp;Grid</p><p className={`${view==="list"? "": "hidden"}`}>&nbsp;List</p>
+              </h2>
+            </div> */}
+            {filteredProjects.map((project:any, index:number)=>{ 
+              return(
+                <div className={`transition-all ${view==="grid"? "my-2 inline-block min-w-[10%] max-w-[100%] lg:pr-2 px-2": view==="list"? "": ""}`} key={project.name + project._id}>
+                  <MobileProjects filteredProjects={filteredProjects} project={project} index={index}/>
+                </div>
+            )})}
+          </div>
         </section>
     </main>: <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>
   )

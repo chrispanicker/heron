@@ -72,7 +72,7 @@ export function Filters({filters, projects}: Props){
                     // style={{[`${entry.key==="roles"? "--r": entry.key==="collabs"? "--c": entry.key==="tags"? "--t": ""}` as any]:idx+1}}
                     key={`${entry.filter}${idx}`}
                     onClick={()=>{
-                        router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`)
+                        router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`, {scroll: false})
                     }}
                     className={`${blurClass} lg:text-md ${entry.key==="roles"? "backdrop-brightness-[.4]": entry.key==="tags"? "backdrop-brightness-[.8]": "backdrop-brightness-[.6]"} ${textClass} pointer-events-auto px-[.4rem] py-[.1rem] mr-2 lg:my-1 my-2 w-fit whitespace-nowrap transition-all
                     ${searchParams.getAll(entry.key)?.includes(entry.filter)? "selection text-black":"hover:bg-white hover:text-black"}`

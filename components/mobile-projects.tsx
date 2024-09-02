@@ -120,7 +120,7 @@ export default function MobileProjects({project}: Props) {
 
     const projectClick = () =>{
         router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, { scroll: false })
-        document.querySelector("html")?.classList.contains("overflow-y-hidden")? document.querySelector("html")?.classList.remove("overflow-y-hidden") : document.querySelector("html")?.classList.add("overflow-y-hidden")
+        // document.querySelector("html")?.classList.contains("overflow-y-hidden")? document.querySelector("html")?.classList.remove("overflow-y-hidden") : document.querySelector("html")?.classList.add("overflow-y-hidden")
         
         
         if(selectedProject===project.slug){
@@ -166,7 +166,7 @@ return(
 
         {/* view === grid || list? */}
         <span id="grid" className={`group relative flex flex-col justify-center items-center overflow-hidden transition-[height] transition-[border-radius] duration-500
-        ${view==="grid"? `rounded-md hover:rounded-xl hover:outline outline-3 outline-white`: view==="list"? "lg:h-[5rem] hover:rounded-md": ""} 
+        ${view==="grid"? `rounded-md hover:rounded-xl hover:outline outline-3 outline-white`: view==="list"? "lg:h-[5rem]": ""} 
         ${selectedProject? view==="grid"? "blur-2xl": `blur-md`: ""} 
         ${view==="grid"||"list"? "": "hidden"} `}>
             <button className={`peer z-20 transition-all  ${selectedProject===project.slug? "" : "hover:blur-none hover:text-white hover:bg-gray-400"}`}onClick={projectClick}>
@@ -189,7 +189,7 @@ return(
                 <div ref={filterRef} className={`z-10 sans  text-center justify-center items-center overflow-hidden h-0 lg:group-hover:h-[2rem] transition-[height] duration-100 w-0 lg:w-auto ${view==="list"? "lg:flex": "hidden"}`}>
                     {Object.entries(filters).map(([key, array])=>{
                         return(
-                            <span key={key} className="capitalize lg:flex justify-center items-center text-lg pt-2">
+                            <span key={key} className="capitalize lg:flex justify-center items-center text-[1rem] leading-[19px] pt-2">
                                 {array.map((filter:any, idx:any)=>{
                                     return (
                                         <button 
@@ -198,7 +198,7 @@ return(
                                         onClick={()=>{
                                             router.push( `/?${createQueryString(`${key}`, `${filter}`)}`)
                                         }}
-                                        className={` backdrop-blur-sm  ${key==="roles"? "backdrop-brightness-[.4]": key==="tags"? "backdrop-brightness-[.8]": "backdrop-brightness-[.6]"}  px-1 mx-1 w-fit whitespace-nowrap
+                                        className={` backdrop-blur-sm  ${key==="roles"? "backdrop-brightness-[.4]": key==="tags"? "backdrop-brightness-[.8]": "backdrop-brightness-[.6]"}  px-1 py-[.1rem] mx-1 w-fit whitespace-nowrap
                                         ${searchParams.getAll(key)?.includes(filter)? "bg-white text-black": `text-white hover:bg-white hover:text-black`}`}
                                         >
                                             {`${filter}`}
@@ -217,7 +217,7 @@ return(
         {/* project open? */}
         <span className={`fixed bottom-0 left-0 z-40 overflow-y-hidden flex  flex-col justify-center items-center transition-all duration-1000 lg:pt-0 pt-5 
         ${selectedProject===project.slug? `h-[100dvh] opacity-100` : "h-0 blur-3xl"}`}>
-            <button className={`peer transition-all mx-2 mb-2 z-30 absolute top-5${blurClass}`}                         
+            <button className={`peer transition-all mx-2 mb-2 z-30 absolute top-5 ${blurClass}`}                         
             onClick={projectClick}><h3 className={`hover:bg-white hover:text-black {hoverClass} hover:rounded-sm px-1`}>Close</h3>
             </button>
 

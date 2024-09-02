@@ -103,7 +103,7 @@ export function HomeGallery({gallery}: Props){
     return(
         isSanityStudio? "": 
             <div id="gallery" className={`relative flex justify-center items-center w-screen h-[100dvh] ${selectedProject? "blur-3xl": ""}`}>
-                <h2 className={`${blurClass} backdrop-brightness-[.8] px-2 absolute top-5 h-fit w-fit z-20`}>Featured Projects</h2>
+                <h2 className={`${blurClass} backdrop-brightness-[.8] px-2 py-0 absolute top-4 w-fit z-20`}>Featured Projects</h2>
                 <span className="relative z-0 flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory">
                     <button className={`${parentClass}`} onClick={()=>{projectClick(gallery[2].projects)}}>
                         <h2 className={`${blurClass} absolute top-14 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8]`}>{gallery[2].projects.name}</h2>
@@ -126,7 +126,7 @@ export function HomeGallery({gallery}: Props){
                         alt=""
                         width={1080}
                         height={1080}
-                        className="w-screen h-[100dvh] object-cover shrink-0"
+                        className="w-screen h-[100dvh] object-cover p-5"
                         unoptimized={urlForImage(gallery[2].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
@@ -151,7 +151,7 @@ export function HomeGallery({gallery}: Props){
                         alt=""
                         width={1080}
                         height={1080}
-                        className="w-screen h-[100dvh] object-cover shrink-0"
+                        className="w-screen h-[100dvh] object-cover p-5"
                         unoptimized={urlForImage(gallery[1].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
@@ -176,7 +176,7 @@ export function HomeGallery({gallery}: Props){
                         alt=""
                         width={1080}
                         height={1080}
-                        className="w-screen h-[100dvh] object-cover shrink-0"
+                        className="w-screen h-[100dvh] object-cover p-5"
                         unoptimized={urlForImage(gallery[0].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
