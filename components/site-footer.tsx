@@ -33,8 +33,8 @@ export function SiteFooter(info:any){
     return (
         isSanityStudio? "" : 
         <footer ref={footerRef} className="">
-            <span id="footer" className={`z-30 flex text-lg justify-center items-center flex-col min-h-screen duration-500 transition-all lg:px-40 m-5 ${blurClass} ${project? "blur-2xl": ""}`}>
-                <div className={`w-4/4 h-fit pb-10 pt-5 text-center mx-5`}>
+            <span id="footer" className={`z-30 flex text-[1rem] lg:justify-center justify-start items-center flex-col min-h-[96dvh] duration-500 transition-all lg:px-40 m-5 ${blurClass} ${project? "blur-2xl": ""}`}>
+                <div className={`w-4/4 h-fit pb-10 lg:pt-20 pt-5 text-center mx-5`}>
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
                 <div className={`w-4/4 h-fit pb-20`}>
