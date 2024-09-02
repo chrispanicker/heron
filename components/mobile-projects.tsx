@@ -120,7 +120,7 @@ export default function MobileProjects({project}: Props) {
 
     const projectClick = () =>{
         router.push( `/?${createQueryString(`project`, `${project.slug}`)}`, { scroll: false })
-        document.querySelector("html")?.classList.contains("overflow-y-hidden")? document.querySelector("html")?.classList.remove("overflow-y-hidden") : document.querySelector("html")?.classList.add("overflow-y-hidden")
+        // document.querySelector("html")?.classList.contains("overflow-y-hidden")? document.querySelector("html")?.classList.remove("overflow-y-hidden") : document.querySelector("html")?.classList.add("overflow-y-hidden")
         
         
         if(selectedProject===project.slug){
@@ -196,7 +196,7 @@ return(
                                         // style={{[`${key==="roles"? "--r": key==="collabs"? "--c": key==="tags"? "--t": ""}` as any]:idx+1}}
                                         key={`${filter}${idx}`}
                                         onClick={()=>{
-                                            router.push( `/?${createQueryString(`${key}`, `${filter}`)}`)
+                                            router.push( `/?${createQueryString(`${key}`, `${filter}`)}`, {scroll: false})
                                         }}
                                         className={` backdrop-blur-sm  ${key==="roles"? "backdrop-brightness-[.4]": key==="tags"? "backdrop-brightness-[.8]": "backdrop-brightness-[.6]"}  px-1 py-[.1rem] mx-1 w-fit whitespace-nowrap
                                         ${searchParams.getAll(key)?.includes(filter)? "bg-white text-black": `text-white hover:bg-white hover:text-black`}`}

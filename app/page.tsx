@@ -27,12 +27,11 @@ export default async function Home({searchParams}: Props) {
   return (
     filteredProjects? <main id="main" className={`snap-y snap-mandatory top-0 flex z-0 flex-col items-center justify-start min-h-[100dvh]`}>
         <Name />
-        <UsedFilters/>
         <section className={`${view==="grid"? "flex flex-wrap justify-center items-center lg:pb-40 pb-20 lg:mx-40 mx-5": "flex flex-col justify-center items-center pb-5 lg:mx-40 mx-5"}`}>
           <Views />
           <TestFilter projects={allProjects}/>
           
-          <div className="flex flex-col justify-center items-center">
+          {/* <div className="flex flex-col justify-center items-center"> */}
             {/* <div className="w-screen flex justify-center pb-5">
               <h2 className="w-fit text-md flex text-center justify-center backdrop-blur-2xl backdrop-brightness-[.8] px-1">Project 
                 <p className={`${view==="grid"? "": "hidden"}`}>&nbsp;Grid</p><p className={`${view==="list"? "": "hidden"}`}>&nbsp;List</p>
@@ -44,8 +43,9 @@ export default async function Home({searchParams}: Props) {
                   <MobileProjects filteredProjects={filteredProjects} project={project} index={index}/>
                 </div>
             )})}
-          </div>
+          {/* </div> */}
         </section>
+        <UsedFilters/>
     </main>: <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>
   )
 }
