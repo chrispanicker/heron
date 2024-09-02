@@ -106,8 +106,8 @@ export function HomeGallery({gallery}: Props){
             <div id="gallery" className={`relative flex justify-center items-center w-screen lg:h-[70dvh] h-[95dvh] mt-5 mb-10 ${selectedProject? "blur-3xl": ""}`}>
                 <h2 className={`${blurClass} backdrop-brightness-[.8] px-2 py-0 absolute top-2 w-fit z-20`}>Featured Projects</h2>
                 <span className="relative z-0 flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory">
-                    <button className={`${parentClass}`} onClick={()=>{projectClick(gallery[2].projects)}}>
-                        <h2 className={`${blurClass} absolute top-16 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8]`}>{gallery[2].projects.name}</h2>
+                    <button className={`${parentClass} group`} onClick={()=>{projectClick(gallery[2].projects)}}>
+                        <h2 className={`${blurClass} absolute top-16 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8] group-hover:bg-white group-hover:text-black transition-all`}>{gallery[2].projects.name}</h2>
                         <span className={`absolute bottom-8 flex justify-center items-center flex-wrap w-screen`}>
                             {gallery[2].projects.roles?.map((role:any)=>{
                                 return <p key={role.name} className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
@@ -131,8 +131,8 @@ export function HomeGallery({gallery}: Props){
                         unoptimized={urlForImage(gallery[2].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
-                    <button className={`${parentClass}`} onClick={()=>{projectClick(gallery[1].projects)}}>     
-                        <h2 className={`${blurClass} absolute top-16 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8]`}>{gallery[1].projects.name}</h2>
+                    <button className={`${parentClass} group`} onClick={()=>{projectClick(gallery[1].projects)}}>     
+                        <h2 className={`${blurClass} absolute top-16 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8] group-hover:bg-white group-hover:text-black transition-all`}>{gallery[1].projects.name}</h2>
                         <span className={`absolute bottom-8 flex justify-center items-center flex-wrap w-screen`}>
                             {gallery[1].projects.roles?.map((role:any)=>{
                                 return <p key={role.name} className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
@@ -152,12 +152,12 @@ export function HomeGallery({gallery}: Props){
                         alt=""
                         width={1080}
                         height={1080}
-                        className="w-screen lg:h-[70dvh] h-[95dvh] object-cover mx-5 my-5 rounded-2xl hover:rounded-[2rem] transition-all outline-3 outline-white hover:outline overflow-hidden"
+                        className="w-screen lg:h-[70dvh] h-[95dvh] object-cover mx-5 my-5 rounded-2xl hover:rounded-[2rem] peer transition-all outline-3 outline-white hover:outline overflow-hidden"
                         unoptimized={urlForImage(gallery[1].projects.preview).url().includes(".gif")? true: false}
                         />
                     </button>
-                    <button className={`${parentClass}`} onClick={()=>{projectClick(gallery[0].projects)}}>
-                        <h2 className={`${blurClass} absolute top-16 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8]`}>{gallery[0].projects.name}</h2>
+                    <button className={`${parentClass} group`} onClick={()=>{projectClick(gallery[0].projects)}}>
+                        <h2 className={`${blurClass} absolute top-16 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8] group-hover:bg-white group-hover:text-black transition-all`}>{gallery[0].projects.name}</h2>
                         <span className={`absolute bottom-8 flex justify-center items-center flex-wrap w-screen`}>
                             {gallery[0].projects.roles?.map((role:any)=>{
                                 return <p key={role.name} className={`${blurClass} px-1 backdrop-brightness-[.4] `}>{role.name}</p>
