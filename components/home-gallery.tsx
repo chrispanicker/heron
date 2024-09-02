@@ -103,7 +103,7 @@ export function HomeGallery({gallery}: Props){
     return(
         isSanityStudio? "": 
             <div id="gallery" className={`relative flex justify-center items-center w-screen h-[100dvh] ${selectedProject? "blur-3xl": ""}`}>
-                <h2 className={`${blurClass} backdrop-brightness-[.8] px-2 absolute top-5 h-fit w-fit`}>Featured Projects</h2>
+                <h2 className={`${blurClass} backdrop-brightness-[.8] px-2 absolute top-5 h-fit w-fit z-20`}>Featured Projects</h2>
                 <span className="relative z-0 flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory">
                     <button className={`${parentClass}`} onClick={()=>{projectClick(gallery[2].projects)}}>
                         <h2 className={`${blurClass} absolute top-14 lg:text-5xl text-3xl px-1 backdrop-brightness-[.8]`}>{gallery[2].projects.name}</h2>
