@@ -144,15 +144,15 @@
 #footer div h2 a {
   color: white;
   background-color: rgb(75, 75, 79);
-  padding: .1rem .2rem;
-
+  padding: .1rem .35rem;
+  cursor: alias;
 }
 
 #footer div h2 a:hover {
   color: black;
   background-color: white;
-  padding: .1rem .2rem;
 }
+
 @keyframes rotate{
   0%{
     transform: rotateX(0deg) rotateX(calc(var(--i)*126deg)) translateX(-10rem);
