@@ -40,7 +40,7 @@ export function MobileGallery({project}:Props){
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover transition-all duration-500 h-[70vh] w-screen px-2`}
+                            className={`object-cover transition-all duration-500 h-[72vh] w-screen px-2`}
                             loading="lazy"
                             placeholder="blur"
                             blurDataURL={`${project.gallery[index].lqip}`}
