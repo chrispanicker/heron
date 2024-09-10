@@ -57,7 +57,7 @@ export default function MobileProjects({project}: Props) {
                 </div>
             </div>
 
-            <div className={`absolute w-screen bottom-0 bg-gray-300 z-10 px-2 pt-1 pb-10`}>
+            <div className={`absolute w-screen bottom-0 bg-gray-300 z-10 px-2 pt-1 pb-5`}>
                 <span className="leading-[1.2rem]">
                     {/* <p className="pb-1">For <i>{project.client}</i></p> */}
                     <PortableText value={project.content}/>

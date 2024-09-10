@@ -35,7 +35,7 @@ let info = await getInfo();
 let gallery = await getGallery();
 
   return (
-    <html lang="en" className='bg-gray-300 text-black serif font-light overflow-x-hidden text-xl leading-[1.4rem] snap-y'>
+    <html lang="en" className='bg-gray-300 text-black serif font-light overflow-x-hidden text-xl leading-[1.4rem] snap-y snap-mandatory'>
       <body>
         <section>
           <SiteHeader />
