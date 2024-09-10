@@ -1,16 +1,16 @@
 'use client'
 import { Project } from "@/types/project";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Gallery } from "./gallery";
 import { buttonClass } from "./classes";
 import { useCallback } from "react";
 import { PortableText } from "@portabletext/react";
-import { MobileGallery } from "./mobile-gallery";
 
 interface Props{
     project: Project
 }
 
-export default function MobileProjects({project}: Props) {
+export default function Projects({project}: Props) {
     const router = useRouter();
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")  
@@ -45,36 +45,31 @@ export default function MobileProjects({project}: Props) {
     
 
     return (
-        <div className={`group snap-start lg:hidden block relative items-center cursor-pointer transition-[padding] duration-500 h-screen pt-5`}
+        <div className={`group lg:grid hidden lg:grid-cols-6 grid-cols-2 items-center cursor-pointer px-1 transition-[padding] duration-500 ${selectedProject===project.slug? "py-16": "py-1 hover:bg-black hover:text-gray-300"}`}
         onClick={()=>{
             router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
         }}>
-            <div className="absolute top-8 bg-gray-300 z-10 pt-2 pb-1">
-                <h2 className="text-2xl w-screen flex justify-start items-center px-2 leading-[1.5rem]">{project.name}</h2>
-                <div className="flex px-2 justify-between">
-                    <p className="italic">{project.type}</p>
-                    <p className="">{project.year}</p>
-                </div>
-            </div>
+            <h2 className="col-span-2 whitespace-nowrap">{project.name}</h2>
+            <p className="italic">{project.client}</p>
 
-            <div className={`absolute bottom-0 bg-gray-300 z-10 px-2 pt-1 pb-1`}>
-                <span className="leading-[1.2rem]">
-                    {/* <p className="pb-1">For <i>{project.client}</i></p> */}
-                    <PortableText value={project.content}/>
-                </span>
-                {/* <span className="overflow-x-scroll my-1 z-10">
-                {project.tags? project.tags?.map((tag:any)=>(
-                    <button key={"mobile"+tag.name} className={`${buttonClass} bg-black text-gray-300`}>{tag.name}</button>
-                )): ""}
-                </span> */}
-            </div>
-
-            
         
-            {/* Mobile Gallery */}
-            <span className={`transition-all duration-500 z-0`}>
-                <MobileGallery project={project}/>
+
+            <span className="flex overflow-hidden col-span-2 lg:my-0 my-1">
+                {project.tags? project.tags?.map((tag:any)=>(
+                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black"} `}>{tag.name}</button>
+                )): ""}
             </span>
+            
+            <p className="lg:text-right">{project.year}</p>
+
+            {/* Desktop Gallery */}
+            <span className={`lg:block hidden col-span-6 overflow-hidden transition-all duration-500 ${selectedProject===project.slug? "max-h-[100rem]": "max-h-[0rem]"}`}>
+                <Gallery project={project}/>
+                <div className={`pb-[.1rem] ${selectedProject===project.slug? "": ""}`}>
+                    <PortableText value={project.content}/>
+                </div>
+            </span>
+
 
         </div>
     )

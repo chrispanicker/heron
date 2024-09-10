@@ -17,7 +17,10 @@ const nextConfig = {
       // This could be anything, using the latest git hash
       return `${process.env.GIT_HASH}`
     },
-    experimental: { missingSuspenseWithCSRBailout: false, }
+    experimental: { 
+      missingSuspenseWithCSRBailout: false, 
+      taint: true,
+    }
 }
 
 module.exports = nextConfig

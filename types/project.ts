@@ -10,10 +10,9 @@ export type Project = {
     content: PortableTextBlock;
     collabs: any;
     year: string;
+    client: string;
     roles: any;
-    color: string;
     gallery: Image[];
-    blurImg: any;
     tags: any;
     vimeo: string[];
     images: Image[];

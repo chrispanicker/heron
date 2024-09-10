@@ -23,16 +23,26 @@ const project = {
             type: 'number', validation: (Rule: any) => Rule.min(0).integer().positive(), 
         },
         {
-            name: 'roles',
-            title: 'Roles',
-            type: 'array',
-            of: [{type: 'reference', to: [{ type: 'roles' }]}],
-            description: 'You can choose from existing roles or add new ones!',
+            name: 'client',
+            title: 'Client',
+            type: "string"
+        },
+        {
+            name: 'type',
+            title: 'Type',
+            type: "string"
         },
         {
             title: 'Year',
             name: 'year',
             type: 'string',
+        },
+        {
+            name: 'roles',
+            title: 'Roles',
+            type: 'array',
+            of: [{type: 'reference', to: [{ type: 'roles' }]}],
+            description: 'You can choose from existing roles or add new ones!',
         },
         
         {

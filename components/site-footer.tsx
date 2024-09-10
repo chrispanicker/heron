@@ -33,22 +33,22 @@ export function SiteFooter(info:any){
     return (
         isSanityStudio? "" : 
         <footer ref={footerRef} className="">
-            <span id="footer" className={`z-30 flex text-[1rem] lg:justify-center justify-start items-center flex-col min-h-[96dvh] duration-500 transition-all lg:px-40 m-5 ${blurClass} ${project? "blur-2xl": ""}`}>
-                <div className={`w-4/4 h-fit pb-10 lg:pt-20 pt-5 text-center mx-5`}>
+            <div className={`w-4/4 h-fit pb-10 lg:pt-20 pt-5 text-left grid grid-cols-2 mx-1`}>
+                <div className="pr-5">
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
                 <div className={`w-4/4 h-fit pb-20`}>
-                        {info.info[0].cv.map((job:job)=>(
-                            <span key={`${job.company}`} className="w-4/4 flex flex-col justify-between items-center lg:pb-2 mx-5 ">
-                                <div className="flex">
-                                    <p className="pr-1">{job.company}</p>
-                                    <p className="italic">{job.title}</p>
-                                </div>
-                                <p>{job.years}</p>
-                            </span>
-                        ))}
+                    {info.info[0].cv.map((job:job)=>(
+                        <span key={`${job.company}`} className="w-4/4 flex justify-between items-start">
+                            <div className="flex">
+                                <p className="pr-1">{job.company}</p>
+                                <p className="italic">{job.title}</p>
+                            </div>
+                            <p>{job.years}</p>
+                        </span>
+                    ))}
                 </div>
-            </span>
+            </div>
         </footer>
     )
 }

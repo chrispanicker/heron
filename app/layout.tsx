@@ -1,11 +1,8 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
-import { SiteFooter } from '@/components/site-footer'
 import localFont from 'next/font/local'
-import ViewToggle from '@/components/view-toggle'
-import { getGallery, getInfo, getProjects } from '@/sanity/sanity-utils'
-import { OpeningCard } from '@/components/opening-card'
-import { HomeGallery } from '@/components/home-gallery'
+import { getGallery, getInfo } from '@/sanity/lib/queries'
+import { SiteHeader } from '@/components/site-header'
 
 
 export const metadata: Metadata = {
@@ -38,13 +35,12 @@ let info = await getInfo();
 let gallery = await getGallery();
 
   return (
-    <html lang="en" className='bg-gray-400 text-white font-light overflow-x-hidden sans '>
+    <html lang="en" className='bg-gray-300 text-black serif font-light overflow-x-hidden text-xl leading-[1.4rem] snap-y'>
       <body>
-        <section className=''>
-          <OpeningCard gallery={gallery} />
-          <HomeGallery gallery={gallery} />
+        <section>
+          <SiteHeader />
           <>{children}</>
-          <SiteFooter info={info} />
+          {/* <SiteFooter /> */}
         </section>
 
       </body>

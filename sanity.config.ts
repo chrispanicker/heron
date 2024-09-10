@@ -7,6 +7,7 @@ import jobs from "./sanity/schemas/jobs"
 import collabs from "./sanity/schemas/collabs";
 import gallery from "./sanity/schemas/opening-gallery";
 import { structureTool } from "sanity/structure";
+import { presentationTool } from "sanity/presentation";
 
 const config = defineConfig({
     projectId: "01jwvji0",
@@ -14,7 +15,16 @@ const config = defineConfig({
     title: "Heron",
     apiVersion: "2023-12-06",
     basePath: "/admin",
-    plugins: [structureTool()],
+    plugins: [
+        structureTool(),
+        // presentationTool({
+        //     previewUrl:{
+        //         previewMode:{
+        //             enable: '/api/draft-mode/enable',
+        //         }
+        //     }
+        // })
+    ],
     schema: {types: [project, gallery, info, jobs, roles, collabs, tags]},
     useCdn: false
 })

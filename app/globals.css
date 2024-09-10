@@ -102,8 +102,13 @@
 
 }
 
+.serif{
+  font-family: 'Times New Roman', Times, serif;
+}
+
 .sans{
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
 }
 
 .selection{
@@ -116,14 +121,15 @@
 /* scrollbar stuff */
 
 /* width */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   height: 5px;
   width: 5px;
-}
+} */
+
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
   background: transparent; 
-}
+} */
 
 
 ::-webkit-scrollbar-thumb {
