@@ -21,7 +21,7 @@ export function MobileGallery({project}:Props){
     return(
         <>
         {/* GALLERY */}
-        <div className={`absolute top-20 left-0 w-screen overflow-x-scroll overflow-y-hidden snap-x snap-mandatory h-screen`}>
+        <div className={`absolute top-20 left-0 w-screen overflow-x-scroll overflow-y-hidden snap-x snap-mandatory h-[100dvh]`}>
                 <span className={`flex w-max justify-center items-start`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
@@ -40,7 +40,7 @@ export function MobileGallery({project}:Props){
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover transition-all duration-500 h-[83vh] w-screen px-2`}
+                            className={`object-cover transition-all duration-500 h-[81vh] w-screen px-2`}
                             loading="lazy"
                             placeholder="blur"
                             blurDataURL={`${project.gallery[index].lqip}`}

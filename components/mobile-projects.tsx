@@ -45,7 +45,7 @@ export default function MobileProjects({project}: Props) {
     
 
     return (
-        <div className={`group snap-start lg:hidden block relative items-center cursor-pointer transition-[padding] duration-500 h-screen pt-5`}
+        <div className={`group snap-start snap-always lg:hidden block relative items-center cursor-pointer transition-[padding] duration-500 h-[100dvh] pt-5`}
         onClick={()=>{
             router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
         }}>
@@ -57,7 +57,7 @@ export default function MobileProjects({project}: Props) {
                 </div>
             </div>
 
-            <div className={`absolute bottom-0 bg-gray-300 z-10 px-2 pt-1 pb-1`}>
+            <div className={`absolute w-screen bottom-0 bg-gray-300 z-10 px-2 pt-1 pb-10`}>
                 <span className="leading-[1.2rem]">
                     {/* <p className="pb-1">For <i>{project.client}</i></p> */}
                     <PortableText value={project.content}/>
