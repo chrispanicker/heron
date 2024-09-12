@@ -21,8 +21,8 @@ export function MobileGallery({project}:Props){
     return(
         <>
         {/* GALLERY */}
-        <div className={`absolute top-20 left-0 w-screen overflow-x-scroll overflow-y-hidden snap-x snap-mandatory h-[100dvh]`}>
-                <span className={`flex w-max justify-center items-start`}>
+        <div className={`pt-10 left-0 w-screen overflow-x-scroll overflow-y-hidden snap-x snap-mandatory transition-all`}>
+                <span className={`flex w-max justify-center items-start h-full`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(
                         <div key={`mobile-${project.slug}+${index}`} className={`pointer-events-auto px-2 snap-center rounded-lg snap-always peer flex justify-center items-center transition-all duration-50`}>
@@ -33,14 +33,14 @@ export function MobileGallery({project}:Props){
                         </div>
                     ))}
                     {project.images?.map((image, index)=>(
-                        <div key={`mobile-${project.slug}+${index}`} className={`snap-center snap-always peer flex justify-center items-center h-full`}>
+                        <div key={`mobile-${project.slug}+${index}`} className={`snap-center snap-always peer flex justify-center items-center`}>
                             {/* main nav gallery images */}
                             <Image
                             src={urlForImage(image).url()}
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover transition-all duration-500 h-[72vh] w-screen px-2`}
+                            className={`object-cover transition-all duration-500 h-[69lvh] w-screen px-2`}
                             loading="lazy"
                             placeholder="blur"
                             blurDataURL={`${project.gallery[index].lqip}`}

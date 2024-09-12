@@ -14,6 +14,12 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       display: ["group-hover"],
+      screens:{
+        'mini': { 'raw': '(max-height: 600px)' },
+        'avg': { 'raw': '(max-height: 750px)' },
+        'large': { 'raw': '(max-height: 900px)' },
+        'big': { 'raw': '(max-height: 1000px)' },
+      },
       colors:{
         bkg: "#b0ac8c" 
       },
