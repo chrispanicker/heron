@@ -55,9 +55,16 @@ export default function Projects({project}: Props) {
         
 
             <span className="flex overflow-hidden col-span-2 lg:my-0 my-1">
+                {project.roles? project.roles?.map((tag:any)=>(
+                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black"} `}>{tag.name}</button>
+                )): ""}
+                {project.collabs? project.collabs?.map((tag:any)=>(
+                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black"} `}>{tag.name}</button>
+                )): ""}
                 {project.tags? project.tags?.map((tag:any)=>(
                     <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black"} `}>{tag.name}</button>
                 )): ""}
+
             </span>
             
             <p className="lg:text-right">{project.year}</p>

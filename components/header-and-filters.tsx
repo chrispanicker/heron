@@ -32,7 +32,7 @@ export function HeaderAndFilters({info, projects}:Props){
         "tags": allTags, 
     };
     return (
-        <header className="flex-col sans justify-between items-center pb-1 bg-black text-gray-300 lg:sticky fixed left-0 top-0 w-screen max-h-[2em] transition-all z-50 overflow-x-hidden">
+        <header className="flex-col sans justify-between items-center pb-1 bg-black text-gray-300 lg:sticky fixed left-0 top-0 w-screen max-h-[2em] transition-all z-50 overflow-hidden">
             <SiteHeader />
             <Filters filters={filters} projects={projects}  />
             <div className="lg:hidden block  overflow-y-scroll">
