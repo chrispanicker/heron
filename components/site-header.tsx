@@ -20,7 +20,7 @@ export function SiteHeader(){
     return (
         isSanityStudio? "" : 
         <>
-            <span className="flex justify-between items-center lg:bg-black lg:text-gray-300 px-2">
+            <span className="flex justify-between items-center px-2">
             <h1 className="flex duration-500 transition-[font-size] mr-40 whitespace-nowrap">Drew Litowitz&nbsp;<p className="lg:block hidden">is a graphic designer and art director based in NYC.</p></h1>
             <button className="text-2xl z-50 transition-all " 
             onClick={()=>{
