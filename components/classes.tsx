@@ -1,1 +1,4 @@
-export const buttonClass = "whitespace-nowrap w-fit h-fit p-[.18rem] mr-[.2rem] leading-[.6rem] sans text-[.8rem]";
+
+
+
+export const buttonClass = "whitespace-nowrap w-fit h-fit p-[.3rem] mr-[.2rem] leading-[.6rem] uppercase mono-book text-[.8rem]";

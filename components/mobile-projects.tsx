@@ -51,9 +51,9 @@ export default function MobileProjects({project}: Props) {
         }}>
             <div className="sticky top-8 bg-gray-300 z-10 pt-2 pb-1">
                 <h2 className="text-2xl w-screen flex justify-start items-center px-2 leading-[1.5rem]">{project.name}</h2>
-                <div className="flex px-2 justify-between">
-                    <p className="italic">{project.type}</p>
-                    <p className="">{project.year}</p>
+                <div className="flex px-2 justify-between text-sm">
+                    <p className="mono">{project.type}</p>
+                    <p className="mono">{project.year}</p>
                 </div>
             </div>
 
@@ -65,7 +65,7 @@ export default function MobileProjects({project}: Props) {
             </span>
 
 
-            <div className={`sticky w-screen bottom-0 text-sm bg-gray-300 z-10 px-2 pt-1 pb-8`}>
+            <div className={`sticky w-screen bottom-0 bg-gray-300 z-10 px-2 pt-1 pb-8`}>
                 <span className="leading-[1.2rem]">
                     {/* <p className="pb-1">For <i>{project.client}</i></p> */}
                     <PortableText value={project.content}/>

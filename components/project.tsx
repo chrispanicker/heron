@@ -45,12 +45,13 @@ export default function Projects({project}: Props) {
     
 
     return (
-        <div className={`group lg:grid hidden lg:grid-cols-6 grid-cols-2 items-center cursor-pointer px-1 transition-[padding] duration-500 ${selectedProject===project.slug? "py-16": "py-1 hover:bg-black hover:text-gray-300"}`}
+        <div id={project.slug} className={`group lg:grid hidden lg:grid-cols-6 grid-cols-2 items-center cursor-pointer px-1 transition-[padding] duration-500 ${selectedProject===project.slug? "py-16": "py-1 hover:bg-black hover:text-gray-300"}`}
         onClick={()=>{
             router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
+            document.querySelector(`#${project.slug}`)?.scrollIntoView()
         }}>
-            <h2 className="col-span-2 whitespace-nowrap">{project.name}</h2>
-            <p className="italic">{project.client}</p>
+            <h2 className="col-span-2 whitespace-nowrap text-2xl">{project.name}</h2>
+            <p className="mono">{project.client}</p>
 
         
 
@@ -67,12 +68,12 @@ export default function Projects({project}: Props) {
 
             </span>
             
-            <p className="lg:text-right">{project.year}</p>
+            <p className="lg:text-right mono">{project.year}</p>
 
             {/* Desktop Gallery */}
             <span className={`lg:block hidden col-span-6 overflow-hidden transition-all duration-500 ${selectedProject===project.slug? "max-h-[100rem]": "max-h-[0rem]"}`}>
                 <Gallery project={project}/>
-                <div className={`pb-[.1rem] ${selectedProject===project.slug? "": ""}`}>
+                <div className={`pb-[.1rem] pt-2 w-[50%] text-2xl ${selectedProject===project.slug? "": ""}`}>
                     <PortableText value={project.content}/>
                 </div>
             </span>

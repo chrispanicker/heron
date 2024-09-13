@@ -40,7 +40,7 @@ export function Gallery({project}:Props){
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover pr-1 transition-all duration-500 w-[53.33333rem] ${selectedProject===project.slug?`h-[40rem]`: "h-0"}`}
+                            className={`object-cover pr-1 transition-all duration-500 w-[53.33333rem] h-[40rem] ${selectedProject===project.slug?``: ""}`}
                             loading="lazy"
                             placeholder="blur"
                             blurDataURL={`${project.gallery[index].lqip}`}

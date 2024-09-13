@@ -30,6 +30,7 @@ export default async function Home({searchParams}: Props) {
 
   return (
     filteredProjects? <main className="lg:mx-5">
+      <div className="h-[10rem]"></div>
       <Scroller />
         <Sorts />
         {filteredProjects.map((project:any, index:number)=>{ 
