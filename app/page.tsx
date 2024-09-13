@@ -28,15 +28,6 @@ export default async function Home({searchParams}: Props) {
   let filteredProjects= await getFilteredProjects({searchParams});
   let info = await getInfo();
 
-  
-  // console.log(allprojects)
-  // let unfilteredProjects:any=[];
-  // allprojects.map((proj:any,i:number )=>{
-  //     unfilteredProjects[i]=proj
-  // })
-  // console.log(unfilteredProjects)
-
-
   return (
     filteredProjects? <main className="lg:mx-5">
       <Scroller />

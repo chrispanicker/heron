@@ -33,7 +33,7 @@ export function SiteFooter(info:any){
     return (
         isSanityStudio? "" : 
         <footer ref={footerRef} className="">
-            <div className={`w-4/4 h-fit pb-10 lg:pt-20 pt-2 text-left grid lg:grid-cols-2 lg:mx-1 mx-2 lg:text-black text-sm text-gray-300`}>
+            <div className={`w-4/4 h-fit pb-10 lg:pt-20 pt-2 text-left grid lg:grid-cols-2 lg:mx-1 mx-2 lg:text-black lg:text-[1rem] text-sm text-gray-300`}>
                 <div className="pr-5 lg:pb-0 pb-5">
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
