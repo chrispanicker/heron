@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
 import localFont from 'next/font/local'
-import { getGallery, getInfo } from '@/sanity/lib/queries'
+import { getGallery, getInfo, getProjects } from '@/sanity/lib/queries'
 import { SiteHeader } from '@/components/site-header'
+import { TestFilter } from '@/components/test-filter'
+import { HeaderAndFilters } from '@/components/header-and-filters'
 
 
 export const metadata: Metadata = {
@@ -30,19 +32,18 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode
   }) {
-
-let info = await getInfo();
-let gallery = await getGallery();
+    let allprojects = await getProjects();
+    let info = await getInfo();
+    
 
   return (
     <html lang="en" className='bg-gray-300 text-black serif font-light overflow-x-hidden text-xl leading-[1.4rem] snap-y snap-mandatory'>
       <body>
         <section>
-          <SiteHeader />
+          <HeaderAndFilters info={info}  projects={allprojects}/>
           <>{children}</>
-          {/* <SiteFooter /> */}
         </section>
-
+        {/* <TestFilter projects = {allprojects} /> */}
       </body>
     </html>
   )

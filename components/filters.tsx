@@ -1,6 +1,7 @@
 "use client"
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import { buttonClass } from "./classes";
 
 interface Props{
     filters:any
@@ -11,37 +12,16 @@ interface Props{
 export function Filters({filters, projects}: Props){
     const searchParams = useSearchParams();    
     const selectedProject = searchParams.get("project");
-    const about = searchParams.get('about');
-    const view = searchParams.get('view');
     const router = useRouter();
-    const pathname = usePathname(); 
-    const isSanityStudio = pathname.startsWith('/admin');
-    const blurClass = 'backdrop-blur-sm';
-    const textClass = " lg:text-md lg:leading-auto text-[1rem] leading-[1.2rem] ";
-    // const hoverClass = "outline outline-1 hover:outline-2 hover:rounded-sm outline-black"
     
     const createQueryString = useCallback(
         (name: string, value: string) => {
             let params;
             
-
-            selectedProject? 
-            document.querySelectorAll(".bg-black").forEach((e)=>{
-                e.classList.remove('bg-black')
-            }): ""
-
-
             let stringSearchParams = searchParams.toString()
             stringSearchParams = stringSearchParams.replaceAll("+", " ")
             params = new URLSearchParams(stringSearchParams)
 
-
-            if(name==="roles"||"tags"||"collabs" && selectedProject){
-                params.delete("project", params?.get("project")!)
-                document.querySelectorAll(".bg-black").forEach((e)=>{
-                    e.classList.remove('bg-black')
-                })
-            } 
 
             stringSearchParams.includes(`${name}=${value}`)?
             params.delete(name, value):params.append(name, value)
@@ -63,8 +43,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={`lg:sticky lg:mx-40 mx-5 top-5 z-[30] pt-1 pb-5 transition-all pointer-events-none text-white text-center duration-500 ${selectedProject? "blur-lg": ""}`}>
-            <h2 className="inline-block px-2">Filters:</h2>
+        <section className={`px-2 lg:block hidden`}>
             {allFilters.map((entry:any, idx:any)=>{
                 return (
                     <button 
@@ -74,8 +53,7 @@ export function Filters({filters, projects}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`, {scroll: false})
                     }}
-                    className={`${blurClass} lg:text-md ${entry.key==="roles"? "backdrop-brightness-[.4]": entry.key==="tags"? "backdrop-brightness-[.8]": "backdrop-brightness-[.6]"} ${textClass} pointer-events-auto px-[.4rem] py-[.1rem] mr-2 lg:my-1 my-2 w-fit whitespace-nowrap transition-all
-                    ${searchParams.getAll(entry.key)?.includes(entry.filter)? "selection text-black":"hover:bg-white hover:text-black"}`
+                    className={`cursor-pointer ${buttonClass} ${searchParams.getAll(entry.key)?.includes(entry.filter)? "hover:underline":"bg-gray-300 text-black hover:bg-black hover:text-gray-300"}`
                     }>
                         {`${entry.filter}`}
                     </button>

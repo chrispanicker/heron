@@ -11,7 +11,6 @@ export default function UsedFilters(){
     const selectedProject = searchParams.get("project")
     const view = searchParams.get("view");
     const blurClass = 'backdrop-blur-sm backdrop-brightness-[.7]';
-    const hoverClass = "outline outline-1 outline-black"
     const router = useRouter();
     const createQueryString = useCallback(
         (name: string, value: string) => {

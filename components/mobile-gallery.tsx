@@ -23,15 +23,13 @@ export function MobileGallery({project}:Props){
         {/* GALLERY */}
         <div className={`pt-10 left-0 w-screen overflow-x-scroll overflow-y-hidden snap-x snap-mandatory transition-all`}>
                 <span className={`flex w-max justify-center items-start h-full`}>
-                    {/* current image */}
-                    {project.vimeo?.map((vid, index)=>(
+                    {/* {project.vimeo?.map((vid, index)=>(
                         <div key={`mobile-${project.slug}+${index}`} className={`pointer-events-auto px-2 snap-center rounded-lg snap-always peer flex justify-center items-center transition-all duration-50`}>
-                            {/* main gallery vimeo */}
                             <div className={`relative overflow-hidden w-full pt-[56.25%]`}>
                                 <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
                             </div>
                         </div>
-                    ))}
+                    ))} */}
                     {project.images?.map((image, index)=>(
                         <div key={`mobile-${project.slug}+${index}`} className={`snap-center snap-always peer flex justify-center items-center`}>
                             {/* main nav gallery images */}

@@ -33,13 +33,13 @@ export function SiteFooter(info:any){
     return (
         isSanityStudio? "" : 
         <footer ref={footerRef} className="">
-            <div className={`w-4/4 h-fit pb-10 lg:pt-20 pt-5 text-left grid grid-cols-2 mx-1`}>
-                <div className="pr-5">
+            <div className={`w-4/4 h-fit pb-10 lg:pt-20 pt-2 text-left grid lg:grid-cols-2 lg:mx-1 mx-2 lg:text-black text-sm text-gray-300`}>
+                <div className="pr-5 lg:pb-0 pb-5">
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
-                <div className={`w-4/4 h-fit pb-20`}>
+                <div className={`w-4/4 lg:h-fit pb-20`}>
                     {info.info[0].cv.map((job:job)=>(
-                        <span key={`${job.company}`} className="w-4/4 flex justify-between items-start">
+                        <span key={`${job.company}`} className="w-4/4 flex lg:flex-row flex-col justify-between items-start lg:pb-0 pb-2 lg:leading-[1.5rem] leading-[1.2rem]">
                             <div className="flex">
                                 <p className="pr-1">{job.company}</p>
                                 <p className="italic">{job.title}</p>

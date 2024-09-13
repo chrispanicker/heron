@@ -1,11 +1,14 @@
 import { Project } from "@/types/project"
 import { Filters } from "./filters";
+import { SiteHeader } from "./site-header";
+import { SiteFooter } from "./site-footer";
 
 interface Props{
     projects:Project[]
+    info:any
 }
 
-export function TestFilter({projects}:Props){
+export function HeaderAndFilters({info, projects}:Props){
     // console.log(projects)
     let allTags:string[] = [], allCollabs:string[] = [], allRoles:string[] = []
     projects?.map((project:Project)=>{
@@ -29,7 +32,13 @@ export function TestFilter({projects}:Props){
         "tags": allTags, 
     };
     return (
-        <Filters filters={filters} projects={projects}  />
+        <header className="flex-col sans justify-between items-center pb-1 bg-black text-gray-300 lg:sticky fixed left-0 top-0 w-screen max-h-[2em] transition-all z-50 overflow-x-hidden">
+            <SiteHeader />
+            <Filters filters={filters} projects={projects}  />
+            <div className="lg:hidden block  overflow-y-scroll">
+                <SiteFooter info={info} />
+            </div>
+        </header>
     )
    
 }

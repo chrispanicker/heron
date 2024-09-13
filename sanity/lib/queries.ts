@@ -95,8 +95,8 @@ export async function getFilteredProjects({searchParams}:Props){
             groq`*[${projectFilter} ${filter}]|order(${
                 sort==="year-asc"? "year asc"
                 : sort==="year-desc"? "year desc"
-                // : sort==="name-asc"? "name asc"
-                // : sort==="name-desc"? "name asc"  
+                : sort==="name-asc"? "name asc"
+                : sort==="name-desc"? "name desc"  
                 :"priority asc"}){
                 _id,
                 name,

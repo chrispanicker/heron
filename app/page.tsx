@@ -1,9 +1,8 @@
-'use server'
-
 import MobileProjects from "@/components/mobile-projects";
 import Projects from "@/components/project";
 import { Scroller } from "@/components/scroller";
 import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { Sorts } from "@/components/sorts";
 import { getFilteredProjects, getInfo, getProjects } from "@/sanity/lib/queries";
 
@@ -16,6 +15,7 @@ interface Props {
     tags?: string[]
     collabs?: string[]
     roles?: string[]
+    sort?: string
     about?: string
   }
 }
@@ -24,14 +24,21 @@ interface Props {
 const UsedFilters = dynamic(() => import("@/components/used-filters"))
 
 export default async function Home({searchParams}: Props) {
-  const {tags, collabs, roles, about, view} = searchParams 
+  const {tags, collabs, roles, about, view, sort} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
   let info = await getInfo();
 
+  
+  // console.log(allprojects)
+  // let unfilteredProjects:any=[];
+  // allprojects.map((proj:any,i:number )=>{
+  //     unfilteredProjects[i]=proj
+  // })
+  // console.log(unfilteredProjects)
 
 
   return (
-    filteredProjects? <main  className="lg:mx-5">
+    filteredProjects? <main className="lg:mx-5">
       <Scroller />
         <Sorts />
         {filteredProjects.map((project:any, index:number)=>{ 
