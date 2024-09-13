@@ -21,8 +21,8 @@ export function SiteHeader(){
         isSanityStudio? "" : 
         <>
             <span className="flex justify-between items-center lg:px-5 px-2 mono-book">
-            <h1 className="flex duration-500 text-sm mr-40 whitespace-nowrap uppercase">Drew Litowitz&nbsp;<p className="lg:block hidden">is a graphic designer and art director based in NYC.</p></h1>
-            <button className="text-2xl z-50 transition-all " 
+            <h1 className="flex duration-500 lg:text-sm text-lg mr-40 whitespace-nowrap uppercase">Drew Litowitz<p className="lg:block hidden">is a graphic designer and art director based in NYC.</p></h1>
+            <button className="text-2xl z-50 transition-all serif" 
             onClick={()=>{
                 let hed = document.querySelector("header")
                 let plus = document.querySelector("header span button")
