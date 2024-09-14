@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { TestFilter } from "./test-filter";
+import { openFilters } from "./functions";
 
 
 type job ={
@@ -16,28 +17,16 @@ export function SiteHeader(){
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin'); 
 
+
 // console.log(allprojects)
     return (
         isSanityStudio? "" : 
         <>
-            <span className="flex justify-between items-center lg:px-5 px-2 mono-book">
+            <span className="flex justify-between items-center lg:px-5 px-2 mono-book"
+            onClick={openFilters}>
             <h1 className="flex duration-500 lg:text-sm text-lg mr-40 whitespace-nowrap uppercase">Drew Litowitz<p className="lg:block hidden">is a graphic designer and art director based in NYC.</p></h1>
             <button className="text-2xl z-50 transition-all serif" 
-            onClick={()=>{
-                let hed = document.querySelector("header")
-                let plus = document.querySelector("header span button")
-                if(hed?.classList.contains("max-h-[2em]")){
-                    hed?.classList.replace("max-h-[2em]","lg:max-h-[6rem]")
-                    hed?.classList.replace("overflow-hidden", "overflow-x-hidden")
-                    hed?.classList.add("max-h-[100dvh]")
-                    plus?.classList.add("rotate-[45deg]")
-                }else{
-                    hed?.classList.replace("lg:max-h-[6rem]","max-h-[2em]")
-                    hed?.classList.replace("overflow-x-hidden","overflow-hidden")
-                    hed?.classList.remove("max-h-[100dvh]")
-                    plus?.classList.remove("rotate-[45deg]")
-                }
-            }}>+</button>
+            >+</button>
             </span>
         </>
     )

@@ -35,11 +35,20 @@ export function Sorts(){
                 router.push("?"+createSortQueryString("sort", "name"))
             }}
             >Name
-            <p className={`${sorted==="name-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
-            <p className={`${sorted==="name-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
+                <p className={`${sorted==="name-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
+                <p className={`${sorted==="name-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
             </button>
-            <button className="text-left">Client</button>
+
+            <button className="text-left flex"
+            onClick={()=>{
+                router.push("?"+createSortQueryString("sort", "client"))
+            }}>Client
+                <p className={`${sorted==="client-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
+                <p className={`${sorted==="client-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
+            </button>
+
             <button className="col-span-2 text-left">Tags</button>
+
             <button className="text-right flex justify-end"
             onClick={()=>{
                 router.push("?"+createSortQueryString("sort", "year"))

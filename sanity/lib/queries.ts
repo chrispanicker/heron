@@ -96,7 +96,9 @@ export async function getFilteredProjects({searchParams}:Props){
                 sort==="year-asc"? "year asc"
                 : sort==="year-desc"? "year desc"
                 : sort==="name-asc"? "name asc"
-                : sort==="name-desc"? "name desc"  
+                : sort==="name-desc"? "name desc"
+                : sort==="client-asc"? "client asc"
+                : sort==="client-desc"? "client desc"    
                 :"priority asc"}){
                 _id,
                 name,

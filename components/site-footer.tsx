@@ -37,7 +37,7 @@ export function SiteFooter(info:any){
                 <div className="pr-5 lg:pb-0 pb-5 lg:text-2xl serif">
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
-                <div className={`w-4/4 lg:h-fit pt-10 pb-20 mono`}>
+                <div className={`w-4/4 lg:h-fit lg:pt-0 pt-10 pb-20 mono`}>
                     {info.info[0].cv.map((job:job)=>(
                         <span key={`${job.company}`} className="w-4/4 flex lg:flex-row flex-col justify-between items-start lg:pb-0 pb-2 lg:leading-[1.5rem] leading-[1.2rem]">
                             <div className="flex">

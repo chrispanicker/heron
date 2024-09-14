@@ -5,6 +5,7 @@ import { Gallery } from "./gallery";
 import { buttonClass } from "./classes";
 import { useCallback } from "react";
 import { PortableText } from "@portabletext/react";
+import { openFilters } from "./functions";
 
 interface Props{
     project: Project
@@ -45,25 +46,30 @@ export default function Projects({project}: Props) {
     
 
     return (
-        <div id={project.slug} className={`group lg:grid hidden lg:grid-cols-6 grid-cols-2 items-center cursor-pointer px-1 transition-[padding] duration-500 ${selectedProject===project.slug? "py-16": "py-1 hover:bg-black hover:text-gray-300"}`}
+        <div id={project.slug} className={`group lg:grid hidden lg:grid-cols-6 grid-cols-2 items-center cursor-pointer px-1 transition-[padding] duration-500 ${selectedProject===project.slug? "py-10": "py-1 hover:bg-black hover:text-gray-300"}`}
         onClick={()=>{
             router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
             document.querySelector(`#${project.slug}`)?.scrollIntoView()
+            let filters = document.querySelector("header section")
+            if(!filters?.classList.contains("h-0")){
+                openFilters()
+            }
+
         }}>
-            <h2 className="col-span-2 whitespace-nowrap text-2xl">{project.name}</h2>
+            <h2 className="col-span-2 lg:text-2xl md:text-lg">{project.name}</h2>
             <p className="mono">{project.client}</p>
 
         
 
             <span className="flex overflow-hidden col-span-2 lg:my-0 my-1">
                 {project.roles? project.roles?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black"} `}>{tag.name}</button>
+                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black hover:text-gray-300 hover:bg-black"} `}>{tag.name}</button>
                 )): ""}
                 {project.collabs? project.collabs?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black"} `}>{tag.name}</button>
+                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black hover:text-gray-300 hover:bg-black"} `}>{tag.name}</button>
                 )): ""}
                 {project.tags? project.tags?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black"} `}>{tag.name}</button>
+                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black hover:text-gray-300 hover:bg-black"} `}>{tag.name}</button>
                 )): ""}
 
             </span>
