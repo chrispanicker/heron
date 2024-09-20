@@ -30,7 +30,7 @@ export function Sorts(){
     
     return(        
         <span className="lg:grid hidden grid-cols-6 mx-1 mt-2 text-sm sans border-b-[1px] mb-1 border-black">
-            <button className="col-span-2 text-left flex"
+            <button className="col-span-2 text-left flex hover:underline"
             onClick={()=>{
                 router.push("?"+createSortQueryString("sort", "name"))
             }}
@@ -39,7 +39,7 @@ export function Sorts(){
                 <p className={`${sorted==="name-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
             </button>
 
-            <button className="text-left flex"
+            <button className="text-left flex hover:underline"
             onClick={()=>{
                 router.push("?"+createSortQueryString("sort", "client"))
             }}>Client
@@ -49,7 +49,7 @@ export function Sorts(){
 
             <button className="col-span-2 text-left">Tags</button>
 
-            <button className="text-right flex justify-end"
+            <button className="text-right flex justify-end hover:underline"
             onClick={()=>{
                 router.push("?"+createSortQueryString("sort", "year"))
             }}>Year

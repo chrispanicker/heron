@@ -56,8 +56,8 @@ export default function Projects({project}: Props) {
     
 
     return (
-        <div id={project.slug} className={`group lg:grid hidden lg:grid-cols-6 grid-cols-2 items-center cursor-pointer px-1 transition-[padding] duration-500 ${selectedProject===project.slug? "pt-10 pb-32": "py-1 hover:bg-black hover:text-gray-300"}`}>
-            <h2 className="col-span-2 lg:text-2xl md:text-lg hover:underline decoration-1 underline-offset-2"
+        <div id={project.slug} className={`group lg:grid hidden lg:grid-cols-6 grid-cols-2 items-center px-1 transition-[padding] duration-500 ${selectedProject===project.slug? "pt-10 pb-32": "py-1 hover:bg-black hover:text-gray-300"}`}>
+            <h2 className="col-span-2 lg:text-2xl md:text-lg hover:underline decoration-1 underline-offset-2 cursor-pointer"
             onClick={()=>{
                 router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
                 document.querySelector(`#${project.slug}`)?.scrollIntoView()
