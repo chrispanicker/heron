@@ -15,6 +15,7 @@ export default function Projects({project}: Props) {
     const router = useRouter();
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")  
+    let e = 0
 
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -31,7 +32,12 @@ export default function Projects({project}: Props) {
                     params.set(name, value)
                     // params.set("img", "0")
                 } 
-            }         
+            }  
+            
+            if(name==="roles"||name==="collabs"||name==="tags"){
+                stringSearchParams.includes(`${name}=${value}`)?
+                params.delete(name, value):params.append(name, value)
+            }
         
             name==="project"? 
             stringSearchParams.includes(`${name}=${value}`)? params.delete(name, value)
@@ -40,36 +46,54 @@ export default function Projects({project}: Props) {
             params.delete(name, value)
             :params.append(name, value)
             return params.toString()
+
+
+            
+
         },
         [searchParams]
     )
     
 
     return (
-        <div id={project.slug} className={`group lg:grid hidden lg:grid-cols-6 grid-cols-2 items-center cursor-pointer px-1 transition-[padding] duration-500 ${selectedProject===project.slug? "py-10": "py-1 hover:bg-black hover:text-gray-300"}`}
-        onClick={()=>{
-            router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
-            document.querySelector(`#${project.slug}`)?.scrollIntoView()
-            let filters = document.querySelector("header section")
-            if(!filters?.classList.contains("h-0")){
-                openFilters()
-            }
-
-        }}>
-            <h2 className="col-span-2 lg:text-2xl md:text-lg">{project.name}</h2>
-            <p className="mono">{project.client}</p>
+        <div id={project.slug} className={`group lg:grid hidden lg:grid-cols-6 grid-cols-2 items-center cursor-pointer px-1 transition-[padding] duration-500 ${selectedProject===project.slug? "pt-10 pb-32": "py-1 hover:bg-black hover:text-gray-300"}`}>
+            <h2 className="col-span-2 lg:text-2xl md:text-lg hover:underline decoration-1 underline-offset-2"
+            onClick={()=>{
+                router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
+                document.querySelector(`#${project.slug}`)?.scrollIntoView()
+                let filters = document.querySelector("header section")
+                e=1
+                if(!filters?.classList.contains("h-0")){
+                    openFilters(e)
+                }
+            }}>{project.name}</h2>
+            <p className="sans">{project.client}</p>
 
         
 
-            <span className="flex overflow-hidden col-span-2 lg:my-0 my-1">
+            <span className="flex overflow-hidden col-span-2 lg:my-0 p-1 ">
                 {project.roles? project.roles?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black hover:text-gray-300 hover:bg-black"} `}>{tag.name}</button>
+                    <button key={tag.name} className={`${buttonClass} outline outline-1 
+                    ${searchParams.getAll("roles")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
+                    onClick={()=>{router.push( `/?${createQueryString(`roles`, `${tag.name}`)}`, {scroll: false})
+                    openFilters(e)
+                }}>{tag.name}</button>
                 )): ""}
                 {project.collabs? project.collabs?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black hover:text-gray-300 hover:bg-black"} `}>{tag.name}</button>
+                    <button key={tag.name} className={`${buttonClass} outline outline-1 outline-black
+                    ${searchParams.getAll("collabs")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
+                    onClick={()=>{
+                        router.push( `/?${createQueryString(`collabs`, `${tag.name}`)}`, {scroll: false})
+                        openFilters(e)
+                    }}>{tag.name}</button>
                 )): ""}
                 {project.tags? project.tags?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} bg-black text-gray-300  ${selectedProject===project.slug? "": "group-hover:bg-gray-300 group-hover:text-black hover:text-gray-300 hover:bg-black"} `}>{tag.name}</button>
+                    <button key={tag.name} 
+                    className={`${buttonClass} outline outline-1 outline-black
+                    ${searchParams.getAll("tags")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
+                    onClick={()=>{router.push( `/?${createQueryString(`tags`, `${tag.name}`)}`, {scroll: false})
+                    openFilters(e)
+                }}>{tag.name}</button>
                 )): ""}
 
             </span>

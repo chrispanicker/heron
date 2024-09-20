@@ -16,6 +16,7 @@ type job ={
 export function SiteHeader(){
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin'); 
+    const e = 1
 
 
 // console.log(allprojects)
@@ -23,8 +24,8 @@ export function SiteHeader(){
         isSanityStudio? "" : 
         <>
             <span className="flex justify-between items-center lg:px-5 px-2 mono-book"
-            onClick={openFilters}>
-            <h1 className="flex duration-500 lg:text-sm text-lg mr-40 whitespace-nowrap uppercase">Drew Litowitz<p className="lg:block hidden">is a graphic designer and art director based in NYC.</p></h1>
+            onClick={()=>{openFilters(e)}}>
+            <h1 className="flex duration-500 lg:text-sm text-lg mr-40 whitespace-nowrap sans">Drew Litowitz&nbsp;<p className="lg:block hidden">is a Graphic Designer and Art Director based in NYC.</p></h1>
             <button className="text-2xl z-50 transition-all serif" 
             >+</button>
             </span>

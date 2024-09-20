@@ -1,4 +1,4 @@
-export const openFilters = () =>{
+export const openFilters = (e:number) =>{
     let hed = document.querySelector("header")
     let plus = document.querySelector("header span button")
     let filters = document.querySelector("header section")
@@ -9,7 +9,7 @@ export const openFilters = () =>{
         filters.classList.add("py-2")
         filters?.classList.replace("overflow-hidden", "overflow-x-hidden")
         plus?.classList.add("rotate-[45deg]")
-    }else{
+    }else if(filters?.classList.contains("h-[4rem]") && e===1){
         hed?.classList.replace("lg:max-h-[6rem]","max-h-[2em]")
         hed?.classList.remove("max-h-[100dvh]")
         filters?.classList.replace("h-[4rem]","h-0")

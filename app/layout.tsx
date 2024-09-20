@@ -44,11 +44,11 @@ export default async function RootLayout({
           <>{children}</>
         </section>
         {/* <TestFilter projects = {allprojects} /> */}
-        <div className="w-screen bg-black text-gray-300 sans h-[2rem] flex justify-between items-center px-2 uppercase">
+        <div className="w-screen bg-black text-gray-300 sans h-[2rem] flex justify-between items-center lg:text-sm px-2">
           <p>&#169; Drew Litowitz</p>
           <span>
-            <a className="pr-1" href="https://www.instagram.com/drewknowitz">@drewknowitz</a>
-            <a href="mailto:dlitowit@gmail.com">dlitowit@gmail.com</a>
+            <a className="pr-1 hover:underline" href="https://www.instagram.com/drewknowitz">@drewknowitz</a>
+            <a className='hover:underline' href="mailto:dlitowit@gmail.com">dlitowit@gmail.com</a>
           </span>
         </div>
       </body>

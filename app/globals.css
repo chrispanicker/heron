@@ -8,6 +8,24 @@
 
 
 @font-face {
+  font-family: Monument Grotesk;
+  src:
+       url('../public/fonts/ABCMonumentGrotesk-Regular-Trial.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Monument Grotesk Semi-Mono;
+  src:
+       url('../public/fonts/ABCMonumentGroteskSemi-Mono-Regular-Trial.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: Flatspot;
   src:
        url('../public/fonts/FlatspotNuovoTest-Roman.woff') format('woff2');
@@ -125,7 +143,7 @@
 }
 
 .mono{
-  font-family: GreyLL Mono;
+  font-family: Monument Grotesk Semi-Mono;
 }
 
 .mono-book{
@@ -134,7 +152,7 @@
 
 
 .sans{
-  font-family: GreyLL;
+  font-family: Monument Grotesk;
   font-weight: 100;
 }
 
