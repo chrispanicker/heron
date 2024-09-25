@@ -30,7 +30,7 @@ export function SiteFooter(info:any){
                         <span key={`${job.company}`} className="w-4/4 lg:flex-row flex flex-col justify-between items-start lg:pb-0 pb-2 lg:leading-[1.5rem] leading-[1.2rem]">
                             <div className="flex justify-center items-center">
                                 <p className="pr-1 sans">{job.company}</p>
-                                <p className={`pl-1 ${buttonClass} bg-black text-gray-300`}>{job.title}</p>
+                                <p className={`pl-1 mx-1 ${buttonClass} bg-black text-gray-300 outline outline-1 lg:outline-black outline-gray-300`}>{job.title}</p>
                             </div>
                             <p className="mono text-right">{job.years}</p>
                         </span>

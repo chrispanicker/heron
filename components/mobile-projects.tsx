@@ -45,10 +45,7 @@ export default function MobileProjects({project}: Props) {
     
 
     return (
-        <div className={`relative group snap-start min-h-screen snap-always lg:hidden block relative items-center cursor-pointer transition-all`}
-        onClick={()=>{
-            router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
-        }}>
+        <div className={`relative group snap-start min-h-screen snap-always lg:hidden block relative items-center cursor-pointer transition-all`}>
             <div className="sticky top-8 bg-gray-300 z-10 pt-2 pb-1">
                 <h2 className="text-2xl w-screen flex justify-start items-center px-2 leading-[1.5rem]">{project.name}</h2>
                 <div className="flex px-2 justify-between text-sm">

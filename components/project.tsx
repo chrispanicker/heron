@@ -72,7 +72,7 @@ export default function Projects({project}: Props) {
                     openFilters(e)
                 }
             }}>{project.name}</h2>
-            <p className="sans">{project.client}</p>
+            <p className="sans lg:text-2xl md:text-lg">{project.client}</p>
 
   
 
