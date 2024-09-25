@@ -2,6 +2,13 @@ export const openFilters = (e:number) =>{
     let hed = document.querySelector("header")
     let plus = document.querySelector("header span button")
     let filters = document.querySelector("header section")
+    // if(params===""){
+
+    // }else{
+    //     console.log(params.getAll("roles"))
+    //     params.getAll("roles").length + params.getAll("collabs").length + params.getAll("tags").length === 1 ? e=1: ""
+    // }
+    
     if(filters?.classList.contains("h-0")){
         hed?.classList.replace("max-h-[2em]","lg:max-h-[6rem]")
         hed?.classList.add("max-h-[100dvh]")

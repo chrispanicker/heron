@@ -21,7 +21,33 @@ export function Gallery({project}:Props){
     return(
         <>
         {/* GALLERY */}
-        <div className={`${selectedProject===project.slug? "overflow-x-scroll":""} overflow-y-hidden snap-x snap-mandatory`}>
+        <div id={`${project.slug}-gallery`} className={`relative ${selectedProject===project.slug? "overflow-x-scroll":""} scroll-smooth overflow-y-hidden snap-x snap-mandatory`}>
+                <div className={`sticky left-0 flex w-full justify-between items-center top-[50%] z-50 text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+                    <button className="bg-black px-1 mx-2 hover:bg-gray-300 hover:text-black"
+                    onClick={()=>{
+                        let gallery = document.querySelector(`#${project.slug}-gallery`)
+                        var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+                        function remToPx(remValue:number, rootFontSize:number) { // Convert REM to PX using the formula 
+                            var pxValue = remValue * rootFontSize;
+                            // Return the result
+                            return pxValue;
+                        }
+                        let width = remToPx(53.3333333, rootFontSize)
+                        gallery!.scrollLeft -= width
+                    }}>&larr;</button>
+                    <button className="bg-black px-1 mx-2 hover:bg-gray-300 hover:text-black"
+                    onClick={()=>{
+                        let gallery = document.querySelector(`#${project.slug}-gallery`)
+                        var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+                        function remToPx(remValue:number, rootFontSize:number) { // Convert REM to PX using the formula 
+                            var pxValue = remValue * rootFontSize;
+                            // Return the result
+                            return pxValue;
+                        }
+                        let width = remToPx(53.3333333, rootFontSize)
+                        gallery!.scrollLeft += width
+                    }}>&rarr;</button>
+                </div>
                 <span className={`flex w-max justify-center items-start`}>
                     {/* current image */}
                     {project.vimeo?.map((vid, index)=>(

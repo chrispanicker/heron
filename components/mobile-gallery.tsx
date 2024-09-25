@@ -21,7 +21,21 @@ export function MobileGallery({project}:Props){
     return(
         <>
         {/* GALLERY */}
-        <div className={`pt-10 left-0 w-screen overflow-x-scroll overflow-y-hidden snap-x snap-mandatory transition-all`}>
+        <div id={`${project.slug}-mobileGallery`} className={`pt-10 left-0 w-screen scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory transition-all`}>
+                <div className={`sticky left-0 flex w-full justify-between items-center top-[50%] text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+                    <button className="bg-black px-1 mx-3"
+                    onClick={()=>{
+                        let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
+                        let width = document.documentElement.clientWidth
+                        gallery!.scrollLeft -= width
+                    }}>&larr;</button>
+                    <button className="bg-black px-1 mx-3"
+                    onClick={()=>{
+                        let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
+                        let width = document.documentElement.clientWidth
+                        gallery!.scrollLeft += width
+                    }}>&rarr;</button>
+                </div>
                 <span className={`flex w-max justify-center items-start h-full`}>
                     {/* {project.vimeo?.map((vid, index)=>(
                         <div key={`mobile-${project.slug}+${index}`} className={`pointer-events-auto px-2 snap-center rounded-lg snap-always peer flex justify-center items-center transition-all duration-50`}>
