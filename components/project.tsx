@@ -18,7 +18,7 @@ export default function Projects({project}: Props) {
     let roles = searchParams.getAll("roles");
     let collabs = searchParams.getAll("collabs");
     let tags = searchParams.getAll("tags");
-    let bool;
+    let bool: Boolean;
     roles.length + collabs.length + tags.length ===1? bool = true: bool=false
     let params = roles.toString()+","+collabs.toString()+","+tags.toString()
 
