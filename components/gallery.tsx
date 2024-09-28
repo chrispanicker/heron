@@ -33,7 +33,8 @@ export function Gallery({project}:Props){
                             return pxValue;
                         }
                         let width = remToPx(53.3333333, rootFontSize)
-                        gallery!.scrollLeft -= width
+                        gallery!.scrollLeft===0? gallery!.scrollLeft=gallery!.scrollWidth
+                        :gallery!.scrollLeft -= width
                     }}>&larr;</button>
                     <button className="bg-black px-1 mx-2 outline outline-1 outline-gray-300 hover:outline-black hover:bg-gray-300 hover:text-black"
                     onClick={()=>{
@@ -45,7 +46,8 @@ export function Gallery({project}:Props){
                             return pxValue;
                         }
                         let width = remToPx(53.3333333, rootFontSize)
-                        gallery!.scrollLeft += width
+                        gallery!.scrollLeft>width*(project.images.length-2)? gallery!.scrollLeft=0
+                        :gallery!.scrollLeft += width
                     }}>&rarr;</button>
                 </div>
                 <span className={`flex w-max justify-center items-start`}>

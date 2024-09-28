@@ -27,13 +27,15 @@ export function MobileGallery({project}:Props){
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                         let width = document.documentElement.clientWidth
-                        gallery!.scrollLeft -= width
+                        gallery!.scrollLeft>=0&& gallery!.scrollLeft<50? gallery!.scrollLeft=gallery!.scrollWidth
+                        :gallery!.scrollLeft -= width
                     }}>&#11164;</button>
                     <button className="bg-black px-1 mx-3 pb-1"
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                         let width = document.documentElement.clientWidth
-                        gallery!.scrollLeft += width
+                        gallery!.scrollLeft>width*(project.images.length-2)? gallery!.scrollLeft=0
+                        :gallery!.scrollLeft += width
                     }}>&#11166;</button>
                 </div>
                 <span className={`flex w-max justify-center items-start h-full`}>
