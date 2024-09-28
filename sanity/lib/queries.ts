@@ -18,7 +18,7 @@ export async function getProjects() {
                 name
               },
             }`
-    )
+    , {revalidate: 3600})
 } 
 
 
@@ -31,8 +31,8 @@ export async function getInfo() {
                   years,
                   title
                 },
-            }`
-)}
+            }`,{revalidate: 3600})
+}
 
 export async function getGallery(){ 
     return client.fetch(
@@ -53,7 +53,7 @@ export async function getGallery(){
                             },
                     }
             }`
-    )
+        , {revalidate: 3600})
 }
 
 
@@ -127,5 +127,5 @@ export async function getFilteredProjects({searchParams}:Props){
                 },
                 "slug": slug.current,
             }`
-    )
+        , {revalidate: 3600})
 }
