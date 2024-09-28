@@ -25,9 +25,11 @@ export function SiteHeader(){
         <>
             <span className="flex justify-between items-center lg:px-5 px-2 mono-book"
             onClick={()=>{openFilters(e)}}>
-            <h1 className="flex duration-500 lg:text-sm text-lg mr-40 whitespace-nowrap sans">Drew Litowitz&nbsp;<p className="lg:block hidden">is a Graphic Designer and Art Director based in NYC.</p></h1>
-            <button className="text-2xl z-50 transition-all sans" 
-            >+</button>
+                <h1 className="flex duration-500 lg:text-sm text-lg mr-40 whitespace-nowrap sans">Drew Litowitz&nbsp;<p className="lg:block hidden">is a Graphic Designer and Art Director based in NYC.</p></h1>
+                <div className="flex">
+                    <button className="filters text-2xl z-50 transition-all sans" 
+                    >+</button>
+                </div>
             </span>
         </>
     )

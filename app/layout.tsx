@@ -5,6 +5,7 @@ import { getGallery, getInfo, getProjects } from '@/sanity/lib/queries'
 import { SiteHeader } from '@/components/site-header'
 import { TestFilter } from '@/components/test-filter'
 import { HeaderAndFilters } from '@/components/header-and-filters'
+import  SillyCanvas  from '@/components/silly-canvas'
 
 
 export const metadata: Metadata = {
@@ -37,20 +38,20 @@ export default async function RootLayout({
     
 
   return (
-    <html lang="en" className='bg-gray-300 text-black serif font-light overflow-x-hidden text-xl leading-[1.4rem] snap-y snap-mandatory'>
+    <html lang="en" className='bg-gray-300 text-black serif font-light overflow-x-hidden text-xl leading-[1.4rem] snap-y snap-mandatory cursor-auto '>
       <body>
-        <section>
+        <section className='relative z-10'>
           <HeaderAndFilters info={info}  projects={allprojects}/>
           <>{children}</>
         </section>
-        {/* <TestFilter projects = {allprojects} /> */}
-        <div className="w-screen bg-black text-gray-300 sans h-[2rem] flex justify-between items-center lg:text-sm px-2">
+        <div className="w-screen bg-black text-gray-300 sans h-[2rem] flex justify-between items-center lg:text-sm px-2 relative z-10">
           <p>&#169; Drew Litowitz</p>
           <span>
             <a className="pr-1 hover:underline" href="https://www.instagram.com/drewknowitz">@drewknowitz</a>
             <a className='hover:underline' href="mailto:dlitowit@gmail.com">dlitowit@gmail.com</a>
           </span>
         </div>
+        <SillyCanvas />
       </body>
     </html>
   )

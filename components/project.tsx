@@ -62,23 +62,24 @@ export default function Projects({project}: Props) {
 
     return (
         <div id={project.slug} className={`group lg:grid hidden lg:grid-cols-6 grid-cols-2 items-center px-1 transition-[padding] duration-500 ${selectedProject===project.slug? "pt-10 pb-32": "py-1 hover:bg-black hover:text-gray-300"}`}>
-            <h2 className="col-span-2 lg:text-2xl md:text-lg hover:underline decoration-1 underline-offset-2 cursor-pointer"
-            onClick={()=>{
-                router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
-                document.querySelector(`#${project.slug}`)?.scrollIntoView()
-                let filters = document.querySelector("header section")
-                e=1
-                if(!filters?.classList.contains("h-0")){
-                    openFilters(e)
-                }
-            }}>{project.name}</h2>
+            <button className="w-max col-span-2 lg:text-2xl md:text-lg hover:underline decoration-1 underline-offset-2 cursor-pointer">
+                <h2 className="" onClick={()=>{
+                    router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
+                    document.querySelector(`#${project.slug}`)?.scrollIntoView()
+                    let filters = document.querySelector("header section")
+                    e=1
+                    if(!filters?.classList.contains("h-0")){
+                        openFilters(e)
+                    }
+                }}>{project.name}</h2>
+            </button>
             <p className="sans lg:text-2xl md:text-lg">{project.client}</p>
 
   
 
             <span className="flex overflow-hidden col-span-2 lg:my-0 p-1 ">
                 {project.roles? project.roles?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} outline outline-1 hover:underline 
+                    <button key={tag.name} className={`${buttonClass} outline outline-1 hover:underline cursor-auto
                     ${searchParams.getAll("roles")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
                     onClick={()=>{
                         router.push( `/?${createQueryString(`roles`, `${tag.name}`)}`, {scroll: false})
@@ -108,14 +109,17 @@ export default function Projects({project}: Props) {
 
             </span>
             
-            <p className="lg:text-right mono">{project.year}</p>
+            <p className="lg:text-right sans text-2xl">{project.year}</p>
 
             {/* Desktop Gallery */}
             <span className={`lg:block relative hidden col-span-6 overflow-hidden transition-all duration-500 ${selectedProject===project.slug? "max-h-[100rem]": "max-h-[0rem]"}`}>
                 <Gallery project={project}/>
-                <div className={`pb-[.1rem] pt-2 sticky grid-cols-2 grid  left-0  text-2xl ${selectedProject===project.slug? "": ""}`}>
-                    <PortableText value={project.content}/>
-                    <div className="flex text-right items-start justify-end">
+                <div className={`pb-[.1rem] pt-2 sticky grid-cols-6 grid  left-0  text-2xl ${selectedProject===project.slug? "": ""}`}>
+                    <div className="col-span-5">
+                        <PortableText value={project.content}/>
+                    </div>
+
+                    <div className="flex text-right items-start justify-end col-span-1">
                         <button className={`px-1 bg-black text-gray-300 ${buttonClass} hover:bg-gray-300 hover:text-black hover:underline outline outline-black outline-1`} 
                         onClick={()=>{
                             router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})

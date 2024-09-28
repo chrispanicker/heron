@@ -20,8 +20,8 @@ export function SiteFooter(info:any){
 
     return (
         isSanityStudio? "" : 
-        <footer ref={footerRef} className="pt-[1rem] border-t-[1px] border-black min-h-screen">
-            <div className={`w-4/4 h-fit pb-10 lg:pt-4 pt-2 text-left grid lg:grid-cols-2 lg:mx-1 mx-2 lg:text-black lg:text-[1rem] text-gray-300`}>
+        <footer ref={footerRef} className="lg:pt-[1rem] border-t-[1px] border-black min-h-screen relative z-10">
+            <div className={`w-4/4 h-fit pb-10 lg:pt-4 pt-2 text-left grid lg:grid-cols-2 lg:mx-1 mx-2 lg:text-black lg:text-[1rem] text-gray-300 `}>
                 <div className="pr-5 lg:pb-0 pb-5 lg:text-2xl serif">
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
@@ -32,7 +32,7 @@ export function SiteFooter(info:any){
                                 <p className="pr-1 sans">{job.company}</p>
                                 <p className={`pl-1 mx-1 ${buttonClass} bg-black text-gray-300 outline outline-1 lg:outline-black outline-gray-300`}>{job.title}</p>
                             </div>
-                            <p className="mono text-right">{job.years}</p>
+                            <p className="sans text-right">{job.years}</p>
                         </span>
                     ))}
                 </div>

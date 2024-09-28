@@ -36,6 +36,11 @@ export function HeaderAndFilters({info, projects}:Props){
             <SiteHeader />
             <Filters filters={filters} projects={projects}  />
             <div className="lg:hidden block overflow-y-scroll">
+                {/* {
+                    projects.map((project)=>(
+                        <h2 className="serif mx-2" key={project.slug+"mobile!"}>{project.name}</h2>
+                    ))
+                } */}
                 <SiteFooter info={info} />
             </div>
         </header>

@@ -54,7 +54,7 @@ export function Filters({filters, projects}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`, {scroll: false})
                     }}
-                    className={`cursor-pointer hover:underline outline outline-1 outline-black ${buttonClass} ${searchParams.getAll(entry.key)?.includes(entry.filter)? "text-black":"bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`
+                    className={`hover:underline outline outline-1 outline-black ${buttonClass} ${searchParams.getAll(entry.key)?.includes(entry.filter)? "text-black":"bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`
                     }>
                         {`${entry.filter}`}
                     </button>

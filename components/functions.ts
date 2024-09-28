@@ -1,6 +1,6 @@
 export const openFilters = (e:number) =>{
     let hed = document.querySelector("header")
-    let plus = document.querySelector("header span button")
+    let plus = document.querySelector("header span .filters")
     let filters = document.querySelector("header section")
     // if(params===""){
 

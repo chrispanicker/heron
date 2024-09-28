@@ -1,6 +1,7 @@
 import MobileProjects from "@/components/mobile-projects";
 import Projects from "@/components/project";
 import { Scroller } from "@/components/scroller";
+import SillyCanvas from "@/components/silly-canvas";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Sorts } from "@/components/sorts";
@@ -29,18 +30,20 @@ export default async function Home({searchParams}: Props) {
   let info = await getInfo();
 
   return (
-    filteredProjects? <main className="lg:mx-5">
+    filteredProjects? <main className="lg:mx-5 z-20">
+
       <div className="h-[10rem]"></div>
       <Scroller />
         <Sorts />
         {filteredProjects.map((project:any, index:number)=>{ 
         return(
-          <div key={project.slug}>
+          <div className="" key={project.slug}>
             <Projects project={project}/>
             <MobileProjects project={project}/>
           </div>
         )})}
         <SiteFooter info={info} />
+
     </main>: <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>
   )
 }

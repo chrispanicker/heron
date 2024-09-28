@@ -4,6 +4,7 @@ import { client } from "./client"
 export async function getProjects() {
     return client.fetch(
             groq`*[_type=="project"]{
+              name,
               _id,
               _createdAt,
               "slug": slug.current,
