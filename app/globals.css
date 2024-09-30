@@ -169,15 +169,15 @@ button:hover{
 /* scrollbar stuff */
 
 /* width */
-/* ::-webkit-scrollbar {
-  height: 5px;
-  width: 5px;
-} */
+::-webkit-scrollbar {
+  height: 0px;
+  width: 0px;
+}
 
 /* Track */
-/* ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: transparent; 
-} */
+}
 
 
 ::-webkit-scrollbar-thumb {
@@ -192,7 +192,7 @@ button:hover{
 }
 
 
-#footer div h2 a {
+/* #footer div h2 a {
   color: white;
   background-color: rgb(75, 75, 79);
   padding: .1rem .35rem;
@@ -202,7 +202,7 @@ button:hover{
 #footer div h2 a:hover {
   color: black;
   background-color: white;
-}
+} */
 
 @keyframes rotate{
   0%{

@@ -43,7 +43,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={` lg:block bg-gray-300 hidden overflow-hidden px-6 transition-all h-0 border border-b-1 border-black`}>
+        <section className={` lg:block bg-gray-300 hidden overflow-hidden px-6 transition-all h-0 border border-b-2 border-black`}>
             {/* <p className="text-sm">Filters:&nbsp;</p> */}
             {allFilters.map((entry:any, idx:any)=>{
                 return (

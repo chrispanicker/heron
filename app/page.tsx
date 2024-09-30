@@ -18,6 +18,7 @@ interface Props {
     roles?: string[]
     sort?: string
     about?: string
+    project?: string
   }
 }
 
@@ -25,7 +26,7 @@ interface Props {
 const UsedFilters = dynamic(() => import("@/components/used-filters"))
 
 export default async function Home({searchParams}: Props) {
-  const {tags, collabs, roles, about, view, sort} = searchParams 
+  const {tags, collabs, roles, about, view, sort, project} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
   let info = await getInfo();
 
@@ -35,11 +36,11 @@ export default async function Home({searchParams}: Props) {
       <div className="h-[10rem]"></div>
       <Scroller />
         <Sorts />
-        {filteredProjects.map((project:any, index:number)=>{ 
+        {filteredProjects.map((proj:any, index:number)=>{ 
         return(
-          <div className="" key={project.slug}>
-            <Projects project={project}/>
-            <MobileProjects project={project}/>
+          <div className={`${project===proj.slug? "py-[3.1rem]": ""}`} key={proj.slug}>
+            <Projects project={proj}/>
+            <MobileProjects project={proj}/>
           </div>
         )})}
         <SiteFooter info={info} />

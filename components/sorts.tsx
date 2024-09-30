@@ -29,8 +29,8 @@ export function Sorts(){
     )
     
     return(        
-        <span className="lg:grid hidden grid-cols-6 mx-1 mt-2 text-sm sans border-b-[1px] mb-1 border-black z-30 relative z-10">
-            <button className="col-span-2 text-left flex hover:underline"
+        <span className="lg:grid hidden grid-cols-6 mx-1 mt-2 text-2xl sans mx-1 mb-1 z-30 relative z-10 border-b-[2px] border-black decoration-2 ">
+            <button className="ml-2 col-span-2 text-left flex hover:underline decoration-2 underline-offset-2"
             onClick={()=>{
                 router.push("?"+createSortQueryString("sort", "name"))
             }}
@@ -39,7 +39,7 @@ export function Sorts(){
                 <p className={`${sorted==="name-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
             </button>
 
-            <button className="text-left flex hover:underline"
+            <button className="pl-[.15rem] text-left flex hover:underline decoration-2 underline-offset-2"
             onClick={()=>{
                 router.push("?"+createSortQueryString("sort", "client"))
             }}>Client
@@ -47,9 +47,9 @@ export function Sorts(){
                 <p className={`${sorted==="client-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
             </button>
 
-            <button className="col-span-2 text-left">Tags</button>
+            <button className="col-span-2 text-left pl-1">Tags</button>
 
-            <button className="text-right flex justify-end hover:underline"
+            <button className="mr-2 text-right flex justify-end hover:underline decoration-2 underline-offset-2"
             onClick={()=>{
                 router.push("?"+createSortQueryString("sort", "year"))
             }}>Year

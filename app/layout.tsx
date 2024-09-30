@@ -44,7 +44,7 @@ export default async function RootLayout({
           <HeaderAndFilters info={info}  projects={allprojects}/>
           <>{children}</>
         </section>
-        <div className="w-screen bg-black text-gray-300 sans h-[2rem] flex justify-between items-center lg:text-sm px-2 relative z-10">
+        <div id='foot' className="w-screen bg-black text-gray-300 sans h-[3rem] flex justify-between items-center lg:text-2xl px-2 relative z-10">
           <p>&#169; Drew Litowitz</p>
           <span>
             <a className="pr-1 hover:underline" href="https://www.instagram.com/drewknowitz">@drewknowitz</a>
