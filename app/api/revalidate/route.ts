@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
   console.log('Revalidation request received')  
-  const secret = request.nextUrl.searchParams.get('secret')
+//   const secret = request.nextUrl.searchParams.get('secret')
+  const secret = process.env.REVALIDATION_SECRET || 'webhooktest'
   console.log('Expected secret:', process.env.REVALIDATION_SECRET);
   console.log('Received secret:', secret);
 
