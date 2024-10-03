@@ -4,9 +4,6 @@
 const nextConfig = {
     images: {
         formats: ['image/avif', 'image/webp',],
-        env:{
-          REVALIDATION_SECRET: process.env.REVALIDATION_SECRET,
-        },
         remotePatterns: [
           {
             protocol: 'https',
@@ -16,6 +13,7 @@ const nextConfig = {
           },
         ],
       },
+      
     generateBuildId: async () => {
       // This could be anything, using the latest git hash
       return `${process.env.GIT_HASH}`
@@ -23,6 +21,9 @@ const nextConfig = {
     experimental: { 
       missingSuspenseWithCSRBailout: false, 
       taint: true,
+    },
+    env:{
+      REVALIDATION_SECRET: process.env.REVALIDATION_SECRET,
     }
 }
 
