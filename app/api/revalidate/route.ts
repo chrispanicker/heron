@@ -4,11 +4,11 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function POST(request: NextRequest) {
   console.log('Revalidation request received')  
 //   const secret = request.nextUrl.searchParams.get('secret')
-  const secret = process.env.NEXT_PUBLIC_REVALIDATION_SECRET || 'webhooktest'
+  const secret = process.env.REVALIDATION_SECRET
   console.log('Expected secret:', secret);
   console.log('Received secret:', secret);
 
-  if (secret !== process.env.NEXT_PUBLIC_REVALIDATION_SECRET) {
+  if (secret !== process.env.REVALIDATION_SECRET) {
     console.log('Invalid secret provided')
     return NextResponse.json({ message: 'Invalid secret' }, { status: 401 })
   }
