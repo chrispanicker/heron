@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   
   const path = request.nextUrl.searchParams.get('path') || '/'
   console.log(`Revalidating path: ${path}`)
-  
+//   testing
   try {
     revalidatePath(path)
     console.log('Revalidation successful')
