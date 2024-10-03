@@ -26,7 +26,7 @@ const config = defineConfig({
         // })
     ],
     schema: {types: [project, gallery, info, jobs, roles, collabs, tags]},
-    useCdn: false
+    useCdn: true
 })
 
 export default config
