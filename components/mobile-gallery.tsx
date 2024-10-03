@@ -23,20 +23,30 @@ export function MobileGallery({project}:Props){
         {/* GALLERY */}
         <div id={`${project.slug}-mobileGallery`} className={`pt-10 left-0 w-screen scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory transition-all`}>
                 <div className={`sticky left-0 flex w-full justify-between items-center top-[50%] text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
-                    <button className="bg-black px-1 mx-3 pb-1 leading-[.5rem] pt-1"
+                    <button className="bg-black mx-2 px-[.1rem]"
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                         let width = document.documentElement.clientWidth
                         gallery!.scrollLeft>=0&& gallery!.scrollLeft<50? gallery!.scrollLeft=gallery!.scrollWidth
                         :gallery!.scrollLeft -= width
-                    }}>&larr;</button>
-                    <button className="bg-black px-1 mx-3 pb-1 leading-[.5rem] pt-1"
+                    }}>
+                        <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 10.87 9.46">
+                        <rect width="10.87" height="9.46"/>
+                        <path fill="#d1d5db" d="M4.87,8.55l-3.82-3.82L4.87.91l.66.65-2.7,2.7h7s0,.94,0,.94H2.82s2.7,2.69,2.7,2.69l-.66.66Z"/>
+                        </svg>
+                    </button>
+                    <button className="bg-black mx-2 px-[.1rem]"
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                         let width = document.documentElement.clientWidth
                         gallery!.scrollLeft>width*(project.images.length-2)? gallery!.scrollLeft=0
                         :gallery!.scrollLeft += width
-                    }}>&rarr;</button>
+                    }}>
+                        <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 10.87 9.46">
+                        <rect width="10.87" height="9.46"/>
+                        <path fill="#d1d5db" d="M6,.91l3.82,3.82-3.82,3.82-.66-.65,2.7-2.7H1.05v-.94h7l-2.7-2.69.66-.66Z"/>
+                        </svg>
+                    </button>
                 </div>
                 <span className={`flex w-max justify-center items-start h-full`}>
                     {/* {project.vimeo?.map((vid, index)=>(
