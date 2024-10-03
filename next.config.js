@@ -4,6 +4,9 @@
 const nextConfig = {
     images: {
         formats: ['image/avif', 'image/webp',],
+        env:{
+          REVALIDATION_SECRET: process.env.REVALIDATION_SECRET,
+        },
         remotePatterns: [
           {
             protocol: 'https',
