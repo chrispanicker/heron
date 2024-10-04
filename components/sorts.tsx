@@ -47,7 +47,13 @@ export function Sorts(){
                 <p className={`${sorted==="client-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
             </button>
 
-            <button className="col-span-2 text-left pl-1">Tags</button>
+            <button className="pl-[.15rem] col-span-2 text-left flex hover:underline decoration-2 underline-offset-2"
+            onClick={()=>{
+                router.push("?"+createSortQueryString("sort", "tags"))
+            }}>Tags
+                <p className={`${sorted==="tags-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
+                <p className={`${sorted==="tags-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
+            </button>
 
             <button className="mr-2 text-right flex justify-end hover:underline decoration-2 underline-offset-2"
             onClick={()=>{

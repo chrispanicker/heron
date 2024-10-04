@@ -17,13 +17,6 @@ const config = defineConfig({
     basePath: "/admin",
     plugins: [
         structureTool(),
-        // presentationTool({
-        //     previewUrl:{
-        //         previewMode:{
-        //             enable: '/api/draft-mode/enable',
-        //         }
-        //     }
-        // })
     ],
     schema: {types: [project, gallery, info, jobs, roles, collabs, tags]},
     useCdn: true

@@ -30,29 +30,28 @@ export default function Projects({project}: Props) {
             let stringSearchParams = searchParams.toString()
             stringSearchParams = stringSearchParams.replaceAll("+", " ")
             params = new URLSearchParams(stringSearchParams)
-    
-            if(name==="project"){
-                if (stringSearchParams.includes(`${name}=${value}`)){
-                    params.delete(name, value)
-                    // params.delete("img", params?.get("img")!)
-                }else{
-                    params.set(name, value)
-                    // params.set("img", "0")
-                } 
-            }  
             
             // if(name==="roles"||name==="collabs"||name==="tags"){
             //     stringSearchParams.includes(`${name}=${value}`)?
             //     params.delete(name, value):params.append(name, value)
             // }
         
-            name==="project"? 
-                stringSearchParams.includes(`${name}=${value}`)? 
+            if(name==="project"){
+                if(stringSearchParams.includes(`${name}=${value}`)){ 
                     params.delete(name, value)
-                :params.set(name, value)
-            :stringSearchParams.includes(`${name}=${value}`)?
-                params.delete(name, value)
-            :params.append(name, value)
+                }else{params.set(name, value)}
+            //not a project?? IE tags?
+            }else {
+                if(name==="roles"||name==="tags"||name==="collabs" && selectedProject){
+                    var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+                    params.delete("project", selectedProject!)
+                    window.scrollTo(scrollX, 0)
+                }
+                if(stringSearchParams.includes(`${name}=${value}`)){
+                    params.delete(name, value)
+                }else{params.append(name, value)}
+            }
+                
             return params.toString()
 
         },
@@ -65,11 +64,17 @@ export default function Projects({project}: Props) {
 
 
     return (
-        <div id={project.slug} className={`group lg:text-2xl lg:grid hidden grid-cols-12 items-center transition-[padding] duration-500 mx-1 px-2 ${selectedProject===project.slug? "py-2 bg-black text-gray-300 ": "py-1 hover:bg-black hover:text-gray-300"}`}>
-            <button className={`text-left col-span-4 hover:underline decoration-1 underline-offset-2 cursor-pointer mr-2`}>
+        <div id={project.slug} className={`group lg:text-2xl lg:grid hidden grid-cols-12 items-start transition-[padding] duration-500 mx-1 px-2 py-1 ${selectedProject===project.slug? "bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
+            <button className={`text-left col-span-4 hover:underline decoration-1 underline-offset-2 mr-2 cursor-auto`}>
                 <h2 className="" onClick={()=>{
+                    let element = document.querySelector(`#${project.slug}`)
+                    let rect = element?.getBoundingClientRect();
+                    var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+                    selectedProject===project.slug? window.scrollTo(scrollX, (scrollY-rootFontSize*3.1))
+                    :element?.scrollIntoView()
                     router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
-                    document.querySelector(`#${project.slug}`)?.scrollIntoView()
+                    
                     let filters = document.querySelector("header section")
                     e=1
                     if(!filters?.classList.contains("h-0")){
@@ -79,11 +84,9 @@ export default function Projects({project}: Props) {
             </button>
             <p className="sans col-span-2">{project.client}</p>
 
-  
-
             <span className="proj-filters flex overflow-x-scroll col-span-5 p-1 mr-1">
                 {project.roles? project.roles?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} outline outline-1 hover:underline cursor-auto
+                    <button key={tag.name} className={`${buttonClass} outline outline-1 hover:underline my-1
                     ${searchParams.getAll("roles")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
                     onClick={()=>{
                         router.push( `/?${createQueryString(`roles`, `${tag.name}`)}`, {scroll: false})
@@ -93,7 +96,7 @@ export default function Projects({project}: Props) {
                 >{tag.name}</button>
                 )): ""}
                 {project.collabs? project.collabs?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} outline outline-1 outline-black hover:underline 
+                    <button key={tag.name} className={`${buttonClass} outline outline-1 outline-black hover:underline my-1
                     ${searchParams.getAll("collabs")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
                     onClick={()=>{
                         router.push( `/?${createQueryString(`collabs`, `${tag.name}`)}`, {scroll: false})
@@ -103,9 +106,10 @@ export default function Projects({project}: Props) {
                 )): ""}
                 {project.tags? project.tags?.map((tag:any)=>(
                     <button key={tag.name} 
-                    className={`${buttonClass} outline outline-1 outline-black hover:underline 
+                    className={`${buttonClass} outline outline-1 outline-black hover:underline my-1
                     ${searchParams.getAll("tags")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
-                    onClick={()=>{router.push( `/?${createQueryString(`tags`, `${tag.name}`)}`, {scroll: false})
+                    onClick={()=>{
+                    router.push( `/?${createQueryString(`tags`, `${tag.name}`)}`, {scroll: false})
                     params.includes(tag.name) && bool ? e=1:""
                     openFilters(e)
                 }}>{tag.name}</button>

@@ -86,6 +86,7 @@ export async function getFilteredProjects({searchParams}:Props){
             return `roles[] -> name match "${e}"`
     }).join(" || ")
 
+
     const projectFilter = `_type == "project"`
     const tagFilter =  tags? `${tagQueries} ${collabs || roles? "||" : "" }` : "" 
     const collabFilter = collabs ? `${collabQueries} ${roles? "||" : "" }` : ""
@@ -94,14 +95,7 @@ export async function getFilteredProjects({searchParams}:Props){
     const filter = collabs || roles || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
 
     return client.fetch(
-            groq`*[${projectFilter} ${filter}]|order(${
-                sort==="year-asc"? "year asc"
-                : sort==="year-desc"? "year desc"
-                : sort==="name-asc"? "name asc"
-                : sort==="name-desc"? "name desc"
-                : sort==="client-asc"? "client asc"
-                : sort==="client-desc"? "client desc"    
-                :"priority asc"}){
+            groq`*[${projectFilter} ${filter}]{
                 _id,
                 name,
                 vimeo,
@@ -127,6 +121,16 @@ export async function getFilteredProjects({searchParams}:Props){
                   name
                 },
                 "slug": slug.current,
-            }`
+                "totalCount": count(coalesce(roles, [])) + count(coalesce(tags, [])) + count(coalesce(collabs, []))
+        } | order(${
+        sort==="year-asc"? "year asc"
+        : sort==="year-desc"? "year desc"
+        : sort==="name-asc"? "name asc"
+        : sort==="name-desc"? "name desc"
+        : sort==="client-asc"? "client asc"
+        : sort==="client-desc"? "client desc"   
+        : sort==="tags-asc"? "totalCount asc"
+        : sort==="tags-desc"? "totalCount desc"
+        :"priority asc"})`
     )
 }
