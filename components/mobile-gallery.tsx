@@ -21,7 +21,7 @@ export function MobileGallery({project}:Props){
     return(
         <>
         {/* GALLERY */}
-        <div id={`${project.slug}-mobileGallery`} className={`pt-10 left-0 w-screen scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory transition-all`}>
+        <div id={`${project.slug}-mobileGallery`} className={`pt-8 left-0 scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory transition-all ${project.gallery.length<2? "mt-6": ""}`}>
                 <div className={`sticky left-0 flex w-full justify-between items-center top-[50%] text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
                     <button className="bg-black mx-2 px-[.1rem]"
                     onClick={()=>{
@@ -64,7 +64,7 @@ export function MobileGallery({project}:Props){
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover transition-all duration-500 h-[69lvh] w-screen px-2`}
+                            className={`object-cover transition-all duration-500 h-[69lvh] ${project.gallery.length<2? "w-screen": "w-[86vw]"} px-1`}
                             loading="lazy"
                             placeholder="blur"
                             blurDataURL={`${project.gallery[index].lqip}`}

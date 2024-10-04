@@ -2,7 +2,7 @@
 import { Project } from "@/types/project";
 import { useRouter, useSearchParams } from "next/navigation";
 import { buttonClass } from "./classes";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { PortableText } from "@portabletext/react";
 import { MobileGallery } from "./mobile-gallery";
 
@@ -14,6 +14,47 @@ export default function MobileProjects({project}: Props) {
     const router = useRouter();
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")  
+    let projRef = useRef(null)
+
+        
+    useEffect(()=>{
+
+        function isElementInViewport (el:Element) {
+            var rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+            );
+        }
+        function onVisibilityChange(el:Element, callback:CallableFunction) {
+            var old_visible:any;
+            return function () {
+                var visible = isElementInViewport(el);
+                if (visible != old_visible) {
+                    old_visible = visible;
+                    if (typeof callback == 'function') {
+                        callback();
+                    }
+                }
+            }
+        }
+
+        let el = document.querySelector(`#mobile-${project.slug}`)
+        var handler = onVisibilityChange(el!, function() {
+            router.push( `/?${createQueryString(`mobile-scroll`, `${project.slug}`)}`, {scroll: false})
+        })
+        
+        // selectedProject===project.slug?
+        // el?.scrollIntoView():""
+        
+
+        window.addEventListener('DOMContentLoaded', handler, false);
+        window.addEventListener('load', handler, false);
+        window.addEventListener('scroll', handler, false);
+        window.addEventListener('resize', handler, false);
+    }, [projRef])
 
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -45,10 +86,10 @@ export default function MobileProjects({project}: Props) {
     
 
     return (
-        <div className={`relative group snap-start min-h-screen snap-always lg:hidden block relative items-center transition-all`}>
-            <div className="sticky top-12 bg-gray-300 z-10 pt-2 pb-1">
-                <h2 className="text-2xl w-screen flex justify-start items-center px-2 leading-[1.5rem]">{project.name}</h2>
-                <div className="flex px-2 justify-between">
+        <div ref={projRef} id ={`mobile-${project.slug}`} className={`relative group snap-start min-h-screen snap-always lg:hidden block relative items-center transition-all mx-2`}>
+            <div className="sticky top-12 bg-gray-300 border-b-2 border-black z-10 pt-2">
+                <h2 className="text-2xl flex justify-start items-center leading-[1.5rem]">{project.name}</h2>
+                <div className="flex justify-between">
                     <p className="sans">{project.type}</p>
                     <p className="sans">{project.year}</p>
                 </div>
@@ -62,7 +103,7 @@ export default function MobileProjects({project}: Props) {
             </span>
 
 
-            <div className={`sticky w-screen bottom-0 bg-gray-300 z-10 px-2 pt-1 pb-8`}>
+            <div className={`sticky bottom-0 border-t-2 mt-2 border-black bg-gray-300 z-10 pt-1 pb-8`}>
                 <span className="leading-[1.2rem]">
                     {/* <p className="pb-1">For <i>{project.client}</i></p> */}
                     <PortableText value={project.content}/>

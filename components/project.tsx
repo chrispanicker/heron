@@ -57,10 +57,7 @@ export default function Projects({project}: Props) {
         },
         [searchParams]
     )
-    
-    useEffect(()=>{
-        
-    })
+
 
 
     return (
