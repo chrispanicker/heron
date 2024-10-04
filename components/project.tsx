@@ -65,8 +65,8 @@ export default function Projects({project}: Props) {
 
     return (
         <div id={project.slug} className={`group lg:text-2xl lg:grid hidden grid-cols-12 items-start transition-[padding] duration-500 mx-1 px-2 py-1 ${selectedProject===project.slug? "bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
-            <button className={`text-left col-span-4 hover:underline decoration-1 underline-offset-2 mr-2 cursor-auto`}>
-                <h2 className="" onClick={()=>{
+            <button className={`text-left col-span-4 hover:underline decoration-1 underline-offset-2 mr-2 cursor-select`}
+                onClick={()=>{
                     let element = document.querySelector(`#${project.slug}`)
                     let rect = element?.getBoundingClientRect();
                     var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -80,7 +80,7 @@ export default function Projects({project}: Props) {
                     if(!filters?.classList.contains("h-0")){
                         openFilters(e)
                     }
-                }}>{project.name}</h2>
+                }}>{project.name}
             </button>
             <p className="sans col-span-2">{project.client}</p>
 
