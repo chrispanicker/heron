@@ -114,11 +114,11 @@ export default function Projects({project}: Props) {
 
             </span>
             
-            <p className="lg:text-right sans">{project.year}</p>
+            <p className="lg:text-right sans flex justify-end">{project.year}</p>
 
             {/* Desktop Gallery */}
-            <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-all duration-500  ${selectedProject===project.slug? "max-h-[100rem] pt-2": "max-h-[0rem]"}`}>
-                <div className={`absolute left-0 flex w-full justify-between items-center top-[20rem] z-50 text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+            <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-all duration-500  ${selectedProject===project.slug? "max-h-[50rem] pt-2": "max-h-[0rem]"}`}>
+                <div className={`absolute left-0 flex w-full justify-between items-center top-[15rem] z-50 text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
                     <button className="bg-black px-1 mx-1 outline outline-1 outline-gray-300 hover:outline-black hover:bg-gray-300 hover:text-black"
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-gallery`)
@@ -128,7 +128,7 @@ export default function Projects({project}: Props) {
                             // Return the result
                             return pxValue;
                         }
-                        let width = remToPx(53.3333333, rootFontSize)
+                        let width = remToPx(40, rootFontSize)
                         gallery!.scrollLeft===0? gallery!.scrollLeft=gallery!.scrollWidth
                         :gallery!.scrollLeft -= width
                     }}>&larr;</button>
@@ -141,7 +141,7 @@ export default function Projects({project}: Props) {
                             // Return the result
                             return pxValue;
                         }
-                        let width = remToPx(53.3333333, rootFontSize)
+                        let width = remToPx(42, rootFontSize)
                         gallery!.scrollLeft>width*(project.images.length-2)? gallery!.scrollLeft=0
                         :gallery!.scrollLeft += width
                     }}>&rarr;</button>
