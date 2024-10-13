@@ -38,39 +38,41 @@ export default function MouseTrailAndDraw() {
     const trailFadeRate = 0.95; // Adjust this value to change how quickly the trail fades
 
     function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if(ctx){
+        ctx.clearRect(0, 0, canvas!.width, canvas!.height);
 
-      // Draw permanent lines
-      ctx.strokeStyle = 'black';
-      drawingSegmentsRef.current.forEach(segment => {
-        ctx.beginPath();
-        segment.forEach((point, index) => {
-          if (index === 0) {
-            ctx.moveTo(point.x, point.y);
-          } else {
-            ctx.lineTo(point.x, point.y);
-          }
-        });
-        ctx.stroke();
-      });
-
-      // Draw and update trail
-      trailRef.current.forEach((point, index) => {
-        const nextPoint = trailRef.current[index + 1];
-        if (nextPoint) {
-          ctx.strokeStyle = `rgba(0, 0, 0, ${point.age})`;
+        // Draw permanent lines
+        ctx.strokeStyle = 'black';
+        drawingSegmentsRef.current.forEach(segment => {
           ctx.beginPath();
-          ctx.moveTo(point.x, point.y);
-          ctx.lineTo(nextPoint.x, nextPoint.y);
+          segment.forEach((point, index) => {
+            if (index === 0) {
+              ctx.moveTo(point.x, point.y);
+            } else {
+              ctx.lineTo(point.x, point.y);
+            }
+          });
           ctx.stroke();
-        }
-        point.age *= trailFadeRate;
-      });
+        });
 
-      // Remove faded trail points
-      trailRef.current = trailRef.current.filter(point => point.age > 0.01);
+        // Draw and update trail
+        trailRef.current.forEach((point, index) => {
+          const nextPoint = trailRef.current[index + 1];
+          if (nextPoint) {
+            ctx.strokeStyle = `rgba(0, 0, 0, ${point.age})`;
+            ctx.beginPath();
+            ctx.moveTo(point.x, point.y);
+            ctx.lineTo(nextPoint.x, nextPoint.y);
+            ctx.stroke();
+          }
+          point.age *= trailFadeRate;
+        });
 
-      requestAnimationFrame(draw);
+        // Remove faded trail points
+        trailRef.current = trailRef.current.filter(point => point.age > 0.01);
+
+        requestAnimationFrame(draw);
+      }
     }
 
     function handleMouseMove(e: MouseEvent) {
