@@ -61,15 +61,32 @@ export default function Projects({project}: Props) {
 
 
     return (
-        <div id={project.slug} className={`group lg:text-2xl lg:grid hidden grid-cols-12 items-start transition-[padding] duration-500 mx-1 px-2 py-1 ${selectedProject===project.slug? "bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
-            <button className={`text-left col-span-4 hover:underline decoration-1 underline-offset-2 mr-2 cursor-select`}
+        <div id={project.slug} 
+            className={`group lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-500 mx-[1.75px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "pt-12 bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
+            <div className="w-full h-full absolute top-0 z-0" 
+            onClick={()=>{
+                let element = document.querySelector(`#${project.slug}`)
+                var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+                selectedProject===project.slug? window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
+                :element?.scrollIntoView({behavior:'smooth'})
+                router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
+                
+                let filters = document.querySelector("header section")
+                e=1
+                if(!filters?.classList.contains("h-0")){
+                    openFilters(e)
+                }
+            }}></div>
+            {/* name */}
+            <button className={`text-left col-span-4 hover:underline decoration-1 underline-offset-2 mr-2 cursor-select z-10`}
                 onClick={()=>{
                     let element = document.querySelector(`#${project.slug}`)
                     let rect = element?.getBoundingClientRect();
                     var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
-                    selectedProject===project.slug? window.scrollTo(scrollX, (scrollY-rootFontSize*3.1))
-                    :element?.scrollIntoView()
+                    selectedProject===project.slug? window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
+                    :element?.scrollIntoView({behavior:'smooth'})
                     router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
                     
                     let filters = document.querySelector("header section")
@@ -79,9 +96,10 @@ export default function Projects({project}: Props) {
                     }
                 }}>{project.name}
             </button>
-            <p className="sans col-span-2">{project.client}</p>
-
-            <span className="proj-filters flex overflow-x-scroll col-span-5 p-1 mr-1">
+            {/* client */}
+            <p className="sans text-[1.35rem] col-span-2">{project.client}</p>
+            {/* tags */}
+            <span className="proj-filters flex overflow-x-scroll col-span-5 p-1 larger:mr-6 lg:mr-10 z-10">
                 {project.roles? project.roles?.map((tag:any)=>(
                     <button key={tag.name} className={`${buttonClass} outline outline-1 hover:underline my-1
                     ${searchParams.getAll("roles")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
@@ -113,12 +131,13 @@ export default function Projects({project}: Props) {
                 )): ""}
 
             </span>
-            
-            <p className="lg:text-right sans flex justify-end">{project.year}</p>
+            {/* year */}
+            <p className="lg:text-right sans text-[1.35rem] flex justify-end col-span-1 whitespace-nowrap">{project.year}</p>
 
-            {/* Desktop Gallery */}
-            <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-all duration-500  ${selectedProject===project.slug? "max-h-[50rem] pt-2": "max-h-[0rem]"}`}>
+            {/* gallery */}
+            <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-all duration-500  ${selectedProject===project.slug? "max-h-[50rem] pt-1": "max-h-[0rem]"}`}>
                 <div className={`absolute left-0 flex w-full justify-between items-center top-[15rem] z-50 text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+                    {/* left arrow */}
                     <button className="bg-black px-1 mx-1 outline outline-1 outline-gray-300 hover:outline-black hover:bg-gray-300 hover:text-black"
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-gallery`)
@@ -132,6 +151,7 @@ export default function Projects({project}: Props) {
                         gallery!.scrollLeft===0? gallery!.scrollLeft=gallery!.scrollWidth
                         :gallery!.scrollLeft -= width
                     }}>&larr;</button>
+                    {/* right arrow */}
                     <button className="bg-black px-1 mx-1 outline outline-1 outline-gray-300 hover:outline-black hover:bg-gray-300 hover:text-black"
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-gallery`)
@@ -146,12 +166,15 @@ export default function Projects({project}: Props) {
                         :gallery!.scrollLeft += width
                     }}>&rarr;</button>
                 </div>
+                {/* gallery component */}
                 <Gallery project={project}/>
-                <div className={`pb-[.1rem] pt-2 sticky grid-cols-6 grid  left-0 ${selectedProject===project.slug? "": ""}`}>
+                {/* info */}
+                <div className={`pb-[.1rem] pt-1 sticky grid-cols-6 grid  left-0 ${selectedProject===project.slug? "": ""}`}>
+                    {/* description */}
                     <div className="col-span-5">
                         <PortableText value={project.content}/>
                     </div>
-
+                    {/* close button */}
                     <div className="flex text-right items-center justify-end col-span-1 h-[2rem]">
                         <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1 ${buttonClass} hover:underline outline outline-1`} 
                         onClick={()=>{
@@ -160,7 +183,6 @@ export default function Projects({project}: Props) {
                     </div>
                 </div>
             </span>
-
 
         </div>
     )

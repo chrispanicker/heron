@@ -43,7 +43,10 @@ export default function MobileProjects({project}: Props) {
 
         let el = document.querySelector(`#mobile-${project.slug}`)
         var handler = onVisibilityChange(el!, function() {
-            router.push( `/?${createQueryString(`mobile-scroll`, `${project.slug}`)}`, {scroll: false})
+            console.log(el)
+            window.innerWidth<1024?""
+            // router.push( `/?${createQueryString(`mobile-scroll`, `${project.slug}`)}`, {scroll: false})
+            : ""
         })
         
         // selectedProject===project.slug?
@@ -87,7 +90,7 @@ export default function MobileProjects({project}: Props) {
 
     return (
         <div ref={projRef} id ={`mobile-${project.slug}`} className={`relative group snap-start min-h-screen snap-always lg:hidden block relative items-center transition-all mx-2`}>
-            <div className="sticky top-12 bg-gray-300 border-b-2 border-black z-10 pt-2">
+            <div className="sticky top-10 bg-gray-300 border-b-2 border-black z-10 pt-2">
                 <h2 className="text-2xl flex justify-start items-center leading-[1.5rem]">{project.name}</h2>
                 <div className="flex justify-between">
                     <p className="sans">{project.type}</p>
@@ -103,7 +106,7 @@ export default function MobileProjects({project}: Props) {
             </span>
 
 
-            <div className={`sticky bottom-0 border-t-2 mt-2 border-black bg-gray-300 z-10 pt-1 pb-8`}>
+            <div className={`sticky bottom-0 mt-2 bg-gray-300 z-10 pt-1 pb-8`}>
                 <span className="leading-[1.2rem]">
                     {/* <p className="pb-1">For <i>{project.client}</i></p> */}
                     <PortableText value={project.content}/>

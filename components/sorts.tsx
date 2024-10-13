@@ -29,7 +29,7 @@ export function Sorts(){
     )
     
     return(        
-        <span className="lg:grid hidden grid-cols-6 mx-1 mt-2 text-2xl sans mx-1 mb-1 z-30 relative z-10 border-b-[2px] border-black decoration-2 ">
+        <span className="lg:grid hidden grid-cols-6 mt-2 text-[1.35rem] sans px-3 mb-[2px] pb-1 z-30 relative z-10 border-b-[2px] border-black decoration-2 ">
             <button className="ml-2 col-span-2 text-left flex hover:underline decoration-2 underline-offset-2"
             onClick={()=>{
                 router.push("?"+createSortQueryString("sort", "name"))

@@ -43,7 +43,7 @@ export function Filters({filters, projects}: Props){
 
 
     return(
-        <section className={` lg:block bg-gray-300 hidden overflow-hidden px-6 transition-all h-0 border border-b-2 border-black`}>
+        <section className={`lg:block bg-gray-300 hidden overflow-hidden px-5 transition-all h-0 border border-b-2 border-black`}>
             {/* <p className="text-sm">Filters:&nbsp;</p> */}
             {allFilters.map((entry:any, idx:any)=>{
                 return (
@@ -54,7 +54,7 @@ export function Filters({filters, projects}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`, {scroll: false})
                     }}
-                    className={`hover:underline outline outline-1 outline-black ${buttonClass} ${searchParams.getAll(entry.key)?.includes(entry.filter)? "text-black":"bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`
+                    className={`hover:underline outline outline-1 outline-black ${buttonClass} ${searchParams.getAll(entry.key)?.includes(entry.filter)? "text-black bg-gray-300":"bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`
                     }>
                         {`${entry.filter}`}
                     </button>

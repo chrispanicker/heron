@@ -31,14 +31,13 @@ export default async function Home({searchParams}: Props) {
   let info = await getInfo();
 
   return (
-    filteredProjects? <main className="lg:mx-5 z-20">
-
+    filteredProjects? <main className="z-20">
       <div className="h-[10rem]"></div>
       <Scroller />
         <Sorts />
         {filteredProjects.map((proj:any, index:number)=>{ 
         return(
-          <div className={` duration-500 ${project===proj.slug? "transition-none py-[3.1rem]": "transition-all"}`} key={proj.slug}>
+          <div className={` duration-500 ${project===proj.slug? "transition-none pb-[2rem]": "transition-all"}`} key={proj.slug}>
             <Projects project={proj}/>
             <MobileProjects project={proj}/>
           </div>

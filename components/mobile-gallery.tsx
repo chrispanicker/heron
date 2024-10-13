@@ -1,6 +1,7 @@
 
 import { urlForImage } from "@/sanity/lib/image"
 import { Project } from "@/types/project"
+import { getFile } from "@sanity/asset-utils";
 import Image from "next/image"
 import { useSearchParams } from "next/navigation";
 
@@ -49,22 +50,28 @@ export function MobileGallery({project}:Props){
                     </button>
                 </div>
                 <span className={`flex w-max justify-center items-start h-full`}>
-                    {/* {project.vimeo?.map((vid, index)=>(
-                        <div key={`mobile-${project.slug}+${index}`} className={`pointer-events-auto px-2 snap-center rounded-lg snap-always peer flex justify-center items-center transition-all duration-50`}>
-                            <div className={`relative overflow-hidden w-full pt-[56.25%]`}>
-                                <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
-                            </div>
+                    {project.images?.map((e:any, index)=>(
+                        e._type === 'mp4'?
+                        <div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center h-[69lvh] bg-black mx-1`}>
+                            <video width="1440" height="1080" muted controls loop autoPlay preload="true"
+                            className={`object-cover transition-all duration-500 h-[50lvh] w-[99vw]`}>
+                            <source src={getFile(e, {projectId:"01jwvji0", dataset:"production"}).asset.url} type="video/mp4" />
+                            <track
+                                src="/path/to/captions.vtt"
+                                kind="subtitles"
+                                srcLang="en"
+                                label="English"
+                            />
+                            Your browser does not support the video tag.
+                            </video>
                         </div>
-                    ))} */}
-                    {project.images?.map((image, index)=>(
-                        <div key={`mobile-${project.slug}+${index}`} className={`snap-center snap-always peer flex justify-center items-center`}>
-                            {/* main nav gallery images */}
+                        :<div key={`mobile-${project.slug}+${index}`} className={`snap-center snap-always peer flex justify-center items-center h-[69lvh] bg-black mx-1`}>
                             <Image
-                            src={urlForImage(image).url()}
+                            src={urlForImage(e).url()}
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover transition-all duration-500 h-[69lvh] ${project.gallery.length<2? "w-screen": "w-[86vw]"} px-1`}
+                            className={`object-cover transition-all duration-500 h-[50lvh] w-[99vw]`}
                             loading="lazy"
                             placeholder="blur"
                             blurDataURL={`${project.gallery[index].lqip}`}

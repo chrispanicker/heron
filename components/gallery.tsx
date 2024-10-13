@@ -2,6 +2,7 @@
 import { urlForImage } from "@/sanity/lib/image"
 import { Project } from "@/types/project"
 import Image from "next/image"
+import {getFile, getFileAsset} from '@sanity/asset-utils'
 import { useSearchParams } from "next/navigation";
 
 interface Props{
@@ -12,35 +13,36 @@ interface Props{
 export function Gallery({project}:Props){
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")  
-    let vimeoIDs:string[] = [];
-    
-    project.vimeo?.map((vid, index)=>{
-        vimeoIDs[index]=vid.replace("https://vimeo.com/", "")
-    })
+    // console.log(project.images.map((e:any)=>{
+    //     return e._type === "mp4"? getFile(e, {projectId:"01jwvji0", dataset:"production"}): ""
+    // }))
 
     return(
         <>
         {/* GALLERY */}
         <div id={`${project.slug}-gallery`} className={`relative ${selectedProject===project.slug? "overflow-x-scroll":""} scroll-smooth overflow-y-hidden snap-x snap-mandatory`}>
             <span className={`flex w-max justify-center items-start`}>
-                {/* current image */}
-                {project.vimeo?.map((vid, index)=>(
-                    <div key={`project.slug+${index}`} className={`pointer-events-auto px-2 snap-center rounded-lg snap-always peer flex justify-center items-center transition-all duration-50`}>
-                        {/* main gallery vimeo */}
-                        <div className={`relative overflow-hidden w-full pt-[56.25%]`}>
-                            <iframe className="absolute top-0 left-0 w-full h-full" src={`https://player.vimeo.com/video/${vimeoIDs[index]}?loop=1&title=0&byline=0&portrait=0`} allow="autoplay; fullscreen; picture-in-picture"></iframe>
-                        </div>
+                {project.images?.map((e:any, index)=>(
+                    e._type === 'mp4'?
+                    <div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center pr-2`}>
+                        <video width="1440" height="1080" muted loop autoPlay preload="true" className="w-[43rem] h-[32rem]">
+                        <source src={getFile(e, {projectId:"01jwvji0", dataset:"production"}).asset.url} type="video/mp4" />
+                        <track
+                            src="/path/to/captions.vtt"
+                            kind="subtitles"
+                            srcLang="en"
+                            label="English"
+                        />
+                        Your browser does not support the video tag.
+                        </video>
                     </div>
-                ))}
-                {project.images?.map((image, index)=>(
-                    <div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center`}>
-                        {/* main nav gallery images */}
+                    :<div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center`}>
                         <Image
-                        src={urlForImage(image).url()}
+                        src={urlForImage(e).url()}
                         alt=""
                         width={1080}
                         height={1080}
-                        className={`object-cover pr-1 transition-all duration-500 w-[42rem] h-[32rem] ${selectedProject===project.slug?``: ""}`}
+                        className={`object-cover pr-2 transition-all duration-500 w-[42rem] h-[32rem] ${selectedProject===project.slug?``: ""}`}
                         loading="lazy"
                         placeholder="blur"
                         blurDataURL={`${project.gallery[index].lqip}`}

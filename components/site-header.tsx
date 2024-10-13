@@ -23,10 +23,12 @@ export function SiteHeader(){
     return (
         isSanityStudio? "" : 
         <>
-            <span className="flex justify-between items-center lg:px-2 px-2 mono-book py-1"
+            <span className="flex justify-between items-center lg:px-5 outline outline-gray-300 px-2 w-[100dvw] mono-book"
             >
-                <h1 className="flex duration-500 text-2xl mr-40 whitespace-nowrap sans" onClick={()=>{document.querySelector("#foot")?.scrollIntoView({behavior:"smooth"})}}
-                >Drew Litowitz&nbsp;<p className="lg:block hidden">is a Graphic Designer and Art Director based in NYC.</p></h1>
+                <h1 className="flex duration-500 text-[1.35rem] sans" onClick={()=>{document.querySelector("#foot")?.scrollIntoView({behavior:"smooth", block: "start"})}}
+                >Drew Litowitz&nbsp;
+                    <p className="lg:inline-block hidden">is a Graphic Designer and Art Director based in NYC.</p>
+                </h1>
                 <div className="flex justify-center items-center h-max">
                     <button className="filters text-4xl z-50 transition-all sans font-bolder" 
                     onClick={()=>{openFilters(e)}}

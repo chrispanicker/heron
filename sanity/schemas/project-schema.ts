@@ -59,13 +59,6 @@ const project = {
             },
         },
         {
-            name: 'vimeo',
-            title:'Vimeo Links',
-            type: "array",
-            of: [{type: 'url'}],
-            description: 'Hi Drew! Have any vimeo videos for this project? You can add them here!',
-        },
-        {
             name: 'images',
             title: "Images",
             type: "array",
@@ -78,7 +71,13 @@ const project = {
                     accept: '.pdf,image/jpeg,image/png',
                     
                 },
-            }]
+            },
+            {
+                type: 'file', 
+                title:'MP4', 
+                name:'mp4', options:{
+                accept: 'video/*,.mp4'
+            }}]
         },
         {
             name: "url",

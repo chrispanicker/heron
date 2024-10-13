@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
 import localFont from 'next/font/local'
-import { getGallery, getInfo, getProjects } from '@/sanity/lib/queries'
-import { SiteHeader } from '@/components/site-header'
-import { TestFilter } from '@/components/test-filter'
+import {getInfo, getProjects } from '@/sanity/lib/queries'
 import { HeaderAndFilters } from '@/components/header-and-filters'
 import  SillyCanvas  from '@/components/silly-canvas'
+
 
 
 export const metadata: Metadata = {
@@ -44,9 +43,9 @@ export default async function RootLayout({
           <HeaderAndFilters info={info}  projects={allprojects}/>
           <>{children}</>
         </section>
-        <div id='foot' className="w-screen bg-black text-gray-300 sans h-[3rem] flex justify-between items-center lg:text-2xl px-2 relative z-10">
+        <div id='foot' className="w-screen bg-black text-gray-300 sans h-[2.4rem] flex justify-between items-center lg:text-2xl px-5 relative z-10">
           <p>&#169; Drew Litowitz</p>
-          <span>
+          <span className='text-[1.35rem]'>
             <a className="pr-1 hover:underline" href="https://www.instagram.com/drewknowitz">@drewknowitz</a>
             <a className='hover:underline' href="mailto:dlitowit@gmail.com">dlitowit@gmail.com</a>
           </span>
