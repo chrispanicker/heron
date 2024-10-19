@@ -20,7 +20,16 @@ export function Gallery({project}:Props){
     return(
         <>
         {/* GALLERY */}
-        <div id={`${project.slug}-gallery`} className={`relative ${selectedProject===project.slug? "overflow-x-scroll":""} scroll-smooth overflow-y-hidden snap-x snap-mandatory`}>
+        <div id={`${project.slug}-gallery`} className={`relative ${selectedProject===project.slug? "overflow-x-scroll":""} scroll-smooth overflow-y-hidden snap-x snap-mandatory`}
+        onScroll={(e)=>{
+            let larr = document.querySelector(`#${project.slug}_larr`)
+            if(e.currentTarget.scrollLeft<200 && larr?.classList.contains("opacity-100")){
+                larr.classList.replace("opacity-100", "opacity-0")
+            }else if(e.currentTarget.scrollLeft>200 && larr?.classList.contains("opacity-0")){
+                larr!.classList.replace("opacity-0","opacity-100")
+
+            } 
+        }}>
             <span className={`flex w-max justify-center items-start`}>
                 {project.images?.map((e:any, index)=>(
                     e._type === 'mp4'?

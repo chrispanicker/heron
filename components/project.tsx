@@ -86,7 +86,7 @@ export default function Projects({project}: Props) {
                     var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
                     selectedProject===project.slug? window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
-                    :element?.scrollIntoView({behavior:'smooth'})
+                    :element?.scrollIntoView()
                     router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
                     
                     let filters = document.querySelector("header section")
@@ -136,9 +136,9 @@ export default function Projects({project}: Props) {
 
             {/* gallery */}
             <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-all duration-500  ${selectedProject===project.slug? "max-h-[50rem] pt-1": "max-h-[0rem]"}`}>
-                <div className={`absolute left-0 flex w-full justify-between items-center top-[15rem] z-50 text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+                <div className={`absolute left-0 flex w-full justify-between items-center top-[15rem] z-30 text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
                     {/* left arrow */}
-                    <button className="bg-black px-1 mx-1 outline outline-1 outline-gray-300 hover:outline-black hover:bg-gray-300 hover:text-black"
+                    <button id={`${project.slug}_larr`} className={`transition-[opacity] opacity-0 bg-black px-1 mx-1 outline outline-1 outline-gray-300 hover:outline-black hover:bg-gray-300 hover:text-black`}
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-gallery`)
                         var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -147,9 +147,10 @@ export default function Projects({project}: Props) {
                             // Return the result
                             return pxValue;
                         }
-                        let width = remToPx(40, rootFontSize)
-                        gallery!.scrollLeft===0? gallery!.scrollLeft=gallery!.scrollWidth
-                        :gallery!.scrollLeft -= width
+                        let width = remToPx(42, rootFontSize)
+                        gallery!.scrollLeft -= width
+                        // gallery!.scrollLeft===0? gallery!.scrollLeft=gallery!.scrollWidth
+                        // :gallery!.scrollLeft -= width
                     }}>&larr;</button>
                     {/* right arrow */}
                     <button className="bg-black px-1 mx-1 outline outline-1 outline-gray-300 hover:outline-black hover:bg-gray-300 hover:text-black"
@@ -162,14 +163,14 @@ export default function Projects({project}: Props) {
                             return pxValue;
                         }
                         let width = remToPx(42, rootFontSize)
-                        gallery!.scrollLeft>width*(project.images.length-2)? gallery!.scrollLeft=0
+                        gallery!.scrollLeft>width*(project.images.length-3)? gallery!.scrollLeft=0
                         :gallery!.scrollLeft += width
                     }}>&rarr;</button>
                 </div>
                 {/* gallery component */}
                 <Gallery project={project}/>
                 {/* info */}
-                <div className={`pb-[.1rem] pt-1 sticky grid-cols-6 grid  left-0 ${selectedProject===project.slug? "": ""}`}>
+                <div className={`pb-[.1rem] pt-1 sticky grid-cols-6 grid left-0 ${selectedProject===project.slug? "": ""}`}>
                     {/* description */}
                     <div className="col-span-5">
                         <PortableText value={project.content}/>

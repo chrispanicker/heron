@@ -27,7 +27,7 @@ export function SiteFooter(info:any){
                 </div>
                 <div className={`lg:h-fit lg:pt-0 pb-20 sans`}>
                     {info.info[0].cv.map((job:job)=>(
-                        <span key={`${job.company}`} className="lg:flex-col larger:flex-row lg:text-2xl flex flex-col lg:justify-start larger:justify-between items-start lg:pb-0 pb-2 lg:leading-[1.98rem]">
+                        <span key={`${job.company}`} className="lg:flex-col larger:flex-row lg:text-2xl flex flex-col lg:justify-start larger:justify-between items-start lg:pb-0 pb-2 lg:leading-[1.75rem]">
                             <div className="flex pb-1">
                                 <p className="whitespace-nowrap text-[1.35rem]">{job.company}</p>                
                                 <p className={` mx-1 ${buttonClass} bg-black text-gray-300 outline outline-1 lg:outline-black outline-gray-300 lg:mt-[.4rem] mt-[.1rem]`}>{job.title}</p>
