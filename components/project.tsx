@@ -24,6 +24,28 @@ export default function Projects({project}: Props) {
 
     let e = 0
 
+
+    let tagHoverInterval:any;
+
+    function setHoverInterval(e:any) {
+        if (!tagHoverInterval) {
+          tagHoverInterval = setInterval(tagHover, 15, e);
+        }
+    }
+      
+      function stopHoverInterval() {
+        clearInterval(tagHoverInterval);
+        tagHoverInterval = null;
+      }
+
+    function tagHover(e:any) {
+        console.log(e)
+        let element = e.target
+        if(element.scrollLeft<element.scrollWidth-element.offsetWidth){
+            element.scrollLeft=element.scrollLeft+1
+        }
+    }
+
     const createQueryString = useCallback(
         (name: string, value: string) => {
             let params;
@@ -99,7 +121,16 @@ export default function Projects({project}: Props) {
             {/* client */}
             <p className="sans text-[1.35rem] col-span-2">{project.client}</p>
             {/* tags */}
-            <span className="proj-filters flex overflow-x-scroll col-span-5 p-1 larger:mr-6 lg:mr-10 z-10">
+            <span id={`${project.slug}_tags`} className="proj-filters flex overflow-x-scroll col-span-5 p-1 larger:mr-6 lg:mr-10 z-10"
+            onMouseOver={(e)=>{
+                setHoverInterval(e)
+            }}
+            onWheel={(e)=>{
+                stopHoverInterval()
+            }}
+            onMouseLeave={()=>{
+                stopHoverInterval()
+            }}>
                 {project.roles? project.roles?.map((tag:any)=>(
                     <button key={tag.name} className={`${buttonClass} outline outline-1 hover:underline my-1
                     ${searchParams.getAll("roles")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
