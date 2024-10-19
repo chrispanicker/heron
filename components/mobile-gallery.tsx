@@ -23,29 +23,29 @@ export function MobileGallery({project}:Props){
         <>
         {/* GALLERY */}
         <div id={`${project.slug}-mobileGallery`} className={`pt-8 left-0 scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory transition-all ${project.gallery.length<2? "mt-6": ""}`}>
-                <div className={`sticky left-0 flex w-full justify-between items-center top-[50%] text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
-                    <button className="bg-black mx-2 px-[.1rem]"
+                <div className={`sticky left-0 flex w-full justify-between items-center top-[50%] text-2xl text-gray-300 serif h-0 leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+                    <button className=" px-[.1rem]"
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                         let width = document.documentElement.clientWidth
                         gallery!.scrollLeft>=0&& gallery!.scrollLeft<50? gallery!.scrollLeft=gallery!.scrollWidth
                         :gallery!.scrollLeft -= width
                     }}>
-                        <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 10.87 9.46">
-                        <rect width="10.87" height="9.46"/>
-                        <path fill="#d1d5db" d="M4.87,8.55l-3.82-3.82L4.87.91l.66.65-2.7,2.7h7s0,.94,0,.94H2.82s2.7,2.69,2.7,2.69l-.66.66Z"/>
+
+                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={5} xmlns="http://www.w3.org/2000/svg" width="30" height="500" viewBox="0 0 55.1 1089.32">
+                        <polygon points="41.56 1089.32 54.94 1086.71 13.56 562.98 55.1 2.83 41.74 0 0 562.87 .09 564.23 41.56 1089.32"/>
                         </svg>
+
                     </button>
-                    <button className="bg-black mx-2 px-[.1rem]"
+                    <button className=" px-[.1rem]"
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                         let width = document.documentElement.clientWidth
                         gallery!.scrollLeft>width*(project.images.length-2)? gallery!.scrollLeft=0
                         :gallery!.scrollLeft += width
                     }}>
-                        <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 10.87 9.46">
-                        <rect width="10.87" height="9.46"/>
-                        <path fill="#d1d5db" d="M6,.91l3.82,3.82-3.82,3.82-.66-.65,2.7-2.7H1.05v-.94h7l-2.7-2.69.66-.66Z"/>
+                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={5} xmlns="http://www.w3.org/2000/svg" width="30" height="500" viewBox="0 0 55.1 1089.32">
+                        <polygon points="13.54 1089.32 .16 1086.71 41.54 562.98 0 2.83 13.36 0 55.1 562.87 55.01 564.23 13.54 1089.32"/>
                         </svg>
                     </button>
                 </div>

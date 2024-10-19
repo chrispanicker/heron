@@ -43,9 +43,8 @@ export default function MobileProjects({project}: Props) {
 
         let el = document.querySelector(`#mobile-${project.slug}`)
         var handler = onVisibilityChange(el!, function() {
-            console.log(el)
-            window.innerWidth<1024?""
-            // router.push( `/?${createQueryString(`mobile-scroll`, `${project.slug}`)}`, {scroll: false})
+            window.innerWidth<1024 && isElementInViewport(el!)?
+            router.push( `/?${createQueryString(`mobile-scroll`, `${project.slug}`)}`, {scroll: false})
             : ""
         })
         
