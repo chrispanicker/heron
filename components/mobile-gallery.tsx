@@ -31,7 +31,7 @@ export function MobileGallery({project}:Props){
                 larr!.classList.replace("opacity-0","opacity-100")
             } 
         }}>
-                <div className={`sticky left-0 flex w-full justify-between items-center top-[50%] text-2xl text-gray-300 serif h-0 leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+                <div className={`sticky left-0 flex w-full justify-between items-center top-[90%] text-2xl text-gray-300 serif h-0 leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
                     <button className="opacity-0 px-[.1rem] transition-[opacity]"
                     id={`mobile-${project.slug}_larr`} 
                     onClick={()=>{
@@ -41,8 +41,8 @@ export function MobileGallery({project}:Props){
                         :gallery!.scrollLeft -= width
                     }}>
 
-                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={5} xmlns="http://www.w3.org/2000/svg" width="30" height="500" viewBox="0 -2 55.1 1099.32">
-                        <polygon points="41.56 1089.32 54.94 1086.71 13.56 562.98 55.1 2.83 41.74 0 0 562.87 .09 564.23 41.56 1089.32"/>
+                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={2}  xmlns="http://www.w3.org/2000/svg" width="50" height="100" viewBox="-10 -10 20 120">
+                        <polygon points="0 0 8 0 0 50 8 100 0 100 -8 50"/>
                         </svg>
 
                     </button>
@@ -53,9 +53,10 @@ export function MobileGallery({project}:Props){
                         gallery!.scrollLeft>width*(project.images.length-2)? gallery!.scrollLeft=0
                         :gallery!.scrollLeft += width
                     }}>
-                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={5} xmlns="http://www.w3.org/2000/svg" width="30" height="500" viewBox="0 -2 55.1 1009.32">
-                        <polygon points="13.54 1089.32 .16 1086.71 41.54 562.98 0 2.83 13.36 0 55.1 562.87 55.01 564.23 13.54 1089.32"/>
+                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={2}  xmlns="http://www.w3.org/2000/svg" width="50" height="100" viewBox="-10 0 20 120">
+                        <polygon points="0 0 8 0 16 50 8 100 0 100 8 50"/>
                         </svg>
+
                     </button>
                 </div>
                 <span className={`flex w-max justify-center items-start h-full`}>
