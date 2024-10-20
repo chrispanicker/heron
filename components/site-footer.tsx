@@ -27,10 +27,11 @@ export function SiteFooter(info:any){
                 </div>
                 <div className={`lg:h-fit lg:pt-0 pb-20 sans px-2`}>
                     {info.info[0].cv.map((job:job)=>(
-                        <span key={`${job.company}`} className="lg:flex-col larger:flex-row lg:text-2xl flex flex-col lg:justify-start larger:justify-between items-start lg:pb-0 pb-3 lg:leading-[1.75rem]">
-                            <div className="flex lg:flex-row flex-col pb-1">
-                                <p className="whitespace-nowrap text-[1.35rem] mb-1">{job.company}</p>                
-                                <p className={`lg:mx-1 lg:my-0 mb-1 ${buttonClass} lg:text-[.8rem] text-[.7rem] bg-black text-gray-300 outline outline-1 lg:outline-black outline-gray-300 lg:mt-[.4rem] mt-[.1rem]`}>{job.title}</p>
+                        <span key={`${job.company}`} className="lg:flex-col larger:flex-row lg:text-2xl flex flex-col lg:justify-start larger:justify-between items-start lg:pb-0 pb-5 lg:leading-[1.75rem]">
+                            <div className="flex lg:flex-row flex-col mb-1 lg:mb-0">
+                                <p className="whitespace-nowrap text-[1.35rem] mb-1 lg:mb-0">{job.company}</p>                
+                                <p className={`lg:block hidden lg:mx-1 lg:my-0 mb-1 ${buttonClass} lg:text-[.8rem] text-[.7rem] bg-black text-gray-300 outline outline-1 lg:outline-black outline-gray-300 lg:mt-[.3rem]  mt-[.1rem]`}>{job.title}</p>
+                                <p className={`serif text-[1.35rem] lg:hidden inline`}>{job.title}</p>
                             </div>
                             <p className="sans text-[1.35rem]">{job.years}</p>
                         </span>

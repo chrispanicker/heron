@@ -14,10 +14,15 @@ export default function MobileProjects({project}: Props) {
     const router = useRouter();
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")  
+    const mobileScroll = searchParams.get("mobile-scroll")  
+
     let projRef = useRef(null)
 
         
     useEffect(()=>{
+        let el = document.querySelector(`#mobile-${project.slug}`)
+
+        mobileScroll===project.slug? el?.scrollIntoView(): ""
 
         function isElementInViewport (el:Element) {
             var rect = el.getBoundingClientRect();
@@ -41,22 +46,20 @@ export default function MobileProjects({project}: Props) {
             }
         }
 
-        let el = document.querySelector(`#mobile-${project.slug}`)
+   
         var handler = onVisibilityChange(el!, function() {
-            window.innerWidth<1024 && isElementInViewport(el!)?
-            router.push( `/?${createQueryString(`mobile-scroll`, `${project.slug}`)}`, {scroll: false})
-            : ""
+            if(window.innerWidth<1024 && isElementInViewport(el!)){
+                router.push( `/?mobile-scroll=${project.slug}`, {scroll: false})
+            }
         })
         
-        // selectedProject===project.slug?
-        // el?.scrollIntoView():""
-        
+        setTimeout(()=>{
+            window.addEventListener('scroll', handler, false);
+            window.addEventListener('resize', handler, false);
+        }, 100)
 
-        window.addEventListener('DOMContentLoaded', handler, false);
-        window.addEventListener('load', handler, false);
-        window.addEventListener('scroll', handler, false);
-        window.addEventListener('resize', handler, false);
     }, [projRef])
+
 
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -81,14 +84,18 @@ export default function MobileProjects({project}: Props) {
             :stringSearchParams.includes(`${name}=${value}`)?
             params.delete(name, value)
             :params.append(name, value)
+
+
             return params.toString()
+
+
         },
         [searchParams]
     )
     
 
     return (
-        <div ref={projRef} id ={`mobile-${project.slug}`} className={`relative group snap-start min-h-screen snap-always lg:hidden block relative items-center transition-all mx-2`}>
+        <div ref={projRef} id ={`mobile-${project.slug}`} className={`relative group snap-start min-h-screen snap-always lg:hidden block relative items-center mx-2`}>
             <div className="sticky top-10 bg-gray-300 border-b-2 border-black z-10 pt-2">
                 <h2 className="text-2xl flex justify-start items-center leading-[1.5rem]">{project.name}</h2>
                 <div className="flex justify-between">
@@ -100,7 +107,7 @@ export default function MobileProjects({project}: Props) {
             
         
             {/* Mobile Gallery */}
-            <span className={`transition-all duration-500 z-0`}>
+            <span className={`duration-500 z-0`}>
                 <MobileGallery project={project}/>
             </span>
 

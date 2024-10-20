@@ -39,7 +39,7 @@ export default function Projects({project}: Props) {
       }
 
     function tagHover(e:any) {
-        console.log(e)
+        // console.log(e)
         let element = e.target
         if(element.scrollLeft<element.scrollWidth-element.offsetWidth){
             element.scrollLeft=element.scrollLeft+1
@@ -125,7 +125,7 @@ export default function Projects({project}: Props) {
             onMouseOver={(e)=>{
                 setHoverInterval(e)
             }}
-            onWheel={(e)=>{
+            onWheel={()=>{
                 stopHoverInterval()
             }}
             onMouseLeave={()=>{

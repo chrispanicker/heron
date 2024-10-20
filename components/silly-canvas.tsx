@@ -116,7 +116,7 @@ export default function MouseTrailAndDraw() {
     // window.addEventListener('mousedown', handleMouseDown);
     // window.addEventListener('mouseup', handleMouseUp);
     // window.addEventListener('mouseout', handleMouseUp);
-    window.addEventListener('contextmenu', handleContextMenu);
+    // window.addEventListener('contextmenu', handleContextMenu);
 
     draw();
 
@@ -125,7 +125,7 @@ export default function MouseTrailAndDraw() {
       // window.removeEventListener('mousedown', handleMouseDown);
       // window.removeEventListener('mouseup', handleMouseUp);
       // window.removeEventListener('mouseout', handleMouseUp);
-      window.removeEventListener('contextmenu', handleContextMenu);
+      // window.removeEventListener('contextmenu', handleContextMenu);
       window.removeEventListener('resize', setCanvasSize);
     };
   }, [isDrawing]);
