@@ -97,7 +97,7 @@ export default function MobileProjects({project}: Props) {
     return (
         <div ref={projRef} id ={`mobile-${project.slug}`} className={`relative group snap-start min-h-screen snap-always lg:hidden block relative items-center mx-2`}>
             <div className="sticky top-10 bg-gray-300 border-b-2 border-black z-10 pt-2">
-                <h2 className="text-2xl flex justify-start items-center leading-[1.5rem]">{project.name}</h2>
+                <h2 className="text-2xl flex justify-start items-center leading-[1.8rem]">{project.name}</h2>
                 <div className="flex justify-between">
                     <p className="sans">{project.type}</p>
                     <p className="sans">{project.year}</p>
