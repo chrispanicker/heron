@@ -31,7 +31,7 @@ export function SiteFooter(info:any){
                             <div className="flex lg:flex-row flex-col mb-1 lg:mb-0">
                                 <p className="whitespace-nowrap text-[1.35rem] mb-1 lg:mb-0">{job.company}</p>                
                                 <p className={`lg:block hidden lg:mx-1 lg:my-0 mb-1 ${buttonClass} lg:text-[.8rem] text-[.7rem] bg-black text-gray-300 outline outline-1 lg:outline-black outline-gray-300 lg:mt-[.3rem]  mt-[.1rem]`}>{job.title}</p>
-                                <p className={`serif text-[1.35rem] lg:hidden inline`}>{job.title}</p>
+                                <p className={`serif text-[1.35rem] lg:hidden inline mb-1`}>{job.title}</p>
                             </div>
                             <p className="sans text-[1.35rem]">{job.years}</p>
                         </span>
