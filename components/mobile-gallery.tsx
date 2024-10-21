@@ -50,10 +50,10 @@ export function MobileGallery({project}:Props){
                     onClick={()=>{
                         let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                         let width = document.documentElement.clientWidth
-                        gallery!.scrollLeft>width*(project.images.length-2)? gallery!.scrollLeft=0
-                        :gallery!.scrollLeft += width
+                        gallery!.scrollLeft>width*(project.images.length-1)? gallery!.scrollLeft=0
+                        : gallery!.scrollLeft += width
                     }}>
-                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={2}  xmlns="http://www.w3.org/2000/svg" width="50" height="100" viewBox="-10 0 20 120">
+                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={2}  xmlns="http://www.w3.org/2000/svg" width="50" height="100" viewBox="-10 -10 20 120">
                         <polygon points="0 0 8 0 16 50 8 100 0 100 8 50"/>
                         </svg>
 
