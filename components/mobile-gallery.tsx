@@ -41,8 +41,14 @@ export function MobileGallery({project}:Props){
                         :gallery!.scrollLeft -= width
                     }}>
 
-                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={2}  xmlns="http://www.w3.org/2000/svg" width="50" height="100" viewBox="-10 -10 20 120">
-                        <polygon points="0 0 8 0 0 50 8 100 0 100 -8 50"/>
+                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={2}  xmlns="http://www.w3.org/2000/svg" width="50" height="100" viewBox="-10 -10 30 120">
+                        <polygon points="
+                            10 0 
+                            20 0 
+                            -10 50 
+                            20 100 
+                            10 100 
+                            -20 50"/>
                         </svg>
 
                     </button>
@@ -53,8 +59,14 @@ export function MobileGallery({project}:Props){
                         gallery!.scrollLeft>width*(project.images.length-1)? gallery!.scrollLeft=0
                         : gallery!.scrollLeft += width
                     }}>
-                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={2}  xmlns="http://www.w3.org/2000/svg" width="50" height="100" viewBox="-10 -10 20 120">
-                        <polygon points="0 0 8 0 16 50 8 100 0 100 8 50"/>
+                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={2}  xmlns="http://www.w3.org/2000/svg" width="50" height="100" viewBox="-10 -10 10 120">
+                        <polygon points="
+                        -20 0
+                        -10 0
+                        20 50
+                        -10 100
+                        -20 100
+                        10 50"/>
                         </svg>
 
                     </button>
