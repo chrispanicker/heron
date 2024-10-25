@@ -84,16 +84,16 @@ export default function Projects({project}: Props) {
 
     return (
         <div id={project.slug} 
-            className={`group lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-500 mx-[1.75px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "pt-12 bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
+            className={`group lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-200 mx-[1.75px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "py-12 bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
             <div className="w-full h-full absolute top-0 z-0" 
             onClick={()=>{
                 let element = document.querySelector(`#${project.slug}`)
                 var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
                 selectedProject===project.slug? window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
-                :element?.scrollIntoView({behavior:'smooth'})
-                router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
-                
+                :selectedProject?
+                    setTimeout(()=>{element?.scrollIntoView({behavior:"smooth", block:"start"})}, 501)
+                    :element?.scrollIntoView({behavior:"smooth", block:"start"})
                 let filters = document.querySelector("header section")
                 e=1
                 if(!filters?.classList.contains("h-0")){
@@ -104,11 +104,14 @@ export default function Projects({project}: Props) {
             <button className={`text-left col-span-4 hover:underline decoration-1 underline-offset-2 mr-2 cursor-select z-10`}
                 onClick={()=>{
                     let element = document.querySelector(`#${project.slug}`)
-                    let rect = element?.getBoundingClientRect();
                     var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-
                     selectedProject===project.slug? window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
-                    :element?.scrollIntoView()
+                    :selectedProject?
+                        setTimeout(()=>{
+                        element?.scrollIntoView({behavior:"smooth", block:"start"})}, 600)
+                    :setTimeout(()=>{
+                    element?.scrollIntoView({behavior:"smooth", block:"start"})}, 200)
+
                     router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
                     
                     let filters = document.querySelector("header section")
