@@ -103,20 +103,22 @@ export function Gallery({ project }: Props) {
         <> 
             <button
               id={`${project.slug}_larr`}
-              className={`transition-[opacity] h-fit w-fit absolute left-2 bottom-2 ${showLeftArrow? "opacity-100": "opacity-0"}`}
+              className={`transition-[opacity] h-fit w-fit absolute bottom-2 ${showLeftArrow? "opacity-100": "opacity-0"}`}
               onClick={prevImage}
             >
               <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-black hover:fill-gray-300 stroke hover:stroke-black stroke-gray-300 stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 40 30">
-                <polygon points="30 0 30 30 10 15" />
+                <polygon points="30 0 10 15 30 30
+                                30 25 17 15 30 5" />
               </svg>
             </button>
           
           <button
-            className="absolute right-2 bottom-2"
+            className="absolute right-0 bottom-2"
             onClick={nextImage}
           >
             <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-black hover:fill-gray-300 stroke hover:stroke-black stroke-gray-300 stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="-10 0 40 30">
-              <polygon points="0 0 0 30 20 15" />
+              <polygon points="0 0 20 15 0 30 
+                              0 25 13 15 0 5" />
             </svg>
           </button>
         </>
