@@ -22,7 +22,7 @@ export function SiteFooter(info:any){
         isSanityStudio? "" : 
         <footer id="footer" ref={footerRef} className="border-t-[2px] mt-[2px] border-black relative z-10">
             <div className={`h-fit pb-10 lg:pt-4 pt-2 text-left grid lg:grid-cols-2 lg:mx-5 lg:text-black lg:text-[1rem] text-gray-300 `}>
-                <div className="lg:pb-0 pb-5 lg:text-2xl lg:leading-[1.95rem] text-[1.4rem] leading-[1.6rem] lg:w-auto w-screen lg:px-0 px-2 serif">
+                <div className="lg:pb-0 pb-5 lg:text-2xl lg:leading-[1.95rem] text-[1.2rem] leading-[1.5rem] lg:w-auto w-screen lg:px-0 px-2 serif">
                     <PortableText value={info.info[0].bio[0]}/>
                 </div>
                 <div className={`lg:h-fit lg:pt-0 pb-20 sans px-2`}>

@@ -167,37 +167,6 @@ export default function Projects({project}: Props) {
 
             {/* gallery */}
             <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-all duration-500  ${selectedProject===project.slug? "max-h-[50rem] pt-1": "max-h-[0rem]"}`}>
-                <div className={`absolute left-0 flex w-full justify-between items-center top-[15rem] z-30 text-2xl text-gray-300 serif h-fit leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
-                    {/* left arrow */}
-                    <button id={`${project.slug}_larr`} className={`transition-[opacity] opacity-0 bg-black px-1 mx-1 outline outline-1 outline-gray-300 hover:outline-black hover:bg-gray-300 hover:text-black`}
-                    onClick={()=>{
-                        let gallery = document.querySelector(`#${project.slug}-gallery`)
-                        var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-                        function remToPx(remValue:number, rootFontSize:number) { // Convert REM to PX using the formula 
-                            var pxValue = remValue * rootFontSize;
-                            // Return the result
-                            return pxValue;
-                        }
-                        let width = remToPx(42, rootFontSize)
-                        gallery!.scrollLeft -= width
-                        // gallery!.scrollLeft===0? gallery!.scrollLeft=gallery!.scrollWidth
-                        // :gallery!.scrollLeft -= width
-                    }}>&larr;</button>
-                    {/* right arrow */}
-                    <button className="bg-black px-1 mx-1 outline outline-1 outline-gray-300 hover:outline-black hover:bg-gray-300 hover:text-black"
-                    onClick={()=>{
-                        let gallery = document.querySelector(`#${project.slug}-gallery`)
-                        var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-                        function remToPx(remValue:number, rootFontSize:number) { // Convert REM to PX using the formula 
-                            var pxValue = remValue * rootFontSize;
-                            // Return the result
-                            return pxValue;
-                        }
-                        let width = remToPx(42, rootFontSize)
-                        gallery!.scrollLeft>width*(project.images.length-3)? gallery!.scrollLeft=0
-                        :gallery!.scrollLeft += width
-                    }}>&rarr;</button>
-                </div>
                 {/* gallery component */}
                 <Gallery project={project}/>
                 {/* info */}
