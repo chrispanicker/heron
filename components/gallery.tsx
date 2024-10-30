@@ -110,7 +110,7 @@ export function Gallery({ project }: Props) {
         <span className={`flex w-max ${!showArrows ? 'justify-center' : 'justify-start'} items-start`}>
           {project.images?.map((e: any, index) => (
             e._type === 'mp4' ? (
-              <video key={`project.slug+${index}`} width="1440" height="1080" muted loop autoPlay preload="true" className="w-[43rem] h-[32rem] pr-2 snap-center snap-always">
+              <video key={`project.slug+${index}`} width="1440" height="1080" muted controls loop autoPlay preload="true" className="w-[43rem] h-[32rem] pr-2 snap-center snap-always">
                 <source src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} type="video/mp4" />
                 <track
                   src="/path/to/captions.vtt"
