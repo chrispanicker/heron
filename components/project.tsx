@@ -84,7 +84,7 @@ export default function Projects({project}: Props) {
 
     return (
         <div id={project.slug} 
-            className={`group lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-200 mx-[1.75px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "py-12 bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
+            className={`group lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-200 ml-[1.75px] mr-[2px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "pt-12 bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
             <div className="w-full h-full absolute top-0 z-0" 
             onClick={()=>{
                 let element = document.querySelector(`#${project.slug}`)
@@ -95,6 +95,8 @@ export default function Projects({project}: Props) {
                     setTimeout(()=>{element?.scrollIntoView({behavior:"smooth", block:"start"})}, 501)
                     :element?.scrollIntoView({behavior:"smooth", block:"start"})
                 let filters = document.querySelector("header section")
+                router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
+
                 e=1
                 if(!filters?.classList.contains("h-0")){
                     openFilters(e)

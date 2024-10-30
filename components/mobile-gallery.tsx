@@ -22,7 +22,7 @@ export function MobileGallery({project}:Props){
     return(
         <>
         {/* GALLERY */}
-        <div id={`${project.slug}-mobileGallery`} className={`pt-8 left-0 scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory ${project.gallery.length<2? "mt-6": ""}`}
+        <div id={`${project.slug}-mobileGallery`} className={`relative pt-8 left-0 scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory ${project.gallery.length<2? "mt-6": ""}`}
         onScroll={(e)=>{
             let larr = document.querySelector(`#mobile-${project.slug}_larr`)
             if(e.currentTarget.scrollLeft<20 && larr?.classList.contains("opacity-100")){
@@ -31,7 +31,7 @@ export function MobileGallery({project}:Props){
                 larr!.classList.replace("opacity-0","opacity-100")
             } 
         }}>
-                <div className={`sticky left-0 flex w-full justify-between items-center top-[98%] text-2xl text-gray-300 serif h-0 leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+                <div className={`sticky left-0 flex w-full justify-between items-center top-full mb-6 text-2xl text-gray-300 serif h-0 leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
                     <button className="opacity-0 px-[.1rem] transition-[opacity]"
                     id={`mobile-${project.slug}_larr`} 
                     onClick={()=>{
@@ -40,15 +40,9 @@ export function MobileGallery({project}:Props){
                         gallery!.scrollLeft>=0&& gallery!.scrollLeft<50? gallery!.scrollLeft=gallery!.scrollWidth
                         :gallery!.scrollLeft -= width
                     }}>
-
-                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={2}  xmlns="http://www.w3.org/2000/svg" width="45" height="90" viewBox="0 0 30 60">
-                            <polygon points="
-                            30 0 
-                            30 30 
-                            10 15"
-                            />
+                        <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-black stroke stroke-gray-300 stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 40 30">
+                            <polygon points="30 0 10 15 30 30 30 25 17 15 30 5" />
                         </svg>
-
                     </button>
                     <button className=" px-[.1rem]"
                     onClick={()=>{
@@ -57,13 +51,9 @@ export function MobileGallery({project}:Props){
                         gallery!.scrollLeft>width*(project.images.length-1)? gallery!.scrollLeft=0
                         : gallery!.scrollLeft += width
                     }}>
-                        <svg id="a" data-name="Layer 1" stroke="black" fill="#d1d5db" strokeWidth={2}  xmlns="http://www.w3.org/2000/svg" width="45" height="90" viewBox="0 0 30 60">
-                            <polygon points="
-                            0 0
-                            20 15
-                            0 30"
-                            />
-                        </svg>
+                        <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-black stroke stroke-gray-300 stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="-10 0 40 30">
+                            <polygon points="0 0 20 15 0 30 0 25 13 15 0 5" />
+                        </svg>      
                     </button>
                 </div>
                 <span className={`flex w-max justify-center items-start h-full`}>
