@@ -45,7 +45,7 @@ export default function Projects({project}: Props) {
         let element = e.target;
 
 
-        if(element.scrollWidth-element.scrollLeft===element.offsetWidth){
+        if(element.scrollWidth-Math.round(element.scrollLeft)===element.offsetWidth){
             setTimeout(()=>{
                 reachedEnd=-1;
             },100)

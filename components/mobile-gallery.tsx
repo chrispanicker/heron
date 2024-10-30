@@ -31,7 +31,7 @@ export function MobileGallery({project}:Props){
                 larr!.classList.replace("opacity-0","opacity-100")
             } 
         }}>
-                <div className={`sticky left-0 flex w-full justify-between items-center top-full mb-6 text-2xl text-gray-300 serif h-0 leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+                <div className={`sticky left-0 flex w-full justify-between items-center pointer-events-none top-full mb-6 text-2xl text-gray-300 serif h-0 leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
                     <button className="opacity-0 px-[.1rem] transition-[opacity]"
                     id={`mobile-${project.slug}_larr`} 
                     onClick={()=>{
