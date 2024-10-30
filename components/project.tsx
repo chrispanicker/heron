@@ -92,7 +92,7 @@ export default function Projects({project}: Props) {
 
                 selectedProject===project.slug? window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
                 :selectedProject?
-                    setTimeout(()=>{element?.scrollIntoView({behavior:"smooth", block:"start"})}, 501)
+                    setTimeout(()=>{element?.scrollIntoView({behavior:"smooth", block:"start"})}, 550)
                     :element?.scrollIntoView({behavior:"smooth", block:"start"})
                 let filters = document.querySelector("header section")
                 router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
