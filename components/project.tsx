@@ -19,6 +19,7 @@ export default function Projects({project}: Props) {
     let collabs = searchParams.getAll("collabs");
     let tags = searchParams.getAll("tags");
     let bool: Boolean;
+    let reachedEnd: number;
     roles.length + collabs.length + tags.length ===1? bool = true: bool=false
     let params = roles.toString()+","+collabs.toString()+","+tags.toString()
 
@@ -29,7 +30,9 @@ export default function Projects({project}: Props) {
 
     function setHoverInterval(e:any) {
         if (!tagHoverInterval) {
-          tagHoverInterval = setInterval(tagHover, 15, e);
+          tagHoverInterval = setInterval(()=>{
+            tagHover(e)
+          }, 15);
         }
     }
       
@@ -39,11 +42,24 @@ export default function Projects({project}: Props) {
       }
 
     function tagHover(e:any) {
-        // console.log(e)
-        let element = e.target
-        if(element.scrollLeft<element.scrollWidth-element.offsetWidth){
-            element.scrollLeft=element.scrollLeft+1
+        let element = e.target;
+
+
+        if(element.scrollWidth-element.scrollLeft===element.offsetWidth){
+            setTimeout(()=>{
+                reachedEnd=-1;
+            },100)
+
+        }else if (element.scrollLeft === 0){
+            setTimeout(()=>{
+                reachedEnd=1;
+            },100)
         }
+
+        console.log("scrollWidth:_"+element.scrollWidth, "scrollLeft:_"+Math.round(element.scrollLeft), "offsetWidth:_"+element.offsetWidth, "reachedEnd:_"+reachedEnd)
+
+        element.scrollLeft=element.scrollLeft+reachedEnd;
+        
     }
 
     const createQueryString = useCallback(
@@ -52,11 +68,7 @@ export default function Projects({project}: Props) {
             let stringSearchParams = searchParams.toString()
             stringSearchParams = stringSearchParams.replaceAll("+", " ")
             params = new URLSearchParams(stringSearchParams)
-            
-            // if(name==="roles"||name==="collabs"||name==="tags"){
-            //     stringSearchParams.includes(`${name}=${value}`)?
-            //     params.delete(name, value):params.append(name, value)
-            // }
+
         
             if(name==="project"){
                 if(stringSearchParams.includes(`${name}=${value}`)){ 
