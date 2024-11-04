@@ -22,7 +22,7 @@ export function MobileGallery({project}:Props){
     return(
         <>
         {/* GALLERY */}
-        <div id={`${project.slug}-mobileGallery`} className={`relative pt-8 left-0 scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory ${project.gallery.length<2? "mt-6": ""}`}
+        <div id={`${project.slug}-mobileGallery`} className={`relative left-0 scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory ${project.gallery.length<2? "mt-6": ""}`}
         onScroll={(e)=>{
             let larr = document.querySelector(`#mobile-${project.slug}_larr`)
             if(e.currentTarget.scrollLeft<20 && larr?.classList.contains("opacity-100")){
