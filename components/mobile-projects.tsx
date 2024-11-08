@@ -95,7 +95,7 @@ export default function MobileProjects({project}: Props) {
     
 
     return (
-        <div ref={projRef} id ={`mobile-${project.slug}`} className={`relative group snap-start min-h-screen snap-always lg:hidden block relative items-center mx-2`}>
+        <div ref={projRef} id ={`mobile-${project.slug}`} className={`relative group snap-start snap-always h-[100lvh] lg:hidden block relative items-center mx-2`}>
             <div className="sticky top-10 bg-gray-300 border-b-2 border-black z-10 pt-2 pb-2">
                 <h2 className="text-2xl flex justify-start items-center leading-[1.8rem]">{project.name}</h2>
                 <div className="flex justify-between">
@@ -111,8 +111,33 @@ export default function MobileProjects({project}: Props) {
                 <MobileGallery project={project}/>
             </span>
 
+            <div className={`left-0 absolute z-30 flex w-full justify-between items-center mt-[-3rem] text-2xl text-gray-300 serif leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+                <button className="opacity-0 px-[.1rem] transition-[opacity]"
+                id={`mobile-${project.slug}_larr`} 
+                onClick={()=>{
+                    let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
+                    let width = document.documentElement.clientWidth
+                    gallery!.scrollLeft>=0&& gallery!.scrollLeft<50? gallery!.scrollLeft=gallery!.scrollWidth
+                    :gallery!.scrollLeft -= width
+                }}>
+                    <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-black stroke stroke-gray-300 stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 40 30">
+                        <polygon points="30 0 10 15 30 30 30 25 17 15 30 5" />
+                    </svg>
+                </button>
+                <button className=" px-[.1rem]"
+                onClick={()=>{
+                    let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
+                    let width = document.documentElement.clientWidth
+                    gallery!.scrollLeft>width*(project.images.length-1)? gallery!.scrollLeft=0
+                    : gallery!.scrollLeft += width
+                }}>
+                    <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-black stroke stroke-gray-300 stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="-10 0 40 30">
+                        <polygon points="0 0 20 15 0 30 0 25 13 15 0 5" />
+                    </svg>      
+                </button>
+            </div>
 
-            <div className={`sticky bottom-0 mt-2 bg-gray-300 z-10 pt-1 pb-8`}>
+            <div className={`sticky bottom-0 mt-2 bg-gray-300 z-10 pt-1`}>
                 <span className="leading-[1.2rem]">
                     {/* <p className="pb-1">For <i>{project.client}</i></p> */}
                     <PortableText value={project.content}/>
