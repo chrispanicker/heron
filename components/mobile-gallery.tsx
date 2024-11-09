@@ -36,7 +36,7 @@ export function MobileGallery({project}:Props){
                         e._type === 'mp4'?
                         <div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
                             <video width="1440" height="1080" muted loop autoPlay controls webkit-playsinline playsInline preload="true"
-                            className={`object-cover duration-500 h-[50lvh] w-[99vw] pointer-events-none`}>
+                            className={`object-cover duration-500 h-[50lvh] w-[99vw]`}>
                             <source src={getFile(e, {projectId:"01jwvji0", dataset:"production"}).asset.url} type="video/mp4" />
                             <track
                                 src="/path/to/captions.vtt"
