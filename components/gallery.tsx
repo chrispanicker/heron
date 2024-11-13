@@ -131,7 +131,7 @@ export function Gallery({ project }: Props) {
                 loading="lazy"
                 placeholder="blur"
                 blurDataURL={`${project.gallery[index].lqip}`}
-                // unoptimized={urlForImage(project.preview).url().includes(".gif")}
+                unoptimized={true}
               />
             )
           ))}
