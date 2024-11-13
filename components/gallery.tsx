@@ -23,7 +23,7 @@ export function Gallery({ project }: Props) {
   const scrollToImage = (index: number) => {
     if (scrollContainerRef.current) {
       const scrollWidth = scrollContainerRef.current.scrollWidth
-      const imageWidth = scrollWidth / project.images.length
+      const imageWidth = scrollWidth / project.images?.length
       scrollContainerRef.current.scrollTo({
         left: imageWidth * index,
         behavior: 'smooth'
@@ -33,12 +33,12 @@ export function Gallery({ project }: Props) {
 
   const nextImage = () => {
     isManualScrolling.current = false // Reset manual scrolling flag
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % project.images.length)
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % project.images?.length)
   }
 
   const prevImage = () => {
     isManualScrolling.current = false // Reset manual scrolling flag
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + project.images.length) % project.images.length)
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + project.images?.length) % project.images?.length)
   }
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export function Gallery({ project }: Props) {
       // Only update currentIndex if this is a manual scroll
       if (isManualScrolling.current) {
         const scrollWidth = container.scrollWidth
-        const imageWidth = scrollWidth / project.images.length
+        const imageWidth = scrollWidth / project.images?.length
         const newIndex = Math.round(container.scrollLeft / imageWidth)
         
         // Clear any existing timeout
@@ -97,7 +97,7 @@ export function Gallery({ project }: Props) {
         clearTimeout(scrollTimeout.current)
       }
     }
-  }, [project.images.length])
+  }, [project.images?.length])
 
   return (
     <div className="relative w-full max-w-screen mx-auto">

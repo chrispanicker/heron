@@ -111,7 +111,7 @@ export default function MobileProjects({project}: Props) {
                 <MobileGallery project={project}/>
             </span>
 
-            <div className={`left-0 absolute z-30 flex w-full justify-between items-center mt-[-3rem] text-2xl text-gray-300 serif leading-[1.1rem] ${project.gallery.length<2? "hidden": ""}`}>
+            <div className={`left-0 absolute z-30 flex w-full justify-between items-center mt-[-3rem] text-2xl text-gray-300 serif leading-[1.1rem] ${project.images?.length<2? "hidden": ""}`}>
                 <button className="opacity-0 px-[.1rem] transition-[opacity]"
                 id={`mobile-${project.slug}_larr`} 
                 onClick={()=>{
@@ -128,7 +128,7 @@ export default function MobileProjects({project}: Props) {
                 onClick={()=>{
                     let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                     let width = document.documentElement.clientWidth
-                    gallery!.scrollLeft>width*(project.images.length-1)? gallery!.scrollLeft=0
+                    gallery!.scrollLeft>width*(project.images?.length-1)? gallery!.scrollLeft=0
                     : gallery!.scrollLeft += width
                 }}>
                     <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-black stroke stroke-gray-300 stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="-10 0 40 30">
