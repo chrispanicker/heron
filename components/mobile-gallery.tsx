@@ -1,4 +1,4 @@
-
+'use client'
 import { urlForImage } from "@/sanity/lib/image"
 import { Project } from "@/types/project"
 import { getFile } from "@sanity/asset-utils";
@@ -35,7 +35,7 @@ export function MobileGallery({project}:Props){
                     {project.images?.map((e:any, index)=>(
                         e._type === 'mp4'?
                         <div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
-                            <video width="1440" height="1080" muted loop autoPlay controls webkit-playsinline playsInline preload="true"
+                            <video width="1440" height="1080" muted loop autoPlay controls webkit-playsinline="true" playsInline preload="true"
                             className={`object-cover duration-500 h-[50lvh] w-[99vw]`}>
                             <source src={getFile(e, {projectId:"01jwvji0", dataset:"production"}).asset.url} type="video/mp4" />
                             <track
@@ -48,11 +48,11 @@ export function MobileGallery({project}:Props){
                             </video>
                         </div>
                         :<div key={`mobile-${project.slug}+${index}`} className={`relative snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
-                            {/* {e.description? 
-                            <>
-                            <button className="absolute top-2 right-4 text-gray-300 px-[.4rem] underline underline-offset-2 mono">i</button>
-                            </>
-                            : ""} */}
+                            {e.description? 
+                            <span className="mobile-description absolute top-0 h-[50lvh] w-[99vw] text-gray-300 flex text-justify justify-center items-start mt-2 px-5">
+                                <p className="serif leading-[1.2rem]">{e.description}</p>
+                            </span>
+                            : ""}
                             <Image
                             src={urlForImage(e).url()}
                             alt=""

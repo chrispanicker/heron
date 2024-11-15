@@ -107,7 +107,7 @@ export function Gallery({ project }: Props) {
           !showArrows ? 'justify-center' : ''
         }`}
       >
-        <span className={`relative flex w-max ${!showArrows ? 'justify-center' : 'justify-start'} items-start`}>
+        <span className={`relative flex w-max ${!showArrows ? 'justify-center' : 'justify-start'} items-start`} key={`${project.slug}-gallery`}>
           {project.images?.map((e: any, index) => (
             e._type === 'mp4' ? (
               <video key={`project.slug+${index}`} width="1440" height="1080" muted controls loop autoPlay preload="true" className="w-[43rem] h-[32rem] pr-2 snap-center snap-always">
@@ -121,16 +121,14 @@ export function Gallery({ project }: Props) {
                 Your browser does not support the video tag.
               </video>
             ) : (
-              <>
-                <div className="relative">
+                <div className="relative"key={`project.slug+${index}`}>
                   {e.description?
-                  <span className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%]">
+                  <span key={`${project.slug}-description-${index}`} className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%]">
                     <button className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-gray-300 text-black outline-gray-300 mb-5">{e.description}</button>
                   </span>
                   : ""}
                   <Image
                     src={urlForImage(e).url()}
-                    key={`project.slug+${index}`}
                     alt=""
                     width={1440}
                     height={1080}
@@ -141,7 +139,6 @@ export function Gallery({ project }: Props) {
                     unoptimized={true}
                   />
                 </div>
-              </>
             )
           ))}
         </span>
