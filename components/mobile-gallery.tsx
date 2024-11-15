@@ -47,7 +47,12 @@ export function MobileGallery({project}:Props){
                             Your browser does not support the video tag.
                             </video>
                         </div>
-                        :<div key={`mobile-${project.slug}+${index}`} className={` snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
+                        :<div key={`mobile-${project.slug}+${index}`} className={`relative snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
+                            {/* {e.description? 
+                            <>
+                            <button className="absolute top-2 right-4 text-gray-300 px-[.4rem] underline underline-offset-2 mono">i</button>
+                            </>
+                            : ""} */}
                             <Image
                             src={urlForImage(e).url()}
                             alt=""

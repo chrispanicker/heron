@@ -44,7 +44,6 @@ export default function Projects({project}: Props) {
     function tagHover(e:any) {
         let element = e.target;
 
-
         if(element.scrollWidth-Math.round(element.scrollLeft)===element.offsetWidth){
             setTimeout(()=>{
                 reachedEnd=-1;
@@ -55,9 +54,6 @@ export default function Projects({project}: Props) {
                 reachedEnd=1;
             },100)
         }
-
-        console.log("scrollWidth:_"+element.scrollWidth, "scrollLeft:_"+Math.round(element.scrollLeft), "offsetWidth:_"+element.offsetWidth, "reachedEnd:_"+reachedEnd)
-
         element.scrollLeft=element.scrollLeft+reachedEnd;
         
     }
@@ -155,6 +151,7 @@ export default function Projects({project}: Props) {
                         router.push( `/?${createQueryString(`roles`, `${tag.name}`)}`, {scroll: false})
                         params.includes(tag.name) && bool ? e=1:""
                         openFilters(e)
+                        stopHoverInterval()
                     }}
                 >{tag.name}</button>
                 )): ""}
@@ -187,7 +184,7 @@ export default function Projects({project}: Props) {
                 {/* gallery component */}
                 <Gallery project={project}/>
                 {/* info */}
-                <div className={`pb-[.1rem] pt-1 sticky grid-cols-6 grid left-0 ${selectedProject===project.slug? "": ""}`}>
+                <div className={`pb-[.1rem] pt-1 sticky grid-cols-6 grid left-0`}>
                     {/* description */}
                     <div className="col-span-5">
                         <PortableText value={project.content}/>
