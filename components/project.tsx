@@ -162,6 +162,7 @@ export default function Projects({project}: Props) {
                         router.push( `/?${createQueryString(`collabs`, `${tag.name}`)}`, {scroll: false})
                         params.includes(tag.name) && bool ? e=1:""
                         openFilters(e)
+                        stopHoverInterval()
                     }}>{tag.name}</button>
                 )): ""}
                 {project.tags? project.tags?.map((tag:any)=>(
@@ -172,6 +173,7 @@ export default function Projects({project}: Props) {
                     router.push( `/?${createQueryString(`tags`, `${tag.name}`)}`, {scroll: false})
                     params.includes(tag.name) && bool ? e=1:""
                     openFilters(e)
+                    stopHoverInterval()
                 }}>{tag.name}</button>
                 )): ""}
 
