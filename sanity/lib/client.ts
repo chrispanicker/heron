@@ -1,9 +1,6 @@
 import { createClient } from "@sanity/client"
 import { QueryOptions, type QueryParams } from "next-sanity";
 import { apiVersion, dataset, projectId, useCdn, } from "../env"
-import { draftMode } from "next/headers";
-import { token } from "./token";
-import { DraftMode } from "next/dist/client/components/draft-mode";
 
 export const client = createClient({
   apiVersion,

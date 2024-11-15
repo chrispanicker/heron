@@ -107,7 +107,7 @@ export function Gallery({ project }: Props) {
           !showArrows ? 'justify-center' : ''
         }`}
       >
-        <span className={`flex w-max ${!showArrows ? 'justify-center' : 'justify-start'} items-start`}>
+        <span className={`relative flex w-max ${!showArrows ? 'justify-center' : 'justify-start'} items-start`}>
           {project.images?.map((e: any, index) => (
             e._type === 'mp4' ? (
               <video key={`project.slug+${index}`} width="1440" height="1080" muted controls loop autoPlay preload="true" className="w-[43rem] h-[32rem] pr-2 snap-center snap-always">
@@ -121,18 +121,27 @@ export function Gallery({ project }: Props) {
                 Your browser does not support the video tag.
               </video>
             ) : (
-              <Image
-                src={urlForImage(e).url()}
-                key={`project.slug+${index}`}
-                alt=""
-                width={1440}
-                height={1080}
-                className={`object-cover pr-2 transition-all duration-500 min-w-[43rem] h-[32rem] snap-center snap-always`}
-                loading="lazy"
-                placeholder="blur"
-                blurDataURL={`${project.gallery[index].lqip}`}
-                unoptimized={true}
-              />
+              <>
+                <div className="relative">
+                  {e.description?
+                  <span className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%]">
+                    <button className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-gray-300 text-black outline-gray-300 mb-5">{e.description}</button>
+                  </span>
+                  : ""}
+                  <Image
+                    src={urlForImage(e).url()}
+                    key={`project.slug+${index}`}
+                    alt=""
+                    width={1440}
+                    height={1080}
+                    className={`object-cover pr-2 transition-all duration-500 min-w-[43rem] h-[32rem] snap-center snap-always`}
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL={`${project.gallery[index].lqip}`}
+                    unoptimized={true}
+                  />
+                </div>
+              </>
             )
           ))}
         </span>

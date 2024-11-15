@@ -58,26 +58,60 @@ const project = {
                 ]
             },
         },
+        // {
+        //     name: 'images',
+        //     title: "Images",
+        //     type: "array",
+        //     of: [{type: 'image',
+        //         options: {
+        //             metadata: [
+        //               'blurhash',   // Default: included
+        //             ],
+        //             // Specify the allowed MIME types
+        //             accept: '.pdf,image/jpeg,image/png',
+                    
+        //         },
+        //     },
+        //     {
+        //         type: 'file', 
+        //         title:'MP4', 
+        //         name:'mp4', options:{
+        //         accept: 'video/*,.mp4'
+        //     }}]
+        // },
+
         {
             name: 'images',
             title: "Images",
             type: "array",
-            of: [{type: 'image',
+            of: [
+                {
+                type: 'image',
                 options: {
                     metadata: [
-                      'blurhash',   // Default: included
+                    'blurhash',   // Default: included
                     ],
                     // Specify the allowed MIME types
                     accept: '.pdf,image/jpeg,image/png',
-                    
                 },
-            },
-            {
+                fields: [
+                    {
+                    name: 'description',
+                    type: 'string',
+                    title: 'Image Description',
+                    description: 'Provide a description of the image to appear on hover',
+                    }
+                ]
+                },
+                {
                 type: 'file', 
-                title:'MP4', 
-                name:'mp4', options:{
-                accept: 'video/*,.mp4'
-            }}]
+                title: 'MP4', 
+                name: 'mp4', 
+                options: {
+                    accept: 'video/*,.mp4'
+                }
+                }
+            ]
         },
         {
             name: "url",
