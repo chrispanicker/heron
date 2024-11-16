@@ -109,7 +109,8 @@ export async function getFilteredProjects({searchParams}:Props){
                     "lqip": asset->metadata.lqip,
                     "blurData": asset->metadata.blurhash,
                     "alt": alt,
-                    "description": description
+                    "description": description,
+                    "text": text
                     },
                 content,
                 "roles": roles[]->{

@@ -124,7 +124,7 @@ export default function MobileProjects({project}: Props) {
                         <polygon points="30 0 10 15 30 30 30 25 17 15 30 5" />
                     </svg>
                 </button>
-                <button className="text-gray-300 outline-[.13rem] outline outline-gray-300 rounded-3xl px-[.6rem] py-1"
+                <button className="text-gray-300 outline-[.13rem] outline outline-gray-300 rounded-3xl px-[.5rem] py-[.1rem] text-[1.2rem]"
                     onClick={()=>{
                         console.log(document.querySelectorAll(".mobile-description"))
                         document.querySelectorAll(".mobile-description").forEach((element)=>{

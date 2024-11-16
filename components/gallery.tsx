@@ -6,6 +6,7 @@ import Image from "next/image"
 import { getFile } from '@sanity/asset-utils'
 import { useSearchParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
+import { PortableText } from "@portabletext/react"
 
 interface Props {
   project: Project
@@ -108,7 +109,7 @@ export function Gallery({ project }: Props) {
         }`}
       >
         <span className={`relative flex w-max ${!showArrows ? 'justify-center' : 'justify-start'} items-start`} key={`${project.slug}-gallery`}>
-          {project.images?.map((e: any, index) => (
+          {project.images?.map((e: any, index:any) => (
             e._type === 'mp4' ? (
               <video key={`project.slug+${index}`} width="1440" height="1080" muted controls loop autoPlay preload="true" className="w-[43rem] h-[32rem] pr-2 snap-center snap-always">
                 <source src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} type="video/mp4" />
@@ -120,11 +121,11 @@ export function Gallery({ project }: Props) {
                 />
                 Your browser does not support the video tag.
               </video>
-            ) : (
+            ) : e._type==="image"? (
                 <div className="relative"key={`project.slug+${index}`}>
                   {e.description?
                   <span key={`${project.slug}-description-${index}`} className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%]">
-                    <button className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-gray-300 text-black outline-gray-300 mb-5">{e.description}</button>
+                    <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-gray-300 text-black outline-gray-300 mb-5">{e.description}</p>
                   </span>
                   : ""}
                   <Image
@@ -139,6 +140,10 @@ export function Gallery({ project }: Props) {
                     unoptimized={true}
                   />
                 </div>
+            ): (
+              <div className="min-w-[43rem] h-[32rem] snap-center snap-always flex justify-center items-center">
+                <PortableText value={e.content} />
+              </div>
             )
           ))}
         </span>
@@ -150,7 +155,7 @@ export function Gallery({ project }: Props) {
             className={`transition-[opacity] h-fit w-fit absolute bottom-2 ${showLeftArrow? "opacity-100": "opacity-0"}`}
             onClick={prevImage}
           >
-            <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-black hover:fill-gray-300 stroke hover:stroke-black stroke-gray-300 stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 40 30">
+            <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-gray-300 stroke hover:stroke-gray-300 stroke-black stroke-[.04rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 40 30">
               <polygon points="30 0 10 15 30 30 30 25 17 15 30 5" />
             </svg>
           </button>
@@ -159,7 +164,7 @@ export function Gallery({ project }: Props) {
             className="absolute right-0 bottom-2"
             onClick={nextImage}
           >
-            <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-black hover:fill-gray-300 stroke hover:stroke-black stroke-gray-300 stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="-10 0 40 30">
+            <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-gray-300 stroke hover:stroke-gray-300 stroke-black stroke-[.04rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="-10 0 40 30">
               <polygon points="0 0 20 15 0 30 0 25 13 15 0 5" />
             </svg>
           </button>

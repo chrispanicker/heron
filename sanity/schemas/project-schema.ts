@@ -58,28 +58,6 @@ const project = {
                 ]
             },
         },
-        // {
-        //     name: 'images',
-        //     title: "Images",
-        //     type: "array",
-        //     of: [{type: 'image',
-        //         options: {
-        //             metadata: [
-        //               'blurhash',   // Default: included
-        //             ],
-        //             // Specify the allowed MIME types
-        //             accept: '.pdf,image/jpeg,image/png',
-                    
-        //         },
-        //     },
-        //     {
-        //         type: 'file', 
-        //         title:'MP4', 
-        //         name:'mp4', options:{
-        //         accept: 'video/*,.mp4'
-        //     }}]
-        // },
-
         {
             name: 'images',
             title: "Images",
@@ -110,6 +88,18 @@ const project = {
                 options: {
                     accept: 'video/*,.mp4'
                 }
+                },
+                {
+                    name: 'textcard',
+                    title: "Text Card",
+                    type: 'object',
+                    fields: [
+                    {       
+                        name: 'content',
+                        title: "Content",
+                        type: 'array',
+                        of: [{ type: 'block'}]}
+                    ]  
                 }
             ]
         },

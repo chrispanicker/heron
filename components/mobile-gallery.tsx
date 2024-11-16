@@ -1,6 +1,7 @@
 'use client'
 import { urlForImage } from "@/sanity/lib/image"
 import { Project } from "@/types/project"
+import { PortableText } from "@portabletext/react";
 import { getFile } from "@sanity/asset-utils";
 import Image from "next/image"
 import { useSearchParams } from "next/navigation";
@@ -32,7 +33,7 @@ export function MobileGallery({project}:Props){
             } 
         }}>
                 <span className={`flex w-max justify-center items-start h-full`}>
-                    {project.images?.map((e:any, index)=>(
+                    {project.images?.map((e:any, index:any)=>(
                         e._type === 'mp4'?
                         <div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
                             <video width="1440" height="1080" muted loop autoPlay controls webkit-playsinline="true" playsInline preload="true"
@@ -47,7 +48,7 @@ export function MobileGallery({project}:Props){
                             Your browser does not support the video tag.
                             </video>
                         </div>
-                        :<div key={`mobile-${project.slug}+${index}`} className={`relative snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
+                        : e._type==="image"?<div key={`mobile-${project.slug}+${index}`} className={`relative snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
                             {e.description? 
                             <span className="mobile-description absolute top-0 h-[50lvh] w-[99vw] text-gray-300 flex text-justify justify-center items-start mt-2 px-5">
                                 <p className="serif leading-[1.2rem]">{e.description}</p>
@@ -65,6 +66,7 @@ export function MobileGallery({project}:Props){
                             unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                             />
                         </div>
+                        : <PortableText value={project.content} />
                     ))}
                 </span>
             </div>
