@@ -13,13 +13,11 @@ type job ={
 
 
 
-export function SiteHeader(){
+export function SiteHeader(info:any){
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin'); 
     const e = 1
 
-
-// console.log(allprojects)
     return (
         isSanityStudio? "" : 
         <>
@@ -27,7 +25,7 @@ export function SiteHeader(){
             >
                 <h1 className="flex duration-500 text-[1.35rem] sans" onClick={()=>{document.querySelector("#foot")?.scrollIntoView({behavior:"smooth", block: "start"})}}
                 >Drew Litowitz&nbsp;
-                    <p className="lg:inline-block hidden">is a Graphic Designer and Art Director based in NYC.</p>
+                    <p className="lg:inline-block hidden">{info.info[0].header}</p>
                 </h1>
                 <div className="flex justify-center items-center h-max">
                     <button className="filters text-4xl z-50 transition-all sans font-bolder" 

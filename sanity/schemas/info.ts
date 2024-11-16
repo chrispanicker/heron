@@ -9,6 +9,12 @@ const info = {
             type: "string"
         },
         {
+            name: 'header',
+            title: 'Header',
+            type: 'string',
+            description: "This goes after your name in the header of the desktop site."
+        },
+        {
             name: 'bio',
             title: "Bio",
             type: 'array',

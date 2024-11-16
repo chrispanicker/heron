@@ -43,7 +43,7 @@ export default async function Home({searchParams}: Props) {
           </div>
         )})}
         <div className="lg:block hidden">
-        <SiteFooter info={info} />
+          <SiteFooter info={info} />
         </div>
 
     </main>: <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>

@@ -21,84 +21,61 @@ export function Gallery({ project }: Props) {
   const isManualScrolling = useRef(false)
   const scrollTimeout = useRef<NodeJS.Timeout>()
 
+  const IMAGE_WIDTH = 688 // 43rem in pixels
+
   const scrollToImage = (index: number) => {
     if (scrollContainerRef.current) {
-      const scrollWidth = scrollContainerRef.current.scrollWidth
-      const imageWidth = scrollWidth / project.images?.length
       scrollContainerRef.current.scrollTo({
-        left: imageWidth * index,
+        left: IMAGE_WIDTH * index,
         behavior: 'smooth'
       })
     }
   }
 
   const nextImage = () => {
-    isManualScrolling.current = false // Reset manual scrolling flag
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % project.images?.length)
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1) % project.images?.length
+      scrollToImage(newIndex)
+      return newIndex
+    })
   }
 
   const prevImage = () => {
-    isManualScrolling.current = false // Reset manual scrolling flag
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + project.images?.length) % project.images?.length)
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex - 1 + project.images?.length) % project.images?.length
+      scrollToImage(newIndex)
+      return newIndex
+    })
   }
-
-  useEffect(() => {
-    if (!isManualScrolling.current) {
-      scrollToImage(currentIndex)
-    }
-  }, [currentIndex])
 
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
 
     const handleScroll = () => {
-      setShowLeftArrow(container.scrollLeft > 0)
+      const scrollLeft = container.scrollLeft
+      setShowLeftArrow(scrollLeft > 0)
 
-      // Only update currentIndex if this is a manual scroll
-      if (isManualScrolling.current) {
-        const scrollWidth = container.scrollWidth
-        const imageWidth = scrollWidth / project.images?.length
-        const newIndex = Math.round(container.scrollLeft / imageWidth)
-        
-        // Clear any existing timeout
-        if (scrollTimeout.current) {
-          clearTimeout(scrollTimeout.current)
-        }
-
-        // Set a timeout to update the index after scrolling stops
-        scrollTimeout.current = setTimeout(() => {
-          setCurrentIndex(newIndex)
-          isManualScrolling.current = false
-        }, 150) // Adjust this delay as needed
+      // Update currentIndex based on scroll position
+      const newIndex = Math.round(scrollLeft / IMAGE_WIDTH)
+      if (newIndex !== currentIndex) {
+        setCurrentIndex(newIndex)
       }
-    }
-
-    const handleScrollStart = () => {
-      isManualScrolling.current = true
     }
 
     const checkArrowVisibility = () => {
       setShowArrows(container.scrollWidth > container.clientWidth)
     }
 
-    // Add event listeners for both scroll start and during scroll
-    container.addEventListener('mousedown', handleScrollStart)
-    container.addEventListener('touchstart', handleScrollStart)
     container.addEventListener('scroll', handleScroll)
     window.addEventListener('resize', checkArrowVisibility)
     checkArrowVisibility()
 
     return () => {
-      container.removeEventListener('mousedown', handleScrollStart)
-      container.removeEventListener('touchstart', handleScrollStart)
       container.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', checkArrowVisibility)
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current)
-      }
     }
-  }, [project.images?.length])
+  }, [currentIndex, project.images?.length])
 
   return (
     <div className="relative w-full max-w-screen mx-auto">
@@ -109,9 +86,9 @@ export function Gallery({ project }: Props) {
         }`}
       >
         <span className={`relative flex w-max ${!showArrows ? 'justify-center' : 'justify-start'} items-start`} key={`${project.slug}-gallery`}>
-          {project.images?.map((e: any, index:any) => (
+          {project.images?.map((e: any, index: number) => (
             e._type === 'mp4' ? (
-              <video key={`project.slug+${index}`} width="1440" height="1080" muted controls loop autoPlay preload="true" className="w-[43rem] h-[32rem] pr-2 snap-center snap-always">
+              <video key={`${project.slug}-${index}`} width="1440" height="1080" muted controls loop autoPlay preload="true" className="w-[43rem] h-[32rem] pr-2 snap-center snap-always">
                 <source src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} type="video/mp4" />
                 <track
                   src="/path/to/captions.vtt"
@@ -121,27 +98,27 @@ export function Gallery({ project }: Props) {
                 />
                 Your browser does not support the video tag.
               </video>
-            ) : e._type==="image"? (
-                <div className="relative"key={`project.slug+${index}`}>
-                  {e.description?
+            ) : e._type === "image" ? (
+              <div className="relative" key={`${project.slug}-${index}`}>
+                {e.description && (
                   <span key={`${project.slug}-description-${index}`} className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%]">
                     <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-gray-300 text-black outline-gray-300 mb-5">{e.description}</p>
                   </span>
-                  : ""}
-                  <Image
-                    src={urlForImage(e).url()}
-                    alt=""
-                    width={1440}
-                    height={1080}
-                    className={`object-cover pr-2 transition-all duration-500 min-w-[43rem] h-[32rem] snap-center snap-always`}
-                    loading="lazy"
-                    placeholder="blur"
-                    blurDataURL={`${project.gallery[index].lqip}`}
-                    unoptimized={true}
-                  />
-                </div>
-            ): (
-              <div className="min-w-[43rem] h-[32rem] snap-center snap-always flex justify-center items-center">
+                )}
+                <Image
+                  src={urlForImage(e).url()}
+                  alt=""
+                  width={1440}
+                  height={1080}
+                  className={`object-cover pr-2 transition-all duration-500 min-w-[43rem] h-[32rem] snap-center snap-always`}
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL={`${project.gallery[index].lqip}`}
+                  unoptimized={true}
+                />
+              </div>
+            ) : (
+              <div className="w-[43rem] h-[32rem] snap-center snap-always flex justify-center items-center" key={`${project.slug}-${index}`}>
                 <PortableText value={e.content} />
               </div>
             )
@@ -152,7 +129,7 @@ export function Gallery({ project }: Props) {
         <> 
           <button
             id={`${project.slug}_larr`}
-            className={`transition-[opacity] h-fit w-fit absolute bottom-2 ${showLeftArrow? "opacity-100": "opacity-0"}`}
+            className={`transition-[opacity] h-fit w-fit absolute bottom-2 ${showLeftArrow ? "opacity-100" : "opacity-0"}`}
             onClick={prevImage}
           >
             <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-gray-300 stroke hover:stroke-gray-300 stroke-black stroke-[.04rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 40 30">

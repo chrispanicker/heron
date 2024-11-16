@@ -32,6 +32,7 @@ export async function getInfo() {
                   years,
                   title
                 },
+                header,
             }`
 )}
 
