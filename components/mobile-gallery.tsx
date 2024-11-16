@@ -66,7 +66,9 @@ export function MobileGallery({project}:Props){
                             unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                             />
                         </div>
-                        : <PortableText value={project.content} />
+                        : <div className="h-[60lvh] w-[99vw] snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-3xl p-5">
+                        <PortableText value={e.content} />
+                      </div>
                     ))}
                 </span>
             </div>
