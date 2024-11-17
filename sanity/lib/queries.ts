@@ -134,6 +134,6 @@ export async function getFilteredProjects({searchParams}:Props){
         : sort==="client-desc"? "client desc"   
         : sort==="tags-asc"? "totalCount asc"
         : sort==="tags-desc"? "totalCount desc"
-        :"priority asc"})`
+        :"priority desc"})`
     )
 }
