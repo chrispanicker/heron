@@ -37,7 +37,7 @@ export default async function Home({searchParams}: Props) {
         <Sorts />
         {filteredProjects.map((proj:any, index:number)=>{ 
         return(
-          <div className={` duration-500 ${project===proj.slug? "transition-none pb-[2rem]": "transition-all"}`} key={proj.slug}>
+          <div className={`duration-500 ${project===proj.slug? "transition-none pb-[2rem]": "transition-all"}`} key={proj.slug}>
             <Projects project={proj}/>
             <MobileProjects project={proj}/>
           </div>

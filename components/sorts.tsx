@@ -1,6 +1,7 @@
 'use client'
 import { useSearchParams, useRouter } from "next/navigation";
 import { useCallback } from "react";
+import { buttonClass } from "./classes";
 
 export function Sorts(){
     const router = useRouter();
@@ -29,39 +30,52 @@ export function Sorts(){
     )
     
     return(        
-        <span className="lg:grid hidden grid-cols-6 mt-2 text-[1.35rem] sans px-3 mb-[2px] pb-1 z-30 relative z-10 border-b-[2px] border-black decoration-2 ">
-            <button className="ml-2 col-span-2 text-left flex hover:underline decoration-2 underline-offset-2"
-            onClick={()=>{
-                router.push("?"+createSortQueryString("sort", "name"))
-            }}
-            >Name
-                <p className={`${sorted==="name-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
-                <p className={`${sorted==="name-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
-            </button>
+        <>
+            <span className={`${sorted? "flex": "hidden"} px-5`}>
+                <p className={`${buttonClass} mr-[.3rem] outline outline-1 outline-black`}>Sorted by</p>
+                <button className={`${buttonClass} bg-black text-gray-300 outline outline-1 outline-black hover:bg-gray-300 hover:text-black hover:underline`}
+                onClick={()=>{
+                    router.push("?"+"")
+                }}>{
+                sorted==="name-asc"||sorted==="name-desc"? "Name"
+                :sorted==="client-asc"||sorted==="client-desc"? "Client"
+                :sorted==="tags-asc"||sorted==="tags-desc"? "Tags"
+                :sorted==="year-asc"||sorted==="year-desc"? "Year": "Default"}</button>
+            </span>
+            <span className="lg:grid hidden grid-cols-6 mt-2 text-[1.35rem] sans px-3 mb-[2px] pb-1 z-30 relative z-10 border-b-[2px] border-black decoration-2 ">
+                <button className="ml-2 col-span-2 text-left flex hover:underline decoration-2 underline-offset-2"
+                onClick={()=>{
+                    router.push("?"+createSortQueryString("sort", "name"))
+                }}
+                >Name
+                    <p className={`${sorted==="name-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
+                    <p className={`${sorted==="name-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
+                </button>
 
-            <button className="pl-[.15rem] text-left flex hover:underline decoration-2 underline-offset-2"
-            onClick={()=>{
-                router.push("?"+createSortQueryString("sort", "client"))
-            }}>Client
-                <p className={`${sorted==="client-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
-                <p className={`${sorted==="client-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
-            </button>
+                <button className="pl-[.15rem] text-left flex hover:underline decoration-2 underline-offset-2"
+                onClick={()=>{
+                    router.push("?"+createSortQueryString("sort", "client"))
+                }}>Client
+                    <p className={`${sorted==="client-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
+                    <p className={`${sorted==="client-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
+                </button>
 
-            <button className="pl-[.15rem] col-span-2 text-left flex hover:underline decoration-2 underline-offset-2"
-            onClick={()=>{
-                router.push("?"+createSortQueryString("sort", "tags"))
-            }}>Tags
-                <p className={`${sorted==="tags-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
-                <p className={`${sorted==="tags-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
-            </button>
+                <button className="pl-[.15rem] col-span-2 text-left flex hover:underline decoration-2 underline-offset-2"
+                onClick={()=>{
+                    router.push("?"+createSortQueryString("sort", "tags"))
+                }}>Tags
+                    <p className={`${sorted==="tags-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
+                    <p className={`${sorted==="tags-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
+                </button>
 
-            <button className="mr-2 text-right flex justify-end hover:underline decoration-2 underline-offset-2"
-            onClick={()=>{
-                router.push("?"+createSortQueryString("sort", "year"))
-            }}>Year
-                <p className={`${sorted==="year-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
-                <p className={`${sorted==="year-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
-            </button>
-        </span>
+                <button className="mr-2 text-right flex justify-end hover:underline decoration-2 underline-offset-2"
+                onClick={()=>{
+                    router.push("?"+createSortQueryString("sort", "year"))
+                }}>Year
+                    <p className={`${sorted==="year-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
+                    <p className={`${sorted==="year-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
+                </button>
+            </span>
+        </>
     )
 }
