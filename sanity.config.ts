@@ -7,7 +7,6 @@ import jobs from "./sanity/schemas/jobs"
 import collabs from "./sanity/schemas/collabs";
 import gallery from "./sanity/schemas/opening-gallery";
 import { structureTool } from "sanity/structure";
-import { presentationTool } from "sanity/presentation";
 
 const config = defineConfig({
     projectId: "01jwvji0",

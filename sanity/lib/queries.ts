@@ -103,6 +103,7 @@ export async function getFilteredProjects({searchParams}:Props){
                 year,
                 client,
                 type,
+                priority,
                 preview,
                 images,
                 "gallery": images[]{
@@ -134,6 +135,6 @@ export async function getFilteredProjects({searchParams}:Props){
         : sort==="client-desc"? "client desc"   
         : sort==="tags-asc"? "totalCount asc"
         : sort==="tags-desc"? "totalCount desc"
-        :"priority desc"})`
+        :"priority asc"})`
     )
 }
