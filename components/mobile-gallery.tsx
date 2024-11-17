@@ -15,6 +15,7 @@ export function MobileGallery({project}:Props){
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")  
     let vimeoIDs:string[] = [];
+    const galleryWidth = "w-[98vw]"
     
     project.vimeo?.map((vid, index)=>{
         vimeoIDs[index]=vid.replace("https://vimeo.com/", "")
@@ -37,7 +38,7 @@ export function MobileGallery({project}:Props){
                         e._type === 'mp4'?
                         <div key={`project.slug+${index}`} className={`snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
                             <video width="1440" height="1080" muted loop autoPlay controls webkit-playsinline="true" playsInline preload="true"
-                            className={`object-cover duration-500 h-[50lvh] w-[99vw]`}>
+                            className={`object-cover duration-500 h-[50lvh] ${galleryWidth}`}>
                             <source src={getFile(e, {projectId:"01jwvji0", dataset:"production"}).asset.url} type="video/mp4" />
                             <track
                                 src="/path/to/captions.vtt"
@@ -50,7 +51,7 @@ export function MobileGallery({project}:Props){
                         </div>
                         : e._type==="image"?<div key={`mobile-${project.slug}+${index}`} className={`relative snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
                             {e.description? 
-                            <span className="mobile-description absolute top-0 h-[50lvh] w-[99vw] text-gray-300 flex text-justify justify-center items-start mt-2 px-5">
+                            <span className={`mobile-description absolute top-0 h-[50lvh] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
                                 <p className="serif leading-[1.2rem]">{e.description}</p>
                             </span>
                             : ""}
@@ -59,14 +60,14 @@ export function MobileGallery({project}:Props){
                             alt=""
                             width={1080}
                             height={1080}
-                            className={`object-cover duration-500 h-[50lvh] w-[99vw]`}
+                            className={`object-cover duration-500 h-[50lvh] ${galleryWidth}`}
                             loading="lazy"
                             placeholder="blur"
                             blurDataURL={`${project.gallery[index].lqip}`}
                             unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                             />
                         </div>
-                        : <div className="h-[60lvh] w-[99vw] snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-3xl p-5">
+                        : <div className={`h-[60lvh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-3xl p-5`}>
                         <PortableText value={e.content} />
                       </div>
                     ))}
