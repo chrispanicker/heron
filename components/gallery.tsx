@@ -102,7 +102,7 @@ export function Gallery({ project }: Props) {
               <div className="relative" key={`${project.slug}-${index}`}>
                 {e.description && (
                   <span key={`${project.slug}-description-${index}`} className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%]">
-                    <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-gray-300 text-black outline-gray-300 mb-5">{e.description}</p>
+                    <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5">{e.description}</p>
                   </span>
                 )}
                 <Image
@@ -119,7 +119,7 @@ export function Gallery({ project }: Props) {
               </div>
             ) : (
               <div className="w-[43rem] h-[32rem] snap-center snap-always flex justify-center items-center" key={`${project.slug}-${index}`}>
-                <span className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-gray-300 text-black outline-gray-300 mb-5">
+                <span className="max-w-[40rem] h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5 mr-10">
                 <PortableText value={e.content} />
                 </span>
               </div>
