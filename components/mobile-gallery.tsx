@@ -63,11 +63,11 @@ export function MobileGallery({project}:Props){
                             className={`object-cover duration-500 h-[50lvh] ${galleryWidth}`}
                             loading="lazy"
                             placeholder="blur"
-                            blurDataURL={`${project.gallery[index].lqip}`}
+                            blurDataURL={`${project.images[index].lqip}`}
                             unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
                             />
                         </div>
-                        : <div className={`h-[60lvh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-3xl p-5`}>
+                        : <div className={`h-[60lvh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-2xl text-center p-5`}>
                         <PortableText value={e.content} />
                       </div>
                     ))}
