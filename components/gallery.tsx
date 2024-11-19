@@ -119,7 +119,9 @@ export function Gallery({ project }: Props) {
               </div>
             ) : (
               <div className="w-[43rem] h-[32rem] snap-center snap-always flex justify-center items-center" key={`${project.slug}-${index}`}>
+                <span className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-gray-300 text-black outline-gray-300 mb-5">
                 <PortableText value={e.content} />
+                </span>
               </div>
             )
           ))}

@@ -31,7 +31,7 @@ export default async function Home({searchParams}: Props) {
   let info = await getInfo();
 
   return (
-    filteredProjects? <main className="z-20">
+    filteredProjects? <main className="z-20 min-h-[95.4lvh]">
       <div className="h-[10rem]"></div>
       <Scroller />
         <Sorts />

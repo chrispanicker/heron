@@ -1,10 +1,16 @@
 import { metadata } from "@/app/layout";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 const project = {
     name: 'project',
     title: "Projects",
     type: 'document',
+    orderings: [orderRankOrdering],
     fields: [
+        orderRankField({ 
+            type: "project", 
+            newItemPosition: "before" }
+        ),
         {
             name: 'name',
             title: 'Name',
@@ -17,11 +23,11 @@ const project = {
             options: { source: 'name'},
             description: 'Hi! Generate a URL slug for this Project!',
         },
-        {
-            name: 'priority', 
-            title: 'Priority', 
-            type: 'number', validation: (Rule: any) => Rule.min(0).integer().positive(), 
-        },
+        // {
+        //     name: 'priority', 
+        //     title: 'Priority', 
+        //     type: 'number', validation: (Rule: any) => Rule.min(0).integer().positive(), 
+        // },
         {
             name: 'client',
             title: 'Client',
@@ -103,12 +109,12 @@ const project = {
                 }
             ]
         },
-        {
-            name: "url",
-            title: 'URL',
-            type: "url",
-            description: 'You can link to the project here!',
-        },
+        // {
+        //     name: "url",
+        //     title: 'URL',
+        //     type: "url",
+        //     description: 'You can link to the project here!',
+        // },
         {
             name: 'tags',
             title: 'Tags',
@@ -130,19 +136,19 @@ const project = {
             of: [{ type: 'block'}]
         },
     ],
-    orderings: [
-        {
-          title: 'Priority',
-          name: 'priorityasc',
-          by: [
-            {field: 'priority', direction: 'asc'}
-          ]
-        },
-    ],
+    // orderings: [
+    //     {
+    //       title: 'Priority',
+    //       name: 'priorityasc',
+    //       by: [
+    //         {field: 'priority', direction: 'asc'}
+    //       ]
+    //     },
+    // ],
     preview: {
         select: {
           title: 'name',
-          subtitle: 'priority',
+        //   subtitle: 'priority',
           media: 'preview'
         }
     },
