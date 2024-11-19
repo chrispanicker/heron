@@ -10,23 +10,6 @@ import  SillyCanvas  from '@/components/silly-canvas'
 export const metadata: Metadata = {
   title: 'Drew Litowitz',
 }
-
-const flatspot = localFont({ 
-  src: [
-    {
-      path: '../public/fonts/FlatspotNuovoTest-Bold.woff2',
-      weight: '700'
-    }
-  ],
-  variable: "--font-flatspot"
-})
-
-const poppins = localFont({ 
-  src:'../public/fonts/Poppins-Black.woff',
-  variable: "--font-poppins"
-})
-
-
 export default async function RootLayout({
   children,
 }: {
