@@ -27,7 +27,9 @@ export default async function RootLayout({
   }) {
     let allprojects = await getProjects();
     let info = await getInfo();
-    let jobs = await getJobs();
+    // let jobs = await getJobs();
+    let jobs = [{company: "pitchfork", years: "2022", title: "Designer" 
+    }]
     
 
   return (

@@ -28,8 +28,10 @@ export default async function Home({searchParams}: Props) {
   const {tags, collabs, roles, about, view, sort, project} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
   let info = await getInfo();
-  let jobs = await getJobs();
-
+  // let jobs = await getJobs();
+  let jobs = [{company: "pitchfork", years: "2022", title: "Designer" 
+  }]
+  
   return (
     filteredProjects? <main className="z-20 min-h-[95.4lvh]">
       <div className="h-[10rem]"></div>
