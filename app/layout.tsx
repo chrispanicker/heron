@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
 import localFont from 'next/font/local'
-import {getInfo, getProjects } from '@/sanity/lib/queries'
+import {getInfo, getJobs, getProjects } from '@/sanity/lib/queries'
 import { HeaderAndFilters } from '@/components/header-and-filters'
 import  SillyCanvas  from '@/components/silly-canvas'
 
@@ -17,13 +17,14 @@ export default async function RootLayout({
   }) {
     let allprojects = await getProjects();
     let info = await getInfo();
+    let jobs = await getJobs();
     
 
   return (
     <html lang="en" className='bg-gray-300 text-black serif font-light overflow-x-hidden text-xl leading-[1.4rem] snap-y snap-mandatory cursor-auto '>
       <body>
         <section className='relative z-10'>
-          <HeaderAndFilters info={info}  projects={allprojects}/>
+          <HeaderAndFilters info={info}  projects={allprojects} jobs={jobs}/>
           <>{children}</>
         </section>
         <div id='foot' className="lg:flex hidden w-screen bg-black text-gray-300 sans h-[2.4rem] justify-between items-center lg:text-2xl px-5 relative z-10">
