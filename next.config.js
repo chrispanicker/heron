@@ -20,6 +20,7 @@ const nextConfig = {
     },
     experimental: { 
       missingSuspenseWithCSRBailout: false, 
+      outputStandalone: true, // Enables standalone build for Vercel
       taint: true,
     },
     env:{
