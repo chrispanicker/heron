@@ -25,13 +25,12 @@ const config = defineConfig({
                 return S.list()
                 .title('Content')
                 .items([
-                //   Minimum required configuration
                     orderableDocumentListDeskItem({type: 'project', title: 'Projects', S, context}),
                     S.documentTypeListItem('info').title('Info').icon(BillIcon),
+                    orderableDocumentListDeskItem({type: 'jobs', title: 'Jobs', S, context, icon: OlistIcon}),
                     S.documentTypeListItem('roles').title('Roles').icon(DotIcon),
                     S.documentTypeListItem('tags').title('Tags').icon(DotIcon),
                     S.documentTypeListItem('collabs').title('Collaborations').icon(DotIcon),
-                    orderableDocumentListDeskItem({type: 'jobs', title: 'Jobs', S, context, icon: OlistIcon}),
               
                 ])
             },
