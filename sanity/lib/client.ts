@@ -1,6 +1,11 @@
 import { createClient } from "@sanity/client"
-import { QueryOptions, type QueryParams } from "next-sanity";
+import { groq, QueryOptions, type QueryParams } from "next-sanity";
 import { apiVersion, dataset, projectId, useCdn, } from "../env"
+import imageUrlBuilder from '@sanity/image-url';
+
+
+
+
 
 export const client = createClient({
   apiVersion,

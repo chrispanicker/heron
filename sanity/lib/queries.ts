@@ -27,8 +27,10 @@ export async function getProjects() {
 export async function getInfo() {
     return client.fetch(
             groq`*[_type=="info"]{
+                name,
                 bio,
                 header,
+                "image": shareimage.asset->url
             }`
 )}
 

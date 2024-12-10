@@ -30,7 +30,7 @@ export default async function Home({searchParams}: Props) {
   let filteredProjects= await getFilteredProjects({searchParams});
   let info = await getInfo();
   let jobs = await getJobs();
-  console.log(jobs)
+
 
   return (
     filteredProjects? <main className="z-20 min-h-[95.4lvh]">

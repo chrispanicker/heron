@@ -1,4 +1,3 @@
-import { metadata } from "@/app/layout";
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 const project = {

@@ -4,12 +4,23 @@ import localFont from 'next/font/local'
 import {getInfo, getJobs, getProjects } from '@/sanity/lib/queries'
 import { HeaderAndFilters } from '@/components/header-and-filters'
 import  SillyCanvas  from '@/components/silly-canvas'
+import { client } from '@/sanity/lib/client'
+import { groq } from 'next-sanity'
 
 
 
-export const metadata: Metadata = {
-  title: 'Drew Litowitz',
-}
+export const metadata = async () => {
+  let info = await getInfo();
+
+  return {
+    title: info.name,
+    description: info.bio,
+    openGraph: {
+      images: info.image,
+    },
+  };
+};
+
 export default async function RootLayout({
   children,
 }: {

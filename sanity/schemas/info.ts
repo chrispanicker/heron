@@ -21,6 +21,12 @@ const info = {
             type: 'array',
             of: [{ type: 'block'}]
         },
+        {
+            name: 'shareimage',
+            description: "This appears when you share the site link! 1200x360 & <1MB",
+            title: "Share Image",
+            type: 'image'
+        }
     ]
 }
 
