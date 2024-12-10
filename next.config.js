@@ -19,9 +19,7 @@ const nextConfig = {
       return `${process.env.GIT_HASH}`
     },
     experimental: { 
-      missingSuspenseWithCSRBailout: false, 
       outputStandalone: true, // Enables standalone build for Vercel
-      taint: true,
     },
     env:{
       REVALIDATION_SECRET: process.env.REVALIDATION_SECRET,
