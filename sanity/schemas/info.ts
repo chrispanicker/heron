@@ -1,4 +1,3 @@
-
 const info = {
     name: 'info',
     title: "Info",

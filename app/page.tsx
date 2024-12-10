@@ -8,7 +8,6 @@ import { Sorts } from "@/components/sorts";
 import { getFilteredProjects, getInfo, getJobs, getProjects } from "@/sanity/lib/queries";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
 
 interface Props {
   searchParams: {
@@ -30,7 +29,6 @@ export default async function Home({searchParams}: Props) {
   let filteredProjects= await getFilteredProjects({searchParams});
   let info = await getInfo();
   let jobs = await getJobs();
-
 
   return (
     filteredProjects? <main className="z-20 min-h-[95.4lvh]">

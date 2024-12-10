@@ -1,7 +1,7 @@
 'use client'
 
 import { Project } from "@/types/project";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { PortableText } from "@portabletext/react";
 import { MobileGallery } from "./mobile-gallery";
@@ -69,7 +69,9 @@ export default function MobileProjects({project}: Props) {
         setCurrentImageHasDescription(!!project.images?.[index]?.description);
     }, [project.images]);
 
-    return (
+    const pathname = usePathname(); 
+    const isSanityStudio = pathname.startsWith('/admin');
+    return isSanityStudio? "": (
         <div ref={projRef} id={`mobile-${project.slug}`} className="relative group snap-start snap-always h-[100lvh] lg:hidden block relative items-center mx-2">
             <div className="sticky top-10 bg-gray-300 border-b-2 border-black z-10 pt-2 pb-2">
                 <h2 className="text-2xl flex justify-start items-center leading-[1.8rem]">{project.name}</h2>

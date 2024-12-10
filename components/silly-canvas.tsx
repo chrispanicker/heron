@@ -1,4 +1,5 @@
 'use client'
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 
 interface Point {
@@ -129,8 +130,9 @@ export default function MouseTrailAndDraw() {
       window.removeEventListener('resize', setCanvasSize);
     };
   }, [isDrawing]);
-
-  return (
+  const pathname = usePathname(); 
+  const isSanityStudio = pathname.startsWith('/admin');
+  return isSanityStudio? "": (
     <canvas
       ref={canvasRef}
       style={{
