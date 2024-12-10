@@ -36,34 +36,13 @@ export async function getInfo() {
 
 export async function getJobs() {
         return client.fetch(
-                groq`*[_type=="jobs"]|order(orderRank){
+                groq`*[_type=="jobs"]{
                     company,
                     years,
                     title
-                }`
+                }|order(orderRank)`
     )}
 
-export async function getGallery(){ 
-    return client.fetch(
-            groq`*[_type == "gallery"]|order(priority asc){
-                    index,
-                    "projects": projects->{
-                            name,
-                            slug,
-                            preview,
-                            "roles": roles[]->{
-                                    name
-                            },
-                            "collabs": collabs[]->{
-                                    name
-                            },
-                            "tags": tags[]->{
-                                    name
-                            },
-                    }
-            }`
-    )
-}
 
 
 interface Props {

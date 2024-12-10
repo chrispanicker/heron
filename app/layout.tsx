@@ -9,16 +9,16 @@ import { groq } from 'next-sanity'
 
 
 
-export const metadata = async () => {
-  let info = await getInfo();
-  return {
-    title: info[0].name,
-    description: info[0].bio,
-    openGraph: {
-      images: info[0].image,
-    },
-  };
-};
+// export const metadata = async () => {
+//   let info = await getInfo();
+//   return {
+//     title: info[0].name,
+//     description: info[0].bio,
+//     openGraph: {
+//       images: info[0].image,
+//     },
+//   };
+// };
 
 export default async function RootLayout({
   children,
