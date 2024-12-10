@@ -5,7 +5,7 @@ import SillyCanvas from "@/components/silly-canvas";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Sorts } from "@/components/sorts";
-import { getFilteredProjects, getInfo, getProjects } from "@/sanity/lib/queries";
+import { getFilteredProjects, getInfo, getJobs, getProjects } from "@/sanity/lib/queries";
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
@@ -29,6 +29,8 @@ export default async function Home({searchParams}: Props) {
   const {tags, collabs, roles, about, view, sort, project} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
   let info = await getInfo();
+  let jobs = await getJobs();
+  console.log(jobs)
 
   return (
     filteredProjects? <main className="z-20 min-h-[95.4lvh]">
@@ -43,7 +45,7 @@ export default async function Home({searchParams}: Props) {
           </div>
         )})}
         <div className="lg:block hidden">
-          <SiteFooter info={info} />
+          <SiteFooter info={info} jobs={jobs}/>
         </div>
 
     </main>: <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>

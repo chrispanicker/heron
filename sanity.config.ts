@@ -8,7 +8,7 @@ import collabs from "./sanity/schemas/collabs";
 import gallery from "./sanity/schemas/opening-gallery";
 import { structureTool } from "sanity/structure";
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
-import {BillIcon, DotIcon, OlistIcon} from '@sanity/icons'
+import {BillIcon, DotIcon, OlistIcon, ThListIcon} from '@sanity/icons'
 
 
 
@@ -32,9 +32,8 @@ const config = defineConfig({
                     S.documentTypeListItem('roles').title('Roles').icon(DotIcon),
                     S.documentTypeListItem('tags').title('Tags').icon(DotIcon),
                     S.documentTypeListItem('collabs').title('Collaborations').icon(DotIcon),
-                    S.documentTypeListItem('jobs').title('Jobs').icon(OlistIcon),
-
-                    // S.documentTypeListItem('gallery').title('Opening Gallery'),        
+                    orderableDocumentListDeskItem({type: 'jobs', title: 'Jobs', S, context, icon: OlistIcon}),
+              
                 ])
             },
         })

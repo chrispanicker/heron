@@ -23,18 +23,23 @@ export async function getProjects() {
 } 
 
 
+
 export async function getInfo() {
     return client.fetch(
             groq`*[_type=="info"]{
                 bio,
-                "cv": cv[]->{
-                  company,
-                  years,
-                  title
-                },
                 header,
             }`
 )}
+
+export async function getJobs() {
+        return client.fetch(
+                groq`*[_type=="jobs"]|order(orderRank){
+                    company,
+                    years,
+                    title
+                }`
+    )}
 
 export async function getGallery(){ 
     return client.fetch(
