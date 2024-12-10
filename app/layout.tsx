@@ -11,12 +11,11 @@ import { groq } from 'next-sanity'
 
 export const metadata = async () => {
   let info = await getInfo();
-
   return {
-    title: info.name,
-    description: info.bio,
+    title: info[0].name,
+    description: info[0].bio,
     openGraph: {
-      images: info.image,
+      images: info[0].image,
     },
   };
 };
