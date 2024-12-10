@@ -5,10 +5,9 @@ import tags from "./sanity/schemas/tags";
 import roles from "./sanity/schemas/roles";
 import jobs from "./sanity/schemas/jobs"
 import collabs from "./sanity/schemas/collabs";
-import gallery from "./sanity/schemas/opening-gallery";
 import { structureTool } from "sanity/structure";
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
-import {BillIcon, DotIcon, OlistIcon, ThListIcon} from '@sanity/icons'
+import {BillIcon, DotIcon, OlistIcon} from '@sanity/icons'
 
 
 
