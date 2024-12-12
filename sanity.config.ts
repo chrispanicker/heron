@@ -19,30 +19,48 @@ const config = defineConfig({
     apiVersion: "2023-12-06",
     basePath: "/admin",
 
-    plugins: [
-        structureTool({
+        plugins: [
+          structureTool({
             structure: (S, context) => {
+              const getContentStructure = () => {
                 return S.list()
-                .title('Content')
-                .items([
-                    orderableDocumentListDeskItem({type: 'project', title: 'Projects', S, context}),
-                    S.documentTypeListItem('info').title('Info').icon(BillIcon),
-                    orderableDocumentListDeskItem({type: 'jobs', title: 'Jobs', S, context, icon: OlistIcon}),
-                    S.documentTypeListItem('roles').title('Roles').icon(DotIcon),
-                    S.documentTypeListItem('tags').title('Tags').icon(DotIcon),
-                    S.documentTypeListItem('collabs').title('Collaborations').icon(DotIcon),
-              
-                ])
-            },
-        })
-    ],
-    schema: {
-        types: (previousTypes) => {
-            return [project, info, jobs, roles, collabs, tags]
-        }
-    },
+                 .title('Content')
+                 .items([
+                    getOrderableDocumentList('project', 'Projects', S, context, OlistIcon),
+                    getDocumentTypeListItem('info', 'Info', S, BillIcon),
+                    getOrderableDocumentList('jobs', 'Jobs', S, context, OlistIcon),
+                    getDocumentTypeListItem('roles', 'Roles', S, DotIcon),
+                    getDocumentTypeListItem('tags', 'Tags', S, DotIcon),
+                    getDocumentTypeListItem('collabs', 'Collaborations', S, DotIcon),
+                  ])
+              }
+      
+          return getContentStructure()
+        },
+      })
+        
+      ],
+        schema: {
+          types: [
+            project,
+            info,
+            jobs,
+            roles,
+            collabs,
+            tags,
+          ],
+        },
 
-    useCdn: true
-})
+      })
+      
+      const getOrderableDocumentList = (type:string, title:string, S:any, context:any, icon:any) => {
+        return orderableDocumentListDeskItem({ type, title, S, context, icon })
+      }
+      
+      const getDocumentTypeListItem = (type:any, title:any, S:any, icon:any) => {
+        return S.documentTypeListItem(type).title(title).icon(icon)
+      }
+
+
 
 export default config
