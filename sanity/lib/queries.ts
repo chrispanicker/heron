@@ -36,11 +36,11 @@ export async function getInfo() {
 
 export async function getJobs() {
         return client.fetch(
-                groq`*[_type=="jobs"]{
+                groq`*[_type=="jobs"] | order(orderRank) {
                     company,
                     years,
                     title
-                }|order(orderRank)`
+                }`
     )}
 
 
