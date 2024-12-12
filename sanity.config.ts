@@ -7,7 +7,7 @@ import jobs from "./sanity/schemas/jobs"
 import collabs from "./sanity/schemas/collabs";
 import { structureTool } from "sanity/structure";
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
-import {BillIcon, DotIcon, OlistIcon} from '@sanity/icons'
+// import {BillIcon, DotIcon, OlistIcon} from '@sanity/icons'
 
 
 
@@ -26,12 +26,12 @@ const config = defineConfig({
                 return S.list()
                  .title('Content')
                  .items([
-                    getOrderableDocumentList('project', 'Projects', S, context, OlistIcon),
-                    getDocumentTypeListItem('info', 'Info', S, BillIcon),
-                    getOrderableDocumentList('jobs', 'Jobs', S, context, OlistIcon),
-                    getDocumentTypeListItem('roles', 'Roles', S, DotIcon),
-                    getDocumentTypeListItem('tags', 'Tags', S, DotIcon),
-                    getDocumentTypeListItem('collabs', 'Collaborations', S, DotIcon),
+                    getOrderableDocumentList('project', 'Projects', S, context),
+                    getDocumentTypeListItem('info', 'Info', S),
+                    getOrderableDocumentList('jobs', 'Jobs', S, context),
+                    getDocumentTypeListItem('roles', 'Roles', S),
+                    getDocumentTypeListItem('tags', 'Tags', S),
+                    getDocumentTypeListItem('collabs', 'Collaborations', S),
                   ])
               }
       
@@ -53,12 +53,12 @@ const config = defineConfig({
 
       })
       
-      const getOrderableDocumentList = (type:string, title:string, S:any, context:any, icon:any) => {
-        return orderableDocumentListDeskItem({ type, title, S, context, icon })
+      const getOrderableDocumentList = (type:string, title:string, S:any, context:any) => {
+        return orderableDocumentListDeskItem({ type, title, S, context })
       }
       
-      const getDocumentTypeListItem = (type:any, title:any, S:any, icon:any) => {
-        return S.documentTypeListItem(type).title(title).icon(icon)
+      const getDocumentTypeListItem = (type:any, title:any, S:any) => {
+        return S.documentTypeListItem(type).title(title)
       }
 
 
