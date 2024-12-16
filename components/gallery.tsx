@@ -101,7 +101,7 @@ export function Gallery({ project }: Props) {
             ) : e._type === "image" ? (
               <div className="relative" key={`${project.slug}-${index}`}>
                 {e.description && (
-                  <span key={`${project.slug}-description-${index}`} className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%]">
+                  <span key={`${project.slug}-description-${index}`} className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%] active:pointer-events-none">
                     <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5">{e.description}</p>
                   </span>
                 )}
