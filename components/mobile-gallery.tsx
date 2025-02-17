@@ -88,7 +88,7 @@ export function MobileGallery({project, onImageChange}: Props) {
                         alt=""
                         width={1080}
                         height={1080}
-                        className={`object-cover duration-500 h-[50lvh] ${galleryWidth}`}
+                        className={`object-contain duration-500 h-[50lvh] ${galleryWidth}`}
                         loading="lazy"
                         placeholder="blur"
                         blurDataURL={`${project.images[index].lqip}`}
