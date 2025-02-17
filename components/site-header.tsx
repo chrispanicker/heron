@@ -23,8 +23,9 @@ export function SiteHeader(info:any){
         <>
             <span className="flex justify-between items-center lg:px-5 outline outline-gray-300 px-2 w-[100dvw] mono-book"
             >
-                <h1 className="flex duration-500 text-[1.35rem] sans" onClick={()=>{document.querySelector("#foot")?.scrollIntoView({behavior:"smooth", block: "start"})}}
-                >Drew Litowitz&nbsp;
+                <h1 className="flex duration-500 text-[1.35rem] sans" 
+                // onClick={()=>{document.querySelector("#foot")?.scrollIntoView({behavior:"smooth", block: "start"})}}
+                ><a href="./">Drew Litowitz&nbsp;</a>
                     <p className="lg:inline-block hidden">{info.info[0].header}</p>
                 </h1>
                 <div className="flex justify-center items-center h-max">

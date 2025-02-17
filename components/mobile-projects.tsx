@@ -37,6 +37,7 @@ export default function MobileProjects({project}: Props) {
         function onVisibilityChange(el: Element, callback: CallableFunction) {
             var old_visible: any;
             return function () {
+              if(el){
                 var visible = isElementInViewport(el);
                 if (visible != old_visible) {
                     old_visible = visible;
@@ -44,6 +45,7 @@ export default function MobileProjects({project}: Props) {
                         callback();
                     }
                 }
+              }
             }
         }
 
@@ -91,8 +93,10 @@ export default function MobileProjects({project}: Props) {
                 onClick={() => {
                     let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                     let width = document.documentElement.clientWidth
-                    gallery!.scrollLeft >= 0 && gallery!.scrollLeft < 50 ? gallery!.scrollLeft = gallery!.scrollWidth
-                    : gallery!.scrollLeft -= width
+                    if(gallery){
+                      gallery!.scrollLeft >= 0 && gallery!.scrollLeft < 50 ? gallery!.scrollLeft = gallery!.scrollWidth
+                      : gallery!.scrollLeft -= width
+                    }
                 }}>
                     <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-gray-300 stroke stroke-black stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 40 30">
                         <polygon points="30 0 10 15 30 30 30 25 17 15 30 5" />
@@ -112,8 +116,10 @@ export default function MobileProjects({project}: Props) {
                 onClick={() => {
                     let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                     let width = document.documentElement.clientWidth
-                    gallery!.scrollLeft > width * (project.images?.length - 1) ? gallery!.scrollLeft = 0
-                    : gallery!.scrollLeft += width
+                    if(gallery){
+                      gallery!.scrollLeft > width * (project.images?.length - 1) ? gallery!.scrollLeft = 0
+                      : gallery!.scrollLeft += width
+                    }
                 }}>
                     <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-gray-300 stroke stroke-black stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="-10 0 40 30">
                         <polygon points="0 0 20 15 0 30 0 25 13 15 0 5" />

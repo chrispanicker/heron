@@ -75,7 +75,7 @@ const project = {
                     'blurhash',   // Default: included
                     ],
                     // Specify the allowed MIME types
-                    accept: '.pdf,image/jpeg,image/png',
+                    accept: '.pdf,image/jpeg,image/png,image/gif',
                 },
                 fields: [
                     {
@@ -92,7 +92,15 @@ const project = {
                 name: 'mp4', 
                 options: {
                     accept: 'video/*,.mp4'
-                }
+                },
+                fields: [
+                  {
+                  name: 'description',
+                  type: 'string',
+                  title: 'Image Description',
+                  description: 'Provide a description of the image to appear on hover',
+                  }
+                ]
                 },
                 {
                     name: 'textcard',
