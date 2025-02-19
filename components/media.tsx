@@ -39,6 +39,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           width="1440"
           height="1080"
           muted
+          controls
           loop
           autoPlay
           preload="true"
@@ -68,11 +69,18 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           alt=""
           width={1440}
           height={1080}
-          className={`object-cover ${e.mycrop? "w-[43rem]": "w-auto"} h-full pr-2 snap-center snap-always transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          className={`object-cover ${e.mycrop? "w-[43rem]": "w-auto"} h-full pr-2 snap-center snap-always transition-opacity duration-1000 cursor-zoom-in ${isVisible ? 'opacity-100' : 'opacity-0'}`}
           loading="lazy"
           placeholder="blur"
           blurDataURL={`${project.gallery[index].lqip}`}
           unoptimized={true}
+          onClick={(e)=>{
+            const modal = document.querySelector("#modal");
+            const modalImg = document.querySelector("#modal img");
+            modalImg!.src = e.currentTarget.src
+            modal?.classList.replace("opacity-0","opacity-100")
+            modal?.classList.remove("pointer-events-none")
+          }}
         />
       </div>
     );
