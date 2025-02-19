@@ -30,7 +30,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
     return (
       <div className="relative w-max h-full" key={`${project.slug}-${index}`} ref={mediaRef}>
         {e.description && (
-          <span className="absolute w-max h-full flex justify-center items-end opacity-0 hover:opacity-[100%] active:pointer-events-none z-[200]">
+          <span className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%] active:pointer-events-none z-[200]">
             <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5">{e.description}</p>
           </span>
         )}
@@ -68,7 +68,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           alt=""
           width={1440}
           height={1080}
-          className={`object-cover w-auto h-full pr-2 snap-center snap-always transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          className={`object-cover ${e.mycrop? "w-[43rem]": "w-auto"} h-full pr-2 snap-center snap-always transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
           loading="lazy"
           placeholder="blur"
           blurDataURL={`${project.gallery[index].lqip}`}

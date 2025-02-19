@@ -16,69 +16,40 @@ interface Props {
 export function Gallery({ project }: Props) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [showLeftArrow, setShowLeftArrow] = useState(false)
+  const [showLeftArrow, setShowLeftArrow] = useState(true)
   const [showArrows, setShowArrows] = useState(true)
   const searchParams = useSearchParams()
   const isManualScrolling = useRef(false)
   const scrollTimeout = useRef<NodeJS.Timeout>()
 
-  const IMAGE_WIDTH = 688 // 43rem in pixels
-
-  const scrollToImage = (index: number) => {
+  const nextImage = () => {
     if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft+1000<scrollContainerRef.current.scrollWidth-1000?
       scrollContainerRef.current.scrollTo({
-        left: IMAGE_WIDTH * index,
+        left: scrollContainerRef.current.scrollLeft+1000,
+        behavior: 'smooth'
+      })
+      : scrollContainerRef.current.scrollTo({
+        left: 0,
         behavior: 'smooth'
       })
     }
   }
 
-  console.log(project.name, project.images[0].mycrop)
-
-  const nextImage = () => {
-    setCurrentIndex((prevIndex) => {
-      const newIndex = (prevIndex + 1) % project.images?.length
-      scrollToImage(newIndex)
-      return newIndex
-    })
-  }
-
   const prevImage = () => {
-    setCurrentIndex((prevIndex) => {
-      const newIndex = (prevIndex - 1 + project.images?.length) % project.images?.length
-      scrollToImage(newIndex)
-      return newIndex
-    })
+    if (scrollContainerRef.current) {
+      console.log(scrollContainerRef.current.scrollWidth, scrollContainerRef.current.scrollLeft, scrollContainerRef.current.scrollLeft!=0 )
+      scrollContainerRef.current.scrollLeft!=0?
+        scrollContainerRef.current.scrollTo({
+          left: scrollContainerRef.current.scrollLeft-1000,
+          behavior: 'smooth'
+        })
+        : scrollContainerRef.current.scrollTo({
+          left: scrollContainerRef.current.scrollWidth,
+          behavior: 'smooth'
+        })
+    }
   }
-
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    if (!container) return
-
-    const handleScroll = () => {
-      const scrollLeft = container.scrollLeft
-      setShowLeftArrow(scrollLeft > 0)
-
-      // Update currentIndex based on scroll position
-      const newIndex = Math.round(scrollLeft / IMAGE_WIDTH)
-      if (newIndex !== currentIndex) {
-        setCurrentIndex(newIndex)
-      }
-    }
-
-    const checkArrowVisibility = () => {
-      setShowArrows(container.scrollWidth > container.clientWidth)
-    }
-
-    container.addEventListener('scroll', handleScroll)
-    window.addEventListener('resize', checkArrowVisibility)
-    checkArrowVisibility()
-
-    return () => {
-      container.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', checkArrowVisibility)
-    }
-  }, [currentIndex, project.images?.length])
 
   return (
     <div className="relative w-full max-w-screen mx-auto">
@@ -98,7 +69,7 @@ export function Gallery({ project }: Props) {
         <> 
           <button
             id={`${project.slug}_larr`}
-            className={`transition-[opacity] h-fit w-fit absolute bottom-2 ${showLeftArrow ? "opacity-100" : "opacity-0"}`}
+            className={`transition-[opacity] h-fit w-fit absolute bottom-2 z-[1000] ${showLeftArrow ? "opacity-100" : "opacity-0"}`}
             onClick={prevImage}
           >
             <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-gray-300 stroke hover:stroke-gray-300 stroke-black stroke-[.04rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 40 30">
@@ -107,7 +78,7 @@ export function Gallery({ project }: Props) {
           </button>
           
           <button
-            className="absolute right-0 bottom-2"
+            className="absolute right-0 bottom-2 z-[1000]"
             onClick={nextImage}
           >
             <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-gray-300 stroke hover:stroke-gray-300 stroke-black stroke-[.04rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="-10 0 40 30">

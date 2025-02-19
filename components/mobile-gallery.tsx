@@ -7,6 +7,7 @@ import { getFile } from "@sanity/asset-utils";
 import Image from "next/image"
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
+import { MobileMedia } from "./mobileMedia";
 
 interface Props {
     project: Project
@@ -57,47 +58,13 @@ export function MobileGallery({project, onImageChange}: Props) {
         >
             <span className={`flex w-max justify-center items-start h-full`}>
                 {project.images?.map((e: any, index: number) => (
-                    e._type === 'mp4' ?
-                    <div key={`${project.slug}-${index}`} className={`snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
-                        {e.description ? 
-                          <span className={`mobile-description absolute top-0 h-[50lvh] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
-                              <p className="serif leading-[1.2rem]">{e.description}</p>
-                          </span>
-                        : null}
-                        <video width="1440" height="1080" muted loop autoPlay controls webkit-playsinline="true" playsInline preload="true"
-                        className={`object-cover duration-500 h-[50lvh] ${galleryWidth}`}>
-                        <source src={getFile(e, {projectId:"01jwvji0", dataset:"production"}).asset.url} type="video/mp4" />
-                        <track
-                            src="/path/to/captions.vtt"
-                            kind="subtitles"
-                            srcLang="en"
-                            label="English"
-                        />
-                        Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    : e._type === "image" ?
-                    <div key={`mobile-${project.slug}-${index}`} className={`relative snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}>
-                        {e.description ? 
-                        <span className={`mobile-description absolute top-0 h-[50lvh] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
-                            <p className="serif leading-[1.2rem]">{e.description}</p>
-                        </span>
-                        : null}
-                        <Image
-                        src={urlForImage(e).url()}
-                        alt=""
-                        width={1080}
-                        height={1080}
-                        className={`object-contain duration-500 h-[50lvh] ${galleryWidth}`}
-                        loading="lazy"
-                        placeholder="blur"
-                        blurDataURL={`${project.images[index].lqip}`}
-                        unoptimized={urlForImage(project.preview).url().includes(".gif")? true: false}
-                        />
-                    </div>
-                    : <div key={`mobile-${project.slug}-text-${index}`} className={`h-[60lvh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-2xl text-center p-5`}>
-                    <PortableText value={e.content} />
-                  </div>
+                       <MobileMedia
+                       key={`${project.slug}-${index}`}
+                       e={e}
+                       project={project}
+                       index={index}
+                       galleryWidth={galleryWidth} // Pass any custom width class if needed
+                     />
                 ))}
             </span>
         </div>
