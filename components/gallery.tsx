@@ -7,6 +7,7 @@ import { getFile } from '@sanity/asset-utils'
 import { useSearchParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { PortableText } from "@portabletext/react"
+import { MediaWithFadeIn } from "./media"
 
 interface Props {
   project: Project
@@ -89,51 +90,7 @@ export function Gallery({ project }: Props) {
       >
         <span className={`relative flex w-max h-[32rem] ${!showArrows ? 'justify-center' : 'justify-start'} items-start`} key={`${project.slug}-gallery`}>
           {project.images?.map((e: any, index: number) => (
-            e._type === 'mp4' ? (
-              <div className="relative w-max h-full" key={`${project.slug}-${index}`}>
-                {e.description && (
-                  <span className="absolute w-max h-full flex justify-center items-end opacity-0 hover:opacity-[100%] active:pointer-events-none z-[200]">
-                    <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5">{e.description}</p>
-                  </span>
-                )}
-                <video key={`${project.slug}-${index}`} width="1440" height="1080" muted loop autoPlay preload="true" className="w-auto h-full pr-2 snap-center snap-always z-0">
-                  <source src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} type="video/mp4" />
-                  <track
-                    src="/path/to/captions.vtt"
-                    kind="subtitles"
-                    srcLang="en"
-                    label="English"
-                  />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            ) : e._type === "image" ? (
-
-              <div className={`relative w-max h-full`} key={`${project.slug}-${index}`}>
-                {e.description && (
-                  <span key={`${project.slug}-description-${index}`} className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%] active:pointer-events-none">
-                    <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5">{e.description}</p>
-                  </span>
-                )}
-                <Image
-                  src={urlForImage(e).url()}
-                  alt=""
-                  width={1440}
-                  height={1080}
-                  className={`object-cover w-auto h-full pr-2 transition-all duration-500 snap-center snap-always`}
-                  loading="lazy"
-                  placeholder="blur"
-                  blurDataURL={`${project.gallery[index].lqip}`}
-                  unoptimized={true}
-                />
-              </div>
-            ) : (
-              <div className="min-w-[43rem] h-[32rem] snap-center snap-always flex justify-center items-center" key={`${project.slug}-${index}`}>
-                <span className="max-w-[18rem] h-fit uppercase mono-book text-[1.2rem] px-1 leading-[1.8rem] text-gray-300 text-center mb-5 mr-10">
-                  <PortableText value={e.content} />
-                </span>
-              </div>
-            )
+              <MediaWithFadeIn key={`${project.slug}-${index}`} e={e} project={project} index={index} />
           ))}
         </span>
       </div>
