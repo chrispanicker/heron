@@ -76,7 +76,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           unoptimized={true}
           onClick={(e)=>{
             const modal = document.querySelector("#modal");
-            const modalImg = document.querySelector("#modal img");
+            const modalImg = document.querySelector("#modal img") as HTMLImageElement
             modalImg!.src = e.currentTarget.src
             modal?.classList.replace("opacity-0","opacity-100")
             modal?.classList.remove("pointer-events-none")
