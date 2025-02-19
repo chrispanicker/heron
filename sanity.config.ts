@@ -1,11 +1,12 @@
-import { defineConfig } from "sanity"
+import { defineConfig, ImageInputProps } from "sanity"
 import { structureTool } from "sanity/structure"
-import project from "./sanity/schemas/project-schema"
+
 import info from "./sanity/schemas/info"
 import tags from "./sanity/schemas/tags"
 import roles from "./sanity/schemas/roles"
 import jobs from "./sanity/schemas/jobs"
 import collabs from "./sanity/schemas/collabs"
+import project from "./sanity/schemas/project-schema"
 
 const config = defineConfig({
     projectId: "01jwvji0",
@@ -31,7 +32,7 @@ const config = defineConfig({
       collabs,
       tags,
     ],
-  },
+  }
 })
 
 export default config

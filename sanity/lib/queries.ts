@@ -98,6 +98,7 @@ export async function getFilteredProjects({searchParams}:Props){
                     "blurData": asset->metadata.blurhash,
                     "alt": alt,
                     "description": description,
+                    "mycrop":mycrop,
                     "text": text
                     },
                 content,

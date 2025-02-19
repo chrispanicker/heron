@@ -1,5 +1,11 @@
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
+type ImagePreviewProps = {
+  imageUrl: string;
+  crop: boolean;
+};
+
+
 const project = {
     name: 'project',
     title: "Projects",
@@ -69,22 +75,25 @@ const project = {
             type: "array",
             of: [
                 {
-                type: 'image',
-                options: {
-                    metadata: [
-                    'blurhash',   // Default: included
-                    ],
-                    // Specify the allowed MIME types
+                  type: 'image',
+                  title: 'Image with Custom Crop',
+                  options: {
                     accept: '.pdf,image/jpeg,image/png,image/gif',
-                },
-                fields: [
+                  },
+                  fields: [
                     {
-                    name: 'description',
-                    type: 'string',
-                    title: 'Image Description',
-                    description: 'Provide a description of the image to appear on hover',
-                    }
-                ]
+                      name: 'description',
+                      type: 'string',
+                      title: 'Image Description',
+                      description: 'Provide a description of the image to appear on hover',
+                    },
+                    {
+                      name: 'mycrop',
+                      type: 'boolean',
+                      title: 'Crop',
+                      description: 'This sets the image to crop to a 4:3 ratio',
+                    },
+                  ],
                 },
                 {
                 type: 'file', 

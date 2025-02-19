@@ -32,6 +32,8 @@ export function Gallery({ project }: Props) {
     }
   }
 
+  console.log(project.name, project.images[0].mycrop)
+
   const nextImage = () => {
     setCurrentIndex((prevIndex) => {
       const newIndex = (prevIndex + 1) % project.images?.length
@@ -85,16 +87,16 @@ export function Gallery({ project }: Props) {
           !showArrows ? 'justify-center' : ''
         }`}
       >
-        <span className={`relative flex w-max ${!showArrows ? 'justify-center' : 'justify-start'} items-start`} key={`${project.slug}-gallery`}>
+        <span className={`relative flex w-max h-[32rem] ${!showArrows ? 'justify-center' : 'justify-start'} items-start`} key={`${project.slug}-gallery`}>
           {project.images?.map((e: any, index: number) => (
             e._type === 'mp4' ? (
-              <div className="relative" key={`${project.slug}-${index}`}>
+              <div className="relative w-max h-full" key={`${project.slug}-${index}`}>
                 {e.description && (
-                  <span className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%] active:pointer-events-none z-[200]">
+                  <span className="absolute w-max h-full flex justify-center items-end opacity-0 hover:opacity-[100%] active:pointer-events-none z-[200]">
                     <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5">{e.description}</p>
                   </span>
                 )}
-                <video key={`${project.slug}-${index}`} width="1440" height="1080" muted loop autoPlay preload="true" className="min-w-[43rem] h-[32rem] pr-2 snap-center snap-always z-0">
+                <video key={`${project.slug}-${index}`} width="1440" height="1080" muted loop autoPlay preload="true" className="w-auto h-full pr-2 snap-center snap-always z-0">
                   <source src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} type="video/mp4" />
                   <track
                     src="/path/to/captions.vtt"
@@ -106,7 +108,8 @@ export function Gallery({ project }: Props) {
                 </video>
               </div>
             ) : e._type === "image" ? (
-              <div className="relative" key={`${project.slug}-${index}`}>
+
+              <div className={`relative w-max h-full`} key={`${project.slug}-${index}`}>
                 {e.description && (
                   <span key={`${project.slug}-description-${index}`} className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%] active:pointer-events-none">
                     <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5">{e.description}</p>
@@ -117,7 +120,7 @@ export function Gallery({ project }: Props) {
                   alt=""
                   width={1440}
                   height={1080}
-                  className={`object-contain pr-2 transition-all duration-500 min-w-[43rem] h-[32rem] snap-center snap-always`}
+                  className={`object-cover w-auto h-full pr-2 transition-all duration-500 snap-center snap-always`}
                   loading="lazy"
                   placeholder="blur"
                   blurDataURL={`${project.gallery[index].lqip}`}
