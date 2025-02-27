@@ -31,11 +31,11 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
       <div
         ref={mediaRef}
         key={`${project.slug}-${index}`}
-        className={`snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}
+        className={`snap-center snap-always peer flex justify-center items-center h-[60dvh] bg-black mx-1`}
       >
         {e.description && (
-          <span className={`mobile-description absolute top-0 h-[50lvh] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
-            <p className="serif leading-[1.2rem]">{e.description}</p>
+          <span className={`mono-book uppercase mobile-description absolute top-0 h-[50dvh] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
+            <p className="leading-[1.2rem]">{e.description}</p>
           </span>
         )}
         <video
@@ -44,11 +44,12 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           muted
           loop
           autoPlay
-          controls
           webkit-playsinline="true"
           playsInline
           preload="true"
-          className={`object-cover duration-500 h-[50lvh] ${galleryWidth} transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          className={`object-cover duration-500 h-[50dvh] ${galleryWidth} transition-opacity duration-1000` 
+          // ${isVisible ? 'opacity-100' : 'opacity-0'}`
+          }
         >
           <source src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} type="video/mp4" />
           <track
@@ -66,11 +67,11 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
       <div
         ref={mediaRef}
         key={`mobile-${project.slug}-${index}`}
-        className={`relative snap-center snap-always peer flex justify-center items-center h-[60lvh] bg-black mx-1`}
+        className={`relative snap-center snap-always peer flex justify-center items-center h-[60dvh] bg-black mx-1`}
       >
         {e.description && (
-          <span className={`mobile-description absolute top-0 h-[50lvh] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
-            <p className="serif leading-[1.2rem]">{e.description}</p>
+          <span className={`mono-book uppercase mobile-description absolute top-0 h-[50dvh] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
+            <p className=" leading-[1.2rem]">{e.description}</p>
           </span>
         )}
         <Image
@@ -78,7 +79,8 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           alt=""
           width={1080}
           height={1080}
-          className={`object-contain duration-500 h-[50lvh] ${galleryWidth} transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          className={`object-contain duration-500 h-[50dvh] ${galleryWidth} transition-opacity opacity-100 duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`
+          }
           loading="lazy"
           placeholder="blur"
           blurDataURL={`${project.images[index].lqip}`}
@@ -88,7 +90,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
     );
   } else {
     return (
-      <div key={`mobile-${project.slug}-text-${index}`} className={`h-[60lvh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-2xl text-center p-5`}>
+      <div key={`mobile-${project.slug}-text-${index}`} className={`mono-book uppercase h-[60dvh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-xl text-center px-7 py-5`}>
         <PortableText value={e.content} />
       </div>
     );

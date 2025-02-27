@@ -31,8 +31,8 @@ export default async function Home({searchParams}: Props) {
   let jobs = await getJobs();
   
   return (
-    filteredProjects? <main className="z-20 min-h-[95.4lvh]">
-      <div className="h-[10rem]"></div>
+    filteredProjects? <main className="z-20 min-h-[96.2dvh]">
+      <div className="lg:h-[10rem]"></div>
       <Scroller />
         <Sorts />
         {filteredProjects.map((proj:any, index:number)=>{ 

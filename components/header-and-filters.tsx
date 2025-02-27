@@ -10,7 +10,6 @@ interface Props{
 }
 
 export function HeaderAndFilters({info, projects, jobs}:Props){
-    // console.log(projects)
     let allTags:string[] = [], allCollabs:string[] = [], allRoles:string[] = []
     projects?.map((project:Project)=>{
         project.roles?.map((role:any)=>{
@@ -33,7 +32,7 @@ export function HeaderAndFilters({info, projects, jobs}:Props){
         "tags": allTags, 
     };
     return (
-        <header className="flex-col sans justify-between items-center bg-black outline outline-[2px] outline-gray-300 text-gray-300 fixed left-0 top-0 max-h-[2.4rem] transition-[height] z-50 overflow-hidden">
+        <header className="flex-col sans justify-between items-center bg-black outline outline-[2px] outline-gray-300 text-gray-300 fixed left-0 top-0 max-h-[2.4rem] transition-all z-50 overflow-hidden">
             <SiteHeader info={info} />
             <Filters filters={filters} projects={projects}  />
             <div className="lg:hidden block">

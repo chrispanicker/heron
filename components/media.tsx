@@ -43,7 +43,9 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           loop
           autoPlay
           preload="true"
-          className={`w-auto h-full pr-2 snap-center snap-always z-0 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          className={`w-auto h-full pr-2 snap-center snap-always z-0 transition-opacity duration-1000` 
+            // ${isVisible ? 'opacity-100' : 'opacity-0'}`
+          }
         >
           <source src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} type="video/mp4" />
           <track
@@ -69,7 +71,9 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           alt=""
           width={1440}
           height={1080}
-          className={`object-cover ${e.mycrop? "w-[43rem]": "w-auto"} h-full pr-2 snap-center snap-always transition-opacity duration-1000 cursor-zoom-in ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+          className={`object-cover ${e.mycrop? "w-[43rem]": "w-auto"} h-full pr-2 snap-center snap-always transition-opacity duration-1000 cursor-zoom-in` 
+          // ${isVisible ? 'opacity-100' : 'opacity-0'}`
+        }
           loading="lazy"
           placeholder="blur"
           blurDataURL={`${project.gallery[index].lqip}`}

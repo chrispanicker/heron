@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { PortableText } from "@portabletext/react";
 import { MobileGallery } from "./mobile-gallery";
+import { buttonClass } from "./classes";
 
 interface Props {
     project: Project
@@ -74,11 +75,11 @@ export default function MobileProjects({project}: Props) {
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin');
     return isSanityStudio? "": (
-        <div ref={projRef} id={`mobile-${project.slug}`} className="relative snap-start snap-always h-[100lvh] lg:hidden block relative items-center mx-2">
+        <div ref={projRef} id={`mobile-${project.slug}`} className="relative snap-start snap-always min-h-[100vh] h-[100dvh] lg:hidden block relative items-center mx-2">
             <div className="sticky top-10 bg-gray-300 border-b-2 border-black z-10 pt-2 pb-2">
                 <h2 className="text-2xl flex justify-start items-center leading-[1.8rem]">{project.name}</h2>
                 <div className="flex justify-between">
-                    <p className="sans">{project.type}</p>
+                    <p className={`${buttonClass} bg-black text-gray-300 ml-[.1rem] mt-[.2rem]`}>{project.type}</p>
                     <p className="sans">{project.year}</p>
                 </div>
             </div>
@@ -87,8 +88,8 @@ export default function MobileProjects({project}: Props) {
                 <MobileGallery project={project} onImageChange={handleGalleryScroll} />
             </span>
 
-            <div className={`left-0 absolute z-30 flex w-full justify-between items-center mt-[-3rem] text-2xl text-gray-300 serif leading-[1.1rem] ${project.images?.length < 2 ? "hidden" : ""}`}>
-                <button className="opacity-0 px-[.1rem] transition-[opacity]"
+            <div className={`left-0 absolute z-30 flex w-full justify-between items-center mt-[-3rem] text-2xl text-gray-300 serif leading-[1.1rem] px-2 ${project.images?.length < 2 ? "hidden" : ""}`}>
+                <button className="opacity-0 px-[.1rem] transition-[opacity] text-3xl"
                 id={`mobile-${project.slug}_larr`} 
                 onClick={() => {
                     let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
@@ -98,9 +99,9 @@ export default function MobileProjects({project}: Props) {
                       : gallery!.scrollLeft -= width
                     }
                 }}>
-                    <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-gray-300 stroke stroke-black stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 40 30">
-                        <polygon points="30 0 10 15 30 30 30 25 17 15 30 5" />
-                    </svg>
+                  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="#d1d5db" stroke="#000000" strokeWidth="7px" viewBox="0 0 185.22 146.88">
+                    <polygon points="73.44 146.88 90.41 129.91 45.94 85.44 185.22 85.44 185.22 61.44 45.94 61.44 90.41 16.97 73.44 0 0 73.44 73.44 146.88"/>
+                  </svg>
                 </button>
                 {currentImageHasDescription && (
                     <button className="text-gray-300 outline-[.1rem] outline outline-gray-300 rounded-3xl px-[.4rem] py-[rem] text-[.8rem]"
@@ -112,7 +113,7 @@ export default function MobileProjects({project}: Props) {
                         i
                     </button>
                 )}
-                <button className="px-[.1rem]"
+                <button className="px-[.1rem] text-3xl"
                 onClick={() => {
                     let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                     let width = document.documentElement.clientWidth
@@ -121,9 +122,9 @@ export default function MobileProjects({project}: Props) {
                       : gallery!.scrollLeft += width
                     }
                 }}>
-                    <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-gray-300 stroke stroke-black stroke-[.07rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="-10 0 40 30">
-                        <polygon points="0 0 20 15 0 30 0 25 13 15 0 5" />
-                    </svg>      
+                  <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="#d1d5db" stroke="#000000" strokeWidth="7px" viewBox="0 0 185.22 146.88">
+                    <polygon points="111.78 0 94.81 16.97 139.28 61.44 0 61.44 0 85.44 139.28 85.44 94.81 129.91 111.78 146.88 185.22 73.44 111.78 0"/>
+                  </svg>
                 </button>
             </div>
 
