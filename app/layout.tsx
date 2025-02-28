@@ -32,7 +32,7 @@ export default async function RootLayout({
     
 
   return (
-    <html lang="en" className='bg-gray-300 text-black serif font-light overflow-x-hidden text-[1rem] leading-[1.4rem] snap-y snap-mandatory cursor-auto '>
+    <html lang="en" className='bg-gray-300 text-black serif font-light overflow-x-hidden lg:text-xl text-[1rem] leading-[1.4rem] snap-y snap-mandatory cursor-auto '>
       <body>
         <Modal />
 

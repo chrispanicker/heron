@@ -93,6 +93,7 @@ export async function getFilteredProjects({searchParams}:Props){
                 orderRank,
                 images,
                 "gallery": images[]{
+                    "metadata": asset->metadata,
                     "imageUrl": asset->url,
                     "blurDataURL": asset->metadata.lqip,
                     "alt": alt,
