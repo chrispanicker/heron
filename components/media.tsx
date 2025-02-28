@@ -72,11 +72,10 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           width={1440}
           height={1080}
           className={`object-cover ${e.mycrop? "w-[43rem]": "w-auto"} h-full pr-2 snap-center snap-always transition-opacity duration-1000 cursor-zoom-in` 
-          // ${isVisible ? 'opacity-100' : 'opacity-0'}`
         }
           loading="lazy"
           placeholder="blur"
-          blurDataURL={`${project.gallery[index].lqip}`}
+          blurDataURL={`${project.gallery[index].blurDataURL}`}
           unoptimized={true}
           onClick={(x)=>{
             const modal = document.querySelector("#modal");

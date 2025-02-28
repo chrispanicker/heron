@@ -6,7 +6,6 @@ interface Props{
 }
 
 export function TestFilter({projects}:Props){
-    // console.log(projects)
     let allTags:string[] = [], allCollabs:string[] = [], allRoles:string[] = []
     projects?.map((project:Project)=>{
         project.roles?.map((role:any)=>{

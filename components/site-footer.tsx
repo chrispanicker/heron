@@ -35,14 +35,14 @@ export function SiteFooter({info, jobs}:Props){
                             <div className="flex lg:flex-row flex-col mb-1 lg:mb-0">
                                 <p className="whitespace-nowrap text-[1.35rem] mb-1 lg:mb-0">{job.company}</p>                
                                 <p className={`lg:block hidden mx-1 my-0${buttonClass} text-[.8rem] bg-black text-gray-300 outline outline-1 outline-black outline-gray-300 mt-[.45rem]`}>{job.title}</p>
-                                <p className={`${buttonClass} text-[1rem] outline outline-1 outline-gray-300 lg:hidden inline mb-1`}>{job.title}</p>
+                                <p className={`${buttonClass} text-2xl outline outline-1 outline-gray-300 lg:hidden inline `}>{job.title}</p>
                             </div>
                             <p className="sans text-[1.35rem]">{job.years}</p>
                         </span>
                     ))}
                 </div>
                 <div className="lg:hidden flex w-screen bg-black text-gray-300 sans justify-between items-end px-2 text-[1rem] relative z-10 leading-[1.6rem] border-t-2 border-gray-300 py-2 pb-5">
-                      <p className="text-right text-xl">&#169; Drew Litowitz</p>
+                      <p className="text-left">&#169; Drew Litowitz</p>
                       <span className="flex">
                         <a className="pr-1 hover:underline" href="https://www.instagram.com/drewknowitz">@drewknowitz</a>
                         <a className='hover:underline' href="mailto:dlitowit@gmail.com">dlitowit@gmail.com</a>

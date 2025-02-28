@@ -38,7 +38,6 @@ export function Gallery({ project }: Props) {
 
   const prevImage = () => {
     if (scrollContainerRef.current) {
-      console.log(scrollContainerRef.current.scrollWidth, scrollContainerRef.current.scrollLeft, scrollContainerRef.current.scrollLeft!=0 )
       scrollContainerRef.current.scrollLeft!=0?
         scrollContainerRef.current.scrollTo({
           left: scrollContainerRef.current.scrollLeft-1000,

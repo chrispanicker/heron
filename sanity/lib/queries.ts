@@ -4,7 +4,7 @@ import { client } from "./client"
 
 export async function getProjects() {
     return client.fetch(
-            groq`*[_type=="project"]{
+            groq`*[_type=="project" && !(_id in path("drafts.**"))]{
               name,
               _id,
               _createdAt,
@@ -18,7 +18,7 @@ export async function getProjects() {
               "tags": tags[]->{
                 name
               },
-            }`
+            }`, {}, {cache: "no-store"}
     )
 } 
 
@@ -82,7 +82,7 @@ export async function getFilteredProjects({searchParams}:Props){
     const filter = collabs || roles || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
 
     return client.fetch(
-            groq`*[${projectFilter} ${filter}]{
+            groq`*[${projectFilter} ${filter} && !(_id in path("drafts.**"))]{
                 _id,
                 name,
                 vimeo,
@@ -94,8 +94,7 @@ export async function getFilteredProjects({searchParams}:Props){
                 images,
                 "gallery": images[]{
                     "imageUrl": asset->url,
-                    "lqip": asset->metadata.lqip,
-                    "blurData": asset->metadata.blurhash,
+                    "blurDataURL": asset->metadata.lqip,
                     "alt": alt,
                     "description": description,
                     "mycrop":mycrop,
@@ -122,6 +121,6 @@ export async function getFilteredProjects({searchParams}:Props){
         : sort==="client-desc"? "client desc"   
         : sort==="tags-asc"? "totalCount asc"
         : sort==="tags-desc"? "totalCount desc"
-        :"orderRank"})`
+        :"orderRank"})`, 
     )
 }

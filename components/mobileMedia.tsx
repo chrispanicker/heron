@@ -47,8 +47,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           webkit-playsinline="true"
           playsInline
           preload="true"
-          className={`object-cover duration-500 h-[50dvh] ${galleryWidth} transition-opacity duration-1000` 
-          // ${isVisible ? 'opacity-100' : 'opacity-0'}`
+          className={`object-cover duration-500 h-[50dvh] ${galleryWidth} transition-opacity duration-1000`
           }
         >
           <source src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} type="video/mp4" />
@@ -79,11 +78,11 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           alt=""
           width={1080}
           height={1080}
-          className={`object-contain duration-500 h-[50dvh] ${galleryWidth} transition-opacity opacity-100 duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`
+          className={`object-contain duration-500 h-[50dvh] ${galleryWidth} transition-opacity opacity-100 duration-1000`
           }
           loading="lazy"
           placeholder="blur"
-          blurDataURL={`${project.images[index].lqip}`}
+          blurDataURL={`${project.gallery[index].blurDataURL}`}
           unoptimized={urlForImage(project.preview).url().includes(".gif") ? true : false}
         />
       </div>

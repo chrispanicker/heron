@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@plaiceholder/base64": "^1.0.0",
     "@plaiceholder/next": "^3.0.0",
     "@portabletext/react": "^3.0.11",
     "@sanity/asset-utils": "^2.0.6",

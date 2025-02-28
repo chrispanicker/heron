@@ -9,13 +9,11 @@ export function Scroller(){
             if (scrollPosition) {
                 window.scrollTo(0, parseInt(scrollPosition));
                 sessionStorage.removeItem("scrollPosition");
-                // console.log("scroll handled")
             }
         };
         handleScrollPosition()
         window.addEventListener('scroll', ()=>{
             sessionStorage.setItem("scrollPosition", `${window.scrollY}`);
-            // console.log(`${window.scrollY}`)
         })
 
     }, [htmlRef])
