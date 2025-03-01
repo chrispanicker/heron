@@ -41,13 +41,21 @@ export default async function RootLayout({
           <>{children}</>
         </section>
 
-        <div id='foot' className="lg:flex hidden w-screen bg-black text-gray-300 sans h-[2.4rem] justify-between items-center lg:text-2xl px-5 relative z-10">
-          <p>&#169; Drew Litowitz</p>
-          <span className='text-[1.35rem]'>
+        <div id='foot' className="flex lg:relative fixed bottom-0 w-screen bg-black text-gray-300 sans justify-between lg:items-center items-end  lg:h-[2.4rem]  lg:px-5 px-2 lg:py-0 py-2 lg:pb-0 pb-5 lg:text-2xl lg:leading-auto leading-[1.6rem]  lg:border-none border-t-2 border-gray-300 z-10">
+          <p className='hidden lg:block'>&#169; Drew Litowitz</p>
+          <span className='text-[1.35rem] flex justify-between w-full'>
             <a className="pr-1 hover:underline" href="https://www.instagram.com/drewknowitz">@drewknowitz</a>
             <a className='hover:underline' href="mailto:dlitowit@gmail.com">dlitowit@gmail.com</a>
           </span>
         </div>
+
+        {/* <div className="lg:hidden flex w-screen bg-black text-gray-300 sans justify-between items-end px-2 text-[1rem] relative z-10 leading-[1.6rem] border-t-2 border-gray-300 py-2 pb-5">
+                      <p className="text-left">&#169; Drew Litowitz</p>
+                      <span className="flex">
+                        <a className="pr-1 hover:underline" href="https://www.instagram.com/drewknowitz">@drewknowitz</a>
+                        <a className='hover:underline' href="mailto:dlitowit@gmail.com">dlitowit@gmail.com</a>
+                      </span>
+                </div> */}
         <SillyCanvas />
       </body>
     </html>
