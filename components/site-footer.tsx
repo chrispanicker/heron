@@ -35,7 +35,7 @@ export function SiteFooter({info, jobs}:Props){
                             <div className="flex lg:flex-row flex-col mb-1 lg:mb-0">
                                 <p className="whitespace-nowrap text-[1.35rem] mb-1 lg:mb-0">{job.company}</p>                
                                 <p className={`lg:block hidden mx-1 my-0${buttonClass} text-[.8rem] bg-black text-gray-300 outline outline-1 outline-black outline-gray-300 mt-[.45rem]`}>{job.title}</p>
-                                <p className={`${buttonClass} text-2xl outline outline-1 outline-gray-300 lg:hidden inline `}>{job.title}</p>
+                                <p className={`${buttonClass} text-2xl outline outline-1 outline-gray-300 lg:hidden inline whitespace-nowrap `}>{job.title}</p>
                             </div>
                             <p className="sans text-[1.35rem]">{job.years}</p>
                         </span>

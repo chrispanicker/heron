@@ -20,7 +20,6 @@ export function SiteHeader(info:any){
     const router = useRouter();
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")
-
     const e = 1
    const createQueryString = useCallback(
           (name: string, value: string) => {
@@ -59,7 +58,13 @@ export function SiteHeader(info:any){
             >
                 <h1 className="flex duration-500 text-[1.35rem] sans" 
                 onClick={()=>{
-                  document.querySelector("#foot")?.scrollIntoView({behavior:"smooth", block: "start"})
+                  if(window.scrollY+window.innerHeight === document.body.scrollHeight){
+                    window.scrollTo({top:0, left:0, behavior:"smooth"})
+                  }else{
+                    document.querySelector("#foot")?.scrollIntoView({behavior:"smooth", block: "start"})
+                  }
+
+              
                   router.push("?"+createQueryString("project", `${selectedProject}`), {scroll:false})
                 }}>Drew Litowitz&nbsp;
                     <p className="lg:inline-block hidden">{info.info[0].header}</p>
