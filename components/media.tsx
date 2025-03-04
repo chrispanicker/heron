@@ -2,11 +2,14 @@ import { urlForImage } from '@/sanity/lib/image';
 import { PortableText } from '@portabletext/react';
 import { getFile } from '@sanity/asset-utils';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 
 export const MediaWithFadeIn = ({ e, project, index }:any) => {
   const [isVisible, setIsVisible] = useState(false);
   const mediaRef = useRef(null);
+  const searchParams = useSearchParams();
+  const selectedProject = searchParams.get("project")
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -73,7 +76,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           height={1080}
           className={`object-cover ${e.mycrop? "w-[43rem]": "w-auto"} h-full pr-2 snap-center snap-always transition-opacity duration-1000 cursor-zoom-in` 
         }
-          loading="lazy"
+          loading={project.slug === selectedProject? "eager":"lazy"}
           placeholder="blur"
           blurDataURL={`${project.gallery[index].blurDataURL}`}
           unoptimized={true}

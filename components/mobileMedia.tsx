@@ -3,10 +3,13 @@ import { urlForImage } from '@/sanity/lib/image';
 import { PortableText } from '@portabletext/react';
 import { getFile } from '@sanity/asset-utils';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 
 export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
   const [isVisible, setIsVisible] = useState(false);
   const mediaRef = useRef(null);
+  const searchParams = useSearchParams();
+  const selectedProject = searchParams.get("project")
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -80,10 +83,10 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           height={1080}
           className={`object-contain duration-500 h-[50dvh] ${galleryWidth} transition-opacity opacity-100 duration-1000`
           }
-          loading="lazy"
+          loading={project.slug === selectedProject? "eager":"lazy"}
           placeholder="blur"
           blurDataURL={`${project.gallery[index].blurDataURL}`}
-          unoptimized={urlForImage(project.preview).url().includes(".gif") ? true : false}
+          unoptimized={urlForImage(e).url().includes(".gif") ? true : false}
         />
       </div>
     );
