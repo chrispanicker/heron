@@ -32,7 +32,11 @@ export function SiteHeader(info:any){
               if(name==="project"){
                   if(stringSearchParams.includes(`${name}=${value}`)){ 
                       params.delete(name, value)
-                  }else{params.set(name, value)}
+                  }else if(value==="null"){
+                  }
+                  else{
+                    params.set(name, value)
+                  }
               //not a project?? IE tags?
               }else {
                   if(name==="roles"||name==="tags"||name==="collabs" && selectedProject){
