@@ -88,7 +88,7 @@ export default function MobileProjects({project}: Props) {
                 <MobileGallery project={project} onImageChange={handleGalleryScroll} />
             </span>
 
-            <div className={`left-0 absolute z-30 flex w-full justify-between items-center mt-[-3rem] text-2xl text-gray-300 serif leading-[1.1rem] px-2 ${project.images?.length < 2 ? "hidden" : ""}`}>
+            <div className={`left-0 absolute z-30 flex w-full justify-between items-center mt-[-1.8rem] text-2xl text-gray-300 serif leading-[1.1rem] px-1 ${project.images?.length < 2 ? "hidden" : ""}`}>
                 <button className="opacity-0 px-[.1rem] transition-[opacity] text-3xl"
                 id={`mobile-${project.slug}_larr`} 
                 onClick={() => {

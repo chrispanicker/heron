@@ -35,10 +35,10 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
       <div
         ref={mediaRef}
         key={`${project.slug}-${index}`}
-        className={`snap-center snap-always peer flex justify-center items-center h-[60vh] bg-black`}
+        className={`snap-center snap-always peer flex justify-center items-center h-[60vh] bg-black mx-2`}
       >
         {e.description && (
-          <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-5`}>
+          <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-3`}>
             <p className="text-[.8rem]  leading-[1rem] outline-gray-300 outline outline-1 px-1">{e.description}</p>
           </span>
         )}
@@ -78,10 +78,10 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
       <div
         ref={mediaRef}
         key={`mobile-${project.slug}-${index}`}
-        className={`relative snap-center snap-always peer flex justify-center items-center h-[60vh] bg-black`}
+        className={`relative snap-center snap-always peer flex justify-center items-center h-[60vh] bg-black mx-2`}
       >
         {e.description && (
-          <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-5`}>
+          <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-3`}>
             <p className="text-[.8rem] leading-[1rem] outline-gray-300 outline outline-1 px-1">{e.description}</p>
           </span>
         )}
@@ -108,7 +108,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
     );
   } else {
     return (
-      <div key={`mobile-${project.slug}-text-${index}`} className={`mono-book uppercase h-[60vh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-xl text-center px-7 py-5`}>
+      <div key={`mobile-${project.slug}-text-${index}`} className={`mono-book uppercase h-[60vh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-xl text-center mx-2 px-7 py-5`}>
         <PortableText value={e.content} />
       </div>
     );
