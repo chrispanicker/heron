@@ -62,6 +62,10 @@ export function SiteHeader(info:any){
             >
                 <h1 className="flex duration-500 text-[1.35rem] sans" 
                 onClick={()=>{
+                  if(window.innerWidth<1024){
+                    window.scrollTo({top:0, left:0, behavior:"smooth"})
+                  }
+
                   if(window.scrollY+window.innerHeight === document.body.scrollHeight){
                     window.scrollTo({top:0, left:0, behavior:"smooth"})
                   }else{
