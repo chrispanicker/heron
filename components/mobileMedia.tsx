@@ -4,6 +4,7 @@ import { PortableText } from '@portabletext/react';
 import { getFile } from '@sanity/asset-utils';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
+import { buttonClass } from './classes';
 
 export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,11 +35,11 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
       <div
         ref={mediaRef}
         key={`${project.slug}-${index}`}
-        className={`snap-center snap-always peer flex justify-center items-center h-[60dvh] bg-black mx-1`}
+        className={`snap-center snap-always peer flex justify-center items-center h-[60dvh] bg-black`}
       >
         {e.description && (
-          <span className={`mono-book uppercase mobile-description absolute top-0 h-[50dvh] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
-            <p className="leading-[1.2rem]">{e.description}</p>
+          <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
+            <p className="text-[.8rem]  leading-[1rem] outline-gray-300 outline outline-1 px-1">{e.description}</p>
           </span>
         )}
         <video
@@ -48,12 +49,20 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           loop
           autoPlay
           webkit-playsinline="true"
+          src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} 
           playsInline
           preload="true"
           className={`object-cover duration-500 h-[50dvh] ${galleryWidth} transition-opacity duration-1000`
           }
+          onDoubleClick={(x)=>{
+            const vidModal = document.querySelector("#vidmodal");
+            const vidModalEl = document.querySelector("#vidmodal video") as HTMLVideoElement
+            vidModalEl.src = x.currentTarget.src
+            vidModal?.classList.replace("opacity-0","opacity-100")
+            vidModal?.classList.remove("pointer-events-none")
+            vidModalEl.classList.remove("hidden")
+          }}
         >
-          <source src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} type="video/mp4" />
           <track
             src="/path/to/captions.vtt"
             kind="subtitles"
@@ -69,11 +78,11 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
       <div
         ref={mediaRef}
         key={`mobile-${project.slug}-${index}`}
-        className={`relative snap-center snap-always peer flex justify-center items-center h-[60dvh] bg-black mx-1`}
+        className={`relative snap-center snap-always peer flex justify-center items-center h-[60dvh] bg-black`}
       >
         {e.description && (
-          <span className={`mono-book uppercase mobile-description absolute top-0 h-[50dvh] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
-            <p className=" leading-[1.2rem]">{e.description}</p>
+          <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
+            <p className="text-[.8rem]  leading-[1rem] outline-gray-300 outline outline-1 px-1">{e.description}</p>
           </span>
         )}
         <Image
@@ -83,6 +92,13 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           height={1080}
           className={`object-contain duration-500 h-[50dvh] ${galleryWidth} transition-opacity opacity-100 duration-1000`
           }
+          onDoubleClick={(x)=>{
+            const modal = document.querySelector("#modal");
+            const modalImg = document.querySelector("#modal img") as HTMLImageElement
+            modalImg!.src = x.currentTarget.src
+            modal?.classList.replace("opacity-0","opacity-100")
+            modal?.classList.remove("pointer-events-none")
+          }}
           loading={project.slug === selectedProject? "eager":"lazy"}
           placeholder="blur"
           blurDataURL={`${project.gallery[index].blurDataURL}`}

@@ -7,6 +7,7 @@ import  SillyCanvas  from '@/components/silly-canvas'
 import { client } from '@/sanity/lib/client'
 import { groq } from 'next-sanity'
 import { Modal } from '@/components/modal'
+import { VideoModal } from '@/components/vidmodal'
 
 
 
@@ -35,6 +36,7 @@ export default async function RootLayout({
     <html lang="en" className='bg-gray-300 text-black serif font-light overflow-x-hidden lg:text-xl text-[1rem] leading-[1.4rem] snap-y snap-mandatory cursor-auto '>
       <body>
         <Modal />
+        <VideoModal />
         <section className='relative z-10'>
           <HeaderAndFilters info={info}  projects={allprojects} jobs={jobs}/>
           <>{children}</>

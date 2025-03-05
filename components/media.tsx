@@ -63,7 +63,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
     );
   } else if (e._type === 'image') {
     return (
-      <div className={`relative w-max h-full group active:pointer-events-none`} key={`${project.slug}-${index}`} ref={mediaRef}>
+      <div className={`relative w-max h-full group`} key={`${project.slug}-${index}`} ref={mediaRef}>
         {e.description && (
           <span key={`${project.slug}-description-${index}`} className="absolute w-full h-[3rem] flex justify-center items-end opacity-0 group-hover:opacity-[100%]">
             <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5">{e.description}</p>
@@ -81,6 +81,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           blurDataURL={`${project.gallery[index].blurDataURL}`}
           unoptimized={true}
           onClick={(x)=>{
+            console.log('hi')
             const modal = document.querySelector("#modal");
             const modalImg = document.querySelector("#modal img") as HTMLImageElement
             modalImg!.src = x.currentTarget.src
