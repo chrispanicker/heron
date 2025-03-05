@@ -31,9 +31,9 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
 
   if (e._type === 'mp4') {
     return (
-      <div className="relative w-max h-full" key={`${project.slug}-${index}`} ref={mediaRef}>
+      <div className="relative w-max h-full group" key={`${project.slug}-${index}`} ref={mediaRef}>
         {e.description && (
-          <span className="absolute w-full h-full flex justify-center items-end opacity-0 hover:opacity-[100%] active:pointer-events-none z-[200]">
+          <span className="absolute w-full h-[3rem] flex justify-center items-end peer-hover:bg-black z-[200] opacity-0 group-hover:opacity-100">
             <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5">{e.description}</p>
           </span>
         )}
@@ -63,9 +63,9 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
     );
   } else if (e._type === 'image') {
     return (
-      <div className={`relative w-max h-full group`} key={`${project.slug}-${index}`} ref={mediaRef}>
+      <div className={`relative w-max h-full group active:pointer-events-none`} key={`${project.slug}-${index}`} ref={mediaRef}>
         {e.description && (
-          <span key={`${project.slug}-description-${index}`} className="absolute w-full h-full flex justify-center items-end opacity-0 group-hover:opacity-[100%] pointer-events-none">
+          <span key={`${project.slug}-description-${index}`} className="absolute w-full h-[3rem] flex justify-center items-end opacity-0 group-hover:opacity-[100%]">
             <p className="w-fit h-fit uppercase mono-book text-[.8rem] px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5">{e.description}</p>
           </span>
         )}
