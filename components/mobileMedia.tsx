@@ -38,7 +38,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
         className={`snap-center snap-always peer flex justify-center items-center h-[60dvh] bg-black`}
       >
         {e.description && (
-          <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
+          <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-5`}>
             <p className="text-[.8rem]  leading-[1rem] outline-gray-300 outline outline-1 px-1">{e.description}</p>
           </span>
         )}
@@ -81,8 +81,8 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
         className={`relative snap-center snap-always peer flex justify-center items-center h-[60dvh] bg-black`}
       >
         {e.description && (
-          <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify justify-center items-start mt-2 px-5`}>
-            <p className="text-[.8rem]  leading-[1rem] outline-gray-300 outline outline-1 px-1">{e.description}</p>
+          <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-5`}>
+            <p className="text-[.8rem] leading-[1rem] outline-gray-300 outline outline-1 px-1">{e.description}</p>
           </span>
         )}
         <Image
