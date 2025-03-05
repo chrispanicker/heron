@@ -22,7 +22,7 @@ export function VideoModal() {
           src={""}
           playsInline
           preload="true"
-          className={`object-contain duration-500 h-[50dvh] transition-opacity duration-1000 hidden`
+          className={`object-contain duration-500 h-[50vh] transition-opacity duration-1000 hidden`
           }
         >
           Your browser does not support the video tag.

@@ -35,7 +35,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
       <div
         ref={mediaRef}
         key={`${project.slug}-${index}`}
-        className={`snap-center snap-always peer flex justify-center items-center h-[60dvh] bg-black`}
+        className={`snap-center snap-always peer flex justify-center items-center h-[60vh] bg-black`}
       >
         {e.description && (
           <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-5`}>
@@ -52,7 +52,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} 
           playsInline
           preload="true"
-          className={`object-cover duration-500 h-[50dvh] ${galleryWidth} transition-opacity duration-1000`
+          className={`object-cover duration-500 h-[50vh] ${galleryWidth} transition-opacity duration-1000`
           }
           onDoubleClick={(x)=>{
             const vidModal = document.querySelector("#vidmodal");
@@ -78,7 +78,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
       <div
         ref={mediaRef}
         key={`mobile-${project.slug}-${index}`}
-        className={`relative snap-center snap-always peer flex justify-center items-center h-[60dvh] bg-black`}
+        className={`relative snap-center snap-always peer flex justify-center items-center h-[60vh] bg-black`}
       >
         {e.description && (
           <span className={`mono-book uppercase mobile-description absolute top-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-5`}>
@@ -90,7 +90,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           alt=""
           width={1080}
           height={1080}
-          className={`object-contain duration-500 h-[50dvh] ${galleryWidth} transition-opacity opacity-100 duration-1000`
+          className={`object-contain duration-500 h-[50vh] ${galleryWidth} transition-opacity opacity-100 duration-1000`
           }
           onDoubleClick={(x)=>{
             const modal = document.querySelector("#modal");
@@ -108,7 +108,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
     );
   } else {
     return (
-      <div key={`mobile-${project.slug}-text-${index}`} className={`mono-book uppercase h-[60dvh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-xl text-center px-7 py-5`}>
+      <div key={`mobile-${project.slug}-text-${index}`} className={`mono-book uppercase h-[60vh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-xl text-center px-7 py-5`}>
         <PortableText value={e.content} />
       </div>
     );
