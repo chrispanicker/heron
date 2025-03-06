@@ -38,7 +38,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
         className={`snap-center snap-always peer flex justify-center items-center h-[60vh] bg-black mx-2`}
       >
         {e.description && (
-          <span className={`mono-book uppercase mobile-description absolute bottom-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-3`}>
+          <span className={`mono-book uppercase mobile-description absolute bottom-2 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-3`}>
             <p className="text-[.8rem]  leading-[1rem] outline-gray-300 outline outline-1 px-1 bg-black">{e.description}</p>
           </span>
         )}
@@ -82,7 +82,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
         className={`relative snap-center snap-always peer flex justify-center items-center h-[60vh] bg-black mx-2`}
       >
         {e.description && (
-          <span className={`mono-book uppercase mobile-description absolute bottom-0 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-3`}>
+          <span className={`mono-book uppercase mobile-description absolute bottom-2 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-3`}>
             <p className="text-[.8rem] leading-[1rem] outline-gray-300 outline outline-1 px-1 bg-black">{e.description}</p>
           </span>
         )}
