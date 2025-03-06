@@ -135,6 +135,7 @@ export default function MouseTrailAndDraw() {
   return isSanityStudio? "": (
     <canvas
       ref={canvasRef}
+      className='lg:block'
       style={{
         position: 'fixed',
         top: 0,

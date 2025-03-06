@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function VideoModal() {
   return (
-    <div id="vidmodal" className="w-screen h-screen bg-black fixed top-0 left-0 z-[1001] cursor-zoom-out opacity-0 pointer-events-none transition-[opacity] flex justify-center items-center"
+    <div id="vidmodal" className="w-screen overflow-scroll h-screen bg-black fixed top-0 left-0 z-[1001] cursor-zoom-out opacity-0 pointer-events-none transition-[opacity] flex justify-center items-center"
     onDoubleClick={(e)=>{
        e.currentTarget.classList.replace("opacity-100","opacity-0") 
        e.currentTarget.classList.add("pointer-events-none") 
@@ -22,7 +22,7 @@ export function VideoModal() {
           src={""}
           playsInline
           preload="true"
-          className={`object-contain duration-500 h-[50vh] transition-opacity duration-1000 hidden`
+          className={`object-contain duration-500 h-auto min-w-[140vw]  transition-opacity duration-1000 hidden`
           }
         >
           Your browser does not support the video tag.
@@ -34,5 +34,5 @@ export function VideoModal() {
             e.currentTarget.parentElement!.firstElementChild?.classList.add("hidden")
         }}>–</p>
   </div>
-  )
+  ) 
 }
