@@ -52,16 +52,15 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} 
           playsInline
           preload="true"
-          className={`object-cover duration-500 h-[50vh] ${galleryWidth} transition-opacity duration-1000`
-          }
-          onDoubleClick={(x)=>{
-            const vidModal = document.querySelector("#vidmodal");
-            const vidModalEl = document.querySelector("#vidmodal video") as HTMLVideoElement
-            vidModalEl.src = x.currentTarget.src
-            vidModal?.classList.replace("opacity-0","opacity-100")
-            vidModal?.classList.remove("pointer-events-none")
-            vidModalEl.classList.remove("hidden")
-          }}
+          className={`object-cover duration-500 h-[50vh] ${galleryWidth} transition-opacity duration-1000`}
+          // onDoubleClick={(x)=>{
+            // const vidModal = document.querySelector("#vidmodal");
+            // const vidModalEl = document.querySelector("#vidmodal video") as HTMLVideoElement
+            // vidModalEl.src = x.currentTarget.src
+            // vidModal?.classList.replace("opacity-0","opacity-100")
+            // vidModal?.classList.remove("pointer-events-none")
+            // vidModalEl.classList.remove("hidden")
+          // }}
         >
           <track
             src="/path/to/captions.vtt"
@@ -92,13 +91,13 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           height={1080}
           className={`object-contain duration-500 h-[50vh] ${galleryWidth} transition-opacity opacity-100 duration-1000`
           }
-          onDoubleClick={(x)=>{
-            const modal = document.querySelector("#modal");
-            const modalImg = document.querySelector("#modal img") as HTMLImageElement
-            modalImg!.src = x.currentTarget.src
-            modal?.classList.replace("opacity-0","opacity-100")
-            modal?.classList.remove("pointer-events-none")
-          }}
+          // onDoubleClick={(x)=>{
+          //   const modal = document.querySelector("#modal");
+          //   const modalImg = document.querySelector("#modal img") as HTMLImageElement
+          //   modalImg!.src = x.currentTarget.src
+          //   modal?.classList.replace("opacity-0","opacity-100")
+          //   modal?.classList.remove("pointer-events-none")
+          // }}
           loading={project.slug === selectedProject? "eager":"lazy"}
           placeholder="blur"
           blurDataURL={`${project.gallery[index].blurDataURL}`}
