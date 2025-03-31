@@ -51,7 +51,7 @@ export function Gallery({ project }: Props) {
   }
 
   return (
-    <div className="relative w-full max-w-screen mx-auto text-3xl">
+    <div className="hidden lg:block relative w-full max-w-screen mx-auto text-3xl">
       <div
         ref={scrollContainerRef}
         className={`flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide ${
