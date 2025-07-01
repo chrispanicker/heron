@@ -26,7 +26,7 @@ export function SiteFooter({info, jobs}:Props){
         isSanityStudio? "" : 
         <footer id="footer" ref={footerRef} className="border-t-[2px] mt-[2px] border-black relative z-10 lg:pt-[8rem]">
             <div className={`h-fit lg:pb-4 lg:pt-4 pb-[20dvh] pt-2 text-left grid lg:grid-cols-2 lg:mx-5 lg:text-black lg:text-[1rem] text-gray-300 `}>
-                <div className="lg:pb-0 pb-5 lg:text-2xl lg:leading-[1.95rem] text-[1.35rem] leading-[1.6rem] lg:w-auto w-screen lg:px-0 px-2 serif">
+                <div className="lg:pb-0 pb-5 lg:text-2xl lg:leading-[1.95rem] text-[1.35rem] leading-[1.6rem] lg:w-auto w-screen lg:pr-6 px-2 serif">
                     <PortableText value={info[0]?.bio[0]}/>
                 </div>
                 <div className={`lg:h-fit lg:pt-0 sans px-2`}>
