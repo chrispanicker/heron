@@ -1,9 +1,7 @@
 import MobileProjects from "@/components/mobile-projects";
 import Projects from "@/components/project";
 import { Scroller } from "@/components/scroller";
-import SillyCanvas from "@/components/silly-canvas";
 import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 import { Sorts } from "@/components/sorts";
 import { getFilteredProjects, getInfo, getJobs, getProjects } from "@/sanity/lib/queries";
 
@@ -29,7 +27,11 @@ export default async function Home({searchParams}: Props) {
   let filteredProjects= await getFilteredProjects({searchParams});
   let info = await getInfo();
   let jobs = await getJobs();
-  
+  let slugs:string[] = []
+  filteredProjects.map((project:any, index: number)=>{
+    slugs[index] = project.slug;
+  })
+
   return (
     filteredProjects? <main className="z-20 min-h-[96.2vh]">
       <div className="lg:h-[10rem]"></div>
@@ -38,7 +40,7 @@ export default async function Home({searchParams}: Props) {
         {filteredProjects.map((proj:any, index:number)=>{ 
         return(
           <div className={`duration-500 ${project===proj.slug? "transition-none pb-[2rem]": "transition-all"}`} key={proj.slug}>
-            <Projects project={proj}/>
+            <Projects project={proj} slugs={slugs}/>
             <MobileProjects project={proj}/>
           </div>
         )})}

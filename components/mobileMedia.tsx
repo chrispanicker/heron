@@ -86,26 +86,28 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
             <p className="text-[.8rem] leading-[1rem] outline-gray-300 outline outline-1 px-1 bg-black">{e.description}</p>
           </span>
         )}
-        <Image
-          src={urlForImage(e).url()}
-          alt=""
-          width={1080}
-          height={1080}
-          className={`object-contain duration-500 h-[50vh] ${galleryWidth} transition-opacity opacity-100 duration-1000`
-          }
-          onDoubleClick={(x)=>{
-            const modal = document.querySelector("#modal");
-            const modalImg = document.querySelector("#modal img") as HTMLImageElement
-            modalImg!.src = x.currentTarget.src
-            modal? modal.scrollLeft=0 :""
-            modal?.classList.replace("opacity-0","opacity-100")
-            modal?.classList.remove("pointer-events-none")
-          }}
-          loading={project.slug === selectedProject? "eager":"lazy"}
-          placeholder="blur"
-          blurDataURL={`${project.gallery[index].blurDataURL}`}
-          unoptimized={urlForImage(e).url().includes(".gif") ? true : false}
-        />
+        <span className={`relative flex justify-center items-center ${galleryWidth} overflow-x-hidden`}>
+          <Image
+            src={urlForImage(e).url()}
+            alt=""
+            width={1080}
+            height={1080}
+            className={`${e.mycrop? "opacity-100 min-w-[140vw]": "w-full"} object-contain duration-500 transition-opacity duration-1000`
+            }
+            onDoubleClick={(x)=>{
+              const modal = document.querySelector("#modal");
+              const modalImg = document.querySelector("#modal img") as HTMLImageElement
+              modalImg!.src = x.currentTarget.src
+              modal? modal.scrollLeft=0 :""
+              modal?.classList.replace("opacity-0","opacity-100")
+              modal?.classList.remove("pointer-events-none")
+            }}
+            loading={project.slug === selectedProject? "eager":"lazy"}
+            placeholder="blur"
+            blurDataURL={`${project.gallery[index].blurDataURL}`}
+            unoptimized={urlForImage(e).url().includes(".gif") ? true : false}
+          />
+        </span>
       </div>
     );
   } else {

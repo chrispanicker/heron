@@ -41,11 +41,12 @@ export default async function RootLayout({
           <HeaderAndFilters info={info}  projects={allprojects} jobs={jobs}/>
           <>{children}</>
         </section>
-        <div id='foot' className="flex lg:relative fixed bottom-0 w-screen bg-black text-gray-300 sans justify-between lg:items-center items-end  lg:h-[2.4rem]  lg:px-5 px-2 lg:py-0 py-2 lg:pb-0 pb-5 lg:text-2xl lg:leading-auto leading-[1.6rem]  lg:border-none border-t-2 border-gray-300 z-10">
-          <p className='hidden lg:block whitespace-nowrap '>&#169; Drew Litowitz</p>
-          <span className='text-[1.35rem] flex lg:justify-end justify-between w-full'>
-            <a className="pr-1 hover:underline" href="https://www.instagram.com/drewknowitz">@drewknowitz</a>
-            <a className='hover:underline' href="mailto:dlitowit@gmail.com">dlitowit@gmail.com</a>
+        <div id='foot' className="flex lg:relative fixed bottom-0 w-screen bg-black text-gray-300 leading-[.6rem] uppercase mono-book text-[.8rem] justify-between lg:items-center items-end  lg:h-[2rem]  lg:px-5 px-2 lg:py-0 py-2 lg:pb-0 pb-5 lg:leading-auto leading-[1.6rem]  lg:border-none border-t-2 border-gray-300 z-10">
+          <span className='hidden lg:flex whitespace-nowrap'><p className='sans'>&#169;</p>Drew Litowitz</span>
+          <span className='flex lg:justify-end justify-between w-full'>
+            <a className="pr-1 hover:underline flex" href="https://www.instagram.com/drewknowitz"><p className='sans'>@</p>drewknowitz</a>
+            <p>&nbsp;</p>
+            <a className='hover:underline flex' href="mailto:dlitowit@gmail.com">dlitowit<p className='sans'>@</p>gmail.com</a>
           </span>
         </div>
         <SillyCanvas />

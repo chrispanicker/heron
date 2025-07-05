@@ -82,7 +82,6 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           blurDataURL={`${project.gallery[index].blurDataURL}`}
           unoptimized={true}
           onClick={(x)=>{
-            console.log('hi')
             const modal = document.querySelector("#modal");
             const modalImg = document.querySelector("#modal img") as HTMLImageElement
             modalImg!.src = x.currentTarget.src

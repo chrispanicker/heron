@@ -46,7 +46,7 @@ export function MobileGallery({project, onImageChange}: Props) {
         <div 
             id={`${project.slug}-mobileGallery`} 
             ref={galleryRef}
-            className={`relative scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory mt-10`}
+            className={`relative scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory mt-10 bg-black`}
             onScroll={(e) => {
                 let larr = document.querySelector(`#mobile-${project.slug}_larr`)
                 if (e.currentTarget.scrollLeft < 20 && larr?.classList.contains("opacity-100")) {

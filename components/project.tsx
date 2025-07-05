@@ -9,9 +9,10 @@ import { openFilters } from "./functions";
 
 interface Props{
     project: Project
+    slugs: string[]
 }
 
-export default function Projects({project}: Props) {
+export default function Projects({project, slugs}: Props ) {
     const router = useRouter();
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")  
@@ -24,9 +25,21 @@ export default function Projects({project}: Props) {
     let params = roles.toString()+","+collabs.toString()+","+tags.toString()
 
     let e = 0
-
-
     let tagHoverInterval:any;
+
+
+    function scrollToProject(slug:string){     
+      let element = document.querySelector(`#${slug}`)
+      var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      selectedProject===slug? 
+      //scroll back to top
+      window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
+      :selectedProject?
+          setTimeout(()=>{
+          element?.scrollIntoView({behavior:"smooth", block:"start"})}, 650)
+      :setTimeout(()=>{
+      element?.scrollIntoView({behavior:"smooth", block:"start"})}, 500)
+    }
 
     function setHoverInterval(e:any) {
         if (!tagHoverInterval) {
@@ -96,13 +109,7 @@ export default function Projects({project}: Props) {
             className={`lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-200 ml-[1.75px] mr-[2px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "pt-12 pb-2 bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
             <div className="w-full h-full absolute top-0 z-0" 
             onClick={()=>{
-                let element = document.querySelector(`#${project.slug}`)
-                var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-
-                selectedProject===project.slug? window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
-                :selectedProject?
-                    setTimeout(()=>{element?.scrollIntoView({behavior:"smooth", block:"start"})}, 550)
-                    :element?.scrollIntoView({behavior:"smooth", block:"start"})
+                scrollToProject(project.slug)
                 let filters = document.querySelector("header section")
                 router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
 
@@ -114,14 +121,7 @@ export default function Projects({project}: Props) {
             {/* name */}
             <button className={`text-left col-span-4 hover:underline decoration-1 underline-offset-2 mr-2 cursor-select z-10`}
                 onClick={()=>{
-                    let element = document.querySelector(`#${project.slug}`)
-                    var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-                    selectedProject===project.slug? window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
-                    :selectedProject?
-                        setTimeout(()=>{
-                        element?.scrollIntoView({behavior:"smooth", block:"start"})}, 600)
-                    :setTimeout(()=>{
-                    element?.scrollIntoView({behavior:"smooth", block:"start"})}, 200)
+                    scrollToProject(project.slug);
 
                     router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
                     
@@ -193,11 +193,22 @@ export default function Projects({project}: Props) {
                         <PortableText value={project.content}/>
                     </div>
                     {/* close button */}
-                    <div className="flex text-right items-center justify-end col-span-1 h-[2rem]">
-                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1 ${buttonClass} hover:underline outline outline-1`} 
+                    <div className="flex flex-col text-right items-end justify-end col-span-1 h-full">
+                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1 mb-1 pt-1 ${buttonClass} sans hover:underline outline outline-1`} 
                         onClick={()=>{
                             router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
-                        }}>Close</button>
+                        }}>&#10005;</button>
+                        
+                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1 mb-2 ${buttonClass} hover:underline outline outline-1`} 
+                        onClick={()=>{
+                          let nextSlug = ""
+                          slugs.map((slug, index)=>{
+                            slug === project.slug? index<slugs.length? nextSlug = slugs[index + 1]: nextSlug = slugs[0]: "";
+                          })
+                            router.push("?"+createQueryString("project", `${nextSlug}`), {scroll:false})
+                          scrollToProject(nextSlug)
+                        }}>Next Project</button>
+
                     </div>
                 </div>
             </span>

@@ -11,6 +11,7 @@ export type Project = {
     collabs: any;
     year: string;
     client: string;
+    orderRank: any;
     roles: any;
     gallery: Image[];
     tags: any;

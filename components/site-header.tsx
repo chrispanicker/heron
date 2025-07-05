@@ -60,7 +60,7 @@ export function SiteHeader(info:any){
         <>
             <span className="flex justify-between items-center lg:px-5 outline outline-gray-300 px-2 w-[100dvw] mono-book"
             >
-                <h1 className="flex duration-500 text-[1.35rem] sans" 
+                <h1 className="flex duration-500 leading-[.6rem] uppercase mono-book text-[.8rem]" 
                 onClick={()=>{
                   if(window.innerWidth<1024){
                     window.scrollTo({top:0, left:0, behavior:"instant"})
@@ -79,7 +79,7 @@ export function SiteHeader(info:any){
                     <p className="lg:inline-block hidden">{info.info[0].header}</p>
                 </h1>
                 <div className="flex justify-center items-center h-max">
-                    <button className="filters text-4xl z-50 transition-all sans font-bolder" 
+                    <button className="filters text-xl z-50 transition-all sans font-bolder" 
                     onClick={()=>{openFilters(e)}}
                     >
                    +

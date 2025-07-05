@@ -68,22 +68,22 @@ export function Gallery({ project }: Props) {
         <> 
           <button
             id={`${project.slug}_larr`}
-            className={`transition-[opacity] h-fit w-fit absolute bottom-2 z-[1000] ${showLeftArrow ? "opacity-100" : "opacity-0"} px-2`}
+            className={`transition-[opacity] h-fit w-fit absolute bottom-2 z-[10] ${showLeftArrow ? "opacity-100" : "opacity-0"} px-2`}
             onClick={prevImage}
           >
             {/* <svg id="a" data-name="Layer 1" fill="#d1d5db" className="fill-gray-300 stroke hover:stroke-gray-300 stroke-black stroke-[.04rem]" xmlns="http://www.w3.org/2000/svg" width="50" height="40" viewBox="0 0 40 30">
               <polygon points="30 0 10 15 30 30 30 25 17 15 30 5" />
             </svg> */}
-            <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="#d1d5db" stroke="#000000" strokeWidth="7px" viewBox="0 0 185.22 146.88">
+            <svg id="Layer_1" className="hover:fill-[#d1d5db] fill-black hover:stroke-black stroke-[#d1d5db]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="#d1d5db" stroke="#000000" strokeWidth="7px" viewBox="0 0 185.22 146.88">
               <polygon points="73.44 146.88 90.41 129.91 45.94 85.44 185.22 85.44 185.22 61.44 45.94 61.44 90.41 16.97 73.44 0 0 73.44 73.44 146.88"/>
             </svg>
           </button>
           
           <button
-            className="absolute right-0 bottom-2 z-[1000] px-2"
+            className="absolute right-0 bottom-2 z-[10] px-2"
             onClick={nextImage}
           >
-            <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="#d1d5db" stroke="#000000" strokeWidth="7px" viewBox="0 0 185.22 146.88">
+            <svg id="a" className="hover:fill-[#d1d5db] fill-black hover:stroke-black stroke-[#d1d5db]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="#d1d5db" stroke="#000000" strokeWidth="7px" viewBox="0 0 185.22 146.88">
               <polygon points="111.78 0 94.81 16.97 139.28 61.44 0 61.44 0 85.44 139.28 85.44 94.81 129.91 111.78 146.88 185.22 73.44 111.78 0"/>
             </svg>
           </button>
