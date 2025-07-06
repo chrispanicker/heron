@@ -198,7 +198,7 @@ export default function Projects({project, slugs}: Props ) {
                 )): ""} */}
             </span>
             {/* year */}
-            <p className={`lg:text-right flex justify-end col-span-1 whitespace-nowrap mono-book text-[1rem] uppercase`}>{project.year}</p>
+            <p className={`lg:text-right flex justify-end col-span-1 whitespace-nowrap serif`}>{project.year}</p>
 
             {/* gallery */}
             <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-all duration-500  ${selectedProject===project.slug? "max-h-[50rem] pt-1": "max-h-[0rem]"}`}>
