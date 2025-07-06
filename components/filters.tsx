@@ -50,7 +50,7 @@ export function Filters({filters}: Props){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`, {scroll: false})
                     }}
-                    className={`hover:underline outline-1 outline-black px-2 ${buttonClass} ${searchParams.getAll(entry.key)?.includes(entry.filter)? "text-black bg-gray-300":"bg-zinc-500 text-zinc-300 hover:bg-gray-300 hover:text-black hover:outline"}`
+                    className={`outline-1 outline-black px-2 ${buttonClass} ${searchParams.getAll(entry.key)?.includes(entry.filter)? "text-black bg-gray-300":"bg-black text-gray-300 hover:bg-gray-300 hover:text-black hover:outline"}`
                     }>
                         {`${entry.filter}`}
                     </button>

@@ -42,7 +42,7 @@ export function SiteFooter({info, jobs}:Props){
                         <span key={`${job.company}`} className="grid grid-cols-3">
                               <div className="flex larger:flex-row flex-col w-full col-span-2">
                                 <p className="whitespace-nowrap pr-2">{job.company}</p>                
-                                <p className={`mono-book text-[1rem] uppercase mt-[.15rem] whitespace-nowrap larger:mb-[0rem] mb-[.95rem]`}>{job.title}</p>
+                                <p className={`mono-book text-[1rem] uppercase mt-[.15rem] whitespace-nowrap larger:leading-[1.95rem] leading-[.2rem] larger:mb-[0rem] mb-[1.6rem]`}>{job.title}</p>
                               </div>
                             <p className={`text-right w-auto text-right mono-book text-[1rem] uppercase`}>{job.years}</p>
                         </span>

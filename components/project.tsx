@@ -135,7 +135,7 @@ export default function Projects({project, slugs}: Props ) {
                 }}>{project.name}
             </button>
             {/* client */}
-            <p className="sans text-[1.35rem] col-span-2">{project.client}</p>
+            <p className="sans text-[1.35rem] col-span-2 ">{project.client}</p>
 
             {/* type */}
             <span id={`${project.slug}_tags`} className="proj-filters flex overflow-x-scroll col-span-2 p-1 larger:mr-6 lg:mr-10 z-10"
@@ -143,7 +143,7 @@ export default function Projects({project, slugs}: Props ) {
               onWheel={()=>{ stopHoverInterval()}}
               onMouseLeave={()=>{stopHoverInterval()}}>
               <button key={project.type} className={`${buttonClass}  outline-1  my-1
-              ${searchParams.getAll("type")?.includes(project.type)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black": "outline-gray-300 bg-zinc-500 text-zinc-300 hover:bg-gray-300 hover:text-black"}`}
+              ${searchParams.getAll("type")?.includes(project.type)? "text-gray-300 bg-black hover:bg-gray-300 hover:text-black outline-black": "bg-gray-300 text-black hover:bg-black hover:text-gray-300 hover:outline-gray-300"} outline outline-1 outline-black`}
               onClick={()=>{
                   router.push( `/?${createQueryString(`type`, `${project.type}`)}`, {scroll: false})
                   params.includes(project.type) && bool ? e=1:""
@@ -166,7 +166,7 @@ export default function Projects({project, slugs}: Props ) {
             }}>
                 {project.roles? project.roles?.map((tag:any)=>(
                     <button key={tag.name} className={`${buttonClass}  outline-1  my-1
-                    ${searchParams.getAll("roles")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-zinc-500 text-zinc-300 hover:bg-gray-300 hover:text-black"}`}
+                    ${searchParams.getAll("roles")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-black hover:text-gray-300 outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}  outline outline-1`}
                     onClick={()=>{
                         router.push( `/?${createQueryString(`roles`, `${tag.name}`)}`, {scroll: false})
                         params.includes(tag.name) && bool ? e=1:""
@@ -212,7 +212,7 @@ export default function Projects({project, slugs}: Props ) {
                     </div>
                     {/* close button */}
                     <div className="flex flex-col text-right items-end justify-end col-span-1 h-full">
-                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-zing- text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1.2 mb-1 pt-[.4rem] ${buttonClass} sans  outline outline-1`} 
+                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1.2 mb-1 pt-[.4rem] ${buttonClass} sans  outline outline-1`} 
                         onClick={()=>{
                             router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
                         }}>&#10005;</button>
