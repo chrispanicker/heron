@@ -51,12 +51,15 @@ interface Props {
             collabs?: string[]
             roles?: string[]
             sort?: string
+            type?: string
     }
 }
 
 export async function getFilteredProjects({searchParams}:Props){ 
-    let {tags, collabs, roles, sort} = searchParams 
-    let tagQueries, collabQueries, roleQueries
+    let {tags, collabs, roles, sort, type} = searchParams;
+    let tagQueries, collabQueries, roleQueries, typeQueries;
+
+    typeof type === "string"? typeQueries = `type match "${type}"`: ""
 
     typeof tags === "string"? tagQueries = `tags[] -> name match "${tags}"` 
     : tagQueries = tags?.map((e, i)=>{
@@ -75,12 +78,13 @@ export async function getFilteredProjects({searchParams}:Props){
 
 
     const projectFilter = `_type == "project"`
+    const typeFilter = type? `${typeQueries} ${tags || collabs || roles? "||" : "" }` : "" 
     const tagFilter =  tags? `${tagQueries} ${collabs || roles? "||" : "" }` : "" 
-    const collabFilter = collabs ? `${collabQueries} ${roles? "||" : "" }` : ""
-    const roleFilter = roles ? `${roleQueries}` : "" 
-    
-    const filter = collabs || roles || tags?`&& ${tagFilter} ${collabFilter} ${roleFilter}`: ""
+    const collabFilter = collabs? `${collabQueries} ${roles? "||" : "" }` : ""
+    const roleFilter = roles? `${roleQueries}` : "" 
 
+    
+    const filter = collabs || roles || tags || type?`&& ${typeFilter} ${tagFilter} ${collabFilter} ${roleFilter}`: ""
     return client.fetch(
             groq`*[${projectFilter} ${filter} && !(_id in path("drafts.**"))]{
                 _id,
@@ -122,6 +126,8 @@ export async function getFilteredProjects({searchParams}:Props){
         : sort==="client-desc"? "client desc"   
         : sort==="tags-asc"? "totalCount asc"
         : sort==="tags-desc"? "totalCount desc"
+        : sort==="type-asc"? "type asc"
+        : sort==="type-desc"? "type desc"
         :"orderRank"})`, 
     )
 }

@@ -5,8 +5,6 @@ import { SiteFooter } from "@/components/site-footer";
 import { Sorts } from "@/components/sorts";
 import { getFilteredProjects, getInfo, getJobs, getProjects } from "@/sanity/lib/queries";
 
-import dynamic from "next/dynamic";
-
 interface Props {
   searchParams: {
     view?: string
@@ -15,15 +13,13 @@ interface Props {
     roles?: string[]
     sort?: string
     about?: string
+    type?: string
     project?: string
   }
 }
 
-
-const UsedFilters = dynamic(() => import("@/components/used-filters"))
-
 export default async function Home({searchParams}: Props) {
-  const {tags, collabs, roles, about, view, sort, project} = searchParams 
+  const {tags, collabs, roles, about, view, sort, type, project} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
   let info = await getInfo();
   let jobs = await getJobs();

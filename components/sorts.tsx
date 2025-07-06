@@ -40,7 +40,9 @@ export function Sorts(){
                 sorted==="name-asc"||sorted==="name-desc"? "Name"
                 :sorted==="client-asc"||sorted==="client-desc"? "Client"
                 :sorted==="tags-asc"||sorted==="tags-desc"? "Tags"
-                :sorted==="year-asc"||sorted==="year-desc"? "Year": "Default"}</button>
+                :sorted==="year-asc"||sorted==="year-desc"? "Year"
+                : sorted==="type-asc"||sorted==="type-desc"? "Type"
+                : "Default"}</button>
             </span>
             <span className="lg:grid hidden grid-cols-6 mt-2 text-[1.35rem] sans px-3 mb-[2px] pb-1 z-30 relative z-10 border-b-[2px] border-black decoration-2 ">
                 <button className="ml-2 col-span-2 text-left flex hover:underline decoration-2 underline-offset-2"
@@ -60,10 +62,18 @@ export function Sorts(){
                     <p className={`${sorted==="client-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
                 </button>
 
-                <button className="pl-[.15rem] col-span-2 text-left flex hover:underline decoration-2 underline-offset-2"
+                <button className="pl-[.1rem] col-span-1 text-left flex hover:underline decoration-2 underline-offset-2"
+                onClick={()=>{
+                    router.push("?"+createSortQueryString("sort", "type"))
+                }}>Type
+                    <p className={`${sorted==="type-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
+                    <p className={`${sorted==="type-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
+                </button>
+
+                <button className="pl-[.0rem] col-span-1 text-left flex hover:underline decoration-2 underline-offset-2"
                 onClick={()=>{
                     router.push("?"+createSortQueryString("sort", "tags"))
-                }}>Tags
+                }}>Role
                     <p className={`${sorted==="tags-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
                     <p className={`${sorted==="tags-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
                 </button>

@@ -12,9 +12,9 @@ interface Props{
 export function HeaderAndFilters({info, projects, jobs}:Props){
     let allTags:string[] = [], allCollabs:string[] = [], allRoles:string[] = []
     projects?.map((project:Project)=>{
-        project.roles?.map((role:any)=>{
-            role.length===0 || allRoles.includes(role.name)? "": allRoles.push(role.name)
-        })
+        // project.roles?.map((role:any)=>{
+        //     role.length===0 || allRoles.includes(role.name)? "": allRoles.push(role.name)
+        // })
         
         project.tags?.map((tag:any)=>{
             tag.length===0 || allTags.includes(tag.name)? "": allTags.push(tag.name)
@@ -25,14 +25,15 @@ export function HeaderAndFilters({info, projects, jobs}:Props){
         })
     })
 
-    allTags.sort(), allCollabs.sort(), allRoles.sort()
+    allTags.sort(), allCollabs.sort()
+    // ,allRoles.sort()
     let filters = {
         "roles": allRoles,
         "collabs": allCollabs, 
         "tags": allTags, 
     };
     return (
-        <header className="flex-col sans justify-between items-center bg-black outline outline-[2px] outline-gray-300 text-gray-300 fixed left-0 top-0 max-h-[1.8rem] transition-all z-50 overflow-hidden">
+        <header className="flex-col sans justify-between items-center bg-black outline outline-[2px] outline-gray-300 text-gray-300 fixed left-0 top-0 max-h-[2rem] transition-all z-50 overflow-hidden">
             <SiteHeader info={info} />
             <Filters filters={filters} projects={projects}  />
             <div className="lg:hidden block">

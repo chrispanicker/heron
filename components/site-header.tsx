@@ -79,9 +79,9 @@ export function SiteHeader(info:any){
                 }}>Drew Litowitz&nbsp;
                     <p className="lg:inline-block hidden">{info.info[0].header}</p>
                 </h1>
-                <div className="flex justify-center items-center h-max">
+                <div className="flex justify-center items-center h-max group" onClick={()=>{openFilters(e)}}>
+                    <p className={`lg:block hidden uppercase pr-1 group-hover:underline ${textSize}`}>Filters</p>
                     <button className="filters text-2xl z-50 transition-all hover:rotate-[15deg] sans font-bolder" 
-                    onClick={()=>{openFilters(e)}}
                     >
                    +
                     </button>

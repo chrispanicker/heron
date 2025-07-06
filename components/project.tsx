@@ -2,7 +2,7 @@
 import { Project } from "@/types/project";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Gallery } from "./gallery";
-import { buttonClass } from "./classes";
+import { buttonClass, textSize } from "./classes";
 import { useCallback, useEffect } from "react";
 import { PortableText } from "@portabletext/react";
 import { openFilters } from "./functions";
@@ -76,20 +76,22 @@ export default function Projects({project, slugs}: Props ) {
             let params;
             let stringSearchParams = searchParams.toString()
             stringSearchParams = stringSearchParams.replaceAll("+", " ")
+            stringSearchParams = stringSearchParams.replaceAll("%2C", ",")
             params = new URLSearchParams(stringSearchParams)
 
         
             if(name==="project"){
+               console.log("proj")
                 if(stringSearchParams.includes(`${name}=${value}`)){ 
                     params.delete(name, value)
                 }else{params.set(name, value)}
             //not a project?? IE tags?
             }else {
-                if(name==="roles"||name==="tags"||name==="collabs" && selectedProject){
-                    var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+                if(name==="roles"||name==="tags"||name==="collabs"||name==="type" && selectedProject){
                     params.delete("project", selectedProject!)
                     window.scrollTo(scrollX, 0)
                 }
+
                 if(stringSearchParams.includes(`${name}=${value}`)){
                     params.delete(name, value)
                 }else{params.append(name, value)}
@@ -134,8 +136,25 @@ export default function Projects({project, slugs}: Props ) {
             </button>
             {/* client */}
             <p className="sans text-[1.35rem] col-span-2">{project.client}</p>
-            {/* tags */}
-            <span id={`${project.slug}_tags`} className="proj-filters flex overflow-x-scroll col-span-5 p-1 larger:mr-6 lg:mr-10 z-10"
+
+            {/* type */}
+            <span id={`${project.slug}_tags`} className="proj-filters flex overflow-x-scroll col-span-2 p-1 larger:mr-6 lg:mr-10 z-10"
+              onMouseOver={(e)=>{setHoverInterval(e)}}
+              onWheel={()=>{ stopHoverInterval()}}
+              onMouseLeave={()=>{stopHoverInterval()}}>
+              <button key={project.type} className={`${buttonClass}  outline-1  my-1
+              ${searchParams.getAll("type")?.includes(project.type)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black": "outline-gray-300 bg-zinc-500 text-zinc-300 hover:bg-gray-300 hover:text-black"}`}
+              onClick={()=>{
+                  router.push( `/?${createQueryString(`type`, `${project.type}`)}`, {scroll: false})
+                  params.includes(project.type) && bool ? e=1:""
+                  openFilters(e)
+                  stopHoverInterval()
+              }}
+              >{project.type}</button>
+            </span>
+
+            {/* roles */}
+            <span id={`${project.slug}_tags`} className="proj-filters flex overflow-x-scroll col-span-3 p-1 larger:mr-6 lg:mr-10 z-10"
             onMouseOver={(e)=>{
                 setHoverInterval(e)
             }}
@@ -146,8 +165,8 @@ export default function Projects({project, slugs}: Props ) {
                 stopHoverInterval()
             }}>
                 {project.roles? project.roles?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} outline outline-1 hover:underline my-1
-                    ${searchParams.getAll("roles")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
+                    <button key={tag.name} className={`${buttonClass}  outline-1  my-1
+                    ${searchParams.getAll("roles")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-zinc-500 text-zinc-300 hover:bg-gray-300 hover:text-black"}`}
                     onClick={()=>{
                         router.push( `/?${createQueryString(`roles`, `${tag.name}`)}`, {scroll: false})
                         params.includes(tag.name) && bool ? e=1:""
@@ -156,8 +175,8 @@ export default function Projects({project, slugs}: Props ) {
                     }}
                 >{tag.name}</button>
                 )): ""}
-                {project.collabs? project.collabs?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} outline outline-1 outline-black hover:underline my-1
+                {/* {project.collabs? project.collabs?.map((tag:any)=>(
+                    <button key={tag.name} className={`${buttonClass} outline outline-1 outline-black  my-1
                     ${searchParams.getAll("collabs")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
                     onClick={()=>{
                         router.push( `/?${createQueryString(`collabs`, `${tag.name}`)}`, {scroll: false})
@@ -168,7 +187,7 @@ export default function Projects({project, slugs}: Props ) {
                 )): ""}
                 {project.tags? project.tags?.map((tag:any)=>(
                     <button key={tag.name} 
-                    className={`${buttonClass} outline outline-1 outline-black hover:underline my-1
+                    className={`${buttonClass} outline outline-1 outline-black  my-1
                     ${searchParams.getAll("tags")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
                     onClick={()=>{
                     router.push( `/?${createQueryString(`tags`, `${tag.name}`)}`, {scroll: false})
@@ -176,11 +195,10 @@ export default function Projects({project, slugs}: Props ) {
                     openFilters(e)
                     stopHoverInterval()
                 }}>{tag.name}</button>
-                )): ""}
-
+                )): ""} */}
             </span>
             {/* year */}
-            <p className="lg:text-right sans text-[1.35rem] flex justify-end col-span-1 whitespace-nowrap">{project.year}</p>
+            <p className={`lg:text-right flex justify-end col-span-1 whitespace-nowrap mono-book text-[1rem] uppercase`}>{project.year}</p>
 
             {/* gallery */}
             <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-all duration-500  ${selectedProject===project.slug? "max-h-[50rem] pt-1": "max-h-[0rem]"}`}>
@@ -194,12 +212,12 @@ export default function Projects({project, slugs}: Props ) {
                     </div>
                     {/* close button */}
                     <div className="flex flex-col text-right items-end justify-end col-span-1 h-full">
-                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1.2 mb-1 pt-[.4rem] ${buttonClass} sans hover:underline outline outline-1`} 
+                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-zing- text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1.2 mb-1 pt-[.4rem] ${buttonClass} sans  outline outline-1`} 
                         onClick={()=>{
                             router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
                         }}>&#10005;</button>
                         
-                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1 mb-2 ${buttonClass} hover:underline outline outline-1`} 
+                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1 mb-2 ${buttonClass}  outline outline-1`} 
                         onClick={()=>{
                           let nextSlug = ""
                           slugs.map((slug, index)=>{
