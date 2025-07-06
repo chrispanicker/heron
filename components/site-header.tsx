@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { TestFilter } from "./test-filter";
 import { openFilters } from "./functions";
 import { useCallback } from "react";
+import { textSize } from "./classes";
 
 
 type job ={
@@ -60,7 +61,7 @@ export function SiteHeader(info:any){
         <>
             <span className="flex justify-between items-center lg:px-5 outline outline-gray-300 px-2 w-[100dvw] mono-book"
             >
-                <h1 className="flex duration-500 leading-[.6rem] uppercase mono-book text-[.8rem]" 
+                <h1 className={`flex duration-500 leading-[.6rem] uppercase mono-book ${textSize}`}
                 onClick={()=>{
                   if(window.innerWidth<1024){
                     window.scrollTo({top:0, left:0, behavior:"instant"})
@@ -79,7 +80,7 @@ export function SiteHeader(info:any){
                     <p className="lg:inline-block hidden">{info.info[0].header}</p>
                 </h1>
                 <div className="flex justify-center items-center h-max">
-                    <button className="filters text-xl z-50 transition-all sans font-bolder" 
+                    <button className="filters text-2xl z-50 transition-all hover:rotate-[15deg] sans font-bolder" 
                     onClick={()=>{openFilters(e)}}
                     >
                    +

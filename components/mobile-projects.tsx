@@ -79,7 +79,7 @@ export default function MobileProjects({project}: Props) {
             <div className="sticky top-8 bg-gray-300 border-b-2 border-black z-30 pt-2 pb-2">
                 <h2 className="text-2xl flex justify-start items-center leading-[1.8rem]">{project.name}</h2>
                 <div className="flex justify-between">
-                    <p className={`${buttonClass} bg-black text-gray-300 ml-[.1rem] mt-[.2rem]`}>{project.type}</p>
+                    <p className={`${buttonClass} bg-black text-gray-300 ml-[.02rem] mt-[.2rem]`}>{project.type}</p>
                     <p className="sans">{project.year}</p>
                 </div>
             </div>

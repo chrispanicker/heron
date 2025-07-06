@@ -1,6 +1,7 @@
 "use client"
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import { textSize } from "./classes";
 
 
 export default function UsedFilters(){
@@ -39,7 +40,7 @@ export default function UsedFilters(){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`roles`, `${role}`)}`, {scroll: false})
                     }}
-                    className={`bg-white text-black ${blurClass}  ml-2 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit cursor-alias whitespace-nowrap mb-2`}>
+                    className={`bg-white text-black ${blurClass}  ml-2 px-1 ${textSize} leading-[1.4rem] py-0 w-fit cursor-alias whitespace-nowrap mb-2`}>
                         {`${role}`}
                     </button>
                 })}
@@ -49,7 +50,7 @@ export default function UsedFilters(){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`collabs`, `${collab}`)}`, {scroll: false})
                     }}
-                    className={`bg-white text-black ${blurClass}  ml-2 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit cursor-alias whitespace-nowrap mb-2`}>
+                    className={`bg-white text-black ${blurClass}  ml-2 px-1 ${textSize} leading-[1.4rem] py-0 w-fit cursor-alias whitespace-nowrap mb-2`}>
                         {`${collab}`}
                     </button>
                 })}
@@ -59,11 +60,11 @@ export default function UsedFilters(){
                     onClick={()=>{
                         router.push( `/?${createQueryString(`tags`, `${tag}`)}`, {scroll: false})
                     }}
-                    className={`bg-white text-black ${blurClass}  ml-2 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit cursor-alias whitespace-nowrap mb-2`}>
+                    className={`bg-white text-black ${blurClass}  ml-2 px-1 ${textSize} leading-[1.4rem] py-0 w-fit cursor-alias whitespace-nowrap mb-2`}>
                         {`${tag}`}
                     </button>
                 })}
-                <button className={`${blurClass}  ml-2 px-1 text-[1rem] leading-[1.4rem] py-0 w-fit whitespace-nowrap mb-2 hover:bg-white hover:text-black`}
+                <button className={`${blurClass}  ml-2 px-1 ${textSize} leading-[1.4rem] py-0 w-fit whitespace-nowrap mb-2 hover:bg-white hover:text-black`}
                 onClick={()=>{
                     router.push(`/?view=${view}`, {scroll: false})
                 }}>Clear</button>

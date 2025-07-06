@@ -194,7 +194,7 @@ export default function Projects({project, slugs}: Props ) {
                     </div>
                     {/* close button */}
                     <div className="flex flex-col text-right items-end justify-end col-span-1 h-full">
-                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1 mb-1 pt-1 ${buttonClass} sans hover:underline outline outline-1`} 
+                        <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1.2 mb-1 pt-[.4rem] ${buttonClass} sans hover:underline outline outline-1`} 
                         onClick={()=>{
                             router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
                         }}>&#10005;</button>
