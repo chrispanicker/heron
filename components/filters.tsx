@@ -12,7 +12,6 @@ interface Props{
 export function Filters({filters}: Props){
     const searchParams = useSearchParams();    
     const router = useRouter();
-    
     const createQueryString = useCallback(
         (name: string, value: string) => {
             let params;
@@ -40,22 +39,45 @@ export function Filters({filters}: Props){
 
 
     return(
-        <section className={`lg:block bg-gray-300 hidden pt-2 overflow-hidden px-4 transition-all h-0 border border-b-2 border-black`}>
-            <p className="text-[1.2rem] leading-[1.8rem] text-black">Filter by Tags:&nbsp;</p>
-            {allFilters.map((entry:any, idx:any)=>{
-                return (
-                    <button 
-                    id={`${entry.filter}`}
-                    key={`${entry.filter}${idx}`}
-                    onClick={()=>{
-                        router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`, {scroll: false})
-                    }}
-                    className={`outline-1 outline-black px-2 ${buttonClass} ${searchParams.getAll(entry.key)?.includes(entry.filter)? "text-black bg-gray-300":"bg-black text-gray-300 hover:bg-gray-300 hover:text-black hover:outline"}`
-                    }>
-                        {`${entry.filter}`}
-                    </button>
-                )
-            })}
+        <section className={`lg:block bg-gray-300 hidden pt-2 pb-2 overflow-hidden px-4 transition-all h-0 border border-b-2 border-black`}>
+          <button 
+            onClick={()=>{router.push( `/?`, {scroll: false})}}
+            className={`${buttonClass} text-gray-300 bg-black outline-black hover:bg-gray-300 hover:text-black outline-1 outline`}
+          >
+            {`CLEAR ALL`}
+          </button>
+
+          <span className={`text-black sans px-1 mr-1`}>
+              {`Types:`}
+          </span>
+          {allFilters.map((entry:any, idx:any)=>{
+            if(entry.key==="type"){
+              return (
+                <button 
+                  id={`${entry.filter}`}
+                  key={`${entry.filter}${idx}`}
+                  onClick={()=>{router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`, {scroll: false})}}
+                  className={`outline-1 outline-black px-2 ${buttonClass} ${searchParams.getAll(entry.key)?.includes(entry.filter)? "text-gray-300 bg-black":"bg-gray-300 text-black hover:bg-black hover:text-gray-300 outline"}`}>{`${entry.filter}`}
+                </button>
+              )
+            }
+          })}
+
+          <span className={`text-black sans px-1 mr-1`}>
+          {`Tags:`}
+          </span>
+          {allFilters.map((entry:any, idx:any)=>{
+            if(entry.key==="tags"){
+              return (
+                <button 
+                  id={`${entry.filter}`}
+                  key={`${entry.filter}${idx}`}
+                  onClick={()=>{router.push( `/?${createQueryString(`${entry.key}`, `${entry.filter}`)}`, {scroll: false})}}
+                  className={`outline-1 outline-black px-2 rounded-xl ${buttonClass} ${searchParams.getAll(entry.key)?.includes(entry.filter)? "text-gray-300 bg-black":"bg-gray-300 text-black hover:bg-black hover:text-gray-300 outline"}`}>{`${entry.filter}`}
+                </button>
+              )
+            }
+          })}
         </section>
     )
 }

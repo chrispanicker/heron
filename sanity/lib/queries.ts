@@ -7,6 +7,7 @@ export async function getProjects() {
             groq`*[_type=="project" && !(_id in path("drafts.**"))]{
               name,
               _id,
+              type,
               _createdAt,
               "slug": slug.current,
               "roles": roles[]->{
@@ -51,15 +52,13 @@ interface Props {
             collabs?: string[]
             roles?: string[]
             sort?: string
-            type?: string
+            type?: string[]
     }
 }
 
 export async function getFilteredProjects({searchParams}:Props){ 
     let {tags, collabs, roles, sort, type} = searchParams;
     let tagQueries, collabQueries, roleQueries, typeQueries;
-
-    typeof type === "string"? typeQueries = `type match "${type}"`: ""
 
     typeof tags === "string"? tagQueries = `tags[] -> name match "${tags}"` 
     : tagQueries = tags?.map((e, i)=>{
@@ -76,6 +75,10 @@ export async function getFilteredProjects({searchParams}:Props){
             return `roles[] -> name match "${e}"`
     }).join(" || ")
 
+    typeof type === "string"? typeQueries = `type match "${type}"` 
+    : typeQueries = type?.map((e)=>{
+            return `type match "${e}"`
+    }).join(" || ")
 
     const projectFilter = `_type == "project"`
     const typeFilter = type? `${typeQueries} ${tags || collabs || roles? "||" : "" }` : "" 
@@ -116,6 +119,7 @@ export async function getFilteredProjects({searchParams}:Props){
                   name
                 },
                 "slug": slug.current,
+                "rolesCount": count(coalesce(roles, [])),
                 "totalCount": count(coalesce(roles, [])) + count(coalesce(tags, [])) + count(coalesce(collabs, []))
         } | order(${
         sort==="year-asc"? "year asc"
@@ -126,6 +130,8 @@ export async function getFilteredProjects({searchParams}:Props){
         : sort==="client-desc"? "client desc"   
         : sort==="tags-asc"? "totalCount asc"
         : sort==="tags-desc"? "totalCount desc"
+        : sort==="roles-asc"? "rolesCount asc"
+        : sort==="roles-desc"? "rolesCount desc"
         : sort==="type-asc"? "type asc"
         : sort==="type-desc"? "type desc"
         :"orderRank"})`, 

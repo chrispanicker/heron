@@ -1,7 +1,6 @@
 'use client'
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { TestFilter } from "./test-filter";
 import { openFilters } from "./functions";
 import { useCallback } from "react";
 import { textSize } from "./classes";
@@ -22,40 +21,36 @@ export function SiteHeader(info:any){
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")
     const e = 1
-   const createQueryString = useCallback(
-          (name: string, value: string) => {
-              let params;
-              let stringSearchParams = searchParams.toString()
-              stringSearchParams = stringSearchParams.replaceAll("+", " ")
-              params = new URLSearchParams(stringSearchParams)
-  
-          
-              if(name==="project"){
-                  if(stringSearchParams.includes(`${name}=${value}`)){ 
-                      params.delete(name, value)
-                  }else if(value==="null"){
-                  }
-                  else{
-                    params.set(name, value)
-                  }
-              //not a project?? IE tags?
-              }else {
-                  if(name==="roles"||name==="tags"||name==="collabs" && selectedProject){
-                      var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-                      params.delete("project", selectedProject!)
-                      window.scrollTo(scrollX, 0)
-                  }
-                  if(stringSearchParams.includes(`${name}=${value}`)){
-                      params.delete(name, value)
-                  }else{params.append(name, value)}
-              }
-                  
-              return params.toString()
-  
-          },
-          [searchParams]
-      )
+    const createQueryString = useCallback(
+        (name: string, value: string) => {
+            let params;
+            let stringSearchParams = searchParams.toString()
+            stringSearchParams = stringSearchParams.replaceAll("+", " ")
+            stringSearchParams = stringSearchParams.replaceAll("%2C", ",")
+            params = new URLSearchParams(stringSearchParams)
 
+        
+            if(name==="project"){
+                if(stringSearchParams.includes(`${name}=${value}`)){ 
+                    params.delete(name, value)
+                }else{params.set(name, value)}
+            //not a project?? IE tags?
+            }else {
+                if(name==="roles"||name==="tags"||name==="collabs"||name==="type" && selectedProject){
+                    params.delete("project", selectedProject!)
+                    window.scrollTo(scrollX, 0)
+                }
+
+                if(stringSearchParams.includes(`${name}=${value}`)){
+                    params.delete(name, value)
+                }else{params.append(name, value)}
+            }
+                
+            return params.toString()
+
+        },
+        [searchParams]
+    )
     return (
         isSanityStudio? "" : 
         <>
@@ -81,7 +76,7 @@ export function SiteHeader(info:any){
                 </h1>
                 <div className="flex justify-center items-center h-max group" onClick={()=>{openFilters(e)}}>
                     <p className={`lg:block hidden uppercase pr-1 group-hover:underline ${textSize}`}>Filters</p>
-                    <button className="filters text-2xl z-50 transition-all hover:rotate-[15deg] sans font-bolder" 
+                    <button className="filters text-2xl z-50 transition-all group-hover:rotate-[15deg] sans font-bolder" 
                     >
                    +
                     </button>

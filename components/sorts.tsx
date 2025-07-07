@@ -7,6 +7,14 @@ export function Sorts(){
     const router = useRouter();
     const searchParams = useSearchParams(); 
     const sorted = searchParams.get("sort")  
+    const roles = searchParams.getAll("roles")
+    const tags = searchParams.getAll("tags")
+    const collabs = searchParams.getAll("collabs")
+    const type = searchParams.getAll("type")
+
+    const allParams = roles.concat(tags, collabs, type)
+
+    const filtered = searchParams.get("roles") || searchParams.get("tags") || searchParams.get("collabs") || searchParams.get("type");
     const createSortQueryString = useCallback(
         (name: string, type:string) => {
             let params;
@@ -28,21 +36,61 @@ export function Sorts(){
         },
         [searchParams]
     )
+    const createQueryString = useCallback(
+    (value:string) => {
+        let params;
+        let stringSearchParams = searchParams.toString()
+        stringSearchParams = stringSearchParams.replaceAll("+", " ")
+        stringSearchParams = stringSearchParams.replaceAll("%2C", ",")
+        params = new URLSearchParams(stringSearchParams)
+
+        stringSearchParams.includes(`type=${value}`)? params.delete("type", value) : ""
+        stringSearchParams.includes(`roles=${value}`)? params.delete("roles", value) : ""
+        stringSearchParams.includes(`tags=${value}`)? params.delete("tags", value) : ""
+        stringSearchParams.includes(`collabs=${value}`)? params.delete("collabs", value) : ""
+
+        return params.toString()
+
+    },
+    [searchParams]
+    )
     
     return(        
         <>
-            <span className={`${sorted? "flex": "hidden"} px-5`}>
-                <p className={`${buttonClass} mr-[.3rem] outline outline-1 outline-black`}>Sorted by</p>
-                <button className={`${buttonClass} bg-black text-gray-300 outline outline-1 outline-black hover:bg-gray-300 hover:text-black hover:underline`}
+            <span className={`${sorted||filtered? "flex": "hidden"} w-screen justify-between px-5`}>
+              <div className={`${sorted? "flex": "opacity-0"} w-[50%]`}>
+                <p className={`sans mr-[.5rem] text-[1.3rem] whitespace-nowrap`}>Sorted by</p>
+                <button className={`${buttonClass} bg-black text-gray-300 outline outline-1 outline-black hover:bg-gray-300 hover:text-black`}
                 onClick={()=>{
                     router.push("?"+"")
                 }}>{
                 sorted==="name-asc"||sorted==="name-desc"? "Name"
                 :sorted==="client-asc"||sorted==="client-desc"? "Client"
-                :sorted==="tags-asc"||sorted==="tags-desc"? "Tags"
+                :sorted==="roles-asc"||sorted==="roles-desc"? "Roles"
                 :sorted==="year-asc"||sorted==="year-desc"? "Year"
                 : sorted==="type-asc"||sorted==="type-desc"? "Type"
                 : "Default"}</button>
+              </div>
+              <div className={`${filtered? "flex": "opacity-0"} w-[50%]`}>
+                <p className={`sans mr-[.5rem] text-[1.3rem] whitespace-nowrap`}>Filtered by</p>
+                <div className="px-1 w-fit">
+                {allParams.map((param:any, idx:any)=>{
+                    return (
+                        <button 
+                        id={`${param}`}
+                        key={`${param}${idx}`}
+                        onClick={()=>{
+                          router.push( `/?${createQueryString(`${param}`)}`, {scroll: false})
+                        }}  
+                        className={`outline-1 outline-black ${buttonClass} bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline outline-1 outline-black`
+                        }>
+                            {`${param}`}
+                        </button>
+                    )
+                })}
+                </div>
+              </div>
+
             </span>
             <span className="lg:grid hidden grid-cols-6 mt-2 text-[1.35rem] sans px-3 mb-[2px] pb-1 z-30 relative z-10 border-b-[2px] border-black decoration-2 ">
                 <button className="ml-2 col-span-2 text-left flex hover:underline decoration-2 underline-offset-2"
@@ -72,10 +120,10 @@ export function Sorts(){
 
                 <button className="pl-[.0rem] col-span-1 text-left flex hover:underline decoration-2 underline-offset-2"
                 onClick={()=>{
-                    router.push("?"+createSortQueryString("sort", "tags"))
-                }}>Role
-                    <p className={`${sorted==="tags-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
-                    <p className={`${sorted==="tags-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
+                    router.push("?"+createSortQueryString("sort", "roles"))
+                }}>Roles
+                    <p className={`${sorted==="roles-asc"? "": "hidden"}`}>&nbsp;&darr;</p>
+                    <p className={`${sorted==="roles-desc"? "": "hidden"}`}>&nbsp;&uarr;</p>
                 </button>
 
                 <button className="mr-2 text-right flex justify-end hover:underline decoration-2 underline-offset-2"

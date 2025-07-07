@@ -8,9 +8,9 @@ interface Props{
 export function TestFilter({projects}:Props){
     let allTags:string[] = [], allCollabs:string[] = [], allRoles:string[] = []
     projects?.map((project:Project)=>{
-        // project.roles?.map((role:any)=>{
-        //     role.length===0 || allRoles.includes(role.name)? "": allRoles.push(role.name)
-        // })
+        project.roles?.map((role:any)=>{
+            role.length===0 || allRoles.includes(role.name)? "": allRoles.push(role.name)
+        })
         
         project.tags?.map((tag:any)=>{
             tag.length===0 || allTags.includes(tag.name)? "": allTags.push(tag.name)
@@ -23,7 +23,7 @@ export function TestFilter({projects}:Props){
 
     allTags.sort(), allCollabs.sort(), allRoles.sort()
     let filters = {
-        // "roles": allRoles,
+        "roles": allRoles,
         "collabs": allCollabs, 
         "tags": allTags, 
     };

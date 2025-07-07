@@ -12,6 +12,10 @@ interface Props{
     slugs: string[]
 }
 
+type Role = {
+  name: string;
+};
+
 export default function Projects({project, slugs}: Props ) {
     const router = useRouter();
     const searchParams = useSearchParams(); 
@@ -81,20 +85,19 @@ export default function Projects({project, slugs}: Props ) {
 
         
             if(name==="project"){
-               console.log("proj")
                 if(stringSearchParams.includes(`${name}=${value}`)){ 
                     params.delete(name, value)
                 }else{params.set(name, value)}
-            //not a project?? IE tags?
             }else {
                 if(name==="roles"||name==="tags"||name==="collabs"||name==="type" && selectedProject){
                     params.delete("project", selectedProject!)
                     window.scrollTo(scrollX, 0)
                 }
-
                 if(stringSearchParams.includes(`${name}=${value}`)){
                     params.delete(name, value)
-                }else{params.append(name, value)}
+                }else{
+
+                  params.append(name, value)}
             }
                 
             return params.toString()
@@ -106,6 +109,9 @@ export default function Projects({project, slugs}: Props ) {
 
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin');
+
+    const sortedRoles: Role[] = project.roles?.sort((a:any, b:any) => a.name.localeCompare(b.name));
+
     return isSanityStudio? "": (
         <div id={project.slug} 
             className={`lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-200 ml-[1.75px] mr-[2px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "pt-12 pb-2 bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
@@ -143,7 +149,7 @@ export default function Projects({project, slugs}: Props ) {
               onWheel={()=>{ stopHoverInterval()}}
               onMouseLeave={()=>{stopHoverInterval()}}>
               <button key={project.type} className={`${buttonClass}  outline-1  my-1
-              ${searchParams.getAll("type")?.includes(project.type)? "text-gray-300 bg-black hover:bg-gray-300 hover:text-black outline-black": "bg-gray-300 text-black hover:bg-black hover:text-gray-300 hover:outline-gray-300"} outline outline-1 outline-black`}
+              ${searchParams.getAll("type")?.includes(project.type)? "text-gray-300 bg-black hover:bg-gray-300 hover:text-black outline-gray-300": "bg-gray-300 text-black outline-black hover:bg-black hover:text-gray-300 hover:outline-gray-300"} outline outline-1`}
               onClick={()=>{
                   router.push( `/?${createQueryString(`type`, `${project.type}`)}`, {scroll: false})
                   params.includes(project.type) && bool ? e=1:""
@@ -164,9 +170,19 @@ export default function Projects({project, slugs}: Props ) {
             onMouseLeave={()=>{
                 stopHoverInterval()
             }}>
-                {project.roles? project.roles?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass}  outline-1  my-1
-                    ${searchParams.getAll("roles")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-black hover:text-gray-300 outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}  outline outline-1`}
+                {project.roles? sortedRoles?.map((tag:any, i:number)=>(
+                    i<project.roles.length-1?
+                    <button key={tag.name} className={`sans text-[1.3rem] leading-[1rem] outline-1  my-1 whitespace-nowrap
+                    ${searchParams.getAll("roles")?.includes(tag.name)? "underline": "hover:underline"}`}
+                    onClick={()=>{
+                        router.push( `/?${createQueryString(`roles`, `${tag.name}`)}`, {scroll: false})
+                        params.includes(tag.name) && bool ? e=1:""
+                        openFilters(e)
+                        stopHoverInterval()
+                    }}
+                >{tag.name + ","}&nbsp;</button>
+                : <button key={tag.name} className={`sans text-[1.3rem] leading-[1rem] outline-1  my-1 whitespace-nowrap
+                    ${searchParams.getAll("roles")?.includes(tag.name)? "underline": "hover:underline"}`}
                     onClick={()=>{
                         router.push( `/?${createQueryString(`roles`, `${tag.name}`)}`, {scroll: false})
                         params.includes(tag.name) && bool ? e=1:""
