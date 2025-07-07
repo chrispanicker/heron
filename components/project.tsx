@@ -40,7 +40,7 @@ export default function Projects({project, slugs}: Props ) {
       window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
       :selectedProject?
           setTimeout(()=>{
-          element?.scrollIntoView({behavior:"smooth", block:"start"})}, 650)
+          element?.scrollIntoView({behavior:"smooth", block:"start"})}, 700)
       :setTimeout(()=>{
       element?.scrollIntoView({behavior:"smooth", block:"start"})}, 500)
     }
