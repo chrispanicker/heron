@@ -13,7 +13,7 @@ interface Props {
     roles?: string[]
     sort?: string
     about?: string
-    type?: string
+    type?: string[]
     project?: string
   }
 }
