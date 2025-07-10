@@ -76,16 +76,16 @@ export default function MobileProjects({project}: Props) {
     const isSanityStudio = pathname.startsWith('/admin');
     return isSanityStudio? "": (
         <div ref={projRef} id={`mobile-${project.slug}`} className="snap-start snap-always relative min-h-[100vh] h-[100vh] lg:hidden block relative items-end mx-2 last:mb-64">
-            <div className="sticky top-8 bg-gray-300 border-b-2 border-black z-30 pt-2 pb-2">
+            <div className="sticky top-8 bg-gray-300 border-b-2 border-black z-30 pt-2 pb-1">
                 <h2 className="text-2xl flex justify-start items-center leading-[1.8rem]">{project.name}</h2>
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-end">
                   <span className="flex">
-                    <p className={`${buttonClass} bg-black text-gray-300 ml-[.02rem] text-[12px]`}>{project.type}</p>
+                    <p className={`${buttonClass} bg-black text-gray-300 ml-[.02rem] p-[4px] text-[12px]`}>{project.type}</p>
                     {project.roles.map((role:any)=>{
-                      return <p key={`mobileRole-${role.name}`} className={`${buttonClass} bg-black text-gray-300 ml-[.02rem] text-[12px]`}>{role.name}</p>
+                      return <p key={`mobileRole-${role.name}`} className={`${buttonClass} bg-black text-gray-300 ml-[.02rem] p-[4px] text-[12px]`}>{role.name}</p>
                     })}
                   </span>
-                  <p className="sans text-[1.1rem]">{project.year}</p>
+                  <p className="sans text-[1.1rem] leading-[.9rem]">{project.year}</p>
                 </div>
             </div>
 
