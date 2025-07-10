@@ -144,11 +144,11 @@ export default function Projects({project, slugs}: Props ) {
             <p className="sans text-[1.35rem] col-span-2 ">{project.client}</p>
 
             {/* type */}
-            <span id={`${project.slug}_tags`} className="proj-filters flex overflow-x-scroll col-span-2 p-1 larger:mr-6 lg:mr-10 z-10"
+            <span id={`${project.slug}_type`} className="proj-filters flex overflow-x-scroll col-span-2 p-1 larger:mr-6 lg:mr-10 z-10"
               onMouseOver={(e)=>{setHoverInterval(e)}}
               onWheel={()=>{ stopHoverInterval()}}
               onMouseLeave={()=>{stopHoverInterval()}}>
-              <button key={project.type} className={`${buttonClass}  outline-1  my-1
+              <button key={"dskp-"+project.type} className={`${buttonClass}  outline-1  my-1
               ${searchParams.getAll("type")?.includes(project.type)? "text-gray-300 bg-black hover:bg-gray-300 hover:text-black outline-gray-300": "bg-gray-300 text-black outline-black hover:bg-black hover:text-gray-300 hover:outline-gray-300"} outline outline-1`}
               onClick={()=>{
                   router.push( `/?${createQueryString(`type`, `${project.type}`)}`, {scroll: false})
@@ -239,7 +239,7 @@ export default function Projects({project, slugs}: Props ) {
                           slugs.map((slug, index)=>{
                             slug === project.slug? index<slugs.length? nextSlug = slugs[index + 1]: nextSlug = slugs[0]: "";
                           })
-                            router.push("?"+createQueryString("project", `${nextSlug}`), {scroll:false})
+                          router.push("?"+createQueryString("project", `${nextSlug}`), {scroll:false})
                           scrollToProject(nextSlug)
                         }}>Next Project</button>
 

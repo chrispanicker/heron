@@ -3,7 +3,7 @@ import Projects from "@/components/project";
 import { Scroller } from "@/components/scroller";
 import { SiteFooter } from "@/components/site-footer";
 import { Sorts } from "@/components/sorts";
-import { getFilteredProjects, getInfo, getJobs, getProjects } from "@/sanity/lib/queries";
+import { getFilteredProjects, getInfo, getJobs } from "@/sanity/lib/queries";
 
 interface Props {
   searchParams: {
@@ -27,7 +27,6 @@ export default async function Home({searchParams}: Props) {
   filteredProjects.map((project:any, index: number)=>{
     slugs[index] = project.slug;
   })
-
   return (
     filteredProjects? <main className="z-20 min-h-[96.2vh]">
       <div className="lg:h-[10rem]"></div>

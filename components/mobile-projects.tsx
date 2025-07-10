@@ -82,7 +82,7 @@ export default function MobileProjects({project}: Props) {
                   <span className="flex">
                     <p className={`${buttonClass} bg-black text-gray-300 ml-[.02rem]`}>{project.type}</p>
                     {project.roles.map((role:any)=>{
-                      return <p key={`mobileRole-${role}`} className={`${buttonClass} bg-black text-gray-300 ml-[.02rem]`}>{role.name}</p>
+                      return <p key={`mobileRole-${role.name}`} className={`${buttonClass} bg-black text-gray-300 ml-[.02rem]`}>{role.name}</p>
                     })}
                   </span>
                   <p className="sans text-[1.1rem]">{project.year}</p>

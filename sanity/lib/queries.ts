@@ -60,34 +60,30 @@ export async function getFilteredProjects({searchParams}:Props){
     let {tags, collabs, roles, sort, type} = searchParams;
     let tagQueries, collabQueries, roleQueries, typeQueries;
 
-    typeof tags === "string"? tagQueries = `tags[] -> name match "${tags}"` 
-    : tagQueries = tags?.map((e, i)=>{
-            return `tags[] -> name match "${e}"`
-    }).join(" || ")
+  typeof tags === "string"
+    ? tagQueries = `(tags[]->name match "${tags}")` 
+    : tagQueries = `(${tags?.map((e) => `tags[]->name match "${e}"`).join(" || ")})`;
 
-    typeof collabs === "string"? collabQueries = `collabs[] -> name match "${collabs}"` 
-    : collabQueries = collabs?.map((e)=>{
-            return `collabs[] -> name match "${e}"`
-    }).join(" || ")
+  typeof collabs === "string"
+    ? collabQueries = `(collabs[]->name match "${collabs}")` 
+    : collabQueries = `(${collabs?.map((e) => `collabs[]->name match "${e}"`).join(" || ")})`;
 
-    typeof roles === "string"? roleQueries = `roles[] -> name match "${roles}"` 
-    : roleQueries = roles?.map((e)=>{
-            return `roles[] -> name match "${e}"`
-    }).join(" || ")
+  typeof roles === "string"
+    ? roleQueries = `(roles[]->name match "${roles}")` 
+    : roleQueries = `(${roles?.map((e) => `roles[]->name match "${e}"`).join(" || ")})`;
 
-    typeof type === "string"? typeQueries = `type match "${type}"` 
-    : typeQueries = type?.map((e)=>{
-            return `type match "${e}"`
-    }).join(" || ")
+  typeof type === "string"
+    ? typeQueries = `(type match "${type}")`
+    : typeQueries = `(${type?.map((e) => `type match "${e}"`).join(" || ")})`;
 
     const projectFilter = `_type == "project"`
     const typeFilter = type? `${typeQueries} ${tags || collabs || roles? "||" : "" }` : "" 
     const tagFilter =  tags? `${tagQueries} ${collabs || roles? "||" : "" }` : "" 
     const collabFilter = collabs? `${collabQueries} ${roles? "||" : "" }` : ""
     const roleFilter = roles? `${roleQueries}` : "" 
-
     
-    const filter = collabs || roles || tags || type?`&& ${typeFilter} ${tagFilter} ${collabFilter} ${roleFilter}`: ""
+    const filter = collabs || roles || tags ?` && ${typeFilter} ${tagFilter} ${collabFilter} ${roleFilter}`: ""
+
     return client.fetch(
             groq`*[${projectFilter} ${filter} && !(_id in path("drafts.**"))]{
                 _id,
@@ -121,7 +117,8 @@ export async function getFilteredProjects({searchParams}:Props){
                 "slug": slug.current,
                 "rolesCount": count(coalesce(roles, [])),
                 "totalCount": count(coalesce(roles, [])) + count(coalesce(tags, [])) + count(coalesce(collabs, []))
-        } | order(${
+        } 
+        | order(${
         sort==="year-asc"? "year asc"
         : sort==="year-desc"? "year desc"
         : sort==="name-asc"? "name asc"
