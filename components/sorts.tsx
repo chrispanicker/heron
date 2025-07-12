@@ -12,7 +12,12 @@ export function Sorts(){
     const collabs = searchParams.getAll("collabs")
     const type = searchParams.getAll("type")
 
-    const allParams = roles.concat(tags, collabs, type)
+    const rolesObject = roles?.map(item => ({ Ptype:"roles", name: item }));
+    const tagsObject =  tags?.map(item => ({ Ptype:"tags", name: item }));
+    const collabsObject = collabs?.map(item => ({ Ptype:"collabs", name: item }));
+    const typeObject = type?.map(item=>({Ptype:"type", name: item }))
+
+    const allParams = typeObject.concat(collabsObject, tagsObject, rolesObject)
 
     const filtered = searchParams.get("roles") || searchParams.get("tags") || searchParams.get("collabs") || searchParams.get("type");
     const createSortQueryString = useCallback(
@@ -54,10 +59,9 @@ export function Sorts(){
     },
     [searchParams]
     )
-    
     return(        
         <>
-            <span className={`${sorted||filtered? "flex": "hidden"} w-screen justify-between px-5`}>
+            <span className={`${sorted||filtered? "lg:flex hidden": "hidden"} w-screen justify-between px-5`}>
               <div className={`${sorted? "flex": "opacity-0"} w-[50%]`}>
                 <p className={`sans mr-[.5rem] text-[1.3rem] whitespace-nowrap`}>Sorted by</p>
                 <button className={`${buttonClass} bg-black text-gray-300 outline outline-1 outline-black hover:bg-gray-300 hover:text-black`}
@@ -74,17 +78,20 @@ export function Sorts(){
               <div className={`${filtered? "flex": "opacity-0"} w-[50%]`}>
                 <p className={`sans mr-[.5rem] text-[1.3rem] whitespace-nowrap`}>Filtered by</p>
                 <div className="px-1 w-fit">
+
+                {/* NEED TO FIGURE OUT HOW TO GET DIFF SHAPES HERE BASED ON TYPE??? */}
                 {allParams.map((param:any, idx:any)=>{
+                  console.log(param)
                     return (
                         <button 
                         id={`${param}`}
                         key={`${param}${idx}`}
                         onClick={()=>{
-                          router.push( `/?${createQueryString(`${param}`)}`, {scroll: false})
+                          router.push( `/?${createQueryString(`${param.name}`)}`, {scroll: false})
                         }}  
-                        className={`outline-1 outline-black ${buttonClass} bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline outline-1 outline-black`
+                        className={`outline-1 outline-black ${buttonClass} ${param.Ptype ==="tags"? "rounded-xl px-2": ""} bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline outline-1 outline-black`
                         }>
-                            {`${param}`}
+                            {`${param.name}`}
                         </button>
                     )
                 })}

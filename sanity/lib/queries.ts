@@ -60,21 +60,22 @@ export async function getFilteredProjects({searchParams}:Props){
     let {tags, collabs, roles, sort, type} = searchParams;
     let tagQueries, collabQueries, roleQueries, typeQueries;
 
-  typeof tags === "string"
-    ? tagQueries = `(tags[]->name match "${tags}")` 
-    : tagQueries = `(${tags?.map((e) => `tags[]->name match "${e}"`).join(" || ")})`;
+typeof tags === "string"
+  ? tagQueries = `(tags[]->name match "${tags}")` 
+  : tagQueries = `(${tags?.map((e) => `tags[]->name match "${e}"`).join(" || ")})`;
 
-  typeof collabs === "string"
-    ? collabQueries = `(collabs[]->name match "${collabs}")` 
-    : collabQueries = `(${collabs?.map((e) => `collabs[]->name match "${e}"`).join(" || ")})`;
+typeof collabs === "string"
+  ? collabQueries = `(collabs[]->name match "${collabs}")` 
+  : collabQueries = `(${collabs?.map((e) => `collabs[]->name match "${e}"`).join(" || ")})`;
 
-  typeof roles === "string"
-    ? roleQueries = `(roles[]->name match "${roles}")` 
-    : roleQueries = `(${roles?.map((e) => `roles[]->name match "${e}"`).join(" || ")})`;
+typeof roles === "string"
+  ? roleQueries = `(roles[]->name match "${roles}")` 
+  : roleQueries = `(${roles?.map((e) => `roles[]->name match "${e}"`).join(" || ")})`;
 
-  typeof type === "string"
-    ? typeQueries = `(type match "${type}")`
-    : typeQueries = `(${type?.map((e) => `type match "${e}"`).join(" || ")})`;
+typeof type === "string"
+  ? typeQueries = `(type match "${type}")`
+  : typeQueries = `(${type?.map((e) => `type match "${e}"`).join(" || ")})`;
+
 
     const projectFilter = `_type == "project"`
     const typeFilter = type? `${typeQueries} ${tags || collabs || roles? "||" : "" }` : "" 
@@ -82,55 +83,56 @@ export async function getFilteredProjects({searchParams}:Props){
     const collabFilter = collabs? `${collabQueries} ${roles? "||" : "" }` : ""
     const roleFilter = roles? `${roleQueries}` : "" 
     
-    const filter = collabs || roles || tags ?` && ${typeFilter} ${tagFilter} ${collabFilter} ${roleFilter}`: ""
-
+    const filter = collabs || roles || tags || type ?` && (${typeFilter} ${tagFilter} ${collabFilter} ${roleFilter})`: ""
+    // THIS FILTER SAYS
+    // Look item with project type && tags[] array has a name that matches "tag name" && etc.
     return client.fetch(
-            groq`*[${projectFilter} ${filter} && !(_id in path("drafts.**"))]{
-                _id,
-                name,
-                vimeo,
-                year,
-                client,
-                type,
-                preview,
-                orderRank,
-                images,
-                "gallery": images[]{
-                    "metadata": asset->metadata,
-                    "imageUrl": asset->url,
-                    "blurDataURL": asset->metadata.lqip,
-                    "alt": alt,
-                    "description": description,
-                    "mycrop":mycrop,
-                    "text": text
-                    },
-                content,
-                "roles": roles[]->{
-                  name
-                },
-                "collabs": collabs[]->{
-                  name
-                },
-                "tags": tags[]->{
-                  name
-                },
-                "slug": slug.current,
-                "rolesCount": count(coalesce(roles, [])),
-                "totalCount": count(coalesce(roles, [])) + count(coalesce(tags, [])) + count(coalesce(collabs, []))
-        } 
-        | order(${
-        sort==="year-asc"? "year asc"
-        : sort==="year-desc"? "year desc"
-        : sort==="name-asc"? "name asc"
-        : sort==="name-desc"? "name desc"
-        : sort==="client-asc"? "client asc"
-        : sort==="client-desc"? "client desc"   
-        : sort==="tags-asc"? "totalCount asc"
-        : sort==="tags-desc"? "totalCount desc"
-        : sort==="roles-asc"? "rolesCount asc"
-        : sort==="roles-desc"? "rolesCount desc"
-        : sort==="type-asc"? "type asc"
-        : sort==="type-desc"? "type desc"
-        :"orderRank"})`, 
+        groq`*[${projectFilter} ${filter} && !(_id in path("drafts.**"))]{
+          _id,
+          name,
+          vimeo,
+          year,
+          client,
+          type,
+          preview,
+          orderRank,
+          images,
+          "gallery": images[]{
+              "metadata": asset->metadata,
+              "imageUrl": asset->url,
+              "blurDataURL": asset->metadata.lqip,
+              "alt": alt,
+              "description": description,
+              "mycrop":mycrop,
+              "text": text
+              },
+          content,
+          "roles": roles[]->{
+            name
+          },
+          "collabs": collabs[]->{
+            name
+          },
+          "tags": tags[]->{
+            name
+          },
+          "slug": slug.current,
+          "rolesCount": count(coalesce(roles, [])),
+          "totalCount": count(coalesce(roles, [])) + count(coalesce(tags, [])) + count(coalesce(collabs, []))
+    }
+      | order(${
+      sort==="year-asc"? "year asc"
+      : sort==="year-desc"? "year desc"
+      : sort==="name-asc"? "name asc"
+      : sort==="name-desc"? "name desc"
+      : sort==="client-asc"? "client asc"
+      : sort==="client-desc"? "client desc"   
+      : sort==="tags-asc"? "totalCount asc"
+      : sort==="tags-desc"? "totalCount desc"
+      : sort==="roles-asc"? "rolesCount asc"
+      : sort==="roles-desc"? "rolesCount desc"
+      : sort==="type-asc"? "type asc"
+      : sort==="type-desc"? "type desc"
+      :"orderRank"})`, 
     )
 }
