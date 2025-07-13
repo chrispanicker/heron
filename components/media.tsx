@@ -34,7 +34,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
     return (
       <div className="relative w-max h-full group" key={`${project.slug}-${index}`} ref={mediaRef}>
         {e.description && (
-          <span className="absolute bottom-10 w-full h-[3rem] flex justify-center items-end peer-hover:bg-black z-[200] opacity-0 group-hover:opacity-100">
+          <span className="absolute bottom-20 w-full h-[3rem] flex justify-center items-end peer-hover:bg-black z-[200] opacity-0 group-hover:opacity-100">
             <p className={`w-fit h-fit uppercase mono-book ${textSize} px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5`}>{e.description}</p>
           </span>
         )}
