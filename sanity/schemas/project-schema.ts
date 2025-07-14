@@ -1,9 +1,5 @@
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
-
-type ImagePreviewProps = {
-  imageUrl: string;
-  crop: boolean;
-};
+import { getFilename } from "../lib/filename";
 
 
 const project = {
@@ -28,11 +24,6 @@ const project = {
             options: { source: 'name'},
             description: 'Hi! Generate a URL slug for this Project!',
         },
-        // {
-        //     name: 'priority', 
-        //     title: 'Priority', 
-        //     type: 'number', validation: (Rule: any) => Rule.min(0).integer().positive(), 
-        // },
         {
             name: 'client',
             title: 'Client',
@@ -82,6 +73,11 @@ const project = {
                   },
                   fields: [
                     {
+                      name: 'name',
+                      type: 'string',
+                      title: 'Name',
+                    },
+                    {
                       name: 'description',
                       type: 'string',
                       title: 'Image Description',
@@ -104,11 +100,17 @@ const project = {
                 },
                 fields: [
                   {
+                    name: 'name',
+                    type: 'string',
+                    title: 'Name',      
+                  },
+                  {
                   name: 'description',
                   type: 'string',
                   title: 'Image Description',
                   description: 'Provide a description of the image to appear on hover',
-                  }
+                  },
+
                 ]
                 },
                 {
@@ -125,12 +127,6 @@ const project = {
                 }
             ]
         },
-        // {
-        //     name: "url",
-        //     title: 'URL',
-        //     type: "url",
-        //     description: 'You can link to the project here!',
-        // },
         {
             name: 'tags',
             title: 'Tags',
@@ -152,19 +148,9 @@ const project = {
             of: [{ type: 'block'}]
         },
     ],
-    // orderings: [
-    //     {
-    //       title: 'Priority',
-    //       name: 'priorityasc',
-    //       by: [
-    //         {field: 'priority', direction: 'asc'}
-    //       ]
-    //     },
-    // ],
     preview: {
         select: {
           title: 'name',
-        //   subtitle: 'priority',
           media: 'preview'
         }
     },
