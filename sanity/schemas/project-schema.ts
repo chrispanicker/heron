@@ -1,6 +1,4 @@
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
-import { getFilename } from "../lib/filename";
-
 
 const project = {
     name: 'project',
@@ -76,6 +74,9 @@ const project = {
                       name: 'name',
                       type: 'string',
                       title: 'Name',
+                      // components: {
+                      //   input: AutoFill,
+                      // },
                     },
                     {
                       name: 'description',
@@ -102,7 +103,10 @@ const project = {
                   {
                     name: 'name',
                     type: 'string',
-                    title: 'Name',      
+                    title: 'Name',
+                    // components: {
+                    //   input: AutoFill,
+                    // },
                   },
                   {
                   name: 'description',
