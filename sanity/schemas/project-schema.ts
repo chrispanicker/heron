@@ -74,9 +74,6 @@ const project = {
                       name: 'name',
                       type: 'string',
                       title: 'Name',
-                      // components: {
-                      //   input: AutoFill,
-                      // },
                     },
                     {
                       name: 'description',
@@ -104,9 +101,6 @@ const project = {
                     name: 'name',
                     type: 'string',
                     title: 'Name',
-                    // components: {
-                    //   input: AutoFill,
-                    // },
                   },
                   {
                   name: 'description',

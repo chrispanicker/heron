@@ -29,7 +29,6 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
 
     return () => observer.disconnect();
   }, []);
-
   if (e._type === 'mp4') {
     return (
       <div
@@ -52,7 +51,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} 
           playsInline
           preload="true"
-          className={`object-cover duration-500 h-[50vh] ${galleryWidth} transition-opacity duration-1000`
+          className={`object-cover duration-500 h-[auto] ${galleryWidth} transition-opacity duration-1000`
           }
           onDoubleClick={(x)=>{
             const vidModal = document.querySelector("#vidmodal");
@@ -86,13 +85,13 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
             <p className="text-[.8rem] leading-[1rem] outline-gray-300 outline outline-1 px-1 bg-black">{e.description}</p>
           </span>
         )}
-        <span className={`relative flex justify-center items-center ${galleryWidth} overflow-x-hidden`}>
+        <span className={`relative flex justify-center items-center ${galleryWidth} overflow-x-hidden h-full`}>
           <Image
             src={urlForImage(e).url()}
             alt=""
             width={1080}
             height={1080}
-            className={`${e.mycrop? "opacity-100 min-w-[140vw]": "w-full"} object-contain duration-500 transition-opacity duration-1000`
+            className={`${e.mycrop? "opacity-100 min-w-[140vw]": "w-full max-h-[75%]"} object-contain duration-500 transition-opacity duration-1000`
             }
             onDoubleClick={(x)=>{
               const modal = document.querySelector("#modal");

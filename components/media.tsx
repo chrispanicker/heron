@@ -11,7 +11,6 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
   const mediaRef = useRef(null);
   const searchParams = useSearchParams();
   const selectedProject = searchParams.get("project")
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -94,7 +93,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
     );
   } else {
     return (
-      <div className="min-w-[43rem] h-[32rem] snap-center snap-always flex justify-center items-center" key={`${project.slug}-${index}`}>
+      <div className="min-w-[32rem] h-[32rem] snap-center snap-always flex justify-center items-center" key={`${project.slug}-${index}`}>
         <span className="max-w-[18rem] h-fit uppercase mono-book text-[1.2rem] px-1 leading-[1.8rem] text-gray-300 text-center mb-5 mr-10">
           <PortableText value={e.content} />
         </span>
