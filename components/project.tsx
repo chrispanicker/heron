@@ -113,8 +113,8 @@ export default function Projects({project, slugs}: Props ) {
     const sortedRoles: Role[] = project.roles?.sort((a:any, b:any) => a.name.localeCompare(b.name));
 
     return isSanityStudio? "": (
-        <div id={project.slug} 
-            className={`lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-200 ml-[1.75px] mr-[2px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "pt-12 pb-2 bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
+        <div
+            className={`lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-200 ml-[1.75px] mr-[2px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "py-4 pb-2 bg-black text-gray-300 ": "hover:bg-black hover:text-gray-300"}`}>
             <div className="w-full h-full absolute top-0 z-0" 
             onClick={()=>{
                 scrollToProject(project.slug)
@@ -217,17 +217,17 @@ export default function Projects({project, slugs}: Props ) {
             <p className={`lg:text-right flex justify-end col-span-1 whitespace-nowrap serif`}>{project.year}</p>
 
             {/* gallery */}
-            <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-all duration-500  ${selectedProject===project.slug? "max-h-[50rem] pt-1": "max-h-[0rem]"}`}>
+            <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-all duration-500  ${selectedProject===project.slug? "max-h-[50rem]": "max-h-[0rem]"}`}>
                 {/* gallery component */}
                 <Gallery project={project}/>
                 {/* info */}
-                <div className={`pb-[.1rem] pt-1 sticky grid-cols-6 grid left-0`}>
+                <div className={`pb-[.1rem] sticky grid-cols-6 grid left-0 pt-2`}>
                     {/* description */}
                     <div className="col-span-5">
                         <PortableText value={project.content}/>
                     </div>
                     {/* close button */}
-                    <div className="flex flex-col text-right items-end justify-end col-span-1 h-full">
+                    <div className="flex flex-col text-right items-end justify-start col-span-1 h-full">
                         <button className={`${selectedProject===project.slug? "hover:bg-gray-300 hover:text-black": "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline-black"} px-1.2 mb-1 pt-[.4rem] ${buttonClass} sans  outline outline-1`} 
                         onClick={()=>{
                             router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})

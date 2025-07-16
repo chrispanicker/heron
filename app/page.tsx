@@ -35,7 +35,9 @@ export default async function Home({searchParams}: Props) {
         {filteredProjects.map((proj:any, index:number)=>{ 
         return(
           <div className={`duration-500 ${project===proj.slug? "transition-none pb-[2rem]": "transition-all"}`} key={proj.slug}>
-            <Projects project={proj} slugs={slugs}/>
+            <div id={`${proj.slug}`} className={`transition-padding duration-500 ${project===proj.slug? "pt-8": " pt-0"}`}>
+              <Projects project={proj} slugs={slugs}/>
+            </div>
             <MobileProjects project={proj}/>
           </div>
         )})}
