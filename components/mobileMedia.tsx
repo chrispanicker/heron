@@ -12,23 +12,23 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
   const searchParams = useSearchParams();
   const selectedProject = searchParams.get("project")
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect(); // Stop observing once the element is in view
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the element is in view
-    );
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     ([entry]) => {
+  //       if (entry.isIntersecting) {
+  //         setIsVisible(true);
+  //         observer.disconnect(); // Stop observing once the element is in view
+  //       }
+  //     },
+  //     { threshold: 0.1 } // Trigger when 10% of the element is in view
+  //   );
 
-    if (mediaRef.current) {
-      observer.observe(mediaRef.current);
-    }
+  //   if (mediaRef.current) {
+  //     observer.observe(mediaRef.current);
+  //   }
 
-    return () => observer.disconnect();
-  }, []);
+  //   return () => observer.disconnect();
+  // }, []);
   if (e._type === 'mp4') {
     return (
       <div
@@ -50,7 +50,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           webkit-playsinline="true"
           src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} 
           playsInline
-          preload="true"
+          preload="none"
           className={`object-cover duration-500 h-[auto] ${galleryWidth} transition-opacity duration-1000`
           }
           onDoubleClick={(x)=>{

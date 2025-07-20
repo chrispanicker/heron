@@ -47,7 +47,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           autoPlay
           webkit-playsinline={`true`}
           preload="true"
-          className={`w-auto h-full pr-2 snap-center snap-always z-0 transition-opacity duration-1000` 
+          className={`w-auto h-full ${index===project.images.length-1? "pr-0":"pr-2"} snap-center snap-always z-0 transition-opacity duration-1000` 
             // ${isVisible ? 'opacity-100' : 'opacity-0'}`
           }
         >
@@ -75,7 +75,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           alt=""
           width={1440}
           height={1080}
-          className={`object-cover ${e.mycrop? "w-[43rem]": "w-auto"} h-full pr-2 snap-center snap-always transition-opacity duration-1000 cursor-zoom-in` 
+          className={`object-cover ${e.mycrop? "w-[43rem]": "w-auto"} ${index===0? "ml-3": ""} h-full pr-2 snap-center snap-always transition-opacity duration-1000 cursor-zoom-in` 
         }
           loading={project.slug === selectedProject? "eager":"lazy"}
           placeholder="blur"

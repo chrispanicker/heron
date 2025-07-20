@@ -81,7 +81,6 @@ export function Sorts(){
 
                 {/* NEED TO FIGURE OUT HOW TO GET DIFF SHAPES HERE BASED ON TYPE??? */}
                 {allParams.map((param:any, idx:any)=>{
-                  console.log(param)
                     return (
                         <button 
                         id={`${param}`}
