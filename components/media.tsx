@@ -48,7 +48,6 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           webkit-playsinline={`true`}
           preload="true"
           className={`w-auto h-full ${index===project.images.length-1? "pr-0":"pr-2"} snap-center snap-always z-0 transition-opacity duration-1000` 
-            // ${isVisible ? 'opacity-100' : 'opacity-0'}`
           }
         >
           <source src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} type="video/mp4" />

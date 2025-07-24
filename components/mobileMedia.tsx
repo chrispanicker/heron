@@ -51,7 +51,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
           src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} 
           playsInline
           preload="none"
-          className={`object-cover duration-500 h-[auto] ${galleryWidth} transition-opacity duration-1000`
+          className={`object-cover duration-500 h-auto ${galleryWidth} transition-opacity duration-1000`
           }
           onDoubleClick={(x)=>{
             const vidModal = document.querySelector("#vidmodal");

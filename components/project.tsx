@@ -217,7 +217,7 @@ export default function Projects({project, slugs}: Props ) {
             <p className={`lg:text-right flex justify-end col-span-1 whitespace-nowrap serif`}>{project.year}</p>
 
             {/* gallery */}
-            <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-[max-height] duration-500 border-black  ${selectedProject===project.slug? "border-x-0 border-y-2 pt-2 pb-1 border max-h-[56rem]": "max-h-[0rem]"}`}>
+            <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-[max-height] duration-500 border-black ${selectedProject===project.slug? "border-x-0 border-y-2 pt-2 pb-1 border max-h-[56rem]": "max-h-[0rem]"}`}>
                 {/* gallery component */}
                 <Gallery project={project}/>
                 {/* info */}

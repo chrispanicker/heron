@@ -51,12 +51,12 @@ export function Gallery({ project }: Props) {
   }
 
   return (
-    <div className={`hidden lg:block relative w-full max-w-screen mx-auto text-3xl px-5 py-20 transition-all duration-500 ${selectedProject===project.slug? "bg-black border-b-2 border-x-0 border-t-0 border border-gray-300" : ""}`}>
+    <div className={`hidden lg:block relative w-full max-w-screen mx-auto text-3xl px-5 py-16 transition-all duration-500 ${selectedProject===project.slug? "bg-black border-b-2 border-x-0 border-t-0 border border-gray-300" : ""}`}>
       <div
         ref={scrollContainerRef}
         className={`flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide ${!showArrows ? 'justify-center' : ''}`}
       >
-        <span className={`relative flex w-max h-[32rem] ${project.images.length===1 ? 'justify-center items-center w-screen' : 'justify-start'} items-start`} key={`${project.slug}-gallery`}>
+        <span className={`relative flex w-max h-[36rem] ${project.images.length===1 ? 'justify-center items-center w-screen' : 'justify-start'} items-start`} key={`${project.slug}-gallery`}>
           {project.images?.map((e: any, index: number) => (
               <MediaWithFadeIn key={`${project.slug}-${index}`} e={e} project={project} index={index} />
           ))}

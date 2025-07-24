@@ -35,8 +35,8 @@ export default async function RootLayout({
     
 
   return (
-    <html lang="en" className={`bg-gray-300 text-black serif font-light overflow-x-hidden lg:text-[1rem] text-[1rem] leading-[1.4rem] snap-y snap-mandatory cursor-auto`}>
-      <body>
+    <html lang="en" className={`bg-black text-black serif font-light overflow-x-hidden lg:text-[1rem] text-[1rem] leading-[1.4rem] snap-y snap-mandatory cursor-auto`}>
+      <body className='bg-gray-300'>
         <Modal />
         <VideoModal />
         <section className='relative z-10'>
