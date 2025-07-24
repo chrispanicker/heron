@@ -120,7 +120,6 @@ export default function Projects({project, slugs}: Props ) {
                 scrollToProject(project.slug)
                 let filters = document.querySelector("header section")
                 router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
-
                 e=1
                 if(!filters?.classList.contains("h-0")){
                     openFilters(e)
