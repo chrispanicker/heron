@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function Modal() {
   return (
-    <div id="modal" className="w-screen overflow-x-scroll overflow-y-scroll h-screen bg-black fixed top-0 left-0 z-[1001] cursor-zoom-out opacity-0 pointer-events-none transition-[opacity] flex justify-center items-center lg:py-0 py-20"
+    <div id="modal" className="w-screen overflow-x-scroll overflow-y-scroll h-screen bg-black fixed top-0 left-0 z-[1001] cursor-zoom-out opacity-0 pointer-events-none transition-[opacity] duration-500 flex justify-center items-center lg:py-0 py-20"
     onClick={(e)=>{
       if(window.innerWidth>=1024){
        e.currentTarget.classList.replace("opacity-100","opacity-0") 
