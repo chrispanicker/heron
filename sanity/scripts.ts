@@ -1,6 +1,8 @@
 // scripts/fill-mp4-names.ts
 import { createClient } from '@sanity/client';
 
+
+
 const client = createClient({
   projectId: '01jwvji0',
   dataset: 'production',
@@ -9,9 +11,11 @@ const client = createClient({
   apiVersion: '2023-07-01',
 });
 
-
+// Helper to get the original filename from an asset reference
 async function getFilename(assetRef: string): Promise<string | null> {
+  // Determine if it's an image or file asset (mp4 of image)
   const type = assetRef.startsWith('file-') ? 'sanity.fileAsset' : 'sanity.imageAsset';
+  //GROQ query the asset document, looking for the originalFilename field
   const asset = await client.fetch(
     `*[_type == $type && _id == $id][0]{originalFilename}`,
     { type, id: assetRef }
@@ -22,6 +26,10 @@ async function getFilename(assetRef: string): Promise<string | null> {
   return asset.originalFilename.replace(/\.[^/.]+$/, ''); // Strip extension
 }
 
+//runs another query to get all projects(specifically image array)
+
+//in my sanity schema, I want to emulate this functionality. 
+//
 async function run() {
   const projects = await client.fetch(`*[_type == "project"]{
     _id,
@@ -30,31 +38,37 @@ async function run() {
 
   console.log(`🔍 Found ${projects.length} projects`);
 
+  //iterate through each project
   for (const project of projects) {
+    //default to false, will change if the name !== filename (has been updated manually)
     let hasUpdates = false;
 
+
     const updatedImages = await Promise.all(
-      (project.images || []).map(async (block: any) => {
-        const isImage = block._type === 'image' && block.asset?._ref;
-        const isMP4 = block._type === 'mp4' && block.asset?._ref;
+      //() for images or any array, map through each( async since we need to await getFilename later??)
+      (project.images || []).map(async (myImage: any) => {
+        const isImage = myImage._type === 'image' && myImage.asset?._ref;
+        const isMP4 = myImage._type === 'mp4' && myImage.asset?._ref;
 
         if ((isImage || isMP4)) {
-          const filename = await getFilename(block.asset._ref);
+          const filename = await getFilename(myImage.asset._ref);
 
-          if (filename && block.name !== filename) {
+          if (filename && myImage.name !== filename) {
             hasUpdates = true;
             return {
-              ...block,
+              //... returns an array of objects with updated names
+              ...myImage,
               name: filename,
             };
           }
         }
 
-        return block;
+        return myImage;
       })
     );
 
     if (hasUpdates) {
+      //this is where the actual value is updated in sanity, (.set and .commit to save changes)
       await client.patch(project._id)
         .set({ images: updatedImages })
         .commit();

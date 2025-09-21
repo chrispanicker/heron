@@ -101,7 +101,7 @@ export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
               modal?.classList.replace("opacity-0","opacity-100")
               modal?.classList.remove("pointer-events-none")
             }}
-            loading={project.slug === selectedProject? "eager":"lazy"}
+            loading="lazy"
             placeholder="blur"
             blurDataURL={`${project.gallery[index].blurDataURL}`}
             unoptimized={urlForImage(e).url().includes(".gif") ? true : false}

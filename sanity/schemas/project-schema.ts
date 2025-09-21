@@ -1,10 +1,15 @@
+import TestComponent from "@/components/testComponent";
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
+
+
 
 const project = {
     name: 'project',
     title: "Projects",
     type: 'document',
+    //plugin for ordering
     orderings: [orderRankOrdering],
+
     fields: [
         orderRankField({ 
             type: "project", 
@@ -58,6 +63,7 @@ const project = {
                 ]
             },
         },
+        //images includes, image with custom crop, mp4, text card
         {
             name: 'images',
             title: "Images",
@@ -68,12 +74,14 @@ const project = {
                   title: 'Image with Custom Crop',
                   options: {
                     accept: '.pdf,image/jpeg,image/png,image/gif',
+                    storeOriginalFilename: true,
                   },
                   fields: [
                     {
                       name: 'name',
                       type: 'string',
                       title: 'Name',
+                      components: {input: TestComponent,}
                     },
                     {
                       name: 'description',
@@ -94,13 +102,16 @@ const project = {
                 title: 'MP4', 
                 name: 'mp4', 
                 options: {
-                    accept: 'video/*,.mp4'
+                    accept: 'video/*,.mp4',
+                    storeOriginalFilename: true,
+
                 },
                 fields: [
                   {
                     name: 'name',
                     type: 'string',
                     title: 'Name',
+                    components: {input: TestComponent,}
                   },
                   {
                   name: 'description',
@@ -108,7 +119,6 @@ const project = {
                   title: 'Image Description',
                   description: 'Provide a description of the image to appear on hover',
                   },
-
                 ]
                 },
                 {
