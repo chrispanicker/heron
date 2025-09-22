@@ -63,7 +63,7 @@ export function Sorts(){
         <>
             <span className={`${sorted||filtered? "lg:flex hidden": "hidden"} w-screen justify-between px-5`}>
               <div className={`${sorted? "flex": "opacity-0"} w-[50%]`}>
-                <p className={`sans mr-[.5rem] text-[1.3rem] whitespace-nowrap`}>Sorted by</p>
+                <p className={`mr-[.5rem] text-[1rem] whitespace-nowrap mono-book uppercase`}>Sorted by</p>
                 <button className={`${buttonClass} bg-black text-gray-300 outline outline-1 outline-black hover:bg-gray-300 hover:text-black`}
                 onClick={()=>{
                     router.push("?"+"")

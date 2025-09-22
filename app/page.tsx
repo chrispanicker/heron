@@ -1,9 +1,11 @@
+import MobileLoadingScreen from "@/components/mobile-loading-screen";
 import MobileProjects from "@/components/mobile-projects";
+import MobileProjectsList from "@/components/mobile-projects-list";
 import Projects from "@/components/project";
 import { Scroller } from "@/components/scroller";
 import { SiteFooter } from "@/components/site-footer";
 import { Sorts } from "@/components/sorts";
-import { getFilteredProjects, getInfo, getJobs } from "@/sanity/lib/queries";
+import { getFilteredProjects, getInfo } from "@/sanity/lib/queries";
 
 interface Props {
   searchParams: {
@@ -18,12 +20,12 @@ interface Props {
   }
 }
 
+
 export default async function Home({searchParams}: Props) {
   const {tags, collabs, roles, about, view, sort, type, project} = searchParams 
   let filteredProjects= await getFilteredProjects({searchParams});
   let info = await getInfo();
-  let jobs = await getJobs();
-  let slugs:string[] = []
+  let slugs:string[] = [];
   filteredProjects.map((project:any, index: number)=>{
     slugs[index] = project.slug;
   })
@@ -38,11 +40,15 @@ export default async function Home({searchParams}: Props) {
             <div id={`${proj.slug}`} className={`transition-padding duration-500 ${project===proj.slug? "pt-8": " pt-0"}`}>
               <Projects project={proj} slugs={slugs}/>
             </div>
-            <MobileProjects project={proj}/>
+            {/* <MobileProjects project={proj}/> */}
           </div>
         )})}
+        {/* <MobileLoadingScreen images={filteredProjects[0]?.images || []} /> */}
+
+        <MobileProjectsList filteredProjects={filteredProjects}/>
+
         <div className="lg:block hidden">
-          <SiteFooter info={info} jobs={jobs}/>
+          <SiteFooter info={info}/>
         </div>
 
     </main>: 

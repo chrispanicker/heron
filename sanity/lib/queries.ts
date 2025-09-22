@@ -31,18 +31,20 @@ export async function getInfo() {
                 name,
                 bio,
                 header,
+                jobs,
+                awards,
                 "image": shareimage.asset->url
             }`
 )}
 
-export async function getJobs() {
-        return client.fetch(
-                groq`*[_type=="jobs"] | order(orderRank) {
-                    company,
-                    years,
-                    title
-                }`
-    )}
+// export async function getJobs() {
+//         return client.fetch(
+//                 groq`*[_type=="jobs"] | order(orderRank) {
+//                     company,
+//                     years,
+//                     title
+//                 }`
+//     )}
 
 
 

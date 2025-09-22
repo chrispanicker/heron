@@ -75,7 +75,7 @@ export function SiteHeader(info:any){
                 </h1>
                 <div className="flex justify-center items-center h-max group" onClick={()=>{openFilters(e)}}>
                     <p className={`lg:block hidden uppercase pr-1 group-hover:underline ${textSize}`}>Filters</p>
-                    <button className="filters text-2xl z-50 transition-all group-hover:rotate-[15deg] sans font-bolder" 
+                    <button className="filters text-2xl z-50 transition-all lg:group-hover:rotate-[15deg] sans font-bolder" 
                     >
                    +
                     </button>

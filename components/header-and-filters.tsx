@@ -6,10 +6,9 @@ import { SiteFooter } from "./site-footer";
 interface Props{
     projects:Project[]
     info:any
-    jobs:any
 }
 
-export function HeaderAndFilters({info, projects, jobs}:Props){
+export function HeaderAndFilters({info, projects}:Props){
     let allTags:string[] = [], allCollabs:string[] = [], allRoles:string[] = [], allTypes:string[] = []
     projects?.map((project:Project)=>{
         // project.roles?.map((role:any)=>{
@@ -40,7 +39,7 @@ export function HeaderAndFilters({info, projects, jobs}:Props){
             <SiteHeader info={info} />
             <Filters filters={filters} projects={projects}  />
             <div className="lg:hidden block">
-                <SiteFooter info={info} jobs={jobs}/>
+                <SiteFooter info={info}/>
             </div>
         </header>
     )

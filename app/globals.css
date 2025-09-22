@@ -109,18 +109,28 @@ button:hover{
   font-family: 'Times New Roman', Times, serif;
 }
 
-
-/* #footer div h2 a {
-  color: white;
-  background-color: rgb(75, 75, 79);
-  padding: .1rem .35rem;
-  cursor: alias;
+a {
+  font-family: GreyLL Mono Book;
+  text-decoration: underline;
+  white-space: nowrap;
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: .1rem .2rem;
 }
 
-#footer div h2 a:hover {
-  color: black;
-  background-color: white;
-} */
+
+a:hover{
+  color: #d1d5db;
+  background-color: black;
+}
+
+@media screen and (max-width: 1024px) {
+  a {
+    font-size: .8rem;
+    padding: .1rem .1rem;
+  }
+  
+}
 
 @keyframes rotate{
   0%{
@@ -130,4 +140,13 @@ button:hover{
   100%{
     transform: rotateX(360deg) rotateX(calc(var(--i)*126deg)) translateX(-10rem);
   }
+}
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 2s linear infinite;
+  }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

@@ -10,15 +10,16 @@ import { useCallback, useEffect, useRef } from "react";
 import { MobileMedia } from "./mobileMedia";
 
 interface Props {
-    project: Project
-    onImageChange: (index: number) => void
+  project: Project;
+  onImageChange: (index: number) => void;
+  isActive: boolean;
 }
 
-export function MobileGallery({project, onImageChange}: Props) {
+export function MobileGallery({ project, onImageChange, isActive }: Props) {
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")  
     let vimeoIDs: string[] = [];
-    const galleryWidth = "w-[98vw]"
+    const galleryWidth = "w-full"
     const galleryRef = useRef<HTMLDivElement>(null);
     
     project.vimeo?.map((vid, index) => {
@@ -43,10 +44,10 @@ export function MobileGallery({project, onImageChange}: Props) {
     }, [handleScroll]);
 
     return (
-        <div 
-            id={`${project.slug}-mobileGallery`} 
-            ref={galleryRef}
-            className={`relative scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory mt-10 bg-black`}
+      <div 
+        id={`${project.slug}-mobileGallery`} 
+        ref={galleryRef}
+        className={`relative scroll-smooth overflow-x-scroll overflow-y-hidden snap-x snap-mandatory mt-10 bg-black h-[60vh] ${galleryWidth} flex scrollbar-hide`}
             onScroll={(e) => {
                 let larr = document.querySelector(`#mobile-${project.slug}_larr`)
                 if (e.currentTarget.scrollLeft < 20 && larr?.classList.contains("opacity-100")) {
@@ -56,17 +57,19 @@ export function MobileGallery({project, onImageChange}: Props) {
                 }
             }}
         >
-            <span className={`flex w-max justify-center items-start h-full`}>
-                {project.images?.map((e: any, index: number) => (
-                       <MobileMedia
-                       key={`${project.slug}-${index}`}
-                       e={e}
-                       project={project}
-                       index={index}
-                       galleryWidth={galleryWidth} // Pass any custom width class if needed
-                     />
-                ))}
-            </span>
-        </div>
-    )
+      <span className={`flex w-max justify-center items-start h-full`}>
+        {isActive
+          ? project.images?.map((e: any, index: number) => (
+              <MobileMedia
+                key={`${project.slug}-${index}`}
+                e={e}
+                project={project}
+                index={index}
+                galleryLength={project.images.length}
+              />
+            ))
+          : null}
+      </span>
+    </div>
+  );
 }

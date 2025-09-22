@@ -3,115 +3,119 @@ import { urlForImage } from '@/sanity/lib/image';
 import { PortableText } from '@portabletext/react';
 import { getFile } from '@sanity/asset-utils';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
-import { buttonClass } from './classes';
 
-export const MobileMedia = ({ e, project, index, galleryWidth }:any) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const mediaRef = useRef(null);
-  const searchParams = useSearchParams();
-  const selectedProject = searchParams.get("project")
+export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
+  const [isPortrait, setIsPortrait] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Intersection Observer for lazy loading
   // useEffect(() => {
-  //   const observer = new IntersectionObserver(
-  //     ([entry]) => {
-  //       if (entry.isIntersecting) {
-  //         setIsVisible(true);
-  //         observer.disconnect(); // Stop observing once the element is in view
-  //       }
-  //     },
-  //     { threshold: 0.1 } // Trigger when 10% of the element is in view
+  //   const observer = new window.IntersectionObserver(
+  //     ([entry]) => setIsVisible(entry.isIntersecting),
+  //     { threshold: 0.5 }
   //   );
-
-  //   if (mediaRef.current) {
-  //     observer.observe(mediaRef.current);
-  //   }
-
+  //   if (containerRef.current) observer.observe(containerRef.current);
   //   return () => observer.disconnect();
   // }, []);
-  if (e._type === 'mp4') {
+  let isVisible = true;
+
+  // Margin logic: no left margin for first, no right margin for last
+  const marginClass =
+    index === 0
+      ? 'mr-2'
+      : index === galleryLength - 1
+      ? 'ml-2'
+      : 'mx-2';
+
+  const containerClass = `snap-center snap-always flex justify-center items-center h-[60vh] bg-black ${marginClass} w-screen relative`;
+
+  // Only render media if visible
+  if (!isVisible) {
     return (
-      <div
-        ref={mediaRef}
-        key={`${project.slug}-${index}`}
-        className={`snap-center snap-always peer flex justify-center items-center h-[60vh] bg-black mx-2`}
-      >
+      <div ref={containerRef} className={containerClass}>
+        <span className="text-gray-300 h-[60vh] flex justify-center items-center mono-book uppercase">Loading...</span>
+      </div>
+    );
+  }else if (e._type === 'mp4' && isVisible) {
+    return (
+      <div ref={containerRef} className={containerClass}>
         {e.description && (
-          <span className={`mono-book uppercase mobile-description absolute bottom-2 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-3`}>
-            <p className="text-[.8rem]  leading-[1rem] outline-gray-300 outline outline-1 px-1 bg-black">{e.description}</p>
+          <span className="mono-book uppercase mobile-description absolute bottom-2 h-[4rem] w-[80%] text-gray-300 flex justify-center items-start mt-2 px-3 z-100">
+            <p className="text-[.8rem] leading-[1rem] outline-gray-300 outline outline-1 px-1 bg-black text-center">{e.description}</p>
           </span>
         )}
         <video
+          ref={videoRef}
           width="1440"
           height="1080"
           muted
           loop
           autoPlay
           webkit-playsinline="true"
-          src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url} 
+          src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url}
           playsInline
-          preload="none"
-          className={`object-cover duration-500 h-auto ${galleryWidth} transition-opacity duration-1000`
+          poster={e.posterUrl || undefined}
+          className={
+            isPortrait
+              ? "object-contain max-h-[90%] max-w-[80%] transition-opacity duration-1000"
+              : "object-cover max-h-full w-[100%] transition-opacity duration-1000"
           }
-          onDoubleClick={(x)=>{
+          onLoadedData={ev => {
+            const video = ev.currentTarget;
+            setIsPortrait(video.videoHeight > video.videoWidth);
+          }}
+          onDoubleClick={(x) => {
             const vidModal = document.querySelector("#vidmodal");
-            const vidModalEl = document.querySelector("#vidmodal video") as HTMLVideoElement
-            vidModalEl.src = x.currentTarget.src
-            vidModal? vidModal.scrollLeft=0 :""
-            vidModal?.classList.replace("opacity-0","opacity-100")
-            vidModal?.classList.remove("pointer-events-none")
-            vidModalEl.classList.remove("hidden")
+            const vidModalEl = document.querySelector("#vidmodal video") as HTMLVideoElement;
+            vidModalEl.src = x.currentTarget.src;
+            vidModal!.scrollLeft = 0;
+            vidModal!.classList.replace("opacity-0", "opacity-100");
+            vidModal!.classList.remove("pointer-events-none");
+            vidModalEl.classList.remove("hidden");
           }}
         >
-          <track
-            src="/path/to/captions.vtt"
-            kind="subtitles"
-            srcLang="en"
-            label="English"
-          />
+          <track src="/path/to/captions.vtt" kind="subtitles" srcLang="en" label="English" />
           Your browser does not support the video tag.
         </video>
       </div>
     );
-  } else if (e._type === "image") {
+  } else if (e._type === "image" && isVisible) {
     return (
-      <div
-        ref={mediaRef}
-        key={`mobile-${project.slug}-${index}`}
-        className={`relative snap-center snap-always peer flex justify-center items-center h-[60vh] bg-black mx-2`}
-      >
+      <div ref={containerRef} className={containerClass}>
         {e.description && (
-          <span className={`mono-book uppercase mobile-description absolute bottom-2 h-[4rem] ${galleryWidth} text-gray-300 flex text-justify-left justify-center items-start mt-2 px-3`}>
-            <p className="text-[.8rem] leading-[1rem] outline-gray-300 outline outline-1 px-1 bg-black">{e.description}</p>
+          <span className="mono-book uppercase mobile-description absolute bottom-2 h-[4rem] w-[80%] text-gray-300 flex justify-center items-start mt-2 px-3 z-100">
+            <p className="text-[.8rem] leading-[1rem] outline-gray-300 outline outline-1 px-1 bg-black text-center">{e.description}</p>
           </span>
         )}
-        <span className={`relative flex justify-center items-center ${galleryWidth} overflow-x-hidden h-full`}>
+        <span className="relative flex justify-center items-center w-full overflow-x-hidden h-full pr-2 z-0">
           <Image
             src={urlForImage(e).url()}
             alt=""
             width={1080}
             height={1080}
-            className={`${e.mycrop? "opacity-100 min-w-[140vw]": "w-full max-h-[75%]"} object-contain duration-500 transition-opacity duration-1000`
-            }
-            onDoubleClick={(x)=>{
+            className={e.mycrop ? "opacity-100 min-w-[140vw]" : "w-full max-h-[75%] object-contain duration-500 transition-opacity duration-1000"}
+            onDoubleClick={(x) => {
               const modal = document.querySelector("#modal");
-              const modalImg = document.querySelector("#modal img") as HTMLImageElement
-              modalImg!.src = x.currentTarget.src
-              modal? modal.scrollLeft=0 :""
-              modal?.classList.replace("opacity-0","opacity-100")
-              modal?.classList.remove("pointer-events-none")
+              const modalImg = document.querySelector("#modal img") as HTMLImageElement;
+              modalImg!.src = x.currentTarget.src;
+              modal!.scrollLeft = 0;
+              modal!.classList.replace("opacity-0", "opacity-100");
+              modal!.classList.remove("pointer-events-none");
             }}
             loading="lazy"
             placeholder="blur"
-            blurDataURL={`${project.gallery[index].blurDataURL}`}
-            unoptimized={urlForImage(e).url().includes(".gif") ? true : false}
+            blurDataURL={project.gallery[index]?.blurDataURL}
+            unoptimized={urlForImage(e).url().includes(".gif")}
           />
         </span>
       </div>
     );
   } else {
+    // Text block
     return (
-      <div key={`mobile-${project.slug}-text-${index}`} className={`mono-book uppercase h-[60vh] ${galleryWidth} snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-xl text-center mx-2 px-7 py-5`}>
+      <div ref={containerRef} className={`mono-book uppercase h-[60vh] w-screen snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-[1rem] text-center ${marginClass} px-7 py-5`}>
         <PortableText value={e.content} />
       </div>
     );

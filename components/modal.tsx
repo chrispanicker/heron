@@ -18,7 +18,7 @@ export function Modal() {
        }
     }}
     >
-      <p className="fixed top-0 right-0 text-gray-300 text-4xl lg:mr-5 mr-2 font-bolder sans z-50 rotate-45"
+      <p className="fixed top-0 right-0 text-gray-300 text-3xl lg:mr-5 leading-[2rem] mr-2 font-bolder sans z-50 rotate-45"
       onClick={(e)=>{
           e.currentTarget.parentElement!.classList.replace("opacity-100","opacity-0") 
           e.currentTarget.parentElement!.classList.add("pointer-events-none") 

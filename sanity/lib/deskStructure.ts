@@ -14,7 +14,15 @@ export const structure = (S: StructureBuilder, context: any) => {
     .title('Content')
     .items([
       getOrderableDocumentList('project', 'Projects', S, context),
-      getDocumentTypeListItem('info', 'Info', S),
+      // getDocumentTypeListItem('info', 'Info', S),
+       S.listItem()
+        .title('Footer Info')
+        .icon(() => '?')
+        .child(
+          S.document()
+            .schemaType('info')
+            .documentId('infoSingleton') // fixed ID for singleton
+        ),
       getOrderableDocumentList('jobs', 'Jobs', S, context),
       getDocumentTypeListItem('roles', 'Roles', S),
       getDocumentTypeListItem('tags', 'Tags', S),
