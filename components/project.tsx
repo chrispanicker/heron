@@ -3,7 +3,7 @@ import { Project } from "@/types/project";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Gallery } from "./gallery";
 import { buttonClass } from "./classes";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { PortableText } from "@portabletext/react";
 import { openFilters } from "./functions";
 
@@ -17,6 +17,7 @@ type Role = {
 };
 
 export default function Projects({project, slugs}: Props ) {
+    const projectRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")  
@@ -31,19 +32,28 @@ export default function Projects({project, slugs}: Props ) {
     let e = 0
     let tagHoverInterval:any;
 
+    // function scrollToProject(slug:string){     
+    //   let element = document.querySelector(`#${slug}`)
+    //   var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    //   selectedProject===slug? 
+    //   //scroll back to top
+    //   window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
+    //   :selectedProject?
+    //       setTimeout(()=>{
+    //       element?.scrollIntoView({behavior:"smooth", block:"start"})}, 300)
+    //   :setTimeout(()=>{
+    //   element?.scrollIntoView({behavior:"smooth", block:"start"})}, 300)
+    // }
 
-    function scrollToProject(slug:string){     
-      let element = document.querySelector(`#${slug}`)
-      var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-      selectedProject===slug? 
-      //scroll back to top
-      window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
-      :selectedProject?
-          setTimeout(()=>{
-          element?.scrollIntoView({behavior:"smooth", block:"start"})}, 700)
-      :setTimeout(()=>{
-      element?.scrollIntoView({behavior:"smooth", block:"start"})}, 500)
-    }
+    function scrollToProject(slug: string) {
+      let filters = document.querySelector("header section");
+      router.push("?" + createQueryString("project", `${slug}`), { scroll: false });
+      e = 1;
+      if (!filters?.classList.contains("h-0")) {
+          openFilters(e);
+      }
+    }   
+    
 
     function setHoverInterval(e:any) {
         if (!tagHoverInterval) {
@@ -53,10 +63,10 @@ export default function Projects({project, slugs}: Props ) {
         }
     }
       
-      function stopHoverInterval() {
+    function stopHoverInterval() {
         clearInterval(tagHoverInterval);
         tagHoverInterval = null;
-      }
+    }
 
     function tagHover(e:any) {
         let element = e.target;
@@ -83,38 +93,69 @@ export default function Projects({project, slugs}: Props ) {
             stringSearchParams = stringSearchParams.replaceAll("%2C", ",")
             params = new URLSearchParams(stringSearchParams)
 
-        
             if(name==="project"){
-                if(stringSearchParams.includes(`${name}=${value}`)){ 
+                if(stringSearchParams.includes(`${name}=${value}`)){
+                    window.scrollTo({left:scrollX, top:0, behavior:"smooth"})
                     params.delete(name, value)
+                    
                 }else{params.set(name, value)}
             }else {
                 if(name==="roles"||name==="tags"||name==="collabs"||name==="type" && selectedProject){
                     params.delete("project", selectedProject!)
-                    window.scrollTo(scrollX, 0)
+                    window.scrollTo({left:scrollX, top:0, behavior:"smooth"})
                 }
                 if(stringSearchParams.includes(`${name}=${value}`)){
                     params.delete(name, value)
                 }else{
-
                   params.append(name, value)}
             }
                 
             return params.toString()
 
         },
-        [searchParams]
+        [searchParams, selectedProject]
     )
 
+    const handleKeyDown = useCallback((event: KeyboardEvent) => {
+        const currentIndex = slugs.indexOf(project.slug);
+        let nextSlug = "";
+
+        if (event.key === "ArrowDown") {
+            const nextIndex = (currentIndex + 1) % slugs.length;
+            nextSlug = slugs[nextIndex];
+            
+            router.push("?" + createQueryString("project", nextSlug), { scroll: false });
+            scrollToProject(nextSlug);
+        } else if (event.key === "ArrowUp") {
+            const prevIndex = (currentIndex - 1 + slugs.length) % slugs.length;
+            nextSlug = slugs[prevIndex];
+            
+            router.push("?" + createQueryString("project", nextSlug), { scroll: false });
+            scrollToProject(nextSlug);
+        }
+    }, [slugs, project.slug, router, createQueryString, scrollToProject]);
+    
+    useEffect(() => {
+        if (selectedProject === project.slug && projectRef.current) {
+          setTimeout(() => {
+            projectRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 300);
+
+            window.addEventListener("keydown", handleKeyDown);
+            return () => {
+                window.removeEventListener("keydown", handleKeyDown);
+            };
+        }
+    }, [selectedProject, project.slug, slugs, router, createQueryString, scrollToProject, handleKeyDown]);
 
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin');
-
     const sortedRoles: Role[] = project.roles?.sort((a:any, b:any) => a.name.localeCompare(b.name));
 
     return isSanityStudio? "": (
         <div
-            className={`lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-200 ml-[1.75px] mr-[2px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "py-4 pb-2 bg-gray-300 text-black ": "hover:bg-black hover:text-gray-300"}`}>
+            ref={projectRef}
+            className={`lg:text-2xl lg:grid hidden lg:relative grid-cols-12 items-start transition-[padding] duration-100 ml-[1.75px] mr-[2px] lg:px-5 px-2 py-1 ${selectedProject===project.slug? "py-4 pt-12 pb-2 bg-gray-300 text-black ": "hover:bg-black hover:text-gray-300"}`}>
             <div className={`w-full h-full absolute top-0 z-0`} 
             onClick={()=>{
                 scrollToProject(project.slug)
@@ -190,33 +231,12 @@ export default function Projects({project, slugs}: Props ) {
                     }}
                 >{tag.name}</button>
                 )): ""}
-                {/* {project.collabs? project.collabs?.map((tag:any)=>(
-                    <button key={tag.name} className={`${buttonClass} outline outline-1 outline-black  my-1
-                    ${searchParams.getAll("collabs")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
-                    onClick={()=>{
-                        router.push( `/?${createQueryString(`collabs`, `${tag.name}`)}`, {scroll: false})
-                        params.includes(tag.name) && bool ? e=1:""
-                        openFilters(e)
-                        stopHoverInterval()
-                    }}>{tag.name}</button>
-                )): ""}
-                {project.tags? project.tags?.map((tag:any)=>(
-                    <button key={tag.name} 
-                    className={`${buttonClass} outline outline-1 outline-black  my-1
-                    ${searchParams.getAll("tags")?.includes(tag.name)? "text-black bg-gray-300 hover:bg-gray-300 hover:text-black outline-black":"outline-gray-300 bg-black text-gray-300 hover:bg-gray-300 hover:text-black"}`}
-                    onClick={()=>{
-                    router.push( `/?${createQueryString(`tags`, `${tag.name}`)}`, {scroll: false})
-                    params.includes(tag.name) && bool ? e=1:""
-                    openFilters(e)
-                    stopHoverInterval()
-                }}>{tag.name}</button>
-                )): ""} */}
             </span>
             {/* year */}
             <p className={`lg:text-right flex justify-end col-span-1 whitespace-nowrap serif`}>{project.year}</p>
 
             {/* gallery */}
-            <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-[max-height] duration-500 border-black ${selectedProject===project.slug? "border-x-0 border-y-2 pt-2 pb-1 border max-h-[56rem]": "max-h-[0rem]"}`}>
+            <span className={`lg:block relative hidden col-span-12 overflow-hidden transition-[max-height] duration-100 border-black ${selectedProject===project.slug? "border-x-0 border-y-2 pt-2 pb-1 border max-h-[56rem]": "max-h-[0rem]"}`}>
                 {/* gallery component */}
                 <Gallery project={project}/>
                 {/* info */}
@@ -241,11 +261,9 @@ export default function Projects({project, slugs}: Props ) {
                           router.push("?"+createQueryString("project", `${nextSlug}`), {scroll:false})
                           scrollToProject(nextSlug)
                         }}>Next Project</button>
-
                     </div>
                 </div>
             </span>
-
         </div>
     )
 }
