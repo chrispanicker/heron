@@ -4,6 +4,7 @@ import { HeaderAndFilters } from '@/components/header-and-filters'
 import  SillyCanvas  from '@/components/silly-canvas'
 import { Modal } from '@/components/modal'
 import { VideoModal } from '@/components/vidmodal'
+import { urlForImage } from '@/sanity/lib/image'
 
 export const metadata = async () => {
   let info = await getInfo();
@@ -23,9 +24,13 @@ export default async function RootLayout({
   }) {
     let allprojects = await getProjects();
     let info = await getInfo();    
+    const faviconUrl = info.favicon ? urlForImage(info.favicon).url() : null;
 
   return (
-    <html lang="en" className={`bg-black text-black serif font-light overflow-x-hidden lg:text-[1rem] text-[1rem] leading-[1.4rem] snap-y snap-mandatory cursor-auto`}>
+    <html lang="en" className={`notSanity bg-black text-black serif font-light overflow-x-hidden lg:text-[1rem] text-[1rem] leading-[1.4rem] snap-y snap-mandatory cursor-auto`}>
+      <head>
+        {faviconUrl && <link rel="icon" href={faviconUrl} />}
+      </head>
       <body className='bg-gray-300'>
         <Modal />
         <VideoModal />

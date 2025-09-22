@@ -20,7 +20,7 @@ export default function MobileLoadingScreen({ images}: { images: any[] }) {
   }, [loadedCount, images.length]);
 
   const handleMediaLoaded = () => {
-    console.log('loaded one!!');
+    console.log('loaded one!!,');
     setLoadedCount((c) => c + 1);}
 
   if (!show) return null;

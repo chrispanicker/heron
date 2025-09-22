@@ -24,7 +24,9 @@ const info = {
         {
             name: 'favicon',
             title: "Favicon",
-            type: 'image'
+            type: 'image',
+            description: "This appears in the browser tab. 32x32 or 64x64 .png file recommended.",
+            accept: 'image/png, image/svg+xml',
         },
         {
             name: 'bio',

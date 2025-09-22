@@ -109,7 +109,7 @@ button:hover{
   font-family: 'Times New Roman', Times, serif;
 }
 
-a {
+.notSanity a {
   font-family: GreyLL Mono Book;
   text-decoration: underline;
   white-space: nowrap;
@@ -119,13 +119,13 @@ a {
 }
 
 
-a:hover{
+.notSanity a:hover{
   color: #d1d5db;
   background-color: black;
 }
 
 @media screen and (max-width: 1024px) {
-  a {
+  .notSanity a {
     font-size: .8rem;
     padding: .1rem .1rem;
   }
