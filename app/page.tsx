@@ -1,5 +1,3 @@
-import MobileLoadingScreen from "@/components/mobile-loading-screen";
-import MobileProjects from "@/components/mobile-projects";
 import MobileProjectsList from "@/components/mobile-projects-list";
 import Projects from "@/components/project";
 import { Scroller } from "@/components/scroller";
@@ -43,8 +41,6 @@ export default async function Home({searchParams}: Props) {
             {/* <MobileProjects project={proj}/> */}
           </div>
         )})}
-        {/* <MobileLoadingScreen images={filteredProjects[0]?.images || []} /> */}
-
         <MobileProjectsList filteredProjects={filteredProjects}/>
 
         <div className="lg:block hidden">

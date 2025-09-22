@@ -1,28 +1,18 @@
-import type { Metadata } from 'next'
 import '@/app/globals.css'
-import localFont from 'next/font/local'
-import {getInfo, getJobs, getProjects } from '@/sanity/lib/queries'
+import {getInfo, getProjects } from '@/sanity/lib/queries'
 import { HeaderAndFilters } from '@/components/header-and-filters'
 import  SillyCanvas  from '@/components/silly-canvas'
-import { client } from '@/sanity/lib/client'
-import { groq } from 'next-sanity'
 import { Modal } from '@/components/modal'
 import { VideoModal } from '@/components/vidmodal'
-import { text } from 'stream/consumers'
-import { textSize } from '@/components/classes'
-
-
 
 export const metadata = async () => {
   let info = await getInfo();
   return {
-    // title: info[0].name,
-    // description: info[0].bio,
-    // openGraph: {
-    //   images: info[0].image,
-    // },
-    title : 'Drew Litowitz',
-    description: 'Portfolio of Drew Litowitz, a New York based designer and developer.',
+    title: info[0].name,
+    description: info[0].bio,
+    openGraph: {
+      images: info[0].image,
+    },
   };
 };
 

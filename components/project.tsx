@@ -2,8 +2,8 @@
 import { Project } from "@/types/project";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Gallery } from "./gallery";
-import { buttonClass, textSize } from "./classes";
-import { useCallback, useEffect } from "react";
+import { buttonClass } from "./classes";
+import { useCallback } from "react";
 import { PortableText } from "@portabletext/react";
 import { openFilters } from "./functions";
 
