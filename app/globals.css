@@ -111,6 +111,7 @@ button:hover{
 
 .notSanity a {
   font-family: GreyLL Mono Book;
+  color: black;
   text-decoration: underline;
   white-space: nowrap;
   font-size: 1rem;
@@ -128,6 +129,7 @@ button:hover{
   .notSanity a {
     font-size: .8rem;
     padding: .1rem .1rem;
+    color: #d1d5db;
   }
   
 }
