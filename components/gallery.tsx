@@ -56,7 +56,7 @@ export function Gallery({ project }: Props) {
         ref={scrollContainerRef}
         className={`flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide ${!showArrows ? 'justify-center' : ''}`}
       >
-        <span className={`relative flex w-max h-[36rem] ${project.images.length===1 ? 'justify-center items-center w-screen' : 'justify-start'} items-start`} key={`${project.slug}-gallery`}>
+        <span className={`relative flex w-max h-[34rem] ${project.images.length===1 ? 'justify-center items-center w-screen' : 'justify-start'} items-start`} key={`${project.slug}-gallery`}>
           {project.images?.map((e: any, index: number) => (
               <MediaWithFadeIn key={`${project.slug}-${index}`} e={e} project={project} index={index} />
           ))}
