@@ -129,12 +129,19 @@ a{
   color: #d1d5db;
   background-color: black;
 }
-
+ 
 @media screen and (max-width: 1024px) {
   .footer a {
     font-size: .8rem;
     padding: .1rem .1rem;
     color: #d1d5db;
+  }
+
+    .footer a:hover {
+    font-size: .8rem;
+    padding: .1rem .1rem;
+    color: black;
+    background-color: #d1d5db;
   }
   
 }
