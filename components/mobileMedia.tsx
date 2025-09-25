@@ -7,18 +7,10 @@ import Image from 'next/image';
 export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
   const [isPortrait, setIsPortrait] = useState(false);
   // const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Intersection Observer for lazy loading
-  // useEffect(() => {
-  //   const observer = new window.IntersectionObserver(
-  //     ([entry]) => setIsVisible(entry.isIntersecting),
-  //     { threshold: 0.5 }
-  //   );
-  //   if (containerRef.current) observer.observe(containerRef.current);
-  //   return () => observer.disconnect();
-  // }, []);
   let isVisible = true;
 
   // Margin logic: no left margin for first, no right margin for last
@@ -42,7 +34,7 @@ export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
     return (
       <div ref={containerRef} className={containerClass}>
         {e.description && (
-          <span className="mono-book uppercase mobile-description absolute bottom-2 h-[4rem] w-[80%] text-gray-300 flex justify-center items-start mt-2 px-3 z-100">
+          <span className="mono-book uppercase mobile-description opacity-0 absolute bottom-2 h-[4rem] w-[80%] text-gray-300 flex justify-center items-start mt-2 px-3 z-100">
             <p className="text-[.8rem] leading-[1rem] outline-gray-300 outline outline-1 px-1 bg-black text-center">{e.description}</p>
           </span>
         )}
@@ -66,15 +58,15 @@ export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
             const video = ev.currentTarget;
             setIsPortrait(video.videoHeight > video.videoWidth);
           }}
-          onDoubleClick={(x) => {
-            const vidModal = document.querySelector("#vidmodal");
-            const vidModalEl = document.querySelector("#vidmodal video") as HTMLVideoElement;
-            vidModalEl.src = x.currentTarget.src;
-            vidModal!.scrollLeft = 0;
-            vidModal!.classList.replace("opacity-0", "opacity-100");
-            vidModal!.classList.remove("pointer-events-none");
-            vidModalEl.classList.remove("hidden");
-          }}
+          // onDoubleClick={(x) => {
+          //   const vidModal = document.querySelector("#vidmodal");
+          //   const vidModalEl = document.querySelector("#vidmodal video") as HTMLVideoElement;
+          //   vidModalEl.src = x.currentTarget.src;
+          //   vidModal!.scrollLeft = 0;
+          //   vidModal!.classList.replace("opacity-0", "opacity-100");
+          //   vidModal!.classList.remove("pointer-events-none");
+          //   vidModalEl.classList.remove("hidden");
+          // }}
         >
           <track src="/path/to/captions.vtt" kind="subtitles" srcLang="en" label="English" />
           Your browser does not support the video tag.
@@ -95,18 +87,19 @@ export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
             alt=""
             width={1080}
             height={1080}
-            className={e.mycrop ? "opacity-100 min-w-[140vw]" : "w-full max-h-[75%] object-contain duration-500 transition-opacity duration-1000"}
-            onDoubleClick={(x) => {
-              const modal = document.querySelector("#modal");
-              const modalImg = document.querySelector("#modal img") as HTMLImageElement;
-              modalImg!.src = x.currentTarget.src;
-              modal!.scrollLeft = 0;
-              modal!.classList.replace("opacity-0", "opacity-100");
-              modal!.classList.remove("pointer-events-none");
-            }}
+            className={`transition-all duration-500 ${e.mycrop ? "opacity-100 min-w-[140vw]" : "w-full max-h-[75%] object-contain"} ${isLoading===true? "blur-2xl": ""}`}
+            // onDoubleClick={(x) => {
+            //   const modal = document.querySelector("#modal");
+            //   const modalImg = document.querySelector("#modal img") as HTMLImageElement;
+            //   modalImg!.src = x.currentTarget.src;
+            //   modal!.scrollLeft = 0;
+            //   modal!.classList.replace("opacity-0", "opacity-100");
+            //   modal!.classList.remove("pointer-events-none");
+            // }}
             loading="lazy"
             placeholder={project.gallery[index]?.blurDataURL? "blur": "empty"}
             blurDataURL={project.gallery[index]?.blurDataURL? project.gallery[index]?.blurDataURL : undefined}
+            onLoadingComplete={()=>setIsLoading(false)}
             unoptimized={urlForImage(e).url().includes(".gif")}
           />
         </span>

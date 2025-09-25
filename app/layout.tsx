@@ -33,7 +33,7 @@ export default async function RootLayout({
       </head>
       <body className='bg-gray-300'>
         <Modal />
-        <VideoModal />
+        {/* <VideoModal /> */}
         <section className='relative z-10'>
           <HeaderAndFilters info={info}  projects={allprojects}/>
           <>{children}</>

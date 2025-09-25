@@ -100,7 +100,7 @@ export default function MobileProjects({ project, isActive, onInView }: Props) {
                 </button>
             </div>
 
-            <div className="sticky bottom-0 mt-2 bg-gray-300 z-10 pt-1">
+            <div className="relative bottom-0 mt-2 bg-gray-300 z-10 pt-1">
                 <span className="leading-[1.2rem]">
                     <PortableText value={project.content}/>
                 </span>

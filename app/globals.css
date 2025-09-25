@@ -111,7 +111,7 @@ button:hover{
 
 a{
   text-decoration: none;
-  color: inherit;
+  /* color: inherit; */
 }
 
 .notSanity a {
@@ -131,7 +131,7 @@ a{
 }
 
 @media screen and (max-width: 1024px) {
-  .notSanity a {
+  #footer a {
     font-size: .8rem;
     padding: .1rem .1rem;
     color: #d1d5db;
