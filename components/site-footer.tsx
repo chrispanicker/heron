@@ -28,7 +28,7 @@ export function SiteFooter({info}:Props){
 
     return (
         isSanityStudio? "" : 
-        <footer id="footer" ref={footerRef} className="border-t-[2px] mt-[2px] border-black relative z-10 lg:pt-[8rem] lg:min-h-auto">
+        <footer id="footer" ref={footerRef} className="footer border-t-[2px] mt-[2px] border-black relative z-10 lg:pt-[8rem] lg:min-h-auto">
             <div className={`h-fit lg:pb-4 lg:pt-4 pb-[30vh] pt-2 text-left grid lg:grid-cols-2 lg:mx-5 lg:text-black lg:text-[1.5rem] text-[1rem] text-gray-300  lg:leading-[1.95rem] leading-[1.6rem]`}>
                 <div className="lg:pb-0 pb-12 lg:pt-0 pt-2 lg:w-auto w-screen lg:pr-6 pr-2 pl-2 serif lg:text-[1.5rem] lg:leading-[1.95rem] text-[1.2rem] text-left [&_*a]:text-blue-600 [&_*a]:underline">
                     <h3 className="w-full border-b-[2px] mb-1 border-black text-[1.5rem] sans lg:block hidden">About</h3>

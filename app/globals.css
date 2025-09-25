@@ -131,7 +131,7 @@ a{
 }
 
 @media screen and (max-width: 1024px) {
-  #footer a {
+  .footer a {
     font-size: .8rem;
     padding: .1rem .1rem;
     color: #d1d5db;
