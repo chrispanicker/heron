@@ -50,14 +50,17 @@ export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
           playsInline
           poster={e.posterUrl || undefined}
           className={
-            isPortrait
+            `${isPortrait
               ? "object-contain max-h-[90%] max-w-[80%] transition-opacity duration-1000"
-              : "object-cover max-h-full w-[100%] transition-opacity duration-1000"
+              : "object-cover max-h-full w-[100%] transition-opacity duration-1000"} ${isLoading===true? "blur-2xl": ""} `
           }
           onLoadedData={ev => {
             const video = ev.currentTarget;
             setIsPortrait(video.videoHeight > video.videoWidth);
           }}
+          // onLoad={() => setIsLoading(false)}
+          onCanPlay={() => setIsLoading(false)}
+          
           // onDoubleClick={(x) => {
           //   const vidModal = document.querySelector("#vidmodal");
           //   const vidModalEl = document.querySelector("#vidmodal video") as HTMLVideoElement;
