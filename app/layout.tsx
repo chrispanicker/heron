@@ -3,7 +3,6 @@ import {getInfo, getProjects } from '@/sanity/lib/queries'
 import { HeaderAndFilters } from '@/components/header-and-filters'
 import  SillyCanvas  from '@/components/silly-canvas'
 import { Modal } from '@/components/modal'
-import { VideoModal } from '@/components/vidmodal'
 import { urlForImage } from '@/sanity/lib/image'
 
 export const metadata = async () => {
