@@ -45,6 +45,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
           controls
           loop
           autoPlay
+          playsInline
           webkit-playsinline={`true`}
           preload={selectedProject===project.slug? "auto":"none"}
           className={`w-auto h-full ${index===project.images.length-1? "pr-0":"pr-2"} snap-center snap-always z-0 transition-opacity duration-1000` 
