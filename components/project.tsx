@@ -121,12 +121,14 @@ export default function Projects({project, slugs}: Props ) {
         let nextSlug = "";
 
         if (event.key === "ArrowDown") {
+            event.preventDefault(); 
             const nextIndex = (currentIndex + 1) % slugs.length;
             nextSlug = slugs[nextIndex];
             
             router.push("?" + createQueryString("project", nextSlug), { scroll: false });
             scrollToProject(nextSlug);
         } else if (event.key === "ArrowUp") {
+            event.preventDefault();
             const prevIndex = (currentIndex - 1 + slugs.length) % slugs.length;
             nextSlug = slugs[prevIndex];
             

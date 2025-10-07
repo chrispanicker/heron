@@ -22,6 +22,7 @@ export function Gallery({ project }: Props) {
   const selectedProject = searchParams.get("project")  
   const isManualScrolling = useRef(false)
   const scrollTimeout = useRef<NodeJS.Timeout>()
+
   const nextImage = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft+1000<scrollContainerRef.current.scrollWidth-1000?
@@ -50,9 +51,25 @@ export function Gallery({ project }: Props) {
     }
   }
 
+  useEffect(() => {
+    if (selectedProject === project.slug) {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          prevImage();
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          nextImage();
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => window.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [selectedProject, project.slug, prevImage, nextImage]);
+
   return (
     selectedProject===project.slug? 
-    <div className={`hidden lg:block relative w-full max-w-screen mx-auto text-3xl px-5 py-16 transition-all duration-500 ${selectedProject===project.slug? "bg-black border-b-2 border-x-0 border-t-0 border border-gray-300" : ""}`}>
+    <div className={`hidden lg:block relative w-full max-w-screen mx-auto text-3xl px-5 py-16 transition-all duration-1000 ${selectedProject===project.slug? "bg-black border-b-2 border-x-0 border-t-0 border border-gray-300" : ""}`}>
       <div
         ref={scrollContainerRef}
         className={`flex overflow-x-scroll snap-x snap-mandatory scrollbar-hide ${!showArrows ? 'justify-center' : ''}`}
@@ -88,7 +105,7 @@ export function Gallery({ project }: Props) {
           </button>
         </>
       )}
-    </div>:     <div className={`hidden lg:block relative w-full max-w-screen mx-auto text-3xl px-5 py-16 transition-all duration-500 ${selectedProject===project.slug? "bg-black border-b-2 border-x-0 border-t-0 border border-gray-300" : ""}`}>
+    </div>:     <div className={`hidden bg-black lg:block relative w-full max-w-screen mx-auto text-3xl px-5 py-16 transition-all duration-500 ${selectedProject===project.slug? "bg-black border-b-2 border-x-0 border-t-0 border border-gray-300" : ""}`}>
 Error Loading Media</div>
   )
 }
