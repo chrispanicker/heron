@@ -20,13 +20,13 @@ export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
       ? 'ml-2'
       : 'mx-2';
 
-  const containerClass = `snap-center snap-always flex justify-center items-center h-[60vh] bg-black ${marginClass} w-screen relative`;
+  const containerClass = `snap-center snap-always flex justify-center items-center h-[100%] bg-black ${marginClass} w-screen relative`;
 
   // Only render media if visible
   if (!isVisible) {
     return (
       <div ref={containerRef} className={containerClass}>
-        <span className="text-gray-300 h-[60vh] flex justify-center items-center mono-book uppercase">Loading...</span>
+        <span className="text-gray-300 h-[100%] flex justify-center items-center mono-book uppercase">Loading...</span>
       </div>
     );
   }else if (e._type === 'mp4' && isVisible) {
@@ -44,6 +44,7 @@ export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
           muted
           loop
           autoPlay
+          preload='none'
           webkit-playsinline="true"
           src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url}
           playsInline
@@ -91,7 +92,7 @@ export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
   } else {
     // Text block
     return (
-      <div ref={containerRef} className={`mono-book uppercase h-[60vh] w-screen snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-[1rem] text-center ${marginClass} px-7 py-5`}>
+      <div ref={containerRef} className={`mono-book uppercase h-[100%] w-screen snap-center snap-always flex justify-center items-center bg-black text-gray-300 text-[1rem] text-center ${marginClass} px-7 py-5`}>
         <PortableText value={e.content} />
       </div>
     );

@@ -51,6 +51,7 @@ export function Gallery({ project }: Props) {
   }
 
   return (
+    selectedProject===project.slug? 
     <div className={`hidden lg:block relative w-full max-w-screen mx-auto text-3xl px-5 py-16 transition-all duration-500 ${selectedProject===project.slug? "bg-black border-b-2 border-x-0 border-t-0 border border-gray-300" : ""}`}>
       <div
         ref={scrollContainerRef}
@@ -87,6 +88,7 @@ export function Gallery({ project }: Props) {
           </button>
         </>
       )}
-    </div>
+    </div>:     <div className={`hidden lg:block relative w-full max-w-screen mx-auto text-3xl px-5 py-16 transition-all duration-500 ${selectedProject===project.slug? "bg-black border-b-2 border-x-0 border-t-0 border border-gray-300" : ""}`}>
+Error Loading Media</div>
   )
 }
