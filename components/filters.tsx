@@ -39,7 +39,7 @@ export function Filters({filters}: Props){
 
 
     return(
-        <section className={`lg:block bg-gray-300 hidden pt-2 pb-2 overflow-hidden px-4 transition-all h-0 border border-b-2 border-black`}>
+        <section className={`lg:block bg-gray-300 hidden pt-2 pb-2 overflow-hidden px-4 transition-all max-h-0 border border-b-2 border-black`}>
           <button 
             onClick={()=>{router.push( `/?`, {scroll: false})}}
             className={`${buttonClass} text-gray-300 bg-black outline-black hover:bg-gray-300 hover:text-black outline-1 outline`}

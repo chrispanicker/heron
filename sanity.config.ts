@@ -7,6 +7,7 @@ import roles from "./sanity/schemas/roles"
 import jobs from "./sanity/schemas/jobs"
 import collabs from "./sanity/schemas/collabs"
 import project from "./sanity/schemas/project-schema"
+import { downloadProjectMediaAction } from "./sanity/lib/downloadMedia"
 
 const config = defineConfig({
     projectId: "01jwvji0",
@@ -14,6 +15,18 @@ const config = defineConfig({
   title: "Heron",
   apiVersion: "2023-12-06",
   basePath: "/admin",
+  document: {
+    actions: (input, context) => {
+      // Only add the action for the "project" type
+      if (context.schemaType === "project") {
+        return [
+          ...input,
+          downloadProjectMediaAction,
+        ];
+      }
+      return input;
+    },
+  },
 
   plugins: [
     structureTool({

@@ -1,5 +1,8 @@
 import TestComponent from "@/components/testComponent";
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
+import { downloadProjectMediaAction } from "../lib/downloadMedia";
+import DownloadImagesZip from "@/components/handleDownloadZip";
+import ImagesArrayWithDownload from "@/components/imagesWrapper";
 
 
 
@@ -8,6 +11,8 @@ const project = {
     title: "Projects",
     type: 'document',
     //plugin for ordering
+    actions: [downloadProjectMediaAction],
+
     orderings: [orderRankOrdering],
 
     fields: [
@@ -68,6 +73,9 @@ const project = {
             name: 'images',
             title: "Images",
             type: "array",
+            components: {
+              input: ImagesArrayWithDownload
+            },    
             of: [
                 {
                   type: 'image',

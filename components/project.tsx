@@ -32,26 +32,13 @@ export default function Projects({project, slugs}: Props ) {
     let e = 0
     let tagHoverInterval:any;
 
-    // function scrollToProject(slug:string){     
-    //   let element = document.querySelector(`#${slug}`)
-    //   var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    //   selectedProject===slug? 
-    //   //scroll back to top
-    //   window.scrollTo(scrollX, (scrollY-(rootFontSize*3.1)))
-    //   :selectedProject?
-    //       setTimeout(()=>{
-    //       element?.scrollIntoView({behavior:"smooth", block:"start"})}, 300)
-    //   :setTimeout(()=>{
-    //   element?.scrollIntoView({behavior:"smooth", block:"start"})}, 300)
-    // }
-
     function scrollToProject(slug: string) {
       let filters = document.querySelector("header section");
       router.push("?" + createQueryString("project", `${slug}`), { scroll: false });
       e = 1;
-      if (!filters?.classList.contains("h-0")) {
-          openFilters(e);
-      }
+      // if (!filters?.classList.contains("h-0")) {
+      //     openFilters(e);
+      // }
     }   
     
 
@@ -164,9 +151,9 @@ export default function Projects({project, slugs}: Props ) {
                 let filters = document.querySelector("header section")
                 router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
                 e=1
-                if(!filters?.classList.contains("h-0")){
-                    openFilters(e)
-                }
+                // if(!filters?.classList.contains("h-0")){
+                //     openFilters(e)
+                // }
             }}></div>
             {/* name */}
             <button className={`text-left col-span-4 hover:underline decoration-1 underline-offset-2 mr-2 cursor-select z-10`}
@@ -177,9 +164,9 @@ export default function Projects({project, slugs}: Props ) {
                     
                     let filters = document.querySelector("header section")
                     e=1
-                    if(!filters?.classList.contains("h-0")){
-                        openFilters(e)
-                    }
+                    // if(!filters?.classList.contains("h-0")){
+                    //     openFilters(e)
+                    // }
                 }}>{project.name}
             </button>
             {/* client */}

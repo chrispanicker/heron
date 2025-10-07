@@ -4,19 +4,19 @@ export const openFilters = (e:number) =>{
     let filters = document.querySelector("header section")
     let foot = document.querySelector("footer")
 
-    if(filters?.classList.contains("h-0")){
-        hed?.classList.replace("max-h-[2rem]","lg:max-h-[7rem]")
+    if(filters?.classList.contains("max-h-0")){
+        hed?.classList.replace("max-h-[2rem]","lg:max-h-[20rem]")
         hed?.classList.add("max-h-[100vh]", "overflow-x-hidden")
         hed?.classList.replace("overflow-hidden","overflow-y-scroll")
-        filters.classList.replace("h-0","h-[4.2rem]")
+        filters.classList.replace("max-h-0","max-h-[10rem]")
         filters?.classList.replace("overflow-hidden", "overflow-x-hidden")
         plus?.classList.add("rotate-[45deg]")
         foot?.classList.add("min-h-screen")
-    }else if(filters?.classList.contains("h-[4.2rem]") && e===1){
-        hed?.classList.replace("lg:max-h-[7rem]","max-h-[2rem]")
+    }else if(filters?.classList.contains("max-h-[10rem]") && e===1){
+        hed?.classList.replace("lg:max-h-[20rem]","max-h-[2rem]")
         hed?.classList.remove("max-h-[100vh]", "overflow-x-hidden")
         hed?.classList.replace("overflow-y-scroll","overflow-hidden")
-        filters?.classList.replace("h-[4.2rem]","h-0")
+        filters?.classList.replace("max-h-[10rem]","max-h-0")
         filters?.classList.replace("overflow-x-hidden","overflow-hidden")
         hed?.classList.replace("overflow-x-hidden","overflow-hidden")
         plus?.classList.remove("rotate-[45deg]")
