@@ -24,30 +24,47 @@ export function Gallery({ project }: Props) {
   const scrollTimeout = useRef<NodeJS.Timeout>()
 
   const nextImage = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft+1000<scrollContainerRef.current.scrollWidth-1000?
-      scrollContainerRef.current.scrollTo({
-        left: scrollContainerRef.current.scrollLeft+1000,
-        behavior: 'smooth'
-      })
-      : scrollContainerRef.current.scrollTo({
-        left: 0,
-        behavior: 'smooth'
-      })
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const maxScrollLeft = container.scrollWidth - container.clientWidth
+    const current = container.scrollLeft
+    const distanceToEnd = Math.max(0, maxScrollLeft - current)
+
+    // Use a step based on visible container width (90% of viewport of gallery),
+    // with a reasonable min so very small viewports still move.
+    const step = Math.max(200, Math.round(container.clientWidth * 0.45))
+
+    if (distanceToEnd > step + 4) {
+      // plenty of room -> move by step
+      container.scrollTo({ left: current + step, behavior: 'smooth' })
+    } else if (distanceToEnd > 4) {
+      // less than one step left -> snap to the end
+      container.scrollTo({ left: maxScrollLeft, behavior: 'smooth' })
+    } else {
+      // already at end -> loop back to start
+      container.scrollTo({ left: 0, behavior: 'smooth' })
     }
   }
 
   const prevImage = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft!=0?
-        scrollContainerRef.current.scrollTo({
-          left: scrollContainerRef.current.scrollLeft-1000,
-          behavior: 'smooth'
-        })
-        : scrollContainerRef.current.scrollTo({
-          left: scrollContainerRef.current.scrollWidth,
-          behavior: 'smooth'
-        })
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const current = container.scrollLeft
+    const maxScrollLeft = container.scrollWidth - container.clientWidth
+
+    const step = Math.max(200, Math.round(container.clientWidth * 0.9))
+
+    if (current > step + 4) {
+      // plenty of room to move left -> -step
+      container.scrollTo({ left: current - step, behavior: 'smooth' })
+    } else if (current > 4) {
+      // less than one step from start -> snap to start
+      container.scrollTo({ left: 0, behavior: 'smooth' })
+    } else {
+      // already at start -> loop to end
+      container.scrollTo({ left: maxScrollLeft, behavior: 'smooth' })
     }
   }
 
@@ -99,7 +116,7 @@ export function Gallery({ project }: Props) {
             className="absolute right-0 bottom-4 z-[10] px-2"
             onClick={nextImage}
           >
-            <svg id="a" className="hover:fill-black fill-gray-300 hover:stroke-gray-300 stroke-black" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="#d1d5db" stroke="#000000" strokeWidth="7px" viewBox="0 0 185.22 146.88">
+            <svg id="a" className={`hover:fill-black fill-gray-300 hover:stroke-gray-300 stroke-black ${project.images.length===1? "opacity-0" : "opacity-100"}`} data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="#d1d5db" stroke="#000000" strokeWidth="7px" viewBox="0 0 185.22 146.88">
               <polygon points="111.78 0 94.81 16.97 139.28 61.44 0 61.44 0 85.44 139.28 85.44 94.81 129.91 111.78 146.88 185.22 73.44 111.78 0"/>
             </svg>
           </button>
