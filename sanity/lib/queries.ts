@@ -26,16 +26,12 @@ export async function getProjects() {
 
 
 export async function getInfo() {
-    return client.fetch(
-            groq`*[_type=="info"]{
-                name,
-                bio,
-                header,
-                jobs,
-                awards,
-                "image": shareimage.asset->url
-            }`
-)}
+  const res = await client.fetch(groq`*[_type == "info"]{
+    _id, name, bio, header, jobs, favicon, "shareImage": shareimage.asset->url
+  }`);
+  return res;
+
+}
 
 // export async function getJobs() {
 //         return client.fetch(
