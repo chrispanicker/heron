@@ -21,19 +21,35 @@ const info = {
             title: "Share Image",
             type: 'image'
         },
-        {
-            name: 'favicon',
-            title: "Favicon",
-            type: 'image',
-            description: "This appears in the browser tab. 32x32 or 64x64 .png file recommended.",
-            accept: 'image/png, image/svg+xml',
-        },
-        {
-            name: 'bio',
-            title: "Bio",
-            type: 'array',
-            of: [{ type: 'block'}]
-        },
+    {
+      name: 'favicon',
+      title: "Favicon",
+      type: 'image',
+      description: "This appears in the browser tab. 32x32 or 64x64 .png file recommended.",
+      options: {
+        accept: 'image/png, image/svg+xml'
+      }
+    },
+    {
+      name: 'instagram',
+      title: 'Instagram handle',
+      type: 'string',
+      description: 'Enter your Instagram username.',
+      validation: (Rule: any) => Rule.max(100)
+    },
+    {
+      name: 'contactEmail',
+      title: 'Contact email',
+      type: 'string',
+      description: 'Enter your contact email address.',
+      validation: (Rule: any) => Rule.regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, { name: 'email', invert: false })
+    },
+    {
+        name: 'bio',
+        title: "Bio",
+        type: 'array',
+        of: [{ type: 'block'}]
+    },
     {
       name: 'jobs',
       title: 'CV / Jobs',

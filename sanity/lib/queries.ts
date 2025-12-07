@@ -27,7 +27,7 @@ export async function getProjects() {
 
 export async function getInfo() {
   const res = await client.fetch(groq`*[_type == "info"]{
-    _id, name, bio, header, jobs, favicon, "shareImage": shareimage.asset->url
+    _id, name, bio, header, jobs, awards, favicon, instagram, contactEmail, "shareImage": shareimage.asset->url
   }`);
   return res;
 

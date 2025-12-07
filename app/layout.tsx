@@ -29,12 +29,27 @@ export default async function RootLayout({
   }) {
     let allprojects = await getProjects();
     let info = await getInfo();    
-  const infoArr = await getInfo();
-  const site = infoArr?.[0] || null;
-  const faviconUrl = site?.favicon ? urlForImage(site.favicon).url() : null;
+    const site = info?.[0] || null;
+    const faviconUrl = site?.favicon ? urlForImage(site.favicon).url() : null;
+
+    const rawInstagram = site?.instagram ? String(site.instagram) : undefined;
+    const instagramHandle = rawInstagram ? rawInstagram.trim().replace(/^@+/, '') : undefined;
+    const instagramUrl = instagramHandle ? `https://instagram.com/${instagramHandle}` : undefined;
+    const email = site?.contactEmail ? String(site.contactEmail) : undefined;
+    let emailBefore: string | null = null;
+    let emailAfter: string | null = null;
+    if (email) {
+      const atIndex = email.indexOf('@');
+      if (atIndex === -1) {
+        emailBefore = email;
+      } else {
+        emailBefore = email.slice(0, atIndex);
+        emailAfter = email.slice(atIndex + 1);
+      }
+    }
 
   return (
-    <html lang="en" className={`notSanity bg-black text-black serif font-light overflow-x-hidden lg:text-[1rem] text-[1rem] leading-[1.4rem] snap-y snap-mandatory cursor-auto`}>
+    <html lang="en" className={`bg-black text-black serif font-light overflow-x-hidden lg:text-[1rem] text-[1rem] leading-[1.4rem] snap-y snap-mandatory cursor-auto`}>
       <head>
         {faviconUrl && <link rel="icon" href={faviconUrl} />}
       </head>
@@ -48,12 +63,25 @@ export default async function RootLayout({
 
         <FaviconUpdater url={faviconUrl} />
 
-        <div id='foot' className="flex lg:relative hidden bottom-0 w-screen bg-black text-gray-300 leading-[.6rem] uppercase mono-book text-[1rem] justify-between lg:items-center items-end  lg:h-[2rem]  lg:px-5 px-2 lg:py-0 py-2 lg:pb-0 pb-5 lg:leading-auto leading-[1.6rem]  lg:border-none border-t-2 border-gray-300 z-10">
+        <div id='foot' className="lg:flex hidden bottom-0 justify-start h-[1rem] items-start lg:px-5 px-2 my-5 pt-2 w-full mono-book uppercase bg-black text-gray-300">
           <span className='hidden lg:flex whitespace-nowrap'><p className='sans'>&#169;</p>Drew Litowitz</span>
-          <span className='flex lg:justify-end justify-between w-full'>
-            <a className="pr-1 hover:underline flex" href="https://www.instagram.com/drewknowitz"><p className='sans'>@</p>drewknowitz</a>
-            <p>&nbsp;</p>
-            <a className='hover:underline flex' href="mailto:dlitowit@gmail.com">dlitowit<p className='sans'>@</p>gmail.com</a>
+          <span className='flex justify-end w-full items-center'>
+            {email ? (
+              <a href={`mailto:${email}`} className="hover:underline flex items-center">
+                <span>{emailBefore}</span>
+                <span className="sans">@</span>
+                <span>{emailAfter}</span>
+              </a>
+            ) : null}
+            
+            {instagramHandle ? (
+              <a className="pr-4 hover:underline flex items-center" href={instagramUrl} target="_blank" rel="noreferrer">
+                <span className='sans'>@</span>
+                <span className="">{instagramHandle}</span>
+              </a>
+            ) : null}
+
+
           </span>
         </div>
         <SillyCanvas />
