@@ -48,11 +48,11 @@ export function SiteFooter({info}:Props){
           <PortableText value={site?.bio || []} />
         </div>
 
-        <div id='foot' className="lg:hidden flex justify-start items-start outline outline-gray-300 lg:px-5 px-2 my-5 pt-1 w-[100dvw] h-[2rem] mono-book uppercase bg-black text-gray-300">
-          <span className='hidden lg:flex whitespace-nowrap'><p className='sans'>&#169;</p>Drew Litowitz</span>
-          <span className='flex justify-start w-full'>
+        <div id='foot' className="lg:hidden flex justify-start items-start  mx-2 pt-[.1rem] border-gray-300 my-5 h-[2rem] mono-book uppercase bg-black text-gray-300">
+          <span className='hidden lg:flex whitespace-nowrap underline'><p className='sans'>&#169;</p>Drew Litowitz</span>
+          <span className='flex justify-start w-full underline'>
             {instagramHandle ? (
-              <a className="pr-1 hover:underline flex items-center" href={instagramUrl} target="_blank" rel="noreferrer">
+              <a className="pr-1 underline flex items-center" href={instagramUrl} target="_blank" rel="noreferrer">
                 <p className='sans'>@</p>{instagramHandle}
               </a>
             ) : null}
