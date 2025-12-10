@@ -65,9 +65,9 @@ export default async function RootLayout({
 
         <div id='foot' className="lg:flex hidden bottom-0 justify-start h-[1rem] items-start lg:px-5 px-2 my-5 pt-2 w-full mono-book uppercase bg-black text-gray-300">
           <span className='hidden lg:flex whitespace-nowrap'><p className='sans'>&#169;</p>Drew Litowitz</span>
-          <span className='flex justify-end w-full items-center'>
+          <span className='flex justify-end w-full items-center '>
             {email ? (
-              <a href={`mailto:${email}`} className="hover:underline flex items-center">
+              <a href={`mailto:${email}`} className="hover:underline flex items-center pr-2">
                 <span>{emailBefore}</span>
                 <span className="sans">@</span>
                 <span>{emailAfter}</span>
@@ -75,7 +75,7 @@ export default async function RootLayout({
             ) : null}
             
             {instagramHandle ? (
-              <a className="pr-4 hover:underline flex items-center" href={instagramUrl} target="_blank" rel="noreferrer">
+              <a className="hover:underline flex items-center" href={instagramUrl} target="_blank" rel="noreferrer">
                 <span className='sans'>@</span>
                 <span className="">{instagramHandle}</span>
               </a>
