@@ -34,7 +34,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
       <div className="relative w-max h-full group" key={`${project.slug}-${index}`} ref={mediaRef}>
         {e.description && (
           <span className="absolute bottom-20 w-full h-[3rem] flex justify-center items-end peer-hover:bg-black z-[200] opacity-100 group-hover:opacity-100">
-            <p className={`inline-block w-fit max-w-[20rem] h-fit uppercase mono-book text-center ${textSize} px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5`}>{e.description}</p>
+            <p className={`inline-block w-fit max-w-[20rem] h-fit uppercase mono-book text-center ${textSize} px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5 opacity-0 group-hover:opacity-100`}>{e.description}</p>
           </span>
         )}
         <video
@@ -67,7 +67,7 @@ export const MediaWithFadeIn = ({ e, project, index }:any) => {
       <div className={`relative w-max h-full group`} key={`${project.slug}-${index}`} ref={mediaRef}>
         {e.description && (
           <span key={`${project.slug}-description-${index}`} className="absolute bottom-10 w-full h-[3rem] flex justify-center items-end opacity-100 group-hover:opacity-[100%]">
-            <p className={`inline-block w-fit max-w-[20rem] h-fit uppercase mono-book text-center ${textSize} px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5`}>{e.description}</p>
+            <p className={`inline-block w-fit max-w-[20rem] h-fit uppercase mono-book text-center ${textSize} px-1 leading-[1rem] outline outline-1 bg-black text-gray-300 outline-gray-300 mb-5 opacity-0 group-hover:opacity-100`}>{e.description}</p>
           </span>
         )}
         <Image
