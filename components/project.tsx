@@ -178,7 +178,7 @@ export default function Projects({project, slugs}: Props ) {
               onWheel={()=>{ stopHoverInterval()}}
               onMouseLeave={()=>{stopHoverInterval()}}>
               <button key={"dskp-"+project.type} className={`${buttonClass}  outline-1  my-1
-              ${searchParams.getAll("type")?.includes(project.type)? "text-black bg-gray-300 hover:bg-black hover:text-gray-300 outline-black": "bg-black text-gray-300 outline-gray-300 hover:bg-gray-300 hover:text-black hover:outline-black"} outline outline-1`}
+              ${searchParams.getAll("type")?.includes(project.type)? "text-black bg-gray-300 hover:bg-black hover:text-gray-300 group-hover:outline-gray-300": "bg-black text-gray-300 outline-gray-300 hover:bg-gray-300 hover:text-black hover:outline-black"} outline outline-1`}
               onClick={()=>{
                   router.push( `/?${createQueryString(`type`, `${project.type}`)}`, {scroll: false})
                   params.includes(project.type) && bool ? e=1:""
