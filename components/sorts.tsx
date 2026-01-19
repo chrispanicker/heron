@@ -61,8 +61,8 @@ export function Sorts(){
     )
     return(        
         <>
-            <span className={`${sorted||filtered? "lg:flex hidden": "hidden"} w-screen justify-between px-5`}>
-              <div className={`${sorted? "flex": "opacity-0"} w-[50%]`}>
+            <span className={`${sorted||filtered? "lg:opacity-100 hidden": "lg:opacity-0 hidden"} lg:flex w-screen justify-between px-5`}>
+              <div className={`${sorted? "opacity-100": "opacity-0"} flex w-[50%]`}>
                 <p className={`mr-[.5rem] text-[1rem] whitespace-nowrap mono-book uppercase`}>Sorted by</p>
                 <button className={`${buttonClass} bg-black text-gray-300 outline outline-1 outline-black hover:bg-gray-300 hover:text-black`}
                 onClick={()=>{
@@ -75,7 +75,7 @@ export function Sorts(){
                 : sorted==="type-asc"||sorted==="type-desc"? "Type"
                 : "Default"}</button>
               </div>
-              <div className={`${filtered? "flex": "opacity-0"} w-[50%]`}>
+              <div className={`${filtered? "opacity-100": "opacity-0"} flex w-[50%]`}>
                 <p className={`sans mr-[.5rem] text-[1.3rem] whitespace-nowrap`}>Filtered by</p>
                 <div className="px-1 w-fit">
 

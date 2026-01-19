@@ -16,7 +16,7 @@ export function SiteFooter({info}:Props){
   // read first info doc
   const site = Array.isArray(info) ? info[0] : info;
   // debug: log incoming info/docs
-  useEffect(() => { console.log('SiteFooter props.info:', info, 'site:', site); }, [info]);
+  // useEffect(() => { console.log('SiteFooter props.info:', info, 'site:', site); }, [info]);
 
   const rawInstagram = site?.instagram ? String(site.instagram) : undefined;
   const instagramHandle = rawInstagram ? rawInstagram.trim().replace(/^@+/, '') : undefined;
@@ -31,10 +31,10 @@ export function SiteFooter({info}:Props){
     const after = emailStr.slice(atIndex + 1);
     // NOTE: href uses full email; display splits only for styling
     return (
-      <a href={`mailto:${emailStr}`} className="hover:underline flex items-center">
-        <span>{before}</span>
-        <span className="sans px-0.5">@</span>
-        <span>{after}</span>
+      <a href={`mailto:${emailStr}`} className="underline flex items-center">
+        {before}
+        <span className="sans px-0.5 no-underline ">@</span>
+        {after}
       </a>
     );
   };
@@ -50,13 +50,13 @@ export function SiteFooter({info}:Props){
 
         <div id='foot' className="lg:hidden flex justify-start items-start  mx-2 pt-[.1rem] border-gray-300 my-5 h-[2rem] mono-book uppercase bg-black text-gray-300">
           <span className='hidden lg:flex whitespace-nowrap underline'><p className='sans'>&#169;</p>Drew Litowitz</span>
-          <span className='flex justify-start w-full underline'>
+          <span className='flex justify-start w-full'>
             {instagramHandle ? (
               <a className="pr-1 underline flex items-center" href={instagramUrl} target="_blank" rel="noreferrer">
                 <p className='sans'>@</p>{instagramHandle}
               </a>
             ) : null}
-            <p>&nbsp;</p>
+            {/* <p className="no-underline">&nbsp;</p> */}
             {email ? renderEmailWithStyledAt(email) : null}
           </span>
         </div>
