@@ -6,9 +6,10 @@ import { buttonClass } from "./classes";
 
 interface Props {
   filters: any;
+  setIsLoadingFilters?: (loading: boolean) => void;
 }
 
-export function MobileFilters({ filters }: Props) {
+export function MobileFilters({ filters, setIsLoadingFilters }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
   
@@ -28,11 +29,13 @@ export function MobileFilters({ filters }: Props) {
   );
 
   const handleFilterClick = (name: string, value: string) => {
+    setIsLoadingFilters?.(true);
     const newQuery = createQueryString(name, value);
     router.push(`/?${newQuery}`, { scroll: false });
   };
 
   const handleClearAll = () => {
+    setIsLoadingFilters?.(true);
     router.push(`/?`, { scroll: false });
   };
 

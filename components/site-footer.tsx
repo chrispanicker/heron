@@ -17,6 +17,12 @@ export function SiteFooter({info, filters, filteredProjects, activeTab = 'filter
   const footerRef = useRef(null)
   const pathname = usePathname();
   const isSanityStudio = pathname.startsWith('/admin');
+  const [isLoadingFilters, setIsLoadingFilters] = useState(false);
+
+  // When filteredProjects change, turn off loading animation
+  useEffect(() => {
+    setIsLoadingFilters(false);
+  }, [filteredProjects]);
 
   // read first info doc
   const site = Array.isArray(info) ? info[0] : info;
@@ -150,28 +156,38 @@ export function SiteFooter({info, filters, filteredProjects, activeTab = 'filter
               <h3 className="w-full border-b-[2px] border-gray-300 text-[1.2rem] sans sticky top-0">Projects & Filters</h3>
               <div>
                 <h3 className="mono-book uppercase text-sm mt-2">
-                  {filteredProjects && filteredProjects.length > 0? "Total: " + filteredProjects.length + " Projects filtered": ""}
+                  {filteredProjects && filteredProjects.length > 0? "Filtered: " + filteredProjects.length + " Projects": ""}
                 </h3>
               </div>
           </div>
           {/* <p className="serif text-lg pt-1">Use the buttons on the right-hand side to filter projects on the site.</p> */}
           <div className="grid grid-cols-3 gap-2">
+            {/* Loading Animation */}
+
             {/* Projects List */}
-            {filteredProjects && filteredProjects.length > 0 && (
-              <div className="col-span-1 pb-32">
-                <h2 className="w-full border-b-2 border-gray-300  sticky top-6 bg-black w-full pt-4">Projects:</h2>
-                <div className="pt-2">
-                {filteredProjects.map((proj: any) => (
-                  <div className="flex flex-col border-b-2 border-gray-300 pb-2 mb-2" key={proj.slug}>
-                    <span className="text-sm mono-book uppercase">{proj.name}</span>
-                    {/* <span className="text-xs">{proj.year}</span> */}
-                  </div>
-                ))}
+            <div className="col-span-1 pb-32">
+              <h2 className="w-full border-b-2 border-gray-300 sticky top-6 bg-black w-full pt-4">Projects:</h2>
+              {isLoadingFilters && (
+              <div className="flex justify-start items-start pt-2">
+                <div className="flex gap-1">
+                  <div className="sans text-2xl text-gray-300 animate-spin">+</div>
                 </div>
               </div>
             )}
+              {!isLoadingFilters && filteredProjects && filteredProjects.length > 0 && (
+                  <div className="pt-2">
+                  {filteredProjects.map((proj: any) => (
+                    <div className="flex flex-col border-b-2 border-gray-300 pb-2 mb-2" key={proj.slug}>
+                      <span className="text-sm mono-book uppercase">{proj.name}</span>
+                      {/* <span className="text-xs">{proj.year}</span> */}
+                    </div>
+                  ))}
+                  </div>
+              )}
+            </div>
 
-            {!filteredProjects || filteredProjects.length === 0 && (
+
+            {!isLoadingFilters && (!filteredProjects || filteredProjects.length === 0) && (
               <div className="col-span-1">
                 <p className="text-gray-300 text-sm">No projects match the selected filters.</p>
               </div>
@@ -180,7 +196,7 @@ export function SiteFooter({info, filters, filteredProjects, activeTab = 'filter
             {/* Filters */}
             {filters && (
               <div className="col-span-2 sticky top-6 pt-4 z-40 self-start">
-                <MobileFilters filters={filters} />
+                <MobileFilters filters={filters} setIsLoadingFilters={setIsLoadingFilters} />
               </div>
             )}
           </div>
