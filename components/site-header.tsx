@@ -19,6 +19,7 @@ interface SiteHeaderProps {
 }
 
 export function SiteHeader({info, activeTab = 'filters', setActiveTab}: SiteHeaderProps){
+  console.log(info[0].header);
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin');
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -96,7 +97,7 @@ export function SiteHeader({info, activeTab = 'filters', setActiveTab}: SiteHead
                 
                   selectedProject? router.push("?"+createQueryString("project", `${selectedProject}`), {scroll:false}): ""
                 }}>Drew Litowitz&nbsp;
-                    <p className="lg:inline-block hidden pr-4">{info?.info?.[0]?.header}</p>
+                    <p className="lg:inline-block hidden pr-4">{info?.[0]?.header}</p>
                     <button className={`mono-book outline outline-1 p-1 ${selectedProject? "hover:bg-gray-300 hover:text-black": "hidden"}`}
                     onClick={()=>{
                       router.push("?"+createQueryString("project", `${selectedProject}`), {scroll:false})
