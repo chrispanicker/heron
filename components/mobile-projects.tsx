@@ -42,9 +42,11 @@ export default function MobileProjects({ project, isActive, onInView }: Props) {
 
     // Handle keyboard arrow navigation
     useEffect(() => {
-        if (!isActive) return;
+        if (!isActive || !project.images?.length) return;
 
         const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+
             const gallery = document.querySelector(`#${project.slug}-mobileGallery`) as HTMLElement;
             if (!gallery) return;
 
@@ -59,7 +61,8 @@ export default function MobileProjects({ project, isActive, onInView }: Props) {
                 }
             } else if (e.key === 'ArrowRight') {
                 e.preventDefault();
-                if (gallery.scrollLeft > width * (project.images?.length - 1)) {
+                const maxScroll = width * ((project.images?.length || 1) - 1);
+                if (gallery.scrollLeft > maxScroll) {
                     gallery.scrollLeft = 0;
                 } else {
                     gallery.scrollLeft += width;
@@ -69,7 +72,7 @@ export default function MobileProjects({ project, isActive, onInView }: Props) {
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [isActive, project.slug, project.images?.length]);
+    }, [isActive, project.slug, project.images]);
 
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin');
