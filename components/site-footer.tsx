@@ -116,7 +116,7 @@ export function SiteFooter({info, filters, filteredProjects, activeTab = 'filter
               </span>
             </div>
 
-            <div className={`grid grid-cols-2 gap-2 mx-2`}>
+            <div className={`grid grid-cols-2 gap-2 mx-2 pb-30`}>
               <div className="w-full">
                 <h3 className=" border-b-[2px] mb-2 pt-4 border-gray-300 sans text-[1.2rem]">CV</h3>
                 <div className="w-full">
@@ -158,7 +158,7 @@ export function SiteFooter({info, filters, filteredProjects, activeTab = 'filter
           <div className="grid grid-cols-3 gap-2">
             {/* Projects List */}
             {filteredProjects && filteredProjects.length > 0 && (
-              <div className="col-span-1">
+              <div className="col-span-1 pb-32">
                 <h2 className="w-full border-b-2 border-gray-300  sticky top-6 bg-black w-full pt-4">Projects:</h2>
                 <div className="pt-2">
                 {filteredProjects.map((proj: any) => (

@@ -105,6 +105,11 @@ export function MobileFilters({ filters }: Props) {
           })}
         </div>
       )}
+
+      <button onClick={()=>{router.push( `/?`, {scroll: false})}} className={`${buttonClass} text-gray-300 bg-black outline-gray-300 outline-1 outline mt-2 w-full`}>
+        {`CLEAR ALL`}
+      </button>
+
     </div>
   ) : (
     ""

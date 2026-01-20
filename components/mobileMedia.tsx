@@ -61,7 +61,7 @@ export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
         )}
         {/* Loading spinner */}
         {isLoading && (
-          <div className="absolute inset-0 flex justify-center items-center z-50 pointer-events-none">
+          <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
             <style>{`
               @keyframes cascade-wave {
                 0% {transform: translate(0,-2px) rotate(0deg); }
