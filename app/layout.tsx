@@ -1,5 +1,5 @@
 import '@/app/globals.css'
-import {getInfo, getProjects } from '@/sanity/lib/queries'
+import {getInfo} from '@/sanity/lib/queries'
 import  SillyCanvas  from '@/components/silly-canvas'
 import { Modal } from '@/components/modal'
 import { urlForImage } from '@/sanity/lib/image'
@@ -26,7 +26,6 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode
   }) {
-    let allprojects = await getProjects();
     let info = await getInfo();    
     const site = info?.[0] || null;
     const faviconUrl = site?.favicon ? urlForImage(site.favicon).url() : null;
