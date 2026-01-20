@@ -25,6 +25,8 @@ export async function getProjects() {
 
 
 
+
+
 export async function getInfo() {
   const res = await client.fetch(groq`*[_type == "info"]{
     _id, name, bio, header, jobs, awards, favicon, instagram, contactEmail, "shareImage": shareimage.asset->url
@@ -133,4 +135,46 @@ typeof type === "string"
       : sort==="type-desc"? "type desc"
       :"orderRank"})`, 
     )
+}
+
+export async function getOpeningGallery() {
+  return client.fetch(
+    groq`*[_type == "gallery"][0]{
+      projects[]->{
+        _id,
+        name,
+        client,
+        type,
+        year,
+        "slug": slug.current,
+        "preview": {
+          "asset": {
+            "url": preview.asset->url,
+            "_ref": preview.asset._ref
+          },
+          "metadata": preview.asset->metadata
+        },
+        "roles": roles[]->{
+          name
+        },
+        "collabs": collabs[]->{
+          name
+        },
+        "tags": tags[]->{
+          name
+        },
+        "gallery": images[]{
+          "metadata": asset->metadata,
+          "imageUrl": asset->url,
+          "blurDataURL": asset->metadata.lqip,
+          "alt": alt,
+          "description": description,
+          "mycrop": mycrop,
+          "text": text
+        }
+      }
+    }`,
+    {},
+    { cache: "no-store" }
+  );
 }

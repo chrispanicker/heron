@@ -1,16 +1,13 @@
 import TestComponent from "@/components/testComponent";
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 import { downloadProjectMediaAction } from "../lib/downloadMedia";
-import DownloadImagesZip from "@/components/handleDownloadZip";
 import ImagesArrayWithDownload from "@/components/imagesWrapper";
-
-
 
 const project = {
     name: 'project',
     title: "Projects",
     type: 'document',
-    //plugin for ordering
+    //plugin for downloading media
     actions: [downloadProjectMediaAction],
 
     orderings: [orderRankOrdering],
@@ -79,7 +76,7 @@ const project = {
             of: [
                 {
                   type: 'image',
-                  title: 'Image with Custom Crop',
+                  title: 'Image',
                   options: {
                     accept: '.pdf,image/jpeg,image/png,image/gif',
                     storeOriginalFilename: true,

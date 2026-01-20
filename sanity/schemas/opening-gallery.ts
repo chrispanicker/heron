@@ -1,57 +1,29 @@
-import { client } from "../lib/client";
-
-const limit = 3; // Set your limit here
+import { Preview } from "sanity";
+import OpeningGalleryInput from "./limitedGalleryInput";
 
 const gallery = {
     name: 'gallery',
-    title: "Gallery Projects",
+    title: "Gallery",
     type: 'document',
+    __experimental_actions: ['create', 'update', 'publish'],
+    description: "Manage the projects that appear in the opening gallery of the site.",
     fields: [
-        {
-            name: 'projects',
-            title: 'Projects',
-            type: 'reference', to: { type: 'project' },
-            description: 'Choose one of your fave projects!',
-        },
-        {
-            name: 'priority', 
-            title: 'Priority', 
-            type: 'number', validation: (Rule: any) => Rule.min(0).integer().positive(), 
-        },
-
-    ],
-    preview: {
-        select: {
-          title: 'priority',
-        }
-    },
-    orderings: [
       {
-        title: 'Priority',
-        name: 'priorityasc',
-        by: [
-          {field: 'priority', direction: 'asc'}
-        ]
-      },
-    ],
-    validation: (Rule: any) => Rule.custom(async (value: any, context: any) => {
-        const { document } = context;
-        const docType = document._type;
-    
-        try {
-          const existingDocs = await client.fetch<number>(`count(*[_type == "${docType}"])`);
-    
-          if (existingDocs >= limit) {
-            return `You cannot create more than ${limit} entries of this type.`;
+        name: 'projects',
+        title: 'Opening Gallery Projects',
+        description: "Add and order projects for the opening gallery. Use the slider to set the maximum number of projects allowed.",
+        type: 'array',
+        of: [
+          {
+            type: 'reference',
+            to: [{ type: 'project' }]
           }
-    
-          return true;
-        } catch (error) {
-          console.error('Error fetching document count:', error);
-          return 'Validation error occurred.';
+        ],
+        components: {
+          input: OpeningGalleryInput
         }
-      })
+      },
+    ]
 }
-
 
 export default gallery;

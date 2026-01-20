@@ -14,16 +14,22 @@ export const structure = (S: StructureBuilder, context: any) => {
     .title('Content')
     .items([
       getOrderableDocumentList('project', 'Projects', S, context),
-      // getDocumentTypeListItem('info', 'Info', S),
-       S.listItem()
-        .title('Footer Info')
-        .icon(() => '?')
-        .child(
-          S.document()
-            .schemaType('info')
-            .documentId('infoSingleton') // fixed ID for singleton
-        ),
-      getOrderableDocumentList('jobs', 'Jobs', S, context),
+      S.listItem()
+      .title('Footer Info')
+      .icon(() => '?')
+      .child(
+        S.document()
+          .schemaType('info')
+          .documentId('infoSingleton') // fixed ID for singleton
+      ),
+      S.listItem()
+      .title('Opening Gallery')
+      .icon(() => ':)')
+      .child(
+        S.document()
+          .schemaType('gallery')
+          .documentId('gallerySingleton') // fixed ID for singleton
+      ),
       getDocumentTypeListItem('roles', 'Roles', S),
       getDocumentTypeListItem('tags', 'Tags', S),
       getDocumentTypeListItem('collabs', 'Collaborations', S),

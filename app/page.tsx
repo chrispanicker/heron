@@ -1,5 +1,5 @@
 import HomeClient from "@/components/homeClient";
-import { getFilteredProjects, getInfo } from "@/sanity/lib/queries";
+import { getFilteredProjects, getInfo, getOpeningGallery } from "@/sanity/lib/queries";
 
 interface Props {
   searchParams: {
@@ -17,6 +17,8 @@ interface Props {
 
 export default async function Home({searchParams}: Props) {
   const {tags, collabs, roles, about, view, sort, type, project} = searchParams 
+  let galleryData = await getOpeningGallery();
+  let OpeningGallery = galleryData?.projects || [];
   let filteredProjects = await getFilteredProjects({searchParams});
   let info = await getInfo();
   let slugs:string[] = [];
@@ -25,7 +27,7 @@ export default async function Home({searchParams}: Props) {
   })
   return (
     filteredProjects? 
-    <HomeClient filteredProjects={filteredProjects} slugs={slugs} info={info} />
+    <HomeClient filteredProjects={filteredProjects} slugs={slugs} info={info} openingGallery={OpeningGallery} />
     : <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>
   )
 }
