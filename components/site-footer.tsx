@@ -60,7 +60,7 @@ export function SiteFooter({info, filters, filteredProjects, activeTab = 'filter
           <PortableText value={site?.bio || []} />
         </div>
 
-        <div id='foot' className="lg:hidden flex justify-start items-start  mx-2 pt-[.1rem] border-gray-300 my-5 h-[2rem] mono-book uppercase bg-black text-gray-300">
+        <div id='foot' className="lg:hidden flex justify-start items-start  mx-2 py-[.1rem] border-gray-300 my-5 h-[2rem] mono-book uppercase bg-black text-gray-300">
           <span className='hidden lg:flex whitespace-nowrap underline'><p className='sans'>&#169;</p>Drew Litowitz</span>
           <span className='flex justify-start w-full'>
             {instagramHandle ? (
