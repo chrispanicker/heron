@@ -80,10 +80,6 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
     return null
   }
 
-  // Get next image URL for prefetching
-  const nextProject = projects![(currentIndex + 1) % projects!.length]
-  const nextPreviewUrl = nextProject?.preview?.asset?.url
-
   return (
     <div className="bg-black w-full h-full relative overflow-hidden">
       <Image
@@ -98,20 +94,6 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
         placeholder="blur"
         onLoad={() => setIsImageLoaded(true)}
       />
-      
-      {/* Prefetch next image */}
-      {nextPreviewUrl && (
-        <Image
-          src={nextPreviewUrl}
-          alt=""
-          width={1}
-          height={1}
-          style={{ display: 'none' }}
-          priority
-          quality={85}
-          aria-hidden="true"
-        />
-      )}
       
       {/* Project counter indicator */}
       <div className="absolute flex lg:justify-between justify-around lg:flex-row flex-col lg:items-center items-start h-screen w-screen top-0 left-0 text-gray-300 lg:text-[1rem] text-[.9rem] mono-book">

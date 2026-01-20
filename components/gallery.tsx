@@ -54,7 +54,8 @@ export function Gallery({ project }: Props) {
     const current = container.scrollLeft
     const maxScrollLeft = container.scrollWidth - container.clientWidth
 
-    const step = Math.max(200, Math.round(container.clientWidth * 0.9))
+    // Use the same step as nextImage for consistency
+    const step = Math.max(200, Math.round(container.clientWidth * 0.45))
 
     if (current > step + 4) {
       // plenty of room to move left -> -step

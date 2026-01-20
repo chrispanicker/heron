@@ -27,7 +27,7 @@ export default async function Home({searchParams}: Props) {
   })
   return (
     filteredProjects? 
-    <HomeClient filteredProjects={filteredProjects} slugs={slugs} info={info} openingGallery={OpeningGallery} />
+    <HomeClient filteredProjects={filteredProjects} slugs={slugs} info={info} openingGallery={OpeningGallery} selectedProject={project} />
     : <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>
   )
 }

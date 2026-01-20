@@ -32,13 +32,17 @@ export default function Projects({project, slugs}: Props ) {
     let e = 0
     let tagHoverInterval:any;
 
+    function closeFiltersIfOpen() {
+      const filters = document.querySelector("header section");
+      if (filters?.classList.contains("max-h-[10rem]")) {
+        openFilters(1);
+      }
+    }
+
     function scrollToProject(slug: string) {
       let filters = document.querySelector("header section");
       router.push("?" + createQueryString("project", `${slug}`), { scroll: false });
-      e = 1;
-      // if (!filters?.classList.contains("h-0")) {
-      //     openFilters(e);
-      // }
+      closeFiltersIfOpen();
     }   
     
 
@@ -148,25 +152,15 @@ export default function Projects({project, slugs}: Props ) {
             <div className={`w-full h-full absolute top-0 z-0`} 
             onClick={()=>{
                 scrollToProject(project.slug)
-                let filters = document.querySelector("header section")
                 router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
-                e=1
-                // if(!filters?.classList.contains("h-0")){
-                //     openFilters(e)
-                // }
+                closeFiltersIfOpen()
             }}></div>
             {/* name */}
             <button className={`text-left col-span-4 hover:underline decoration-1 underline-offset-2 mr-2 cursor-select z-10`}
                 onClick={()=>{
                     scrollToProject(project.slug);
-
                     router.push("?"+createQueryString("project", `${project.slug}`), {scroll:false})
-                    
-                    let filters = document.querySelector("header section")
-                    e=1
-                    // if(!filters?.classList.contains("h-0")){
-                    //     openFilters(e)
-                    // }
+                    closeFiltersIfOpen()
                 }}>{project.name}
             </button>
             {/* client */}
