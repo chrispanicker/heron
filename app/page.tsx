@@ -1,5 +1,5 @@
 import HomeClient from "@/components/homeClient";
-import { getFilteredProjects, getInfo, getOpeningGallery } from "@/sanity/lib/queries";
+import { getFilteredProjects, getInfo, getOpeningGallery, getProjects } from "@/sanity/lib/queries";
 
 interface Props {
   searchParams: {
@@ -20,6 +20,7 @@ export default async function Home({searchParams}: Props) {
   let galleryData = await getOpeningGallery();
   let OpeningGallery = galleryData?.projects || [];
   let filteredProjects = await getFilteredProjects({searchParams});
+  let allProjects = await getProjects();
   let info = await getInfo();
   let slugs:string[] = [];
   filteredProjects.map((project:any, index: number)=>{
@@ -27,7 +28,7 @@ export default async function Home({searchParams}: Props) {
   })
   return (
     filteredProjects? 
-    <HomeClient filteredProjects={filteredProjects} slugs={slugs} info={info} openingGallery={OpeningGallery} selectedProject={project} />
+    <HomeClient filteredProjects={filteredProjects} slugs={slugs} info={info} openingGallery={OpeningGallery} selectedProject={project} allProjects={allProjects} />
     : <main className="w-screen h-screen flex justify-center items-center cursor-progress"><h1>Ah! There was an error loading the page!! Please refresh, thanks!</h1></main>
   )
 }

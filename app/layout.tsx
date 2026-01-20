@@ -1,6 +1,5 @@
 import '@/app/globals.css'
 import {getInfo, getProjects } from '@/sanity/lib/queries'
-import { HeaderAndFilters } from '@/components/header-and-filters'
 import  SillyCanvas  from '@/components/silly-canvas'
 import { Modal } from '@/components/modal'
 import { urlForImage } from '@/sanity/lib/image'
@@ -57,7 +56,6 @@ export default async function RootLayout({
         <Modal />
         {/* <VideoModal /> */}
         <section className='relative z-10'>
-          <HeaderAndFilters info={info}  projects={allprojects}/>
           <>{children}</>
         </section>
 

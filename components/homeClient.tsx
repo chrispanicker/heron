@@ -6,10 +6,11 @@ import { Scroller } from "@/components/scroller";
 import { SiteFooter } from "@/components/site-footer";
 import { Sorts } from "@/components/sorts";
 import { OpeningGallerySlideshow } from "@/components/opening-gallery-slideshow";
+import { HeaderAndFilters } from "@/components/header-and-filters";
 import { openFilters } from "@/components/functions";
 import { useEffect, useState } from "react";
 
-export default function HomeClient({ filteredProjects, slugs, info, openingGallery, selectedProject }: { filteredProjects: any[], slugs: string[], info: any, openingGallery: any[], selectedProject?: string }) {
+export default function HomeClient({ filteredProjects, slugs, info, openingGallery, selectedProject, allProjects }: { filteredProjects: any[], slugs: string[], info: any, openingGallery: any[], selectedProject?: string, allProjects?: any[] }) {
   const [loaded, setLoaded] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const site = Array.isArray(info) ? info[0] : info;
@@ -51,6 +52,7 @@ export default function HomeClient({ filteredProjects, slugs, info, openingGalle
 
   return (
     <div>
+      <HeaderAndFilters info={info} projects={allProjects || filteredProjects} filteredProjects={filteredProjects} />
       <section id="opening-gallery" className={`fixed flex justify-center items-center top-0 w-screen h-screen z-[1000] mono-book text-gray-300 transition-all duration-500 ease-in-out ${
         isClosing ? '-translate-y-full' : 'translate-y-0'
       }`}>
@@ -80,7 +82,7 @@ export default function HomeClient({ filteredProjects, slugs, info, openingGalle
        <MobileProjectsList filteredProjects={filteredProjects}/>
 
         <div className="lg:block hidden">
-          <SiteFooter info={info}/>
+          <SiteFooter info={info} filteredProjects={filteredProjects}/>
         </div>
 
     </main>

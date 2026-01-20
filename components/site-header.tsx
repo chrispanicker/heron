@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { openFilters } from "./functions";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { buttonClass, textSize } from "./classes";
 
 
@@ -12,15 +12,44 @@ type job ={
     title: string
 }
 
+interface SiteHeaderProps {
+  info: any;
+  activeTab?: 'about' | 'filters';
+  setActiveTab?: (tab: 'about' | 'filters') => void;
+}
 
-
-export function SiteHeader(info:any){
+export function SiteHeader({info, activeTab = 'filters', setActiveTab}: SiteHeaderProps){
     const pathname = usePathname(); 
-    const isSanityStudio = pathname.startsWith('/admin'); 
+    const isSanityStudio = pathname.startsWith('/admin');
+    const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams(); 
     const selectedProject = searchParams.get("project")
     const e = 1
+
+    useEffect(() => {
+      const checkFiltersOpen = () => {
+        const filters = document.querySelector("header section");
+        if (filters?.classList.contains("max-h-[10rem]")) {
+          setIsFiltersOpen(true);
+        } else {
+          setIsFiltersOpen(false);
+        }
+      };
+
+      // Check on mount
+      checkFiltersOpen();
+
+      // Listen for changes
+      const observer = new MutationObserver(checkFiltersOpen);
+      const filters = document.querySelector("header section");
+      if (filters) {
+        observer.observe(filters, { attributes: true });
+      }
+
+      return () => observer.disconnect();
+    }, []);
+    
     const createQueryString = useCallback(
         (name: string, value: string) => {
             let params;
@@ -54,7 +83,7 @@ export function SiteHeader(info:any){
     return (
         isSanityStudio? "" : 
         <>
-            <span className="flex justify-between items-center lg:px-5 outline outline-gray-300 px-2 w-[100dvw] mono-book"
+            <span className="flex justify-between items-center lg:px-5 outline outline-gray-300 px-2 w-[100dvw] mono-book sticky top-0 bg-black z-50"
             >
                 <h1 className={`flex justify-center items-center duration-500 leading-[.6rem] uppercase mono-book ${textSize}`}
                 onClick={()=>{
@@ -67,7 +96,7 @@ export function SiteHeader(info:any){
                 
                   selectedProject? router.push("?"+createQueryString("project", `${selectedProject}`), {scroll:false}): ""
                 }}>Drew Litowitz&nbsp;
-                    <p className="lg:inline-block hidden pr-4">{info.info[0].header}</p>
+                    <p className="lg:inline-block hidden pr-4">{info?.info?.[0]?.header}</p>
                     <button className={`mono-book outline outline-1 p-1 ${selectedProject? "hover:bg-gray-300 hover:text-black": "hidden"}`}
                     onClick={()=>{
                       router.push("?"+createQueryString("project", `${selectedProject}`), {scroll:false})
@@ -81,6 +110,38 @@ export function SiteHeader(info:any){
                     </button>
                 </div>
             </span>
+            {isFiltersOpen && (
+              <div className="lg:hidden fixed bottom-0 left-0 right-0 flex justify-between items-center border-t border-t-2 border-gray-300 bg-black px-2 py-2 z-40">
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setActiveTab?.('filters')}
+                    className={`outline outline-1 mono-book uppercase text-sm px-1 h-[1.2rem] flex justify-center items-center ${
+                      activeTab === 'filters'
+                        ? 'bg-gray-300 text-black'
+                        : 'bg-black text-gray-300 outline-gray-300'
+                    }`}
+                  >
+                    Projects & Filters
+                  </button>
+                  <button
+                    onClick={() => setActiveTab?.('about')}
+                    className={`outline outline-1 mono-book uppercase text-sm px-1 h-[1.2rem] flex justify-center items-center ${
+                      activeTab === 'about'
+                        ? 'bg-gray-300 text-black'
+                        : 'bg-black text-gray-300 outline-gray-300'
+                    }`}
+                  >
+                    About
+                  </button>
+                </div>
+                <button
+                  onClick={() => openFilters(e)}
+                  className="outline outline-1 outline-gray-300 px-1 mono-book bg-black hover:bg-gray-300 hover:text-black uppercase text-sm h-[1.2rem] flex justify-center items-center"
+                >
+                  CLOSE Menu
+                </button>
+              </div>
+            )}
         </>
     )
 }

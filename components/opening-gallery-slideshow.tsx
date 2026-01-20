@@ -96,7 +96,7 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
       />
       
       {/* Project counter indicator */}
-      <div className="absolute flex lg:justify-between justify-around lg:flex-row flex-col lg:items-center items-start h-screen w-screen top-0 left-0 text-gray-300 lg:text-[1rem] text-[.9rem] mono-book">
+      <div className="absolute flex lg:justify-between justify-start lg:flex-row flex-col lg:items-center items-start h-screen w-screen top-0 left-0 text-gray-300 lg:text-[1rem] text-[.9rem] mono-book">
         <h2 className='bg-black px-2 h-fit uppercase lg:mx-4 mx-1 mt-1 py-0'>{siteInfo?.name ? siteInfo.name : ''}</h2>
         <span className='uppercase bg-black px-2 h-fit lg:mx-4 mx-1'>{currentProject.name} - {currentIndex + 1} / {projects!.length}</span>
       </div>

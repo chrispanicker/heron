@@ -2,13 +2,16 @@ import { Project } from "@/types/project"
 import { Filters } from "./filters";
 import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
+import { useState } from "react";
 
 interface Props{
     projects:Project[]
     info:any
+    filteredProjects?: Project[]
 }
 
-export function HeaderAndFilters({info, projects}:Props){
+export function HeaderAndFilters({info, projects, filteredProjects}:Props){
+    const [activeTab, setActiveTab] = useState<'about' | 'filters'>('filters');
     let allTags:string[] = [], allCollabs:string[] = [], allRoles:string[] = [], allTypes:string[] = []
     projects?.map((project:Project)=>{
         // project.roles?.map((role:any)=>{
@@ -36,10 +39,10 @@ export function HeaderAndFilters({info, projects}:Props){
     };
     return (
         <header className="flex-col sans justify-between items-center bg-black outline outline-[2px] outline-gray-300 text-gray-300 fixed left-0 top-0 max-h-[2rem] transition-all z-50 overflow-hidden">
-            <SiteHeader info={info} />
+            <SiteHeader info={info} activeTab={activeTab} setActiveTab={setActiveTab} />
             <Filters filters={filters} projects={projects}  />
             <div className="lg:hidden block">
-                <SiteFooter info={info}/>
+                <SiteFooter info={info} filters={filters} filteredProjects={filteredProjects || projects} activeTab={activeTab} setActiveTab={setActiveTab} />
             </div>
         </header>
     )
