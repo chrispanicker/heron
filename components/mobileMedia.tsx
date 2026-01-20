@@ -62,18 +62,11 @@ export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
         {/* Loading spinner */}
         {isLoading && (
           <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-            <style>{`
-              @keyframes cascade-wave {
-                0% {transform: translate(0,-2px) rotate(0deg); }
-                50% {transform: translate(0,2px) rotate(45deg); }
-                100% {transform: translate(0,-2px) rotate(90deg); }
-              }
-            `}</style>
             <div className="flex flex-col justify-center items-center gap-2">
               <div className="flex gap-1">
-                <div className="sans text-2xl text-gray-300" style={{ animation: 'cascade-wave 500ms ease-in-out infinite' }}>+</div>
-                <div className="sans text-2xl text-gray-300" style={{ animation: 'cascade-wave 500ms ease-in-out infinite 220ms' }}>+</div>
-                <div className="sans text-2xl text-gray-300" style={{ animation: 'cascade-wave 500ms ease-in-out infinite 410ms' }}>+</div>
+                <div className="sans text-2xl text-gray-300 animate-pulse">+</div>
+                <div className="sans text-2xl text-gray-300 animate-pulse" style={{ animationDelay: '220ms' }}>+</div>
+                <div className="sans text-2xl text-gray-300 animate-pulse" style={{ animationDelay: '410ms' }}>+</div>
               </div>
               <p className='text-gray-300 text-sm mono-book uppercase'>Loading...</p>
             </div>

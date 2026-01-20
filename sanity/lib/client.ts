@@ -28,25 +28,11 @@ export async function sanityFetch<const QueryString extends string>({
   revalidate?: number | false;
   tags?: string[];
 }) {
-  // const isDraftMode = DraftMode().isEnabled;
-
-  // if (isDraftMode && !token) {
-  //   throw new Error("Missing environment variable SANITY_API_READ_TOKEN");
-  // }
-
-  const queryOptions: QueryOptions = {};
+  const queryOptions: QueryOptions = {
+    cache: 'force-cache',
+  };
   let maybeRevalidate = revalidate;
 
-  // if (isDraftMode) {
-  //   queryOptions.token = token;
-  //   queryOptions.perspective = "previewDrafts";
-  //   queryOptions.stega = true;
-
-  //   maybeRevalidate = 0; // Do not cache in Draft Mode
-  // } else if (tags.length) {
-  //   maybeRevalidate = false; // Cache indefinitely if tags supplied
-  // }
-  
   return client.fetch(query, params, {
     ...queryOptions,
     next: {
