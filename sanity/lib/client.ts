@@ -28,15 +28,10 @@ export async function sanityFetch<const QueryString extends string>({
   revalidate?: number | false;
   tags?: string[];
 }) {
-  const queryOptions: QueryOptions = {
-    cache: 'force-cache',
-  };
-  let maybeRevalidate = revalidate;
-
+  // Don't mix cache directives - let Next.js handle caching via next config
   return client.fetch(query, params, {
-    ...queryOptions,
     next: {
-      revalidate: maybeRevalidate,
+      revalidate: revalidate,
       tags,
     },
   });
