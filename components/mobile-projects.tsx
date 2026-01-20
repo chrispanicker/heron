@@ -40,6 +40,37 @@ export default function MobileProjects({ project, isActive, onInView }: Props) {
         setCurrentImageHasDescription(!!project.images?.[index]?.description);
     }, [project.images]);
 
+    // Handle keyboard arrow navigation
+    useEffect(() => {
+        if (!isActive) return;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            const gallery = document.querySelector(`#${project.slug}-mobileGallery`) as HTMLElement;
+            if (!gallery) return;
+
+            const width = document.documentElement.clientWidth;
+
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                if (gallery.scrollLeft >= 0 && gallery.scrollLeft < 50) {
+                    gallery.scrollLeft = gallery.scrollWidth;
+                } else {
+                    gallery.scrollLeft -= width;
+                }
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                if (gallery.scrollLeft > width * (project.images?.length - 1)) {
+                    gallery.scrollLeft = 0;
+                } else {
+                    gallery.scrollLeft += width;
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isActive, project.slug, project.images?.length]);
+
     const pathname = usePathname(); 
     const isSanityStudio = pathname.startsWith('/admin');
     return isSanityStudio? "": (
@@ -85,7 +116,7 @@ export default function MobileProjects({ project, isActive, onInView }: Props) {
                         i
                     </button>
                 )}
-                <button className="px-[.1rem] text-3xl"
+                <button id={`mobile-${project.slug}_rarr`} className="px-[.1rem] text-3xl"
                 onClick={() => {
                     let gallery = document.querySelector(`#${project.slug}-mobileGallery`)
                     let width = document.documentElement.clientWidth
