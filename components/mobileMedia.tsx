@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { urlForImage } from '@/sanity/lib/image';
 import { PortableText } from '@portabletext/react';
 import { getFile } from '@sanity/asset-utils';
@@ -7,10 +7,32 @@ import Image from 'next/image';
 export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
   const [isPortrait, setIsPortrait] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   let isVisible = true;
+
+  // Intersection observer for lazy loading videos
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setShouldLoad(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(container);
+    return () => observer.unobserve(container);
+  }, []);
 
   // Margin logic: no left margin for first, no right margin for last
   const marginClass =
@@ -37,32 +59,54 @@ export const MobileMedia = ({ e, project, index, galleryLength }: any) => {
             <p className="text-[.8rem] leading-[1rem] outline-gray-300 outline outline-1 px-1 bg-black text-center">{e.description}</p>
           </span>
         )}
-        <video
-          ref={videoRef}
-          width="1440"
-          height="1080"
-          muted
-          loop
-          autoPlay
-          preload='none'
-          webkit-playsinline="true"
-          src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url}
-          playsInline
-          poster={e.posterUrl || undefined}
-          className={
-            `${isPortrait
-              ? "object-contain max-h-[90%] max-w-[80%] transition-opacity duration-1000"
-              : "object-cover max-h-full w-[100%] transition-opacity duration-1000"} ${isLoading===true? "blur-2xl": ""} `
-          }
-          onLoadedData={ev => {
-            const video = ev.currentTarget;
-            setIsPortrait(video.videoHeight > video.videoWidth);
-          }}
-          onCanPlay={() => setIsLoading(false)}
-        >
-          <track src="/path/to/captions.vtt" kind="subtitles" srcLang="en" label="English" />
-          Your browser does not support the video tag.
-        </video>
+        {/* Loading spinner */}
+        {isLoading && (
+          <div className="absolute inset-0 flex justify-center items-center z-50 pointer-events-none">
+            <style>{`
+              @keyframes cascade-wave {
+                0% {transform: translate(0,-2px) rotate(0deg); }
+                50% {transform: translate(0,2px) rotate(45deg); }
+                100% {transform: translate(0,-2px) rotate(90deg); }
+              }
+            `}</style>
+            <div className="flex flex-col justify-center items-center gap-2">
+              <div className="flex gap-1">
+                <div className="sans text-2xl text-gray-300" style={{ animation: 'cascade-wave 500ms ease-in-out infinite' }}>+</div>
+                <div className="sans text-2xl text-gray-300" style={{ animation: 'cascade-wave 500ms ease-in-out infinite 220ms' }}>+</div>
+                <div className="sans text-2xl text-gray-300" style={{ animation: 'cascade-wave 500ms ease-in-out infinite 410ms' }}>+</div>
+              </div>
+              <p className='text-gray-300 text-sm mono-book uppercase'>Loading...</p>
+            </div>
+          </div>
+        )}
+        {shouldLoad && (
+          <video
+            ref={videoRef}
+            width="1440"
+            height="1080"
+            muted
+            loop
+            autoPlay
+            preload='metadata'
+            webkit-playsinline="true"
+            src={getFile(e, { projectId: "01jwvji0", dataset: "production" }).asset.url}
+            playsInline
+            poster={e.posterUrl || undefined}
+            className={
+              `${isPortrait
+                ? "object-contain max-h-[90%] max-w-[80%] transition-opacity duration-500"
+                : "object-cover max-h-full w-[100%] transition-opacity duration-500"} ${isLoading===true? "opacity-0": "opacity-100"} `
+            }
+            onLoadedData={ev => {
+              const video = ev.currentTarget;
+              setIsPortrait(video.videoHeight > video.videoWidth);
+            }}
+            onCanPlay={() => setIsLoading(false)}
+          >
+            <track src="/path/to/captions.vtt" kind="subtitles" srcLang="en" label="English" />
+            Your browser does not support the video tag.
+          </video>
+        )}
       </div>
     );
   } else if (e._type === "image" && isVisible) {

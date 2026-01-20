@@ -53,7 +53,7 @@ export default function HomeClient({ filteredProjects, slugs, info, openingGalle
   return (
     <div>
       <HeaderAndFilters info={info} projects={allProjects || filteredProjects} filteredProjects={filteredProjects} />
-      <section id="opening-gallery" className={`fixed flex justify-center items-center top-0 w-screen h-screen z-[1000] mono-book text-gray-300 transition-all duration-500 ease-in-out ${
+      <section id="opening-gallery" className={`fixed lg:flex hidden justify-center items-center top-0 w-screen h-screen z-[1000] mono-book text-gray-300 transition-all duration-500 ease-in-out ${
         isClosing ? '-translate-y-full' : 'translate-y-0'
       }`}>
         <OpeningGallerySlideshow projects={openingGallery} onReadyToClose={handleGalleryReadyToClose} siteInfo={site} isClosing={isClosing} />

@@ -21,6 +21,7 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
   const [currentIndex, setCurrentIndex] = useState(0)
   const [hasCompletedCycle, setHasCompletedCycle] = useState(false)
   const [isImageLoaded, setIsImageLoaded] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
     if (!projects || projects.length === 0) return
@@ -81,7 +82,7 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
   }
 
   return (
-    <div className="bg-black w-full h-full relative overflow-hidden">
+    <div className="bg-black lg:w-full lg:h-full relative overflow-hidden">
       <Image
         src={previewUrl}
         alt={currentProject.name || 'Project preview'}
