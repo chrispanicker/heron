@@ -67,7 +67,7 @@ export function MobileFilters({ filters }: Props) {
                       .getAll(entry.key)
                       ?.includes(entry.filter)
                       ? "text-black bg-gray-300"
-                      : "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline"
+                      : "bg-black text-gray-300 outline"
                   }`}
                 >
                   {`${entry.filter}`}
@@ -95,7 +95,7 @@ export function MobileFilters({ filters }: Props) {
                       .getAll(entry.key)
                       ?.includes(entry.filter)
                       ? "text-black bg-gray-300"
-                      : "bg-black text-gray-300 hover:bg-gray-300 hover:text-black outline"
+                      : "bg-black text-gray-300 outline"
                   }`}
                 >
                   {`${entry.filter}`}

@@ -105,7 +105,7 @@ export function SiteFooter({info, filters, filteredProjects, activeTab = 'filter
               <PortableText value={site?.bio || []} />
             </div>
 
-            <div id='foot' className="flex justify-start items-start mx-2 pt-2 border-t border-gray-300 my-4 mono-book uppercase text-gray-300">
+            <div id='foot' className="flex justify-center items-center mx-2 py-2 border-b-2 border-gray-300 mono-book uppercase text-gray-300">
               <span className='flex justify-start w-full gap-4'>
                 {instagramHandle ? (
                   <a className="underline flex items-center" href={instagramUrl} target="_blank" rel="noreferrer">
