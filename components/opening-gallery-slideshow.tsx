@@ -46,7 +46,7 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
         }
         return nextIndex
       })
-    }, 750)
+    }, 500)
 
     return () => clearTimeout(timeout)
   }, [projects, isClosing, isImageLoaded])
@@ -87,11 +87,11 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
         src={previewUrl}
         alt={currentProject.name || 'Project preview'}
         fill
-        className="lg:object-cover object-contain mx-auto"
+        className="lg:object-contain object-contain mx-auto"
         priority
         sizes="100vw"
         quality={85}
-        blurDataURL={currentProject.preview?.metadata?.lqip}
+        blurDataURL={currentProject.preview?.metadata?.lqip ? currentProject.preview.metadata.lqip : "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAUGB//EABUBAQEAAAAAAAAAAAAAAAAAAAME/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgP/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCkAAAAAP/Z"}
         placeholder="blur"
         onLoad={() => setIsImageLoaded(true)}
       />
