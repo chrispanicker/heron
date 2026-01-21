@@ -1,10 +1,10 @@
 
 import { groq } from "next-sanity"
-import { client } from "./client"
+import { client, sanityFetch } from "./client"
 
 export async function getProjects() {
-    return client.fetch(
-            groq`*[_type=="project" && !(_id in path("drafts.**"))]{
+    return sanityFetch({
+            query: groq`*[_type=="project" && !(_id in path("drafts.**"))]{
               name,
               _id,
               type,
@@ -19,8 +19,10 @@ export async function getProjects() {
               "tags": tags[]->{
                 name
               },
-            }`, {}, {cache: "no-store"}
-    )
+            }`,
+            revalidate: 3600,
+            tags: ["projects"]
+    })
 } 
 
 
@@ -28,11 +30,13 @@ export async function getProjects() {
 
 
 export async function getInfo() {
-  const res = await client.fetch(groq`*[_type == "info"]{
-    _id, name, bio, header, jobs, awards, favicon, instagram, contactEmail, "shareImage": shareimage.asset->url
-  }`);
-  return res;
-
+  return sanityFetch({
+    query: groq`*[_type == "info"]{
+      _id, name, bio, header, jobs, awards, favicon, instagram, contactEmail, "shareImage": shareimage.asset->url
+    }`,
+    revalidate: 3600,
+    tags: ["info"]
+  });
 }
 
 // export async function getJobs() {
@@ -84,7 +88,7 @@ typeof type === "string"
     const roleFilter = roles? `${roleQueries}` : "" 
     
     const filter = collabs || roles || tags || type ?` && (${typeFilter} ${tagFilter} ${collabFilter} ${roleFilter})`: ""
-    // THIS FILTER SAYS
+    // THISsanityFetch({
     // Look item with project type && tags[] array has a name that matches "tag name" && etc.
     return client.fetch(
         groq`*[${projectFilter} ${filter} && !(_id in path("drafts.**"))]{
@@ -131,17 +135,17 @@ typeof type === "string"
       : sort==="tags-desc"? "totalCount desc"
       : sort==="roles-asc"? "rolesCount asc"
       : sort==="roles-desc"? "rolesCount desc"
-      : sort==="type-asc"? "type asc"
-      : sort==="type-desc"? "type desc"
-      :"orderRank"})`, 
+      : sort==="type-a
+      revalidate: 60,
+      tags: ["projects"]
       {},
       {cache: "no-store"}
     )
 }
 
 export async function getOpeningGallery() {
-  return client.fetch(
-    groq`*[_type == "gallery"][0]{
+  return sanityFetch({
+    query: groq`*[_type == "gallery"][0]{
       projects[]->{
         _id,
         name,
@@ -176,7 +180,7 @@ export async function getOpeningGallery() {
         }
       }
     }`,
-    {},
-    { cache: "no-store" }
-  );
+    revalidate: 3600,
+    tags: ["projects", "gallery"]
+  });
 }
