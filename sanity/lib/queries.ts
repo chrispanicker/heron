@@ -134,6 +134,8 @@ typeof type === "string"
       : sort==="type-asc"? "type asc"
       : sort==="type-desc"? "type desc"
       :"orderRank"})`, 
+      {},
+      {cache: "no-store"}
     )
 }
 
