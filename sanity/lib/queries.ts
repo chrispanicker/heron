@@ -88,10 +88,10 @@ typeof type === "string"
     const roleFilter = roles? `${roleQueries}` : "" 
     
     const filter = collabs || roles || tags || type ?` && (${typeFilter} ${tagFilter} ${collabFilter} ${roleFilter})`: ""
-    // THISsanityFetch({
+    // THIS FILTER SAYS
     // Look item with project type && tags[] array has a name that matches "tag name" && etc.
-    return client.fetch(
-        groq`*[${projectFilter} ${filter} && !(_id in path("drafts.**"))]{
+    return sanityFetch({
+      query: groq`*[${projectFilter} ${filter} && !(_id in path("drafts.**"))]{
           _id,
           name,
           vimeo,
@@ -135,12 +135,12 @@ typeof type === "string"
       : sort==="tags-desc"? "totalCount desc"
       : sort==="roles-asc"? "rolesCount asc"
       : sort==="roles-desc"? "rolesCount desc"
-      : sort==="type-a
+      : sort==="type-asc"? "type asc"
+      : sort==="type-desc"? "type desc"
+      :"orderRank"})`,
       revalidate: 60,
       tags: ["projects"]
-      {},
-      {cache: "no-store"}
-    )
+    })
 }
 
 export async function getOpeningGallery() {
