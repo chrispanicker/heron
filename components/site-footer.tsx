@@ -105,7 +105,7 @@ export function SiteFooter({info, filters, filteredProjects, activeTab = 'filter
       <div className="lg:hidden block relative pb-[5rem]">
         {/* Tab Content */}
         {activeTab === 'about' && (
-          <div className={`h-fit pt-2 text-left text-[1rem] text-gray-300 leading-[1.6rem]`}>
+          <div className={`h-fit pt-2 text-left text-[1rem] text-gray-300 leading-[1.6rem] pb-32`}>
             <div className="pb-4 pt-2 w-screen pr-2 pl-2 serif text-[1.2rem] text-left">
               <h3 className="w-full border-b-[2px] mb-2 border-gray-300 text-[1.2rem] sans">About</h3>
               <PortableText value={site?.bio || []} />
