@@ -4,6 +4,7 @@ import  SillyCanvas  from '@/components/silly-canvas'
 import { Modal } from '@/components/modal'
 import { urlForImage } from '@/sanity/lib/image'
 import FaviconUpdater from '@/components/faviconUpdater'
+import { Analytics } from '@vercel/analytics/next'
 
 
 export const metadata = async () => {
@@ -59,6 +60,7 @@ export default async function RootLayout({
         </section>
 
         <FaviconUpdater url={faviconUrl} />
+        <Analytics />
 
         <div id='foot' className="lg:flex hidden bottom-0 justify-start h-[1rem] items-start lg:px-5 px-2 my-5 pt-2 w-full mono-book uppercase bg-black text-gray-300">
           <span className='hidden lg:flex whitespace-nowrap'><p className='sans'>&#169;</p>Drew Litowitz</span>
