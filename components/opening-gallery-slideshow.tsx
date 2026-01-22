@@ -32,11 +32,11 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
         const img = new window.Image()
         img.src = project.preview.asset.url
         img.onload = () => {
-          setLoadedImages((prev) => new Set([...prev, index]))
+          setLoadedImages((prev) => new Set([...Array.from(prev), index]))
         }
         img.onerror = () => {
           // Still mark as attempted even if load fails
-          setLoadedImages((prev) => new Set([...prev, index]))
+          setLoadedImages((prev) => new Set([...Array.from(prev), index]))
         }
       }
     })
