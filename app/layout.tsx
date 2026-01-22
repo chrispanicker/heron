@@ -4,7 +4,6 @@ import  SillyCanvas  from '@/components/silly-canvas'
 import { Modal } from '@/components/modal'
 import { urlForImage } from '@/sanity/lib/image'
 import FaviconUpdater from '@/components/faviconUpdater'
-import { Analytics } from '@vercel/analytics/next';
 
 
 export const metadata = async () => {
@@ -49,7 +48,6 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`bg-black text-black serif font-light overflow-x-hidden lg:text-[1rem] text-[1rem] leading-[1.4rem] snap-y snap-mandatory cursor-auto`}>
-      <Analytics />
       <head>
         {faviconUrl && <link rel="icon" href={faviconUrl} />}
       </head>
