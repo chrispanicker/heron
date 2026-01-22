@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
 
 interface Project {
@@ -20,8 +20,27 @@ interface Project {
 export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, isClosing }: { projects: Project[] | undefined, onReadyToClose?: () => void, siteInfo?: any, isClosing?: boolean }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [hasCompletedCycle, setHasCompletedCycle] = useState(false)
-  const [isImageLoaded, setIsImageLoaded] = useState(false)
-  const [isDesktop, setIsDesktop] = useState(false)
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0])) // Track which images have loaded
+  const [isFirstImageLoaded, setIsFirstImageLoaded] = useState(false) // Wait for first image before cycling
+
+  // Preload images in the background
+  useEffect(() => {
+    if (!projects || projects.length === 0) return
+
+    projects.forEach((project, index) => {
+      if (!loadedImages.has(index) && project.preview?.asset?.url) {
+        const img = new window.Image()
+        img.src = project.preview.asset.url
+        img.onload = () => {
+          setLoadedImages((prev) => new Set([...prev, index]))
+        }
+        img.onerror = () => {
+          // Still mark as attempted even if load fails
+          setLoadedImages((prev) => new Set([...prev, index]))
+        }
+      }
+    })
+  }, [projects, loadedImages])
 
   useEffect(() => {
     if (!projects || projects.length === 0) return
@@ -29,11 +48,11 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
     // Don't cycle if closing and we've completed a cycle
     if (isClosing && hasCompletedCycle) return
 
-    // Only start timer after image is loaded
-    if (!isImageLoaded) return
+    // Only start cycling after first image loads
+    if (currentIndex === 0 && !isFirstImageLoaded) return
 
+    // Start timer with fast transitions
     const timeout = setTimeout(() => {
-      setIsImageLoaded(false) // Reset for next image
       setCurrentIndex((prev) => {
         const nextIndex = (prev + 1) % projects.length
         // If we've wrapped around to 0, we've completed a cycle
@@ -46,18 +65,18 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
         }
         return nextIndex
       })
-    }, 500)
+    }, 500) // Fast transitions for smooth cycling
 
     return () => clearTimeout(timeout)
-  }, [projects, isClosing, isImageLoaded])
+  }, [projects, isClosing, currentIndex, isFirstImageLoaded])
 
   // Call the callback when cycle is complete
   useEffect(() => {
     if (hasCompletedCycle && onReadyToClose) {
-      // Wait the full interval duration before triggering close
+      // Reduced delay from 750ms to 500ms
       const timeout = setTimeout(() => {
         onReadyToClose()
-      }, 750)
+      }, 1000)
       return () => clearTimeout(timeout)
     }
   }, [hasCompletedCycle, onReadyToClose])
@@ -88,12 +107,16 @@ export function OpeningGallerySlideshow({ projects, onReadyToClose, siteInfo, is
         alt={currentProject.name || 'Project preview'}
         fill
         className="lg:object-contain object-contain mx-auto"
-        priority
+        priority={currentIndex === 0} // Only prioritize first image
         sizes="100vw"
-        quality={85}
+        quality={75} // Reduced from 85 for faster loading
         blurDataURL={currentProject.preview?.metadata?.lqip ? currentProject.preview.metadata.lqip : "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAUGB//EABUBAQEAAAAAAAAAAAAAAAAAAAME/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgP/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCkAAAAAP/Z"}
         placeholder="blur"
-        onLoad={() => setIsImageLoaded(true)}
+        onLoad={() => {
+          if (currentIndex === 0) {
+            setIsFirstImageLoaded(true)
+          }
+        }}
       />
       
       {/* Project counter indicator */}
