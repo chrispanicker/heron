@@ -4,7 +4,7 @@ import  SillyCanvas  from '@/components/silly-canvas'
 import { Modal } from '@/components/modal'
 import { urlForImage } from '@/sanity/lib/image'
 import FaviconUpdater from '@/components/faviconUpdater'
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/next';
 
 
 export const metadata = async () => {
